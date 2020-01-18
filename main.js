@@ -99,26 +99,46 @@ BobaDisappear.prototype.update = function () {
     // if (this.x < -230) this.x = 800;
 }
 
-// function Boba4(game, spritesheet) {
-//     this.animation = new Animation(spritesheet, 0, 420, 85, 85, 4, 0.20, 4, true, 1);
-//     this.x = 600;
-//     this.y = 300;
-//     this.speed = 100;
-//     this.game = game;
-//     this.ctx = game.ctx;
-// }
-//
-// Boba4.prototype.draw = function () {
-//     this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-// }
-//
-// Boba4.prototype.update = function () {
-//     // if (this.animation.elapsedTime < this.animation.totalTime * 8 / 14)
-//     //     this.x -= this.game.clockTick * this.speed;
-//     // if (this.x < -230) this.x = 800;
-// }
+function BobaRunFlip(game, spritesheet) {
+	this.animation = new Animation(spritesheet, 678, 100, 72, 85, 5, 0.18, 5, true, 1);
+    this.x = 0;
+    this.y = 300;
+    this.speed = 200;
+    this.game = game;
+    this.ctx = game.ctx;
+}
+
+BobaRunFlip.prototype.draw = function () {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+}
+
+BobaRunFlip.prototype.update = function () {
+    if (this.animation.elapsedTime < this.animation.totalTime * 8 / 14)
+        this.x += this.game.clockTick * this.speed;
+    if (this.x > 800) this.x = -230;
+}
+
+function BobaWalkFlip(game, spritesheet) {
+	this.animation = new Animation(spritesheet, 785, 0, 65, 95, 4, 0.20, 4, true, 1);
+    this.x = 600;
+    this.y = 400;
+    this.speed = 100;
+    this.game = game;
+    this.ctx = game.ctx;
+}
+
+BobaWalkFlip.prototype.draw = function () {
+    this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
+}
+
+BobaWalkFlip.prototype.update = function () {
+	if (this.animation.elapsedTime < this.animation.totalTime * 8 / 14)
+        this.x += this.game.clockTick * this.speed;
+    if (this.x > 800) this.x = -230;
+}
 
 AM.queueDownload("./img/22137.png")
+AM.queueDownload("./img/22137Flip.png")
 
 AM.downloadAll(function () {
     var canvas = document.getElementById("gameWorld");
@@ -131,7 +151,8 @@ AM.downloadAll(function () {
 	gameEngine.addEntity(new BobaWalk(gameEngine, AM.getAsset("./img/22137.png")));
 	gameEngine.addEntity(new BobaRun(gameEngine, AM.getAsset("./img/22137.png")));
 	gameEngine.addEntity(new BobaDisappear(gameEngine, AM.getAsset("./img/22137.png")));
-	// gameEngine.addEntity(new Boba4(gameEngine, AM.getAsset("./img/22137.png")));
+	gameEngine.addEntity(new BobaRunFlip(gameEngine, AM.getAsset("./img/22137Flip.png")));
+	gameEngine.addEntity(new BobaWalkFlip(gameEngine, AM.getAsset("./img/22137Flip.png")));
 
     console.log("All Done!");
 });
