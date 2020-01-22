@@ -324,21 +324,33 @@ AM.downloadAll(function () {
     gameEngine.init(ctx);
     gameEngine.start();
 
-	gameEngine.addEntity(new BobaWalkLeft(gameEngine, AM.getAsset("./img/22137.png")));
-	gameEngine.addEntity(new BobaRunLeft(gameEngine, AM.getAsset("./img/22137.png")));
-	gameEngine.addEntity(new BobaDisappearLeft(gameEngine, AM.getAsset("./img/22137.png")));
-	gameEngine.addEntity(new BobaRunRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
-	gameEngine.addEntity(new BobaWalkRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
+	// gameEngine.addEntity(new BobaWalkLeft(gameEngine, AM.getAsset("./img/22137.png")));
+	// gameEngine.addEntity(new BobaRunLeft(gameEngine, AM.getAsset("./img/22137.png")));
+	// gameEngine.addEntity(new BobaDisappearLeft(gameEngine, AM.getAsset("./img/22137.png")));
+	// gameEngine.addEntity(new BobaRunRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
+	// gameEngine.addEntity(new BobaWalkRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
 
-	gameEngine.addEntity(new BobaDisappearRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
-	gameEngine.addEntity(new BobaWalkUpLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
-	gameEngine.addEntity(new BobaRunUpLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
-	gameEngine.addEntity(new BobaWalkUpLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
-	gameEngine.addEntity(new BobaRunUpLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
-	gameEngine.addEntity(new BobaRunDownLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
-	gameEngine.addEntity(new BobaWalkDownLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
-	gameEngine.addEntity(new BobaRunDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
-	gameEngine.addEntity(new BobaWalkDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
+	// gameEngine.addEntity(new BobaDisappearRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
+	// gameEngine.addEntity(new BobaWalkUpLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
+	// gameEngine.addEntity(new BobaRunUpLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
+	// gameEngine.addEntity(new BobaWalkUpLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
+	// gameEngine.addEntity(new BobaRunUpLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
+	// gameEngine.addEntity(new BobaRunDownLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
+	// gameEngine.addEntity(new BobaWalkDownLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
+	// gameEngine.addEntity(new BobaRunDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
+    // gameEngine.addEntity(new BobaWalkDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
+    gameEngine.addEntity(new redTea(gameEngine));
 
     console.log("All Done!");
 });
+
+var GAMEBOARD = [];
+
+  for(var i = 0; i < 10; i++) {
+    GAMEBOARD.push([]);
+    for(var j = 0; j < 10; j++) {
+      GAMEBOARD[i].push({
+        block: false
+      });
+    }
+  }
