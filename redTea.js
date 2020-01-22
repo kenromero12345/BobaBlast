@@ -1,4 +1,4 @@
-function redTea(game, spawnX, spawnY) {
+function redTea(game, spawnX, spawnY, isRun) {
     this.animationWalkLeft = new Animation(AM.getAsset("./img/22137.png")
     , 0, 0, 65, 95, 4, 0.20, 4, true, 1, false);
     this.animationRunLeft = new Animation(AM.getAsset("./img/22137.png")
@@ -50,7 +50,7 @@ function redTea(game, spawnX, spawnY) {
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
-    this.paceWalk = true;
+    this.paceWalk = !isRun;
     this.hp = 10;
 }
 

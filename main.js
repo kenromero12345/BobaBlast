@@ -343,9 +343,9 @@ AM.downloadAll(function () {
 	// gameEngine.addEntity(new BobaWalkDownLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
 	// gameEngine.addEntity(new BobaRunDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
     // gameEngine.addEntity(new BobaWalkDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
-    gameEngine.addEntity(new redTea(gameEngine, -50, 250));
-    gameEngine.addEntity(new greenTea(gameEngine, -50, 250));
-    gameEngine.addEntity(new yellowTea(gameEngine, -50, 250));
+    gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
+    gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
+    gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, false));
     console.log("All Done!");
 });
 
