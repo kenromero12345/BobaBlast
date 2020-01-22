@@ -1,34 +1,34 @@
-function redTea(game) {
-    this.animationWalkLeft = new Animation(AM.getAsset("./img/22137.png")
+function greenTea(game) {
+    this.animationWalkLeft = new Animation(AM.getAsset("./img/greenTea.png")
     , 0, 0, 65, 95, 4, 0.20, 4, true, 1, false);
-    this.animationRunLeft = new Animation(AM.getAsset("./img/22137.png")
+    this.animationRunLeft = new Animation(AM.getAsset("./img/greenTea.png")
     , 0, 100, 72, 85, 5, 0.18, 5, true, 1, false);
-    this.animationWalkRight = new Animation(AM.getAsset("./img/22137Flip.png")
-    , 785, 0, 65, 95, 4, 0.20, 4, true, 1, true);
-    this.animationRunRight = new Animation(AM.getAsset("./img/22137Flip.png")
-    , 678, 100, 72, 85, 5, 0.18, 5, true, 1, true);
-    this.animationWalkUpLookRight = new Animation(AM.getAsset("./img/22137Flip.png")
-    , 785, 0, 65, 95, 4, 0.20, 4, true, 1, true);
-    this.animationRunUpLookRight = new Animation(AM.getAsset("./img/22137Flip.png")
-    , 678, 100, 72, 85, 5, 0.18, 5, true, 1, true);
-    this.animationWalkUpLookLeft = new Animation(AM.getAsset("./img/22137.png")
+    this.animationWalkRight = new Animation(AM.getAsset("./img/greenTeaFlip.png")
+    , 730, 0, 65, 95, 4, 0.20, 4, true, 1, true);
+    this.animationRunRight = new Animation(AM.getAsset("./img/greenTeaFlip.png")
+    , 637, 100, 72, 85, 5, 0.18, 5, true, 1, true);
+    this.animationWalkUpLookRight = new Animation(AM.getAsset("./img/greenTeaFlip.png")
+    , 730, 0, 65, 95, 4, 0.20, 4, true, 1, true);
+    this.animationRunUpLookRight = new Animation(AM.getAsset("./img/greenTeaFlip.png")
+    , 637, 100, 72, 85, 5, 0.18, 5, true, 1, true);
+    this.animationWalkUpLookLeft = new Animation(AM.getAsset("./img/greenTea.png")
     , 0, 0, 65, 95, 4, 0.20, 4, true, 1, false);
-    this.animationRunUpLookLeft= new Animation(AM.getAsset("./img/22137.png")
+    this.animationRunUpLookLeft= new Animation(AM.getAsset("./img/greenTea.png")
     , 0, 100, 72, 85, 5, 0.18, 5, true, 1, false);
-    this.animationWalkDownLookRight = new Animation(AM.getAsset("./img/22137Flip.png")
-    , 785, 0, 65, 95, 4, 0.20, 4, true, 1, true);
-    this.animationRunDownLookRight = new Animation(AM.getAsset("./img/22137Flip.png")
-    , 678, 100, 72, 85, 5, 0.18, 5, true, 1, true);
-    this.animationWalkDownLookLeft = new Animation(AM.getAsset("./img/22137.png")
+    this.animationWalkDownLookRight = new Animation(AM.getAsset("./img/greenTeaFlip.png")
+    , 730, 0, 65, 95, 4, 0.20, 4, true, 1, true);
+    this.animationRunDownLookRight = new Animation(AM.getAsset("./img/greenTeaFlip.png")
+    , 637, 100, 72, 85, 5, 0.18, 5, true, 1, true);
+    this.animationWalkDownLookLeft = new Animation(AM.getAsset("./img/greenTea.png")
     , 0, 0, 65, 95, 4, 0.20, 4, true, 1, false);
-    this.animationRunDownLookLeft = new Animation(AM.getAsset("./img/22137.png")
+    this.animationRunDownLookLeft = new Animation(AM.getAsset("./img/greenTea.png")
     , 0, 100, 72, 85, 5, 0.18, 5, true, 1, false);
-    this.animationDisappearRight = new Animation(AM.getAsset("./img/22137Flip.png")
-    , 593, 560, 74, 85, 6, 0.18, 6, true, 1, true);
-    this.animationDisappearLeft = new Animation(AM.getAsset("./img/22137.png")
-    , 0, 560, 74, 85, 6, 0.18, 6, true, 1, false);
-    this.x = 100;
-    this.y = 100;
+    this.animationDisappearRight = new Animation(AM.getAsset("./img/greenTeaFlip.png")
+    , 553, 530, 74, 85, 6, 0.18, 6, true, 1, true);
+    this.animationDisappearLeft = new Animation(AM.getAsset("./img/greenTea.png")
+    , 0, 537, 74, 85, 6, 0.18, 6, true, 1, false);
+    this.x = 10;
+    this.y = 10;
     this.walkSpeed = 100;
     this.runSpeed = 200;
     this.game = game;
@@ -39,7 +39,7 @@ function redTea(game) {
     this.hp = 10;
 }
 
-redTea.prototype.draw = function () {
+greenTea.prototype.draw = function () {
     if (this.hp <= 0) {
         if (this.lookDirectionRight) {
             this.animationDisappearRight.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
@@ -86,7 +86,7 @@ redTea.prototype.draw = function () {
     }
 }
 
-redTea.prototype.update = function () {
+greenTea.prototype.update = function () {
     //update moveDirection, lookDirection, pace
     if (this.game.space) this.moveDirection++;
     if (this.moveDirection == 5) this.moveDirection = 1;
