@@ -165,8 +165,18 @@ var update = function (tea) {
     }
     x = tea.x;
     y = tea.y;
-    tea.centerX = ( width - x ) / 2;
-    tea.centerY = ( height - y ) / 2;
+    this.centerX = x + ( width - x ) / 2;
+    this.centerY = y + ( y - height ) / 2;
+    // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
+    // var difX = this.centerX - spawnX;
+    // var difY =  spawnY - this.centerY;
+    // // console.log("dx:" + difX + ", dy:" + difY);
+    // this.centerX = this.centerX - Math.abs(difX);
+    // this.centerY = this.centerY - Math.abs(difY);
+    // tea.centerX = ( width - x ) / 2;
+    // tea.centerY = ( height - y ) / 2;
+    // console.log(tea.centerX + " " + tea.centerY)
+    console.log(getXY(this.centerX, this.centerY));
     // console.log ("x: " + tea.centerX + " y: " + tea.centerY );
 
     //start at -50 50 
@@ -175,8 +185,9 @@ var update = function (tea) {
 }
 
 var getXY = function(x, y) {
-    var i = Math.floor((x - BUBBLES_X_START + BUBBLES_GAP/2)/BUBBLES_GAP);
-    var j = Math.floor((y - BUBBLES_Y_START + 9)/17.75);
+    var i = Math.floor(x/100) + 1;
+    var j = Math.floor(y/100);
   
     return {x: i, y: j}
 }
+
