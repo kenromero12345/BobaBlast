@@ -85,5 +85,6 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
     gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
     gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, false));
+    gameEngine.addEntity(new board(gameEngine));
     console.log("All Done!");
 });

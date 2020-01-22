@@ -1,6 +1,6 @@
 function board(game) {
 	this.GAMEBOARD = [];
-	this.width = 8;
+	this.width = 11;
 	this.height = 6;
 	this.xgap = 100;
   this.ygap = 100;
@@ -51,11 +51,11 @@ board.prototype.drawRect = function (i,j) {
 }
 
 board.prototype.draw = function () {
-  for(var i = 0; i < this.width; i++) {
+ /* for(var i = 0; i < this.width; i++) {
     for(var j = 0; j < this.height; j++) {
       this.drawRect(i,j);
     }
-  }
+  } */
 }
 
 board.prototype.update = function () {
