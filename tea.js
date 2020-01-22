@@ -71,8 +71,8 @@ var draw = function (tea) {
 
 var update = function (tea) {
     //update moveDirection, lookDirection, pace
-    if (tea.game.space) tea.moveDirection++;
-    if (tea.moveDirection == 5) tea.moveDirection = 1;
+    if (tea.game.space) tea.hp--;
+    // if (tea.moveDirection == 5) tea.moveDirection = 1;
     if (tea.game.right) {
         tea.moveDirection = 1;
         tea.lookDirectionRight = true;

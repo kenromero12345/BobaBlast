@@ -24,9 +24,9 @@ function yellowTea(game, spawnX, spawnY, isRun) {
     this.animationRunDownLookLeft = new Animation(AM.getAsset("./img/yellowTea.png")
     , 0, 100, 71, 83, 5, 0.18, 5, true, 1, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/yellowTeaFlip.png")
-    , 635, 530, 75, 85, 6, 0.18, 6, true, 1, true);
+    , 635, 530, 75, 85, 6, 0.18, 6, false, 1, true);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/yellowTea.png")
-    , -3, 534, 75, 85, 6, 0.18, 6, true, 1, false);
+    , -3, 534, 75, 85, 6, 0.18, 6, false, 1, false);
     this.walkWidth = 65;
     this.walkHeight = 95;
     this.runWidth = 71;

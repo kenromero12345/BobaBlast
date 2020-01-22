@@ -18,6 +18,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
     this.elapsedTime += tick;
+    if (!(this.isDone() && !this.loop)) {
     if (this.isDone()) {
         if (this.loop) this.elapsedTime = 0;
     }
@@ -37,6 +38,7 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y) {
                  x, y,
                  this.frameWidth * this.scale,
                  this.frameHeight * this.scale);
+    }
 }
 
 Animation.prototype.currentFrame = function () {
@@ -44,6 +46,7 @@ Animation.prototype.currentFrame = function () {
 }
 
 Animation.prototype.isDone = function () {
+    // console.log(this.elapsedTime >= this.totalTime);
     return (this.elapsedTime >= this.totalTime);
 }
 
