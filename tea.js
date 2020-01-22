@@ -173,3 +173,10 @@ var update = function (tea) {
     // console.log("x: " + x + " y: " + y + " w: " + width + " h: " + height);
     // drawRect(tea.ctx, tea.startX, tea.startY, tea.frameWidth, tea.frameHeight);
 }
+
+var getXY = function(x, y) {
+    var i = Math.floor((x - BUBBLES_X_START + BUBBLES_GAP/2)/BUBBLES_GAP);
+    var j = Math.floor((y - BUBBLES_Y_START + 9)/17.75);
+  
+    return {x: i, y: j}
+}
