@@ -343,9 +343,9 @@ AM.downloadAll(function () {
 	// gameEngine.addEntity(new BobaWalkDownLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
 	// gameEngine.addEntity(new BobaRunDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
     // gameEngine.addEntity(new BobaWalkDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
-    gameEngine.addEntity(new redTea(gameEngine));
-    gameEngine.addEntity(new greenTea(gameEngine));
-    gameEngine.addEntity(new yellowTea(gameEngine));
+    gameEngine.addEntity(new redTea(gameEngine, -50, 250));
+    gameEngine.addEntity(new greenTea(gameEngine, -50, 250));
+    gameEngine.addEntity(new yellowTea(gameEngine, -50, 250));
     console.log("All Done!");
 });
 
@@ -360,19 +360,11 @@ var GAMEBOARD = [];
     }
   }
 
-  function drawRect(i,j) {
-    var ctx = PACMAN_CANVAS_CONTEXT;
-    var ygap = 17.75;
-    var x = BUBBLES_X_START + i*BUBBLES_GAP - BUBBLES_GAP/2;
-    var y = BUBBLES_Y_START + j*ygap- 9;
-    var w = BUBBLES_GAP;
-    var h = ygap;
-  
-    if(GAMEBOARD && GAMEBOARD[0] && GAMEBOARD[i][j]){
-      ctx.strokeStyle = "green";
-      ctx.rect(x,y,w,h);
-      ctx.stroke();
-    }
+  function drawRect(ctx, x,y,w,h) {
+    // console.log("paint")
+    ctx.strokeStyle = "green";
+    ctx.rect(x,y,w,h);
+    ctx.stroke();
   }
 
   function drawDebug() {
@@ -382,3 +374,17 @@ var GAMEBOARD = [];
       }
     }
   }
+
+    // function getGameboardXYToCanvasXY(x, y) {
+    //     var i = Math.floor((x - BUBBLES_X_START + BUBBLES_GAP/2)/BUBBLES_GAP);
+    //     var j = Math.floor((y - BUBBLES_Y_START + 9)/17.75);
+    
+    //     return {x: i, y: j}
+    // }
+
+    // function getCanvasXYToGameboardXY(x, y) {
+    //     var i = Math.floor((x - BUBBLES_X_START + BUBBLES_GAP/2)/BUBBLES_GAP);
+    //     var j = Math.floor((y - BUBBLES_Y_START + 9)/17.75);
+    
+    //     return {x: i, y: j}
+    // }

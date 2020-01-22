@@ -1,4 +1,4 @@
-function yellowTea(game) {
+function yellowTea(game, spawnX, spawnY) {
     this.animationWalkLeft = new Animation(AM.getAsset("./img/yellowTea.png")
     , 0, 0, 65, 95, 4, 0.20, 4, true, 1, false);
     this.animationRunLeft = new Animation(AM.getAsset("./img/yellowTea.png")
@@ -27,14 +27,29 @@ function yellowTea(game) {
     , 635, 530, 75, 85, 6, 0.18, 6, true, 1, true);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/yellowTea.png")
     , -3, 534, 75, 85, 6, 0.18, 6, true, 1, false);
-    this.x = 200;
+    this.walkWidth = 65;
+    this.walkHeight = 95;
+    this.runWidth = 71;
+    this.runHeight= 83;
+    this.x = -100;
     this.y = 200;
+    this.centerX = this.x + ( this.walkWidth - this.x ) / 2;
+    this.centerY = this.y + ( this.y - this.walkHeight ) / 2;
+    console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
+    var difX = this.centerX - spawnX;
+    var difY =  spawnY - this.centerY;
+    console.log("dx:" + difX + ", dy:" + difY);
+    this.centerX = this.centerX - Math.abs(difX);
+    this.centerY = this.centerY - Math.abs(difY);
+    this.x = this.x - Math.abs(difX);
+    this.y = this.y - Math.abs(difY);
+    console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
     this.walkSpeed = 100;
     this.runSpeed = 200;
     this.game = game;
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
-    this.lookDirectionRight = false;
+    this.lookDirectionRight = true;
     this.paceWalk = true;
     this.hp = 10;
 }
@@ -101,55 +116,92 @@ yellowTea.prototype.update = function () {
     }
     if (this.game.up) this.moveDirection = 4;
     if (this.game.run) this.paceWalk = !this.paceWalk;
+    var x;
+    var y;
+    var width;
+    var height;
     if (this.hp > 0) {
         if (this.paceWalk) {
             if (this.moveDirection == 1) {
                 if (this.animationWalkRight.elapsedTime < this.animationWalkRight.totalTime * 8 / 14)
                     this.x += this.game.clockTick * this.walkSpeed;
+                    width = this.animationWalkRight.frameWidth;
+                    height =  this.animationWalkRight.frameHeight;
             } else if (this.moveDirection == 2) {
                 if (this.lookDirectionRight) {
                     if (this.animationWalkDownLookRight.elapsedTime < this.animationWalkDownLookRight.totalTime * 8 / 14)
                         this.y += this.game.clockTick * this.walkSpeed;
+                        width =  this.animationWalkDownLookRight.frameWidth;
+                        height =  this.animationWalkDownLookRight.frameHeight;
                 } else {
                     if (this.animationWalkDownLookLeft.elapsedTime < this.animationWalkDownLookLeft.totalTime * 8 / 14)
                         this.y += this.game.clockTick * this.walkSpeed;
+                        width =  this.animationWalkDownLookLeft.frameWidth;
+                        height =  this.animationWalkDownLookLeft.frameHeight;
                 }
             } else if (this.moveDirection == 3) {
                 if (this.animationWalkLeft.elapsedTime < this.animationWalkLeft.totalTime * 8 / 14)
                     this.x -= this.game.clockTick * this.walkSpeed;
+                    width =  this.animationWalkLeft.frameWidth;
+                    height =  this.animationWalkLeft.frameHeight;
             } else {
                 if (this.lookDirectionRight) {
                     if (this.animationWalkUpLookRight.elapsedTime < this.animationWalkUpLookRight.totalTime * 8 / 14)
                         this.y -= this.game.clockTick * this.walkSpeed;
+                        width =  this.animationWalkUpLookRight.frameWidth;
+                        height =  this.animationWalkUpLookRight.frameHeight;
                 } else {
                     if (this.animationWalkUpLookLeft.elapsedTime < this.animationWalkUpLookLeft.totalTime * 8 / 14)
                         this.y -= this.game.clockTick * this.walkSpeed;
+                        width =  this.animationWalkUpLookLeft.frameWidth;
+                        height =  this.animationWalkUpLookLeft.frameHeight;
                 }
             }
         } else {
             if (this.moveDirection == 1) {
                 if (this.animationRunRight.elapsedTime < this.animationRunRight.totalTime * 8 / 14)
                     this.x += this.game.clockTick * this.runSpeed;
+                    width =  this.animationRunRight.frameWidth;
+                    height =  this.animationRunRight.frameHeight;
             } else if (this.moveDirection == 2) {
                 if (this.lookDirectionRight) {
                     if (this.animationRunDownLookRight.elapsedTime < this.animationRunDownLookRight.totalTime * 8 / 14)
                         this.y += this.game.clockTick * this.runSpeed;
+                        width =  this.animationRunDownLookRight.frameWidth;
+                        height =  this.animationRunDownLookRight.frameHeight;
                 } else {
                     if (this.animationRunDownLookLeft.elapsedTime < this.animationRunDownLookLeft.totalTime * 8 / 14)
                         this.y += this.game.clockTick * this.runSpeed;
+                        width =  this.animationRunDownLookLeft.frameWidth;
+                        height =  this.animationRunDownLookLeft.frameHeight;
                 }
             } else if (this.moveDirection == 3) {
                 if (this.animationRunLeft.elapsedTime < this.animationRunLeft.totalTime * 8 / 14)
                     this.x -= this.game.clockTick * this.runSpeed;
+                    width =  this.animationRunLeft.frameWidth;
+                    height =  this.animationRunLeft.frameHeight;
             } else {
                 if (this.lookDirectionRight) {
                     if (this.animationRunUpLookRight.elapsedTime < this.animationRunUpLookRight.totalTime * 8 / 14)
                         this.y -= this.game.clockTick * this.runSpeed;
+                        width = this.animationRunUpLookRight.frameWidth;
+                        height = this.animationRunUpLookRight.frameHeight;
                 } else {
                     if (this.animationRunUpLookLeft.elapsedTime < this.animationRunUpLookLeft.totalTime * 8 / 14)
                         this.y -= this.game.clockTick * this.runSpeed;
+                        width =  this.animationRunUpLookLeft.frameWidth;
+                        height =  this.animationRunUpLookLeft.frameHeight;
                 }
             }
         }
     }
+    x = this.x;
+    y = this.y;
+    this.centerX = ( width - x ) / 2;
+    this.centerY = ( height - y ) / 2;
+    // console.log ("x: " + this.centerX + " y: " + this.centerY );
+
+    //start at -50 50 
+    // console.log("x: " + x + " y: " + y + " w: " + width + " h: " + height);
+    // drawRect(this.ctx, this.startX, this.startY, this.frameWidth, this.frameHeight);
 }
