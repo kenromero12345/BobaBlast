@@ -81,6 +81,7 @@ AM.downloadAll(function () {
     var gameEngine = new GameEngine();
     gameEngine.init(ctx);
     gameEngine.start();
+    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
     gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
     gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
     gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, false));
