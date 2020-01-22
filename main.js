@@ -319,6 +319,23 @@ AM.queueDownload("./img/greenTea.png");
 AM.queueDownload("./img/greenTeaFlip.png");
 AM.queueDownload("./img/yellowTea.png");
 AM.queueDownload("./img/yellowTeaFlip.png");
+AM.queueDownload("./img/background.png");
+
+function Background(game, spritesheet) {
+    this.x = 0;
+    this.y = 0;
+    this.spritesheet = spritesheet;
+    this.game = game;
+    this.ctx = game.ctx;
+}
+
+Background.prototype.draw = function() {
+    this.ctx.drawImage(this.spritesheet, this.x, this.y);
+}
+
+Background.prototype.update = function() {
+
+}
 
 AM.downloadAll(function () {
     var canvas = document.getElementById("gameWorld");
@@ -339,7 +356,7 @@ AM.downloadAll(function () {
 	// gameEngine.addEntity(new BobaRunUpLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
 	// gameEngine.addEntity(new BobaWalkUpLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
 	// gameEngine.addEntity(new BobaRunUpLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
-	// gameEngine.addEntity(new BobaRunDownLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
+	// gameEngine.addEntity(new BobaRunDownLookLeft(gameEngine, AM.getAsset("./img/22137.png")));3
 	// gameEngine.addEntity(new BobaWalkDownLookLeft(gameEngine, AM.getAsset("./img/22137.png")));
 	// gameEngine.addEntity(new BobaRunDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
     // gameEngine.addEntity(new BobaWalkDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
@@ -348,43 +365,3 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, false));
     console.log("All Done!");
 });
-
-var GAMEBOARD = [];
-
-  for(var i = 0; i < 10; i++) {
-    GAMEBOARD.push([]);
-    for(var j = 0; j < 10; j++) {
-      GAMEBOARD[i].push({
-        block: false
-      });
-    }
-  }
-
-  function drawRect(ctx, x,y,w,h) {
-    // console.log("paint")
-    ctx.strokeStyle = "green";
-    ctx.rect(x,y,w,h);
-    ctx.stroke();
-  }
-
-  function drawDebug() {
-    for(var i = 0; i < 26; i++) {
-      for(var j = 0; j < 29; j++) {
-        drawRect(i,j);
-      }
-    }
-  }
-
-    // function getGameboardXYToCanvasXY(x, y) {
-    //     var i = Math.floor((x - BUBBLES_X_START + BUBBLES_GAP/2)/BUBBLES_GAP);
-    //     var j = Math.floor((y - BUBBLES_Y_START + 9)/17.75);
-    
-    //     return {x: i, y: j}
-    // }
-
-    // function getCanvasXYToGameboardXY(x, y) {
-    //     var i = Math.floor((x - BUBBLES_X_START + BUBBLES_GAP/2)/BUBBLES_GAP);
-    //     var j = Math.floor((y - BUBBLES_Y_START + 9)/17.75);
-    
-    //     return {x: i, y: j}
-    // }
