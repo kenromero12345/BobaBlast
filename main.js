@@ -313,8 +313,10 @@ BobaDisappearRight.prototype.update = function () {
     // if (this.x < -230) this.x = 800;
 }
 
-AM.queueDownload("./img/22137.png")
-AM.queueDownload("./img/22137Flip.png")
+AM.queueDownload("./img/22137.png");
+AM.queueDownload("./img/22137Flip.png");
+AM.queueDownload("./img/greenTea.png");
+AM.queueDownload("./img/greenTeaFlip.png");
 
 AM.downloadAll(function () {
     var canvas = document.getElementById("gameWorld");
@@ -340,6 +342,7 @@ AM.downloadAll(function () {
 	// gameEngine.addEntity(new BobaRunDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
     // gameEngine.addEntity(new BobaWalkDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
     gameEngine.addEntity(new redTea(gameEngine));
+    gameEngine.addEntity(new greenTea(gameEngine));
 
     console.log("All Done!");
 });
@@ -352,5 +355,28 @@ var GAMEBOARD = [];
       GAMEBOARD[i].push({
         block: false
       });
+    }
+  }
+
+  function drawRect(i,j) {
+    var ctx = PACMAN_CANVAS_CONTEXT;
+    var ygap = 17.75;
+    var x = BUBBLES_X_START + i*BUBBLES_GAP - BUBBLES_GAP/2;
+    var y = BUBBLES_Y_START + j*ygap- 9;
+    var w = BUBBLES_GAP;
+    var h = ygap;
+  
+    if(GAMEBOARD && GAMEBOARD[0] && GAMEBOARD[i][j]){
+      ctx.strokeStyle = "green";
+      ctx.rect(x,y,w,h);
+      ctx.stroke();
+    }
+  }
+
+  function drawDebug() {
+    for(var i = 0; i < 26; i++) {
+      for(var j = 0; j < 29; j++) {
+        drawRect(i,j);
+      }
     }
   }
