@@ -36,7 +36,7 @@ function greenTea(game) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = false;
     this.paceWalk = true;
-    this.hp = 0;
+    this.hp = 10;
 }
 
 greenTea.prototype.draw = function () {

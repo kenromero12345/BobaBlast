@@ -317,6 +317,8 @@ AM.queueDownload("./img/22137.png");
 AM.queueDownload("./img/22137Flip.png");
 AM.queueDownload("./img/greenTea.png");
 AM.queueDownload("./img/greenTeaFlip.png");
+AM.queueDownload("./img/yellowTea.png");
+AM.queueDownload("./img/yellowTeaFlip.png");
 
 AM.downloadAll(function () {
     var canvas = document.getElementById("gameWorld");
@@ -343,7 +345,7 @@ AM.downloadAll(function () {
     // gameEngine.addEntity(new BobaWalkDownLookRight(gameEngine, AM.getAsset("./img/22137Flip.png")));
     gameEngine.addEntity(new redTea(gameEngine));
     gameEngine.addEntity(new greenTea(gameEngine));
-
+    gameEngine.addEntity(new yellowTea(gameEngine));
     console.log("All Done!");
 });
 
