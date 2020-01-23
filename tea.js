@@ -84,6 +84,10 @@ var update = function (tea) {
     }
     if (tea.game.up) tea.moveDirection = 4;
     if (tea.game.run) tea.paceWalk = !tea.paceWalk;
+    var xy = getXY(tea.centerX, tea.centerY);
+    if (GAMEBOARD[xy.x][xy.y].end) {
+        tea.hp = 0; //dead
+    }
     var x;
     var y;
     var width;
@@ -165,8 +169,18 @@ var update = function (tea) {
     }
     x = tea.x;
     y = tea.y;
-    tea.centerX = ( width - x ) / 2;
-    tea.centerY = ( height - y ) / 2;
+    this.centerX = x + ( width - x ) / 2;
+    this.centerY = y + ( y - height ) / 2;
+    // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
+    // var difX = this.centerX - spawnX;
+    // var difY =  spawnY - this.centerY;
+    // // console.log("dx:" + difX + ", dy:" + difY);
+    // this.centerX = this.centerX - Math.abs(difX);
+    // this.centerY = this.centerY - Math.abs(difY);
+    // tea.centerX = ( width - x ) / 2;
+    // tea.centerY = ( height - y ) / 2;
+    // console.log(tea.centerX + " " + tea.centerY)
+    // console.log(getXY(this.centerX, this.centerY));
     // console.log ("x: " + tea.centerX + " y: " + tea.centerY );
 
     //start at -50 50 
@@ -175,8 +189,97 @@ var update = function (tea) {
 }
 
 var getXY = function(x, y) {
-    var i = Math.floor((x - BUBBLES_X_START + BUBBLES_GAP/2)/BUBBLES_GAP);
-    var j = Math.floor((y - BUBBLES_Y_START + 9)/17.75);
+    var i = Math.floor(x/100) + 1;
+    var j = Math.floor(y/100);
   
     return {x: i, y: j}
 }
+
+//make it bidirection ?
+function getShortestPath(x, y) {
+    var queue = [];
+
+	for(var i = 0; i < GAMEBOARD.length; i++) {
+	  	for(var j = 0; j < GAMEBOARD[i].length; j++) {
+            GAMEBOARD[i][j].distToXY = -1;
+            GAMEBOARD[i][j].dir = -1;
+	  	}
+	}
+
+    queue.push(getXY(x, y));
+
+    while (queue.length !== 0) {
+        for (let i = 0; i < queue.length; i++) {
+            var node = queue.shift();
+            if (GAMEBOARD[node.x][node.y].end) {
+				return helperToGetDirection(node);
+            }
+
+            if (node.x + 1 < GAMEBOARD.length && node.x + 1 >= 0 && !GAMEBOARD[node.x + 1][node.y].occupied 
+                && GAMEBOARD[node.x + 1][node.y].dir < 0) {
+                var newNode = Object.assign({}, node);
+                newNode.x++;
+                queue.push(newNode);
+				GAMEBOARD[node.x + 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+				GAMEBOARD[node.x + 1][node.y].dir = 1;
+            }
+            if (node.y + 1 < GAMEBOARD[0].length && node.y + 1 >= 0 && !GAMEBOARD[node.x][node.y + 1].occupied 
+                && GAMEBOARD[node.x][node.y + 1].dir < 0) {
+                var newNode = Object.assign({}, node);
+                newNode.y++;
+                queue.push(newNode);
+				GAMEBOARD[node.x][node.y + 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+				GAMEBOARD[node.x][node.y + 1].dir = 2;
+            }
+            if (node.x - 1 < GAMEBOARD.length && node.x - 1 >= 0 && !GAMEBOARD[node.x - 1][node.y].occupied 
+                && GAMEBOARD[node.x - 1][node.y].dir < 0) {
+                var newNode = Object.assign({}, node);
+                newNode.x--;
+                queue.push(newNode);
+				GAMEBOARD[node.x - 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+				GAMEBOARD[node.x - 1][node.y].dir = 3;
+            }
+            if (node.y - 1 < GAMEBOARD[0].length && node.y - 1 >= 0 && !GAMEBOARD[node.x][node.y - 1].occupied 
+                && GAMEBOARD[node.x][node.y - 1].dir < 0) {
+                var newNode = Object.assign({}, node);
+                newNode.y--;
+                queue.push(newNode);
+				GAMEBOARD[node.x][node.y - 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+				GAMEBOARD[node.x][node.y - 1].dir = 4;
+            }
+        }
+    }
+    return null; // no shortest path
+};
+
+function helperToGetDirection(node) {
+	if(GAMEBOARD[node.x][node.y].distToXY == 0) {
+		return node.linkedDir;
+	}
+
+	if (node.x + 1 < 26 && node.x + 1 >= 0 && !GAMEBOARD[node.x + 1][node.y].occupied
+		&& GAMEBOARD[node.x + 1][node.y].distToXY == GAMEBOARD[node.x][node.y].distToXY - 1) {
+		node.linkedDir = GAMEBOARD[node.x][node.y].dir;
+		node.x++;
+		return helperToGetDirection(node);
+	}
+	if (node.y + 1 < 29 && node.y + 1 >= 0 && !GAMEBOARD[node.x][node.y + 1].occupied
+		&& GAMEBOARD[node.x][node.y + 1].distToXY == GAMEBOARD[node.x][node.y].distToXY - 1) {
+		node.linkedDir = GAMEBOARD[node.x][node.y].dir;
+		node.y++;
+		return helperToGetDirection(node);
+	}
+	if (node.x - 1 < 26 && node.x - 1 >= 0 && !GAMEBOARD[node.x - 1][node.y].occupied
+		&& GAMEBOARD[node.x - 1][node.y].distToXY == GAMEBOARD[node.x][node.y].distToXY - 1) {
+		node.linkedDir = GAMEBOARD[node.x][node.y].dir;
+		node.x--;
+		return helperToGetDirection(node);
+	}
+	if (node.y - 1 < 29 && node.y - 1 >= 0 && !GAMEBOARD[node.x][node.y - 1].occupied 
+		&& GAMEBOARD[node.x][node.y - 1].distToXY == GAMEBOARD[node.x][node.y].distToXY - 1) {
+		node.linkedDir = GAMEBOARD[node.x][node.y].dir;
+		node.y--;
+		return helperToGetDirection(node);
+	}
+};
+
