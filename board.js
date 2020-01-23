@@ -33,11 +33,39 @@ board.prototype.buildGameboard = function () {
   GAMEBOARD[10][2].end = true;
   GAMEBOARD[10][3].end = true;
 
-  GAMEBOARD[2][2].occupied = true;
-  GAMEBOARD[2][3].occupied = true;
-  GAMEBOARD[2][1].occupied = true;
-  GAMEBOARD[2][4].occupied = true;
-  GAMEBOARD[2][5].occupied = true;
+  GAMEBOARD[0][0].occupied = true;
+  GAMEBOARD[0][1].occupied = true;
+  GAMEBOARD[0][4].occupied = true;
+  GAMEBOARD[0][5].occupied = true;
+
+  GAMEBOARD[10][0].occupied = true;
+  GAMEBOARD[10][1].occupied = true;
+  GAMEBOARD[10][4].occupied = true;
+  GAMEBOARD[10][5].occupied = true;
+
+  // GAMEBOARD[2][1].occupied = true;
+  // GAMEBOARD[2][2].occupied = true;
+  // GAMEBOARD[2][3].occupied = true;
+  // GAMEBOARD[2][4].occupied = true;
+  // GAMEBOARD[2][5].occupied = true;
+
+  // GAMEBOARD[4][1].occupied = true;
+  // GAMEBOARD[4][2].occupied = true;
+  // GAMEBOARD[4][3].occupied = true;
+  // GAMEBOARD[4][4].occupied = true;
+  // GAMEBOARD[4][0].occupied = true;
+
+  // GAMEBOARD[6][1].occupied = true;
+  // GAMEBOARD[6][2].occupied = true;
+  // GAMEBOARD[6][0].occupied = true;
+  // GAMEBOARD[6][4].occupied = true;
+  // GAMEBOARD[6][5].occupied = true;
+
+  // GAMEBOARD[8][1].occupied = true;
+  // GAMEBOARD[8][2].occupied = true;
+  // GAMEBOARD[8][3].occupied = true;
+  // GAMEBOARD[8][4].occupied = true;
+  // GAMEBOARD[8][5].occupied = true;
 
   for(var i = 0; i < this.width; i++) {
     for(var j = 0; j < this.height; j++) {
@@ -53,17 +81,22 @@ board.prototype.drawRect = function (i,j) {
   var y = this.startingYPoint + j * 100;
   var w = this.xgap;
   var h = this.ygap;
-  ctx.strokeStyle = "green";
-  ctx.rect(x,y,w,h);
-  ctx.stroke();
+  // ctx.strokeStyle = "green";
+  // ctx.rect(x,y,w,h);
+  // ctx.stroke();
+  ctx.fillStyle = "green";
+  ctx.fillRect(x,y,w,h);
 }
 
 board.prototype.draw = function () {
- /* for(var i = 0; i < this.width; i++) {
+ for(var i = 0; i < this.width; i++) {
     for(var j = 0; j < this.height; j++) {
-      this.drawRect(i,j);
+      // this.drawRect(i,j);
+      if (GAMEBOARD[i][j].occupied) {
+        this.drawRect(i,j); 
+      }
     }
-  } */
+  } 
 }
 
 board.prototype.update = function () {
