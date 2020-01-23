@@ -1,7 +1,7 @@
 var GAMEBOARD = [];
 
 function board(game) {
-	this.GAMEBOARD = [];
+	GAMEBOARD = [];
 	this.width = 11;
 	this.height = 6;
 	this.xgap = 100;
@@ -14,11 +14,11 @@ function board(game) {
 }
 
 board.prototype.buildGameboard = function () {
-  this.GAMEBOARD = [];
+  GAMEBOARD = [];
   for(var i = 0; i < this.width; i++) {
-    this.GAMEBOARD.push([]);
+    GAMEBOARD.push([]);
     for(var j = 0; j < this.height; j++) {
-      this.GAMEBOARD[i].push({
+      GAMEBOARD[i].push({
 		occupied : false,
 		start : false,
 		end : false,
@@ -28,15 +28,15 @@ board.prototype.buildGameboard = function () {
     }
   }
 
-  this.GAMEBOARD[0][2].start = true;
-  this.GAMEBOARD[0][3].start = true;
-  this.GAMEBOARD[7][2].end = true;
-  this.GAMEBOARD[7][3].end = true;
+  GAMEBOARD[0][2].start = true;
+  GAMEBOARD[0][3].start = true;
+  GAMEBOARD[7][2].end = true;
+  GAMEBOARD[7][3].end = true;
 
   for(var i = 0; i < this.width; i++) {
     for(var j = 0; j < this.height; j++) {
-	  this.GAMEBOARD[i][j].centerx = this.startingXPoint + 50 + this.width * this.xgap;
-	  this.GAMEBOARD[i][j].centery = this.startingYPoint + 50 + this.height * this.ygap;
+	  GAMEBOARD[i][j].centerx = this.startingXPoint + 50 + this.width * this.xgap;
+	  GAMEBOARD[i][j].centery = this.startingYPoint + 50 + this.height * this.ygap;
     }
   }
 }
