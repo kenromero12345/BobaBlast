@@ -1,7 +1,7 @@
 var GAMEBOARD = [];
 
 function board(game) {
-	this.GAMEBOARD = [];
+	GAMEBOARD = [];
 	this.width = 11;
 	this.height = 6;
 	this.xgap = 100;
@@ -14,7 +14,6 @@ function board(game) {
 }
 
 board.prototype.buildGameboard = function () {
-  this.GAMEBOARD = [];
   for(var i = 0; i < this.width; i++) {
     this.GAMEBOARD.push([]);
     for(var j = 0; j < this.height; j++) {
