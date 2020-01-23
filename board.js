@@ -30,8 +30,14 @@ board.prototype.buildGameboard = function () {
 
   GAMEBOARD[0][2].start = true;
   GAMEBOARD[0][3].start = true;
-  GAMEBOARD[7][2].end = true;
-  GAMEBOARD[7][3].end = true;
+  GAMEBOARD[10][2].end = true;
+  GAMEBOARD[10][3].end = true;
+
+  GAMEBOARD[2][2].occupied = true;
+  GAMEBOARD[2][3].occupied = true;
+  GAMEBOARD[2][1].occupied = true;
+  GAMEBOARD[2][4].occupied = true;
+  GAMEBOARD[2][5].occupied = true;
 
   for(var i = 0; i < this.width; i++) {
     for(var j = 0; j < this.height; j++) {
