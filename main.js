@@ -74,6 +74,7 @@ Background.prototype.update = function() {
 
 }
 
+// var GAMEBOARD = [];
 AM.downloadAll(function () {
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
@@ -82,9 +83,14 @@ AM.downloadAll(function () {
     gameEngine.init(ctx);
     gameEngine.start();
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
+    // board = new function() {
+    //     new board(gameEngine);
+    // } 
+    // GAMEBOARD = board.GAMEBOARD;
+    // gameEngine.addEntity(board);
+    gameEngine.addEntity(new board(gameEngine));
     gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
     gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
     gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, false));
-    gameEngine.addEntity(new board(gameEngine));
     console.log("All Done!");
 });
