@@ -88,6 +88,8 @@ var update = function (tea) {
     if (GAMEBOARD[xy.x][xy.y].end) {
         tea.hp = 0; //dead
     }
+
+    console.log(getShortestPath(tea.centerX, tea.centerY));
     var x;
     var y;
     var width;
