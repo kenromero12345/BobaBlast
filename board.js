@@ -1,3 +1,5 @@
+var GAMEBOARD = [];
+
 function board(game) {
 	this.GAMEBOARD = [];
 	this.width = 11;
