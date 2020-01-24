@@ -89,8 +89,8 @@ AM.downloadAll(function () {
     // GAMEBOARD = board.GAMEBOARD;
     // gameEngine.addEntity(board);
     gameEngine.addEntity(new board(gameEngine));
-    gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
+    gameEngine.addEntity(new redTea(gameEngine, -50, 250, true));
     gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
-    gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, false));
+    // gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, false));
     console.log("All Done!");
 });
