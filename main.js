@@ -56,6 +56,8 @@ AM.queueDownload("./img/greenTea.png");
 AM.queueDownload("./img/greenTeaFlip.png");
 AM.queueDownload("./img/yellowTea.png");
 AM.queueDownload("./img/yellowTeaFlip.png");
+AM.queueDownload("./img/origTea.png");
+AM.queueDownload("./img/origTeaFlip.png");
 AM.queueDownload("./img/background.png");
 
 function Background(game, spritesheet) {
@@ -89,8 +91,15 @@ AM.downloadAll(function () {
     // GAMEBOARD = board.GAMEBOARD;
     // gameEngine.addEntity(board);
     gameEngine.addEntity(new board(gameEngine));
-    gameEngine.addEntity(new redTea(gameEngine, -50, 250, true));
-    gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
-    // gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, false));
+    gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
+    sleep(1000).then(() => {
+        gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
+    })
+    gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true));
     console.log("All Done!");
 });
+
+
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }

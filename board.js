@@ -43,29 +43,30 @@ board.prototype.buildGameboard = function () {
   GAMEBOARD[10][4].occupied = true;
   GAMEBOARD[10][5].occupied = true;
 
-  // GAMEBOARD[2][1].occupied = true;
-  // GAMEBOARD[2][2].occupied = true;
-  // GAMEBOARD[2][3].occupied = true;
-  // GAMEBOARD[2][4].occupied = true;
-  // GAMEBOARD[2][5].occupied = true;
+  GAMEBOARD[1][1].occupied = true;
 
-  // GAMEBOARD[4][1].occupied = true;
-  // GAMEBOARD[4][2].occupied = true;
-  // GAMEBOARD[4][3].occupied = true;
-  // GAMEBOARD[4][4].occupied = true;
-  // GAMEBOARD[4][0].occupied = true;
+  GAMEBOARD[2][2].occupied = true;
+  GAMEBOARD[2][3].occupied = true;
+  GAMEBOARD[2][4].occupied = true;
 
-  // GAMEBOARD[6][1].occupied = true;
-  // GAMEBOARD[6][2].occupied = true;
-  // GAMEBOARD[6][0].occupied = true;
-  // GAMEBOARD[6][4].occupied = true;
-  // GAMEBOARD[6][5].occupied = true;
+  GAMEBOARD[4][2].occupied = true;
+  GAMEBOARD[4][3].occupied = true;
+  GAMEBOARD[4][4].occupied = true;
+  GAMEBOARD[4][5].occupied = true;
 
-  // GAMEBOARD[8][1].occupied = true;
-  // GAMEBOARD[8][2].occupied = true;
-  // GAMEBOARD[8][3].occupied = true;
-  // GAMEBOARD[8][4].occupied = true;
-  // GAMEBOARD[8][5].occupied = true;
+  GAMEBOARD[5][1].occupied = true;
+
+  GAMEBOARD[6][1].occupied = true;
+  GAMEBOARD[6][3].occupied = true;
+  GAMEBOARD[6][4].occupied = true;
+  
+  GAMEBOARD[7][1].occupied = true;
+  GAMEBOARD[7][3].occupied = true;
+
+  GAMEBOARD[8][3].occupied = true;
+
+  GAMEBOARD[9][2].occupied = true;
+
 
   for(var i = 0; i < this.width; i++) {
     for(var j = 0; j < this.height; j++) {
