@@ -56,8 +56,8 @@ AM.queueDownload("./img/greenTea.png");
 AM.queueDownload("./img/greenTeaFlip.png");
 AM.queueDownload("./img/yellowTea.png");
 AM.queueDownload("./img/yellowTeaFlip.png");
-AM.queueDownload("./img/origTea.png");
-AM.queueDownload("./img/origTeaFlip.png");
+// AM.queueDownload("./img/origTea.png");
+// AM.queueDownload("./img/origTeaFlip.png");
 AM.queueDownload("./img/background.png");
 AM.queueDownload("./img/holder.png");
 
@@ -94,10 +94,13 @@ AM.downloadAll(function () {
     var temp = [[AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png")],[AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png")],[AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png")]]
     gameEngine.addEntity(new board(gameEngine));
     gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
-    sleep(1000).then(() => {
+    sleep(2000).then(() => {
         gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
     })
-    gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true));
+    sleep(8000).then(() => {
+        gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true));
+    })
+    
     gameEngine.addEntity(new display(gameEngine, temp));
 
     console.log("All Done!");

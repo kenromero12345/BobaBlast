@@ -31,6 +31,7 @@ function redTea(game, spawnX, spawnY, isRun) {
     this.walkHeight = 95;
     this.runWidth = 72;
     this.runHeight= 85;
+    this.name = "red";
     constructor(this, game, spawnX, spawnY, isRun);
 }
 
