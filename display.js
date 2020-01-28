@@ -165,4 +165,6 @@ display.prototype.generateDescriptionBox = function() {
 }
 
 display.prototype.update = function () {
+    currentMoney++;
+    currentLifes--;
 }

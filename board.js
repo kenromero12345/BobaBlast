@@ -98,6 +98,16 @@ board.prototype.draw = function () {
       }
     }
   } 
+
+  //  && this.board[this.game.mouse.x][this.game.mouse.y] === 0
+  if (this.game.mouse) {
+    var mouse = this.game.mouse;
+    this.ctx.save();
+    this.ctx.globalAlpha = 0.5;
+    console.log("X: " + mouse.x + "Y" + mouse.y);
+    this.drawRect(mouse.x, mouse.y);
+    this.ctx.restore();
+  }
 }
 
 board.prototype.update = function () {
