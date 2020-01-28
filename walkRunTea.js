@@ -21,6 +21,13 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
     tea.hp = 10;
+    if (tea.paceWalk) {
+        tea.width = tea.walkWidth;
+        tea.height = tea.walkHeight;
+    } else {
+        tea.width = tea.runWidth;
+        tea.height = tea.runHeight;
+    }
 }
 
 var draw = function (tea) {
@@ -224,13 +231,6 @@ var update = function (tea) {
         }
     }
 }
-
-var collide = function (rect1, rect2) {
-    return (rect1.paceWalk && (rect1.x < rect2.x + rect2.walkWidth && rect1.x + rect1.walkWidth > rect2.x 
-    && rect1.y < rect2.y + rect2.walkHeight && rect1.walkHeight + rect1.y > rect2.y))
-    || (!rect1.paceWalk && (rect1.x < rect2.x + rect2.runWidth && rect1.x + rect1.runWidth > rect2.x 
-        && rect1.y < rect2.y + rect2.runHeight && rect1.runHeight + rect1.y > rect2.y));
-};
 
 var getXY = function(x, y) {
     var i = Math.floor(x/100) + 1;
