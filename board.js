@@ -1,4 +1,5 @@
 var GAMEBOARD = [];
+var ACTIVETOWERS = [];
 
 function board(game) {
 	GAMEBOARD = [];
@@ -94,18 +95,25 @@ board.prototype.draw = function () {
     for(var j = 0; j < this.height; j++) {
       // this.drawRect(i,j);
       if (GAMEBOARD[i][j].occupied) {
-        this.drawRect(i,j); 
+        this.drawRect(i, j);
+        var x = this.startingXPoint + i * 100;
+        var y = this.startingYPoint + j * 100;
+        this.ctx.drawImage(towerArray[selectedTowerRow][selectedTowerColumn].spritesheet, x, y);
+           
       }
     }
   } 
 
-  //  && this.board[this.game.mouse.x][this.game.mouse.y] === 0
-  if (this.game.mouse) {
+  if (this.game.mouse && purchaseMode == true) {
     var mouse = this.game.mouse;
     this.ctx.save();
     this.ctx.globalAlpha = 0.5;
+    var upperLeftX = Math.floor(mouse.x/100) * 100;
+    var upperLeftY = Math.floor(mouse.y/100) * 100;
     console.log("X: " + mouse.x + "Y" + mouse.y);
-    this.drawRect(mouse.x, mouse.y);
+    this.drawRect(Math.floor(mouse.x/100) + 1, Math.floor(mouse.y/100));
+    this.ctx.drawImage(towerArray[selectedTowerRow][selectedTowerColumn].spritesheet, upperLeftX, upperLeftY);
+           
     this.ctx.restore();
   }
 }

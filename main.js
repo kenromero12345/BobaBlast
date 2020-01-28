@@ -61,6 +61,8 @@ AM.queueDownload("./img/yellowTeaFlip.png");
 AM.queueDownload("./img/background.png");
 AM.queueDownload("./img/holder.png");
 
+  
+
 function Background(game, spritesheet) {
     this.x = 0;
     this.y = 0;
@@ -91,7 +93,6 @@ AM.downloadAll(function () {
     // } 
     // GAMEBOARD = board.GAMEBOARD;
     // gameEngine.addEntity(board);
-    var temp = [[AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png")],[AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png")],[AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png")]]
     gameEngine.addEntity(new board(gameEngine));
     gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
     sleep(2000).then(() => {
@@ -101,11 +102,25 @@ AM.downloadAll(function () {
         gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true));
     })
     
-    gameEngine.addEntity(new display(gameEngine, temp));
+    gameEngine.addEntity(new display(gameEngine, this.generateGenericTowers(gameEngine)));
 
     console.log("All Done!");
 });
 
+function generateGenericTowers(game) {
+    var firstTower = new tower(game, "Tower 1", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var secondTower = new tower(game, "Tower 2", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var thirdTower = new tower(game, "Tower 3", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var fourthTower = new tower(game, "Tower 4", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var fifthTower = new tower(game, "Tower 5", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var sixthTower = new tower(game, "Tower 6", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var seventhTower = new tower(game, "Tower 7", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var eightTower = new tower(game, "Tower 8", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var ninthTower = new tower(game, "Tower 9", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    
+    var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower,eightTower,ninthTower]];
+    return temp;
+}
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))

@@ -83,7 +83,8 @@ GameEngine.prototype.startInput = function () {
     }, false);
 
     this.ctx.canvas.addEventListener("click", function (e) {
-        that.click = getXandY(e);
+        //that.click = getXandY(e);
+        that.click = { x: e.clientX, y: e.clientY };
         // console.log(e);
         // console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
         // console.log(getXY(e.clientX, e.clientY));
@@ -92,7 +93,7 @@ GameEngine.prototype.startInput = function () {
     }, false);
 
     this.ctx.canvas.addEventListener("mousemove", function (e) {
-        that.mouse = getXandY(e);
+        that.mouse = { x: e.clientX, y: e.clientY };
     }, false);
 
     console.log('Input started');
