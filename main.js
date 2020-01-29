@@ -135,17 +135,22 @@ Dragon.prototype.draw = function (ctx) {
 }
 
 function Tower(game){
-    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/twrY.png"), 0,0,490,475, 0.5, 8, true);
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/ice.png"), 0,203,41,69, 0.4, 3, true);
+    this.animationB = new Animation(ASSET_MANAGER.getAsset("./img/ice.png"), 0,203,41,69, 0.4, 2, false, false);
     Entity.call(this, game, 200,100);
 }
 
 Tower.prototype = new Entity();
 Tower.prototype.constructor = Tower;
 
-Tower.prototype.update = function(){}
+Tower.prototype.update = function(){
+    this.y--;
+    if(this.y==-20) this.y=200;
+    Entity.prototype.update.call(this);
+}
 
 Tower.prototype.draw = function (ctx) {
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y); 
     Entity.prototype.draw.call(this);
 }
 
@@ -154,10 +159,10 @@ Tower.prototype.draw = function (ctx) {
 var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./img/hydrei.png");
-ASSET_MANAGER.queueDownload("./img/twrY.png");
+ASSET_MANAGER.queueDownload("./img/ice.png");
 
 ASSET_MANAGER.downloadAll(function () {
-    console.log("starting up da sheild");
+    console.log("starting dl");
     var canvas = document.getElementById('gameWorld');
     var ctx = canvas.getContext('2d');
 
@@ -177,3 +182,7 @@ ASSET_MANAGER.downloadAll(function () {
     gameEngine.init(ctx);
     gameEngine.start();
 });
+
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
