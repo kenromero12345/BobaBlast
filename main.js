@@ -70,36 +70,73 @@ Background.prototype.draw = function (ctx) {
 }
 
 function Cloud(game) {
-    Entity.call(this, game, 100, 200);
-    this.radius = 200;
+    this.speed = 15;
+    this.walk = new Animation(ASSET_MANAGER.getAsset("./img/iceg.png"), 0, 180, 194, 180, 0.5, 4, true);
+    this.die = new Animation(ASSET_MANAGER.getAsset("./img/iceg.png"), 0, 745, 238, 180, 0.25, 7,);
+    Entity.call(this, game, 500, 400);
 }
 
 Cloud.prototype = new Entity();
 Cloud.prototype.constructor = Cloud;
 
 Cloud.prototype.update = function () {
+    if(this.x<230) this.x = this.x;
+    else this.x -= this.game.clockTick * this.speed;
+    
 }
 
 Cloud.prototype.draw = function (ctx) {
-    ctx.fillStyle = "White";
-    ctx.fillRect(400,200,300,100);
+    if(this.x>230){
+        this.walk.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    } else this.die.drawFrame(this.game.clockTick, ctx, this.x, this.y);
     Entity.prototype.draw.call(this);
 }
 
 function Sun(game) {
-    Entity.call(this, game, 100, 200);
-    this.radius = 200;
+    this.walk = new Animation(ASSET_MANAGER.getAsset("./img/zero.png"), 100, 650, 56, 80, 0.1, 8, true);
+    this.slash = new Animation(ASSET_MANAGER.getAsset("./img/zero.png"), 83, 105, 95, 146, 0.1, 11, true);
+    this.top = new Animation(ASSET_MANAGER.getAsset("./img/zero.png"), 1, 509, 46, 80, 0.1, 5, true);
+    this.hold = new Animation(ASSET_MANAGER.getAsset("./img/zero.png"), 335, 260, 67, 120, 0.5, 1, true);
+    this.sword = new Animation(ASSET_MANAGER.getAsset("./img/zero.png"), 402, 260, 56, 120, 0.1, 4, true);
+    this.speed = 100;
+    Entity.call(this, game, 000, 200);
 }
 
 Sun.prototype = new Entity();
 Sun.prototype.constructor = Sun;
 
 Sun.prototype.update = function () {
+    if(this.x<90){
+        this.x+= this.game.clockTick * this.speed;
+    }else if (this.y> 92 && this.x < 250) {
+        this.y -= this.game.clockTick * this.speed;
+        this.x+= this.game.clockTick * this.speed;
+    }else if (this.x < 255){
+        this.x+= this.game.clockTick * this.speed;
+    }else if(this.x<500){
+        this.y += this.game.clockTick * this.speed * 10;
+    }
+    if(this.y > 1000){
+        this.x = -50;
+        this.y = 200;
+    }
 }
 
 Sun.prototype.draw = function (ctx) {
-    ctx.fillStyle = "Yellow";
-    ctx.fillRect(10,10,200,200);
+    if(this.x<90){
+        this.walk.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    }else if (this.y> 94 && this.x < 250 ) {
+        this.slash.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    }else if (this.x < 255 ){
+        this.top.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    }else if(this.x<500){
+        this.sword.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    }
+    
+    
+    
+    // this.hold.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    
     Entity.prototype.draw.call(this);
 }
 
@@ -144,8 +181,8 @@ Tower.prototype = new Entity();
 Tower.prototype.constructor = Tower;
 
 Tower.prototype.update = function(){
-    this.y--;
-    if(this.y==-20) this.y=200;
+    this.y++;
+    if(this.y==200) this.y=-20;
     Entity.prototype.update.call(this);
 }
 
@@ -160,6 +197,9 @@ var ASSET_MANAGER = new AssetManager();
 
 ASSET_MANAGER.queueDownload("./img/hydrei.png");
 ASSET_MANAGER.queueDownload("./img/ice.png");
+ASSET_MANAGER.queueDownload("./img/iceg.png");
+ASSET_MANAGER.queueDownload("./img/icegFlip.png");
+ASSET_MANAGER.queueDownload("./img/zero.png");
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting dl");
