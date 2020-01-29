@@ -75,7 +75,7 @@ display.prototype.draw = function () {
         purchaseMode = false;
         var click = this.game.click;
         if(click.x >= 945 && click.x < 1155 && click.y >= 200 && click.y < 410) {
-            console.log("X: " + click.x + "Y" + click.y);
+            // console.log("X: " + click.x + "Y" + click.y);
             var xIndex = Math.floor((click.x - this.towerStartX - 20)/70);
             var yIndex = Math.floor((click.y - this.towerStartY - 30)/70);
             purchaseMode = true;

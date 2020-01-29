@@ -20,7 +20,8 @@ board.prototype.buildGameboard = function () {
     GAMEBOARD.push([]);
     for(var j = 0; j < this.height; j++) {
       GAMEBOARD[i].push({
-		occupied : false,
+    occupied : false,
+    hoverOccupied: false,
 		start : false,
 		end : false,
 		centerx : 0,
@@ -105,18 +106,33 @@ board.prototype.draw = function () {
     }
   } 
 
-  // Shadow Effect
-  if (this.game.mouse && purchaseMode == true) {
-    var mouse = this.game.mouse;
-    this.ctx.save();
-    this.ctx.globalAlpha = 0.5;
-    var upperLeftX = Math.floor(mouse.x/100) * 100;
-    var upperLeftY = Math.floor(mouse.y/100) * 100;
-    this.drawRect(Math.floor(mouse.x/100) + 1, Math.floor(mouse.y/100));
-    this.ctx.drawImage(towerArray[selectedTowerRow][selectedTowerColumn].spritesheet, upperLeftX, upperLeftY); 
-    this.ctx.restore();
-  }
+
+
+
+    // Shadow Effect
+    if (this.game.mouse && purchaseMode == true) {
+      var mouse = this.game.mouse;
+      this.ctx.save();
+      this.ctx.globalAlpha = 0.5;
+      var upperLeftX = Math.floor(mouse.x/100) * 100;
+      var upperLeftY = Math.floor(mouse.y/100) * 100;
+      var gridX = Math.floor(mouse.x/100) + 1;
+      var gridY = Math.floor(mouse.y/100);
+      // console.log(gridX + " " + gridY);
+      // if (!isPath(-50, 250, gridX, gridY)) {
+      //   console.log(GAMEBOARD);
+      // }
+      // console.log(isPath(-50, 250, gridX, gridY));
+      if (gridX >= 0 && gridX < GAMEBOARD.length  
+        && gridY >= 0 && gridY < GAMEBOARD[0].length
+        && !GAMEBOARD[gridX][gridY].end && isPath(-50, 250, gridX, gridY)) {
+        this.drawRect(Math.floor(mouse.x/100) + 1, Math.floor(mouse.y/100));
+        this.ctx.drawImage(towerArray[selectedTowerRow][selectedTowerColumn].spritesheet, upperLeftX, upperLeftY); 
+      }
+      this.ctx.restore();
+    }
 }
+
 
 board.prototype.update = function () {
   if (this.game.click && purchaseMode === true) {
@@ -124,11 +140,84 @@ board.prototype.update = function () {
     if(click.x >= 0 && click.x < 900 && click.y >= 0 && click.y < 600) {
       var gridX = Math.floor(click.x/100) + 1;
       var gridY = Math.floor(click.y/100);
-      console.log("X: " + click.x + "Y" + click.y);
-      purchaseMode = true;
-      GAMEBOARD[gridX][gridY].occupied = true;
-      ACTIVETOWERS.push([gridX, gridY,towerArray[selectedTowerRow][selectedTowerColumn].spritesheet]);
-      console.log(ACTIVETOWERS[0][0]);
+      // console.log("X: " + click.x + "Y" + click.y);
+      if (isPath(-50, 250, gridX, gridY)) {
+        purchaseMode = true;
+        GAMEBOARD[gridX][gridY].occupied = true;
+        ACTIVETOWERS.push([gridX, gridY,towerArray[selectedTowerRow][selectedTowerColumn].spritesheet]);
+      }
+      // console.log(ACTIVETOWERS[0][0]);
     }
   }
+  
 }
+
+//make it bidirection ?
+function isPath(x, y, blockX, blockY) {
+  var queue = [];
+  if (GAMEBOARD[blockX][blockY]) {
+    GAMEBOARD[blockX][blockY].hoverOccupied = true;
+  } else {
+    return false;
+  }
+
+for(var i = 0; i < GAMEBOARD.length; i++) {
+    for(var j = 0; j < GAMEBOARD[i].length; j++) {
+          GAMEBOARD[i][j].distToXY = -1;
+          GAMEBOARD[i][j].dir = -1;
+    }
+}
+
+  var xy = getXY(x, y);
+  GAMEBOARD[xy.x][xy.y].distToXY = 0;
+  GAMEBOARD[xy.x][xy.y].dir = 0;
+  queue.push(xy);
+
+  while (queue.length !== 0) {
+      for (let i = 0; i < queue.length; i++) {
+          var node = queue.shift();
+          // if (node.x == 2 && node.y > 0) {
+          //     console.log("problem")
+          // }
+          if (GAMEBOARD[node.x][node.y].end) {
+            GAMEBOARD[blockX][blockY].hoverOccupied = false;
+            return true;
+          }
+
+          if (node.x + 1 < GAMEBOARD.length && node.x + 1 >= 0 && (!GAMEBOARD[node.x + 1][node.y].hoverOccupied 
+            && !GAMEBOARD[node.x + 1][node.y].occupied) && GAMEBOARD[node.x + 1][node.y].dir < 0) {
+              var newNode = Object.assign({}, node);
+              newNode.x++;
+              queue.push(newNode);
+              GAMEBOARD[node.x + 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+              GAMEBOARD[node.x + 1][node.y].dir = 1;
+          }
+          if (node.y + 1 < GAMEBOARD[0].length && node.y + 1 >= 0 && (!GAMEBOARD[node.x][node.y + 1].hoverOccupied 
+            && !GAMEBOARD[node.x][node.y + 1].occupied) && GAMEBOARD[node.x][node.y + 1].dir < 0) {
+              var newNode = Object.assign({}, node);
+              newNode.y++;
+              queue.push(newNode);
+              GAMEBOARD[node.x][node.y + 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+              GAMEBOARD[node.x][node.y + 1].dir = 2;
+          }
+          if (node.x - 1 < GAMEBOARD.length && node.x - 1 >= 0 && (!GAMEBOARD[node.x - 1][node.y].hoverOccupied 
+            && !GAMEBOARD[node.x - 1][node.y].occupied) && GAMEBOARD[node.x - 1][node.y].dir < 0) {
+              var newNode = Object.assign({}, node);
+              newNode.x--;
+              queue.push(newNode);
+              GAMEBOARD[node.x - 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+              GAMEBOARD[node.x - 1][node.y].dir = 3;
+          }
+          if (node.y - 1 < GAMEBOARD[0].length && node.y - 1 >= 0 && (!GAMEBOARD[node.x][node.y - 1].hoverOccupied 
+            && !GAMEBOARD[node.x][node.y - 1].occupied) && GAMEBOARD[node.x][node.y - 1].dir < 0) {
+              var newNode = Object.assign({}, node);
+              newNode.y--;
+              queue.push(newNode);
+              GAMEBOARD[node.x][node.y - 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+              GAMEBOARD[node.x][node.y - 1].dir = 4;
+          }
+      }
+  }
+  GAMEBOARD[blockX][blockY].hoverOccupied = false;
+  return false; // no shortest path
+};

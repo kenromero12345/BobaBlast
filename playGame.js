@@ -8,7 +8,7 @@ PlayGame.prototype.reset = function () {
 }
 PlayGame.prototype.update = function () {
     if (this.game.click) {
-        console.log("I CLICKED SCREEN");
+        // console.log("I CLICKED SCREEN");
         this.game.running = true;
     }
 }
