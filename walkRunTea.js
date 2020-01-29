@@ -34,8 +34,14 @@ var draw = function (tea) {
     if (tea.hp <= 0) {
         if (tea.lookDirectionRight) {
             tea.animationDisappearRight.drawFrame(tea.game.clockTick, tea.ctx, tea.x, tea.y);
+            if (tea.animationDisappearRight.isDone()) {
+                tea.removeFromWorld = true;
+            }
         } else {
             tea.animationDisappearLeft.drawFrame(tea.game.clockTick, tea.ctx, tea.x, tea.y);
+            if (tea.animationDisappearLeft.isDone()) {
+                tea.removeFromWorld = true;
+            }
         }
     } else if (tea.paceWalk) {
         if (tea.moveDirection == 1) {
@@ -95,8 +101,8 @@ var update = function (tea) {
     if (tea.game.run) tea.paceWalk = !tea.paceWalk;
     var xy = getXY(tea.centerX, tea.centerY);
     // console.log(xy);
-    if (((tea.centerX +  100) % 100 > 42 && (tea.centerX + 100) % 100 < 58
-        && tea.centerY % 100 > 42 && tea.centerY % 100 < 58) && !tea.paceWalk
+    if (((tea.centerX +  100) % 100 > 43 && (tea.centerX + 100) % 100 < 57
+        && tea.centerY % 100 > 43 && tea.centerY % 100 < 57) && !tea.paceWalk
         || ((tea.centerX +  100) % 100 > 49 && (tea.centerX + 100) % 100 < 51
         && tea.centerY % 100 > 49 && tea.centerY % 100 < 51) && tea.paceWalk) {
             // console.log(tea.centerX + " " + tea.centerY)
@@ -225,9 +231,11 @@ var update = function (tea) {
 
     for (var i = 0; i < tea.game.entities.length; i++) {
         var ent = tea.game.entities[i];
-        if (ent !== tea && collide(ent, tea)) {
+        if (ent !== tea && ent.isBoba && collide(ent, tea)) {
             //collide
-            console.log(tea.name + " collide with " + ent.name);
+            // console.log(tea.name + " collide with " + ent.name);
+            ent.removeFromWorld = true;
+            tea.hp--;
         }
     }
 }
