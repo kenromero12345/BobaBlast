@@ -4,15 +4,15 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.centerX = tea.x + tea.walkWidth / 2;
     tea.centerY = tea.y + tea.walkHeight / 2;
     // console.log("w:" + ( tea.walkWidth));
-    console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
+    // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
     var difX = tea.centerX - spawnX;
     var difY =  spawnY - tea.centerY;
-    console.log("dx:" + difX + ", dy:" + difY);
+    // console.log("dx:" + difX + ", dy:" + difY);
     tea.centerX = tea.centerX + Math.abs(difX);
     tea.centerY = tea.centerY + Math.abs(difY);
     tea.x = tea.x + Math.abs(difX);
     tea.y = tea.y + Math.abs(difY);
-    console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
+    // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
     tea.walkSpeed = 100;
     tea.runSpeed = 200;
     tea.game = game;
@@ -21,14 +21,27 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
     tea.hp = 10;
+    if (tea.paceWalk) {
+        tea.width = tea.walkWidth;
+        tea.height = tea.walkHeight;
+    } else {
+        tea.width = tea.runWidth;
+        tea.height = tea.runHeight;
+    }
 }
 
 var draw = function (tea) {
     if (tea.hp <= 0) {
         if (tea.lookDirectionRight) {
             tea.animationDisappearRight.drawFrame(tea.game.clockTick, tea.ctx, tea.x, tea.y);
+            if (tea.animationDisappearRight.isDone()) {
+                tea.removeFromWorld = true;
+            }
         } else {
             tea.animationDisappearLeft.drawFrame(tea.game.clockTick, tea.ctx, tea.x, tea.y);
+            if (tea.animationDisappearLeft.isDone()) {
+                tea.removeFromWorld = true;
+            }
         }
     } else if (tea.paceWalk) {
         if (tea.moveDirection == 1) {
@@ -88,8 +101,8 @@ var update = function (tea) {
     if (tea.game.run) tea.paceWalk = !tea.paceWalk;
     var xy = getXY(tea.centerX, tea.centerY);
     // console.log(xy);
-    if (((tea.centerX +  100) % 100 > 42 && (tea.centerX + 100) % 100 < 58
-        && tea.centerY % 100 > 42 && tea.centerY % 100 < 58) && !tea.paceWalk
+    if (((tea.centerX +  100) % 100 > 43 && (tea.centerX + 100) % 100 < 57
+        && tea.centerY % 100 > 43 && tea.centerY % 100 < 57) && !tea.paceWalk
         || ((tea.centerX +  100) % 100 > 49 && (tea.centerX + 100) % 100 < 51
         && tea.centerY % 100 > 49 && tea.centerY % 100 < 51) && tea.paceWalk) {
             // console.log(tea.centerX + " " + tea.centerY)
@@ -101,9 +114,7 @@ var update = function (tea) {
         }
     }
     // console.log(xy);
-    console.log(tea.centerX + " " +  tea.centerY);
-    var x;
-    var y;
+    // console.log(tea.centerX + " " +  tea.centerY);
     var width;
     var height;
     if (tea.hp > 0) {
@@ -216,6 +227,17 @@ var update = function (tea) {
     //start at -50 50 
     // console.log("x: " + x + " y: " + y + " w: " + width + " h: " + height);
     // drawRect(tea.ctx, tea.startX, tea.startY, tea.frameWidth, tea.frameHeight);
+    // console.log(tea.game.entities.length);
+
+    for (var i = 0; i < tea.game.entities.length; i++) {
+        var ent = tea.game.entities[i];
+        if (ent !== tea && ent.isBoba && collide(ent, tea)) {
+            //collide
+            // console.log(tea.name + " collide with " + ent.name);
+            ent.removeFromWorld = true;
+            tea.hp--;
+        }
+    }
 }
 
 var getXY = function(x, y) {
@@ -244,9 +266,9 @@ function getShortestPath(x, y) {
     while (queue.length !== 0) {
         for (let i = 0; i < queue.length; i++) {
             var node = queue.shift();
-            if (node.x == 2 && node.y > 0) {
-                console.log("problem")
-            }
+            // if (node.x == 2 && node.y > 0) {
+            //     console.log("problem")
+            // }
             if (GAMEBOARD[node.x][node.y].end) {
 				return helperToGetDirection(node);
             }
@@ -290,9 +312,9 @@ function getShortestPath(x, y) {
 
 function helperToGetDirection(node) {
 
-    if (node.x == 2 && node.y > 0) {
-        console.log("problem")
-    }
+    // if (node.x == 2 && node.y > 0) {
+    //     console.log("problem")
+    // }
 	if(GAMEBOARD[node.x][node.y].distToXY == 0) {
 		return node.linkedDir;
 	}

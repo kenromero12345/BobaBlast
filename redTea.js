@@ -31,13 +31,18 @@ function redTea(game, spawnX, spawnY, isRun) {
     this.walkHeight = 95;
     this.runWidth = 72;
     this.runHeight= 85;
+    this.name = "red";
     constructor(this, game, spawnX, spawnY, isRun);
 }
 
 redTea.prototype.draw = function () {
-    draw(this);
+    if(this.game.running) {
+        draw(this);
+    }
 }
 
 redTea.prototype.update = function () {
-    update(this);
+    if(this.game.running) {
+        update(this);
+    }
 }

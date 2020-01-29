@@ -1,8 +1,14 @@
 var currentMoney = 650;
 var currentLifes = 100;
 
-function display(game, towerArray) {
-    this.towerArray = towerArray;
+var purchaseMode = false;
+var selectedTowerRow = 0;
+var selectedTowerColumn = 0;
+var towerArray = [];
+
+
+function display(game, towerArr) {
+    towerArray = towerArr;
     this.width = 300;
     this.height = 600;
     this.startX = 900;
@@ -63,7 +69,46 @@ display.prototype.draw = function () {
     this.generateLifeBoard();
     this.generateTowerBoard();
     this.generateStartButton();
-    this.generateDescriptionBox();
+    this.generateDescriptionBox(null);
+
+    if (this.game.click) {
+        purchaseMode = false;
+        var click = this.game.click;
+        if(click.x >= 945 && click.x < 1155 && click.y >= 200 && click.y < 410) {
+            // console.log("X: " + click.x + "Y" + click.y);
+            var xIndex = Math.floor((click.x - this.towerStartX - 20)/70);
+            var yIndex = Math.floor((click.y - this.towerStartY - 30)/70);
+            purchaseMode = true;
+            selectedTowerRow = xIndex;
+            selectedTowerColumn = yIndex;
+           // this.ctx.drawImage(this.towerArray[xIndex][yIndex], this.towerStartX + 20 + 70 * xIndex, this.towerStartY + 30 + 70 * yIndex);
+            this.ctx.fillStyle = "green";
+            this.ctx.fillRect(this.towerStartX + 20 + 70 * xIndex, this.towerStartY + 30 + 70 * yIndex,70,70);
+            this.generateDescriptionBox(towerArray[xIndex][yIndex]);
+        }
+        // if statement for click on purchase button
+        // if statement for click on start round button
+      }
+
+    if (this.game.mouse) {
+        var mouse = this.game.mouse;
+        if(mouse.x >= 945 && mouse.x < 1155 && mouse.y >= 200 && mouse.y < 410) {
+            this.ctx.save();
+            this.ctx.globalAlpha = 0.5;
+            console.log("X: " + mouse.x + "Y" + mouse.y);
+            var xIndex = Math.floor((mouse.x - this.towerStartX - 20)/70);
+            var yIndex = Math.floor((mouse.y - this.towerStartY - 30)/70);
+           // this.ctx.drawImage(this.towerArray[xIndex][yIndex], this.towerStartX + 20 + 70 * xIndex, this.towerStartY + 30 + 70 * yIndex);
+            this.ctx.fillStyle = "green";
+            this.ctx.fillRect(this.towerStartX + 20 + 70 * xIndex, this.towerStartY + 30 + 70 * yIndex,70,70);
+           this.ctx.restore();
+            this.generateDescriptionBox(towerArray[xIndex][yIndex]);
+        }
+                // if statement for click on purchase button
+        // if statement for click on start round button
+      }
+
+
 }
 
 display.prototype.generateScoreBoard = function () {
@@ -105,7 +150,7 @@ display.prototype.generateTowerBoard = function () {
     ctx.fillText("Boba Tower Store", this.towerStartX + 40, this.towerStartY + 25);
     for(var i = 0; i < 3; i++) {
         for(var j=0; j < 3; j++) {
-        this.ctx.drawImage(this.towerArray[i][j], this.towerStartX + 20 + 70 * i, this.towerStartY + 30 + 70 * j);
+        this.ctx.drawImage(towerArray[i][j].spritesheet , this.towerStartX + 20 + 70 * i, this.towerStartY + 30 + 70 * j);
         }
     }
 }
@@ -129,7 +174,7 @@ display.prototype.generateStartButton = function() {
     ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 40  );
 }
 
-display.prototype.generateDescriptionBox = function() {
+display.prototype.generateDescriptionBox = function(currentTower) {
     var ctx = this.ctx;
     var x = this.descriptionBoxStartX;
     var y = this.descriptionBoxStartY;
@@ -137,12 +182,13 @@ display.prototype.generateDescriptionBox = function() {
     var h = this.descriptionBoxHeight;
     ctx.fillStyle = "#ff4747";
     ctx.fillRect(x,y,w,h);
+    if(currentTower === null) return;
     ctx.fillStyle = "black";
     ctx.font = '16px Bahnschrift SemiBold';
-    ctx.fillText("Name: Kobe", this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
-    ctx.fillText("Cost: 200", this.descriptionBoxStartX + 140, this.descriptionBoxStartY + 20);
+    ctx.fillText("Name: " + currentTower.name, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
+    ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 140, this.descriptionBoxStartY + 20);
 
-    var txt = 'Description: The Kobe tower \ncan shoot 3 bobas \nevery second.';
+    var txt = 'Description: ' + currentTower.description;
     var lineX = this.descriptionBoxStartX + 15;
     var lineY = this.descriptionBoxStartY + 40;
     var lineheight = 15;
@@ -165,4 +211,7 @@ display.prototype.generateDescriptionBox = function() {
 }
 
 display.prototype.update = function () {
+    if(!this.game.running) return;
+    currentMoney++;
+    currentLifes--;
 }

@@ -1,4 +1,5 @@
 var AM = new AssetManager();
+var gameStarted = false;
 
 function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, flip) {
     this.spriteSheet = spriteSheet;
@@ -56,10 +57,15 @@ AM.queueDownload("./img/greenTea.png");
 AM.queueDownload("./img/greenTeaFlip.png");
 AM.queueDownload("./img/yellowTea.png");
 AM.queueDownload("./img/yellowTeaFlip.png");
-AM.queueDownload("./img/origTea.png");
-AM.queueDownload("./img/origTeaFlip.png");
+// AM.queueDownload("./img/origTea.png");
+// AM.queueDownload("./img/origTeaFlip.png");
 AM.queueDownload("./img/background.png");
 AM.queueDownload("./img/holder.png");
+AM.queueDownload("./img/towerG2.png");
+AM.queueDownload("./img/towerR2.png");
+AM.queueDownload("./img/towerY2.png");
+
+  
 
 function Background(game, spritesheet) {
     this.x = 0;
@@ -81,28 +87,49 @@ Background.prototype.update = function() {
 AM.downloadAll(function () {
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
-
     var gameEngine = new GameEngine();
     gameEngine.init(ctx);
     gameEngine.start();
+    
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
     // board = new function() {
     //     new board(gameEngine);
     // } 
     // GAMEBOARD = board.GAMEBOARD;
     // gameEngine.addEntity(board);
-    var temp = [[AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png")],[AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png")],[AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png"),AM.getAsset("./img/holder.png")]]
     gameEngine.addEntity(new board(gameEngine));
     gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
-    sleep(1000).then(() => {
+    sleep(2000).then(() => {
         gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
     })
-    gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true));
-    gameEngine.addEntity(new display(gameEngine, temp));
+    sleep(8000).then(() => {
+        gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true));
+    })
+    
+    gameEngine.addEntity(new display(gameEngine, this.generateGenericTowers(gameEngine)));
 
     console.log("All Done!");
+
+    var pg = new PlayGame(gameEngine);
+    gameEngine.addEntity(pg);
+
+    gameEngine.running = false;
 });
 
+function generateGenericTowers(game) {
+    var firstTower = new tower(game, "Tower 1", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerG2.png"));
+    var secondTower = new tower(game, "Tower 2", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerR2.png"));
+    var thirdTower = new tower(game, "Tower 3", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerY2.png"));
+    var fourthTower = new tower(game, "Tower 4", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var fifthTower = new tower(game, "Tower 5", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var sixthTower = new tower(game, "Tower 6", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var seventhTower = new tower(game, "Tower 7", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var eightTower = new tower(game, "Tower 8", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var ninthTower = new tower(game, "Tower 9", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    
+    var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower,eightTower,ninthTower]];
+    return temp;
+}
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
