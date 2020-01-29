@@ -62,15 +62,13 @@ GameEngine.prototype.startInput = function () {
     var that = this;
 
     var getXandY = function (e) {
-        var x = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
-        var y = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+        var a = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
+        var b = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
 
-        if (x < 1024) {
-            x = Math.floor(x / 32);
-            y = Math.floor(y / 32);
-        }
-
-        return { x: x, y: y };
+        var i = Math.floor(a/100) + 1;
+        var j = Math.floor(b/100);
+        
+        return {x: i, y: j}
     }
 
     this.ctx.canvas.addEventListener("keydown", function (e) {
@@ -85,12 +83,17 @@ GameEngine.prototype.startInput = function () {
     }, false);
 
     this.ctx.canvas.addEventListener("click", function (e) {
-        that.click = getXandY(e);
+        //that.click = getXandY(e);
+        that.click = { x: e.clientX, y: e.clientY };
         // console.log(e);
         // console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
         // console.log(getXY(e.clientX, e.clientY));
         var xy = getXY(e.clientX, e.clientY);
-        GAMEBOARD[xy.x][xy.y].occupied = !GAMEBOARD[xy.x][xy.y].occupied;
+      //  GAMEBOARD[xy.x][xy.y].occupied = !GAMEBOARD[xy.x][xy.y].occupied;
+    }, false);
+
+    this.ctx.canvas.addEventListener("mousemove", function (e) {
+        that.mouse = { x: e.clientX, y: e.clientY };
     }, false);
 
     console.log('Input started');

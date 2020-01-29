@@ -36,9 +36,13 @@ function yellowTea(game, spawnX, spawnY, isRun) {
 }
 
 yellowTea.prototype.draw = function () {
-    draw(this);
+    if(this.game.running) {
+        draw(this);
+    }
 }
 
 yellowTea.prototype.update = function () {
-    update(this);
+    if(this.game.running) {
+        update(this);
+    }
 }

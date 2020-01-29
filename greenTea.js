@@ -36,9 +36,13 @@ function greenTea(game, spawnX, spawnY, isRun) {
 }
 
 greenTea.prototype.draw = function () {
-    draw(this);
+    if(this.game.running) {
+        draw(this);
+    }
 }
 
 greenTea.prototype.update = function () {
-    update(this);
+    if(this.game.running) {
+        update(this);
+    }
 }

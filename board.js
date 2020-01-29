@@ -1,4 +1,5 @@
 var GAMEBOARD = [];
+var ACTIVETOWERS = [];
 
 function board(game) {
 	GAMEBOARD = [];
@@ -76,6 +77,7 @@ board.prototype.buildGameboard = function () {
   }
 }
 
+// Rectangle for Testing Purposes DELETE WHEN DONE
 board.prototype.drawRect = function (i,j) {
   var ctx = this.ctx;
   var x = this.startingXPoint + i * 100;
@@ -94,11 +96,39 @@ board.prototype.draw = function () {
     for(var j = 0; j < this.height; j++) {
       // this.drawRect(i,j);
       if (GAMEBOARD[i][j].occupied) {
-        this.drawRect(i,j); 
+        this.drawRect(i, j);
+        for(var z = 0; z < ACTIVETOWERS.length; z++) {
+         this.ctx.drawImage(ACTIVETOWERS[z][2], this.startingXPoint + ACTIVETOWERS[z][0] * 100, this.startingYPoint + 100 * ACTIVETOWERS[z][1]);
+        }
+       
       }
     }
   } 
+
+  // Shadow Effect
+  if (this.game.mouse && purchaseMode == true) {
+    var mouse = this.game.mouse;
+    this.ctx.save();
+    this.ctx.globalAlpha = 0.5;
+    var upperLeftX = Math.floor(mouse.x/100) * 100;
+    var upperLeftY = Math.floor(mouse.y/100) * 100;
+    this.drawRect(Math.floor(mouse.x/100) + 1, Math.floor(mouse.y/100));
+    this.ctx.drawImage(towerArray[selectedTowerRow][selectedTowerColumn].spritesheet, upperLeftX, upperLeftY); 
+    this.ctx.restore();
+  }
 }
 
 board.prototype.update = function () {
+  if (this.game.click && purchaseMode === true) {
+    var click = this.game.click;
+    if(click.x >= 0 && click.x < 900 && click.y >= 0 && click.y < 600) {
+      var gridX = Math.floor(click.x/100) + 1;
+      var gridY = Math.floor(click.y/100);
+      console.log("X: " + click.x + "Y" + click.y);
+      purchaseMode = true;
+      GAMEBOARD[gridX][gridY].occupied = true;
+      ACTIVETOWERS.push([gridX, gridY,towerArray[selectedTowerRow][selectedTowerColumn].spritesheet]);
+      console.log(ACTIVETOWERS[0][0]);
+    }
+  }
 }
