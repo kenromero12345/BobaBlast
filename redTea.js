@@ -36,9 +36,13 @@ function redTea(game, spawnX, spawnY, isRun) {
 }
 
 redTea.prototype.draw = function () {
-    draw(this);
+    if(this.game.running) {
+        draw(this);
+    }
 }
 
 redTea.prototype.update = function () {
-    update(this);
+    if(this.game.running) {
+        update(this);
+    }
 }

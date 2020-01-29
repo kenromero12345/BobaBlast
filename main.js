@@ -1,4 +1,5 @@
 var AM = new AssetManager();
+var gameStarted = false;
 
 function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, flip) {
     this.spriteSheet = spriteSheet;
@@ -86,10 +87,10 @@ Background.prototype.update = function() {
 AM.downloadAll(function () {
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
-
     var gameEngine = new GameEngine();
     gameEngine.init(ctx);
     gameEngine.start();
+    
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
     // board = new function() {
     //     new board(gameEngine);
@@ -108,6 +109,11 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new display(gameEngine, this.generateGenericTowers(gameEngine)));
 
     console.log("All Done!");
+
+    var pg = new PlayGame(gameEngine);
+    gameEngine.addEntity(pg);
+
+    gameEngine.running = false;
 });
 
 function generateGenericTowers(game) {

@@ -211,6 +211,7 @@ display.prototype.generateDescriptionBox = function(currentTower) {
 }
 
 display.prototype.update = function () {
+    if(!this.game.running) return;
     currentMoney++;
     currentLifes--;
 }
