@@ -60,6 +60,9 @@ AM.queueDownload("./img/yellowTeaFlip.png");
 // AM.queueDownload("./img/origTeaFlip.png");
 AM.queueDownload("./img/background.png");
 AM.queueDownload("./img/holder.png");
+AM.queueDownload("./img/towerG2.png");
+AM.queueDownload("./img/towerR2.png");
+AM.queueDownload("./img/towerY2.png");
 
   
 
@@ -108,9 +111,9 @@ AM.downloadAll(function () {
 });
 
 function generateGenericTowers(game) {
-    var firstTower = new tower(game, "Tower 1", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var secondTower = new tower(game, "Tower 2", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var thirdTower = new tower(game, "Tower 3", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var firstTower = new tower(game, "Tower 1", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerG2.png"));
+    var secondTower = new tower(game, "Tower 2", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerR2.png"));
+    var thirdTower = new tower(game, "Tower 3", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerY2.png"));
     var fourthTower = new tower(game, "Tower 4", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
     var fifthTower = new tower(game, "Tower 5", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
     var sixthTower = new tower(game, "Tower 6", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));

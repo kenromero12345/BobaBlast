@@ -89,7 +89,7 @@ GameEngine.prototype.startInput = function () {
         // console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
         // console.log(getXY(e.clientX, e.clientY));
         var xy = getXY(e.clientX, e.clientY);
-        GAMEBOARD[xy.x][xy.y].occupied = !GAMEBOARD[xy.x][xy.y].occupied;
+      //  GAMEBOARD[xy.x][xy.y].occupied = !GAMEBOARD[xy.x][xy.y].occupied;
     }, false);
 
     this.ctx.canvas.addEventListener("mousemove", function (e) {
