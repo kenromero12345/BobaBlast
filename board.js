@@ -45,29 +45,29 @@ board.prototype.buildGameboard = function () {
   GAMEBOARD[10][4].occupied = true;
   GAMEBOARD[10][5].occupied = true;
 
-  GAMEBOARD[1][1].occupied = true;
+  // GAMEBOARD[1][1].occupied = true;
 
-  GAMEBOARD[2][2].occupied = true;
-  GAMEBOARD[2][3].occupied = true;
-  GAMEBOARD[2][4].occupied = true;
+  // GAMEBOARD[2][2].occupied = true;
+  // GAMEBOARD[2][3].occupied = true;
+  // GAMEBOARD[2][4].occupied = true;
 
-  GAMEBOARD[4][2].occupied = true;
-  GAMEBOARD[4][3].occupied = true;
-  GAMEBOARD[4][4].occupied = true;
-  GAMEBOARD[4][5].occupied = true;
+  // GAMEBOARD[4][2].occupied = true;
+  // GAMEBOARD[4][3].occupied = true;
+  // GAMEBOARD[4][4].occupied = true;
+  // GAMEBOARD[4][5].occupied = true;
 
-  GAMEBOARD[5][1].occupied = true;
+  // GAMEBOARD[5][1].occupied = true;
 
-  GAMEBOARD[6][1].occupied = true;
-  GAMEBOARD[6][3].occupied = true;
-  GAMEBOARD[6][4].occupied = true;
+  // GAMEBOARD[6][1].occupied = true;
+  // GAMEBOARD[6][3].occupied = true;
+  // GAMEBOARD[6][4].occupied = true;
   
-  GAMEBOARD[7][1].occupied = true;
-  GAMEBOARD[7][3].occupied = true;
+  // GAMEBOARD[7][1].occupied = true;
+  // GAMEBOARD[7][3].occupied = true;
 
-  GAMEBOARD[8][3].occupied = true;
+  // GAMEBOARD[8][3].occupied = true;
 
-  GAMEBOARD[9][2].occupied = true;
+  // GAMEBOARD[9][2].occupied = true;
 
 
   for(var i = 0; i < this.width; i++) {
@@ -88,7 +88,7 @@ board.prototype.drawRect = function (i,j) {
   // ctx.strokeStyle = "green";
   // ctx.rect(x,y,w,h);
   // ctx.stroke();
-  ctx.fillStyle = "green";
+  ctx.fillStyle = "gray";
   ctx.fillRect(x,y,w,h);
 }
 

@@ -17,9 +17,8 @@ PlayGame.prototype.draw = function () {
     var ctx = this.ctx;
     if (!this.game.running) {
         ctx.font = "24pt Impact";
-        ctx.fillStyle = "purple";
-        if (this.game.mouse) {
-            ctx.fillText("Click to Play!", 300, 300);
-        }
+        ctx.fillStyle = "yellow";
+        ctx.fillText("Click to Play!", 300, 350);
+        ctx.fillText("Click on a tower then click on the tile you want to place it on", 100, 380);
     }
 }
