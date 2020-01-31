@@ -105,6 +105,10 @@ AM.downloadAll(function () {
     sleep(8000).then(() => {
         gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true));
     })
+
+    // BOBA BULLET TESTING
+    gameEngine.addEntity(new boba(gameEngine,100, 100, 100, 200));
+    //
     
     gameEngine.addEntity(new display(gameEngine, this.generateGenericTowers(gameEngine)));
 
