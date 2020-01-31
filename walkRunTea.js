@@ -8,15 +8,14 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
         tea.centerX = tea.x + tea.walkWidth / 2;
         tea.centerY = tea.y + tea.walkHeight / 2;
     }
-    // console.log("w:" + ( tea.walkWidth));
     // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
     var difX = tea.centerX - spawnX;
     var difY =  spawnY - tea.centerY;
-    console.log("dx:" + difX + ", dy:" + difY);
-    tea.centerX = tea.centerX + Math.abs(difX);
-    tea.centerY = tea.centerY + Math.abs(difY);
-    tea.x = tea.x + Math.abs(difX);
-    tea.y = tea.y + Math.abs(difY);
+    // console.log("dx:" + difX + ", dy:" + difY);
+    tea.centerX = tea.centerX - difX;
+    tea.centerY = tea.centerY + difY;
+    tea.x = tea.x - difX;
+    tea.y = tea.y + difY;
     // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
     tea.walkSpeed = 100;
     tea.runSpeed = 200;

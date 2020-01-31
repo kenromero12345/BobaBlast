@@ -100,7 +100,7 @@ AM.downloadAll(function () {
     // gameEngine.addEntity(board);
     gameEngine.addEntity(new board(gameEngine));
     gameEngine.addEntity(new redTea(gameEngine, -50, 250, false, .75));
-    // gameEngine.addEntity(new iceGolem(gameEngine, -50, 250, 1));
+    gameEngine.addEntity(new iceGolem(gameEngine, -50, 250, .6));
     sleep(2000).then(() => {
         gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false, .75));
     })
