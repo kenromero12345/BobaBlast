@@ -233,7 +233,7 @@ var update = function (tea) {
         var ent = tea.game.entities[i];
         if (ent !== tea && ent.isBoba && collide(ent, tea)) {
             //collide
-            // console.log(tea.name + " collide with " + ent.name);
+             console.log(tea.name + " collide with " + ent.name);
             ent.removeFromWorld = true;
             tea.hp--;
         }
