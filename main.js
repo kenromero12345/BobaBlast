@@ -114,7 +114,7 @@ Sun.prototype.update = function () {
     }else if (this.x < 255){
         this.x+= this.game.clockTick * this.speed;
     }else if(this.x<500){
-        this.y += this.game.clockTick * this.speed * 10;
+        this.y += this.game.clockTick * this.speed * 4;
     }
     if(this.y > 1000){
         this.x = -50;
@@ -171,10 +171,30 @@ Dragon.prototype.draw = function (ctx) {
     Entity.prototype.draw.call(this);
 }
 
+function Bird(game) {
+    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/teawings.png"), 0, 0, 222, 262, 0.08, 13, true);
+    this.speed = 275;
+    this.ctx = game.ctx;
+    Entity.call(this, game, 300, 0);
+}
+
+Bird.prototype = new Entity();
+Bird.prototype.constructor = Bird;
+
+Bird.prototype.update = function () {
+
+    Entity.prototype.update.call(this);
+}
+
+Bird.prototype.draw = function (ctx) {
+    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
+    Entity.prototype.draw.call(this);
+}
+
 function Tower(game){
     this.animation = new Animation(ASSET_MANAGER.getAsset("./img/ice.png"), 0,203,41,69, 0.4, 3, true);
     this.animationB = new Animation(ASSET_MANAGER.getAsset("./img/ice.png"), 0,203,41,69, 0.4, 2, false, false);
-    Entity.call(this, game, 200,100);
+    Entity.call(this, game, 600,100);
 }
 
 Tower.prototype = new Entity();
@@ -200,6 +220,7 @@ ASSET_MANAGER.queueDownload("./img/ice.png");
 ASSET_MANAGER.queueDownload("./img/iceg.png");
 ASSET_MANAGER.queueDownload("./img/icegFlip.png");
 ASSET_MANAGER.queueDownload("./img/zero.png");
+ASSET_MANAGER.queueDownload("./img/teawings.png");
 
 ASSET_MANAGER.downloadAll(function () {
     console.log("starting dl");
@@ -211,12 +232,14 @@ ASSET_MANAGER.downloadAll(function () {
     var cld = new Cloud(gameEngine);
     var sun = new Sun(gameEngine);
     var monster = new Dragon(gameEngine);
+    var bird = new Bird(gameEngine);
     var tower = new Tower(gameEngine)
 
     gameEngine.addEntity(bg);
     gameEngine.addEntity(cld);
     gameEngine.addEntity(sun);
     gameEngine.addEntity(monster);
+    gameEngine.addEntity(bird);
     gameEngine.addEntity(tower);
 
     gameEngine.init(ctx);
