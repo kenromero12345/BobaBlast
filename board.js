@@ -25,7 +25,8 @@ board.prototype.buildGameboard = function () {
 		start : false,
 		end : false,
 		centerx : 0,
-		centery : 0
+    centery : 0,
+    hasEnemyRadius: false
       });
     }
   }
@@ -123,9 +124,9 @@ board.prototype.draw = function () {
       //   console.log(GAMEBOARD);
       // }
       // console.log(isPath(-50, 250, gridX, gridY));
-      if (gridX >= 0 && gridX < GAMEBOARD.length  
-        && gridY >= 0 && gridY < GAMEBOARD[0].length
-        && !GAMEBOARD[gridX][gridY].end && isPath(-50, 250, gridX, gridY)) {
+      if (gridX >= 0 && gridX < GAMEBOARD.length && gridY >= 0 && gridY < GAMEBOARD[0].length
+        && !GAMEBOARD[gridX][gridY].end && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
+        && isPath(-50, 250, gridX, gridY)) {
         this.drawRect(Math.floor(mouse.x/100) + 1, Math.floor(mouse.y/100));
         this.ctx.drawImage(towerArray[selectedTowerRow][selectedTowerColumn].spritesheet, upperLeftX, upperLeftY); 
       }
@@ -135,13 +136,42 @@ board.prototype.draw = function () {
 
 
 board.prototype.update = function () {
+  for(var i = 0; i < this.width; i++) {
+    for(var j = 0; j < this.height; j++) {
+      GAMEBOARD[i][j].hasEnemyRadius = false;
+    }
+  }
+
+  for (var i = 0; i < this.game.entities.length; i++) {
+    var ent = this.game.entities[i];
+    if (ent !== this) {
+        var xy = getXY(ent.centerX, ent.centerY);
+        // console.log(xy)
+        if (xy.x && xy.y) {
+          GAMEBOARD[xy.x][xy.y].hasEnemyRadius = true;  
+          if (xy.x + 1< GAMEBOARD.length && xy.x + 1 >= 0) {
+            GAMEBOARD[xy.x + 1][xy.y].hasEnemyRadius = true;  
+          }  
+          if (xy.y + 1 < GAMEBOARD[0].length && xy.y + 1 >= 0) {
+            GAMEBOARD[xy.x][xy.y + 1].hasEnemyRadius = true;  
+          }
+          if (xy.x - 1 < GAMEBOARD.length && xy.x - 1 >= 0) {
+            GAMEBOARD[xy.x - 1][xy.y].hasEnemyRadius = true;
+          }
+          if (xy.y - 1 < GAMEBOARD[0].length && xy.y - 1 >= 0) {
+            GAMEBOARD[xy.x][xy.y - 1].hasEnemyRadius = true;  
+          }  
+          
+        }
+    }
+}
   if (this.game.click && purchaseMode === true) {
     var click = this.game.click;
     if(click.x >= 0 && click.x < 900 && click.y >= 0 && click.y < 600) {
       var gridX = Math.floor(click.x/100) + 1;
       var gridY = Math.floor(click.y/100);
       // console.log("X: " + click.x + "Y" + click.y);
-      if (isPath(-50, 250, gridX, gridY)) {
+      if (isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].hasEnemyRadius) {
         purchaseMode = true;
         GAMEBOARD[gridX][gridY].occupied = true;
         ACTIVETOWERS.push([gridX, gridY,towerArray[selectedTowerRow][selectedTowerColumn].spritesheet]);

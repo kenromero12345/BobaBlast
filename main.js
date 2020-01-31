@@ -64,7 +64,8 @@ AM.queueDownload("./img/holder.png");
 AM.queueDownload("./img/towerG2.png");
 AM.queueDownload("./img/towerR2.png");
 AM.queueDownload("./img/towerY2.png");
-
+AM.queueDownload("./img/iceg.png");
+AM.queueDownload("./img/icegFlip.png");
   
 
 function Background(game, spritesheet) {
@@ -98,12 +99,13 @@ AM.downloadAll(function () {
     // GAMEBOARD = board.GAMEBOARD;
     // gameEngine.addEntity(board);
     gameEngine.addEntity(new board(gameEngine));
-    gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
+    gameEngine.addEntity(new redTea(gameEngine, -50, 250, false, .75));
+    // gameEngine.addEntity(new iceGolem(gameEngine, -50, 250, 1));
     sleep(2000).then(() => {
-        gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
+        gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false, .75));
     })
     sleep(8000).then(() => {
-        gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true));
+        gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true, .75));
     })
     
     gameEngine.addEntity(new display(gameEngine, this.generateGenericTowers(gameEngine)));
