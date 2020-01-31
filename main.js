@@ -107,7 +107,7 @@ AM.downloadAll(function () {
     })
 
     // BOBA BULLET TESTING
-    gameEngine.addEntity(new boba(gameEngine,500, 500, 200, 200));
+    gameEngine.addEntity(new boba(gameEngine,500, 500, 300, 350));
     //
     
     gameEngine.addEntity(new display(gameEngine, this.generateGenericTowers(gameEngine)));
