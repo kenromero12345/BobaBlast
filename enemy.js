@@ -46,39 +46,39 @@ var enemyUpdateHelper = function (enemy) {
     // console.log(enemy.centerX + " " + enemy.centerY)
     if (enemy.hp > 0) {
         if (enemy.moveDirection == 1) {
-            if (enemy.animationWalkRight.elapsedTime < enemy.animationWalkRight.totalTime * 8 / 14) {
+     
                 enemy.x += enemy.game.clockTick * enemy.speed;
                 enemy.centerX += enemy.game.clockTick * enemy.speed;
-            }
+            
         } else if (enemy.moveDirection == 2) {
             if (enemy.lookDirectionRight) {
-                if (enemy.animationWalkRight.elapsedTime < enemy.animationWalkRight.totalTime * 8 / 14) {
+             
                     enemy.y += enemy.game.clockTick * enemy.speed;
                     enemy.centerY +=enemy.game.clockTick * enemy.speed;
-                }
+                
             } else {
-                if (enemy.animationWalkLeft.elapsedTime < enemy.animationWalkLeft.totalTime * 8 / 14) {
+           
                     enemy.y += enemy.game.clockTick * enemy.speed;
                     enemy.centerY += enemy.game.clockTick * enemy.speed;
-                }
+                
             }
         } else if (enemy.moveDirection == 3) {
-            if (enemy.animationWalkLeft.elapsedTime < enemy.animationWalkLeft.totalTime * 8 / 14) {
+        
                 enemy.x -= enemy.game.clockTick * enemy.speed;
                 enemy.centerX -= enemy.game.clockTick * enemy.speed;
-            }
+            
         } else {
             if (enemy.lookDirectionRight) {
-                if (enemy.animationWalkRight.elapsedTime < enemy.animationWalkRight.totalTime * 8 / 14) {
+            
                     enemy.y -= enemy.game.clockTick * enemy.speed;
                     enemy.centerY -= enemy.game.clockTick * enemy.speed;
-                }
+                
                     
             } else {
-                if (enemy.animationWalkLeft.elapsedTime < enemy.animationWalkLeft.totalTime * 8 / 14) {
+                
                     enemy.y -= enemy.game.clockTick * enemy.speed;
                     enemy.centerY -= enemy.game.clockTick * enemy.speed;
-                }
+                
             }
         }
     }

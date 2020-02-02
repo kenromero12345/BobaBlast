@@ -126,7 +126,7 @@ function cola(game, spawnX, spawnY, scale) {
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/cola.png")
     , 0, 341, 70, 65, 5, 0.2, 5, false, 1, false);
     this.animationWalkRight = new Animation(AM.getAsset("./img/colaFlip.png")
-    , 499, 35, -65, 65, 4, 0.10, 4, true, 1, false);//michael animation
+    , 239, 137, 65, 65, 4, 0.10, 4, true, 1, true);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/colaFlip.png")
     , 0, 341, 70, 65, 5, 0.2, 5, false, 1, true);
 }
