@@ -66,6 +66,8 @@ AM.queueDownload("./img/towerR2.png");
 AM.queueDownload("./img/towerY2.png");
 AM.queueDownload("./img/iceg.png");
 AM.queueDownload("./img/icegFlip.png");
+AM.queueDownload("./img/cola.png");
+AM.queueDownload("./img/colaFlip.png");
   
 
 function Background(game, spritesheet) {
@@ -101,6 +103,7 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new board(gameEngine));
     gameEngine.addEntity(new redTea(gameEngine, -50, 250, false, .75));
     gameEngine.addEntity(new iceGolem(gameEngine, -50, 250, .6));
+    gameEngine.addEntity(new cola(gameEngine, -50, 250, 1));
     sleep(2000).then(() => {
         gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false, .75));
     })

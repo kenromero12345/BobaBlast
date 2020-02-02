@@ -33,93 +33,20 @@ function iceGolem(game, spawnX, spawnY, scale) {
 
 iceGolem.prototype.draw = function () {
     // console.log(this.centerX)
-    if(this.game.running) {
-        if (this.hp <= 0) {
-            if (this.lookDirectionRight) {
-                this.animationDisappearRight.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-                if (this.animationDisappearRight.isDone()) {
-                    this.removeFromWorld = true;
-                }
-            } else {
-                this.animationDisappearLeft.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-                if (this.animationDisappearLeft.isDone()) {
-                    this.removeFromWorld = true;
-                }
-            }
-        } else {
-            if (this.moveDirection == 1) {
-                this.animationWalkRight.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-            } else if (this.moveDirection == 2) {
-                if (this.lookDirectionRight) {
-                    this.animationWalkRight.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-                } else {
-                    this.animationWalkLeft.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-                }
-            } else if (this.moveDirection == 3) {
-                this.animationWalkLeft.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-            } else {
-                if (this.lookDirectionRight) {
-                    this.animationWalkRight.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-                } else {
-                    this.animationWalkLeft.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-                }
-            }
-        }
-    }
+    enemyDraw(this);
 }
 
 iceGolem.prototype.update = function () {
-    console.log(this.centerX + " " + this.centerY)
+    // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
         var xy = getXY(this.centerX, this.centerY);
         if (((this.centerX +  100) % 100 > 49 && (this.centerX + 100) % 100 < 51
             && this.centerY % 100 > 49 && this.centerY % 100 < 51)) {
             this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            if (this.moveDirection == 1) {
-                this.lookDirectionRight = true;
-            } else if (this.moveDirection == 3) {
-                this.lookDirectionRight = false;
-            }
+            enemyUpdateLookHelper(this);
         }
 
-        if (this.hp > 0) {
-            if (this.moveDirection == 1) {
-                if (this.animationWalkRight.elapsedTime < this.animationWalkRight.totalTime * 8 / 14) {
-                    this.x += this.game.clockTick * this.speed;
-                    this.centerX += this.game.clockTick * this.speed;
-                }
-            } else if (this.moveDirection == 2) {
-                if (this.lookDirectionRight) {
-                    if (this.animationWalkRight.elapsedTime < this.animationWalkRight.totalTime * 8 / 14) {
-                        this.y += this.game.clockTick * this.speed;
-                        this.centerY +=this.game.clockTick * this.speed;
-                    }
-                } else {
-                    if (this.animationWalkLeft.elapsedTime < this.animationWalkLeft.totalTime * 8 / 14) {
-                        this.y += this.game.clockTick * this.speed;
-                        this.centerY += this.game.clockTick * this.speed;
-                    }
-                }
-            } else if (this.moveDirection == 3) {
-                if (this.animationWalkLeft.elapsedTime < this.animationWalkLeft.totalTime * 8 / 14) {
-                    this.x -= this.game.clockTick * this.speed;
-                    this.centerX -= this.game.clockTick * this.speed;
-                }
-            } else {
-                if (this.lookDirectionRight) {
-                    if (this.animationWalkRight.elapsedTime < this.animationWalkRight.totalTime * 8 / 14) {
-                        this.y -= this.game.clockTick * this.speed;
-                        this.centerY -= this.game.clockTick * this.speed;
-                    }
-                        
-                } else {
-                    if (this.animationWalkLeft.elapsedTime < this.animationWalkLeft.totalTime * 8 / 14) {
-                        this.y -= this.game.clockTick * this.speed;
-                        this.centerY -= this.game.clockTick * this.speed;
-                    }
-                }
-            }
-        }
+        enemyUpdateHelper(this);
 
         xy = getXY(this.centerX, this.centerY);
         if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
