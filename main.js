@@ -64,7 +64,10 @@ AM.queueDownload("./img/holder.png");
 AM.queueDownload("./img/towerG2.png");
 AM.queueDownload("./img/towerR2.png");
 AM.queueDownload("./img/towerY2.png");
-
+AM.queueDownload("./img/iceg.png");
+AM.queueDownload("./img/icegFlip.png");
+AM.queueDownload("./img/cola.png");
+AM.queueDownload("./img/colaFlip.png");
   
 
 function Background(game, spritesheet) {
@@ -98,12 +101,33 @@ AM.downloadAll(function () {
     // GAMEBOARD = board.GAMEBOARD;
     // gameEngine.addEntity(board);
     gameEngine.addEntity(new board(gameEngine));
-    gameEngine.addEntity(new redTea(gameEngine, -50, 250, false));
+    gameEngine.addEntity(new redTea(gameEngine, -50, 250, false, .75));
+    gameEngine.addEntity(new iceGolem(gameEngine, -50, 250, .6));
+    gameEngine.addEntity(new cola(gameEngine, -50, 250, 1));
     sleep(2000).then(() => {
-        gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false));
+        gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false, .75));
     })
     sleep(8000).then(() => {
-        gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true));
+        gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true, .75));
+    })
+
+    // BOBA BULLET TESTING
+    gameEngine.addEntity(new boba(gameEngine,500, 500, 300, 350));
+
+    sleep(8000).then(() => {
+        gameEngine.addEntity(new boba(gameEngine,500, 500, 300, 350));
+    })
+
+    sleep(10000).then(() => {
+        gameEngine.addEntity(new boba(gameEngine,500, 500, 200, 200));
+    })
+
+    sleep(11000).then(() => {
+        gameEngine.addEntity(new boba(gameEngine,100, 100, 200, 200));
+    })
+
+    sleep(8000).then(() => {
+        gameEngine.addEntity(new boba(gameEngine,0, 500, 900, 50));
     })
     
     gameEngine.addEntity(new display(gameEngine, this.generateGenericTowers(gameEngine)));
@@ -117,15 +141,15 @@ AM.downloadAll(function () {
 });
 
 function generateGenericTowers(game) {
-    var firstTower = new tower(game, "Tower 1", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerG2.png"));
-    var secondTower = new tower(game, "Tower 2", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerR2.png"));
-    var thirdTower = new tower(game, "Tower 3", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerY2.png"));
-    var fourthTower = new tower(game, "Tower 4", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var fifthTower = new tower(game, "Tower 5", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var sixthTower = new tower(game, "Tower 6", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var seventhTower = new tower(game, "Tower 7", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var eightTower = new tower(game, "Tower 8", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var ninthTower = new tower(game, "Tower 9", 300, "The Kobe tower \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var firstTower = new tower(game, "Tower 1", 300, "Tower 1 \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerG2.png"));
+    var secondTower = new tower(game, "Tower 2", 320, "Tower 2 \ncan shoot 5 bobas \nevery second.",AM.getAsset("./img/towerR2.png"));
+    var thirdTower = new tower(game, "Tower 3", 400, "Tower 3 \ncan shoot 10 bobas \nevery second.",AM.getAsset("./img/towerY2.png"));
+    var fourthTower = new tower(game, "Tower 4", 500, "Tower 4 \ncan shoot 30 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var fifthTower = new tower(game, "Tower 5", 200, "Tower 5 \ncan shoot 2 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var sixthTower = new tower(game, "Tower 6", 100, "Tower 6 \ncan shoot 1 boba \nevery second.",AM.getAsset("./img/holder.png"));
+    var seventhTower = new tower(game, "Tower 7", 1000, "Tower 7 \ncan shoot 15 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var eightTower = new tower(game, "Tower 8", 2000, "Tower 8 \ncan shoot 20 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var ninthTower = new tower(game, "Tower 9", 2200, "Tower 9 \ncan shoot 21 bobas \nevery second.",AM.getAsset("./img/holder.png"));
     
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower,eightTower,ninthTower]];
     return temp;
