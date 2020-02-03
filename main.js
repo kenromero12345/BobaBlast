@@ -1,47 +1,47 @@
-function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, frameDuration, frames, loop, reverse) {
+var AM = new AssetManager();
+var gameStarted = false;
+
+function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, flip) {
     this.spriteSheet = spriteSheet;
-    this.startX = startX;
-    this.startY = startY;
+	this.startX = startX;
+	this.startY = startY;
     this.frameWidth = frameWidth;
     this.frameDuration = frameDuration;
     this.frameHeight = frameHeight;
+    this.sheetWidth = sheetWidth;
     this.frames = frames;
     this.totalTime = frameDuration * frames;
     this.elapsedTime = 0;
     this.loop = loop;
-    this.reverse = reverse;
+    this.scale = scale;
+    this.flip = flip;
+    this.offsetY = 0;
+    this.offsetX = 0;
 }
 
-Animation.prototype.drawFrame = function (tick, ctx, x, y, scaleBy) {
-    var scaleBy = scaleBy || 1;
+Animation.prototype.drawFrame = function (tick, ctx, x, y) {
     this.elapsedTime += tick;
-    if (this.loop) {
-        if (this.isDone()) {
-            this.elapsedTime = 0;
-        }
-    } else if (this.isDone()) {
-        return;
+    if (!(this.isDone() && !this.loop)) {
+    if (this.isDone()) {
+        if (this.loop) this.elapsedTime = 0;
     }
-    var index = this.reverse ? this.frames - this.currentFrame() - 1 : this.currentFrame();
-    var vindex = 0;
-    if ((index + 1) * this.frameWidth + this.startX > this.spriteSheet.width) {
-        index -= Math.floor((this.spriteSheet.width - this.startX) / this.frameWidth);
-        vindex++;
-    }
-    while ((index + 1) * this.frameWidth > this.spriteSheet.width) {
-        index -= Math.floor(this.spriteSheet.width / this.frameWidth);
-        vindex++;
-    }
-
-    var locX = x;
-    var locY = y;
-    var offset = vindex === 0 ? this.startX : 0;
+    var frame = this.currentFrame();
+    var xindex = 0;
+    var yindex = 0;
+    //xindex = frame % this.sheetWidth;
+    yindex = Math.floor(frame / this.sheetWidth);
+	if (this.flip) {
+		xindex = this.sheetWidth - 1 -frame % this.sheetWidth;
+	} else {
+		xindex = frame % this.sheetWidth;
+	}
     ctx.drawImage(this.spriteSheet,
-                  index * this.frameWidth + offset, vindex * this.frameHeight + this.startY,  // source from sheet
-                  this.frameWidth, this.frameHeight,
-                  locX, locY,
-                  this.frameWidth * scaleBy,
-                  this.frameHeight * scaleBy);
+                 xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
+                 this.frameWidth, this.frameHeight,
+                 x + this.offsetX, y + this.offsetY,
+                 this.frameWidth * this.scale,
+                 this.frameHeight * this.scale);
+    }
 }
 
 Animation.prototype.currentFrame = function () {
@@ -49,202 +49,116 @@ Animation.prototype.currentFrame = function () {
 }
 
 Animation.prototype.isDone = function () {
+    // console.log(this.elapsedTime >= this.totalTime);
     return (this.elapsedTime >= this.totalTime);
 }
 
-function Background(game) {
-    Entity.call(this, game, 100, 200);
-    this.radius = 200;
-}
+AM.queueDownload("./img/22137.png");
+AM.queueDownload("./img/22137Flip.png");
+AM.queueDownload("./img/greenTea.png");
+AM.queueDownload("./img/greenTeaFlip.png");
+AM.queueDownload("./img/yellowTea.png");
+AM.queueDownload("./img/yellowTeaFlip.png");
+// AM.queueDownload("./img/origTea.png");
+// AM.queueDownload("./img/origTeaFlip.png");
+AM.queueDownload("./img/background.png");
+AM.queueDownload("./img/holder.png");
+AM.queueDownload("./img/towerG2.png");
+AM.queueDownload("./img/towerR2.png");
+AM.queueDownload("./img/towerY2.png");
+AM.queueDownload("./img/iceg.png");
+AM.queueDownload("./img/icegFlip.png");
+AM.queueDownload("./img/cola.png");
+AM.queueDownload("./img/colaFlip.png");
+AM.queueDownload("./img/slime.png");
+AM.queueDownload("./img/slimeFlip.png");
+  
 
-Background.prototype = new Entity();
-Background.prototype.constructor = Background;
-
-Background.prototype.update = function () {
-}
-
-Background.prototype.draw = function (ctx) {
-    ctx.fillStyle = "Blue";
-    ctx.fillRect(0,500,800,300);
-    Entity.prototype.draw.call(this);
-}
-
-function Cloud(game) {
-    this.speed = 15;
-    this.walk = new Animation(ASSET_MANAGER.getAsset("./img/iceg.png"), 0, 180, 194, 180, 0.5, 4, true);
-    this.die = new Animation(ASSET_MANAGER.getAsset("./img/iceg.png"), 0, 745, 238, 180, 0.25, 7,);
-    Entity.call(this, game, 500, 400);
-}
-
-Cloud.prototype = new Entity();
-Cloud.prototype.constructor = Cloud;
-
-Cloud.prototype.update = function () {
-    if(this.x<230) this.x = this.x;
-    else this.x -= this.game.clockTick * this.speed;
-    
-}
-
-Cloud.prototype.draw = function (ctx) {
-    if(this.x>230){
-        this.walk.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    } else this.die.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    Entity.prototype.draw.call(this);
-}
-
-function Sun(game) {
-    this.walk = new Animation(ASSET_MANAGER.getAsset("./img/zero.png"), 100, 650, 56, 80, 0.1, 8, true);
-    this.slash = new Animation(ASSET_MANAGER.getAsset("./img/zero.png"), 83, 105, 95, 146, 0.1, 11, true);
-    this.top = new Animation(ASSET_MANAGER.getAsset("./img/zero.png"), 1, 509, 46, 80, 0.1, 5, true);
-    this.hold = new Animation(ASSET_MANAGER.getAsset("./img/zero.png"), 335, 260, 67, 120, 0.5, 1, true);
-    this.sword = new Animation(ASSET_MANAGER.getAsset("./img/zero.png"), 402, 260, 56, 120, 0.1, 4, true);
-    this.speed = 100;
-    Entity.call(this, game, 000, 200);
-}
-
-Sun.prototype = new Entity();
-Sun.prototype.constructor = Sun;
-
-Sun.prototype.update = function () {
-    if(this.x<90){
-        this.x+= this.game.clockTick * this.speed;
-    }else if (this.y> 92 && this.x < 250) {
-        this.y -= this.game.clockTick * this.speed;
-        this.x+= this.game.clockTick * this.speed;
-    }else if (this.x < 255){
-        this.x+= this.game.clockTick * this.speed;
-    }else if(this.x<500){
-        this.y += this.game.clockTick * this.speed * 4;
-    }
-    if(this.y > 1000){
-        this.x = -50;
-        this.y = 200;
-    }
-}
-
-Sun.prototype.draw = function (ctx) {
-    if(this.x<90){
-        this.walk.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    }else if (this.y> 94 && this.x < 250 ) {
-        this.slash.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    }else if (this.x < 255 ){
-        this.top.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    }else if(this.x<500){
-        this.sword.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    }
-    
-    
-    
-    // this.hold.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    
-    Entity.prototype.draw.call(this);
-}
-
-function Dragon(game) {
-    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/hydrei.png"), 0, 0, 169, 220, 0.05, 45, true);
-    this.speed = 275;
+function Background(game, spritesheet) {
+    this.x = 0;
+    this.y = 0;
+    this.spritesheet = spritesheet;
+    this.game = game;
     this.ctx = game.ctx;
-    Entity.call(this, game, 400, 200);
 }
 
-Dragon.prototype = new Entity();
-Dragon.prototype.constructor = Dragon;
-
-Dragon.prototype.update = function () {
-    this.x -= this.game.clockTick * this.speed;
-    if (this.x > 475) {
-        this.y += this.game.clockTick * this.speed / 2;
-    }
-    if (this.x < 475) {
-        this.y -= this.game.clockTick * this.speed / 2;
-        if (this.x < 200) this.y += this.game.clockTick * this.speed / 2;
-    }
-    if (this.x < -230) {
-        this.x = 800;
-        this.y = 100;
-    }
-    Entity.prototype.update.call(this);
+Background.prototype.draw = function() {
+    this.ctx.drawImage(this.spritesheet, this.x, this.y);
 }
 
-Dragon.prototype.draw = function (ctx) {
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    Entity.prototype.draw.call(this);
+Background.prototype.update = function() {
+
 }
 
-function Bird(game) {
-    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/teawings.png"), 0, 0, 222, 262, 0.08, 13, true);
-    this.speed = 275;
-    this.ctx = game.ctx;
-    Entity.call(this, game, 300, 0);
-}
-
-Bird.prototype = new Entity();
-Bird.prototype.constructor = Bird;
-
-Bird.prototype.update = function () {
-
-    Entity.prototype.update.call(this);
-}
-
-Bird.prototype.draw = function (ctx) {
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y);
-    Entity.prototype.draw.call(this);
-}
-
-function Tower(game){
-    this.animation = new Animation(ASSET_MANAGER.getAsset("./img/ice.png"), 0,203,41,69, 0.4, 3, true);
-    this.animationB = new Animation(ASSET_MANAGER.getAsset("./img/ice.png"), 0,203,41,69, 0.4, 2, false, false);
-    Entity.call(this, game, 600,100);
-}
-
-Tower.prototype = new Entity();
-Tower.prototype.constructor = Tower;
-
-Tower.prototype.update = function(){
-    this.y++;
-    if(this.y==200) this.y=-20;
-    Entity.prototype.update.call(this);
-}
-
-Tower.prototype.draw = function (ctx) {
-    this.animation.drawFrame(this.game.clockTick, ctx, this.x, this.y); 
-    Entity.prototype.draw.call(this);
-}
-
-// the "main" code begins here
-
-var ASSET_MANAGER = new AssetManager();
-
-ASSET_MANAGER.queueDownload("./img/hydrei.png");
-ASSET_MANAGER.queueDownload("./img/ice.png");
-ASSET_MANAGER.queueDownload("./img/iceg.png");
-ASSET_MANAGER.queueDownload("./img/icegFlip.png");
-ASSET_MANAGER.queueDownload("./img/zero.png");
-ASSET_MANAGER.queueDownload("./img/teawings.png");
-
-ASSET_MANAGER.downloadAll(function () {
-    console.log("starting dl");
-    var canvas = document.getElementById('gameWorld');
-    var ctx = canvas.getContext('2d');
-
+// var GAMEBOARD = [];
+AM.downloadAll(function () {
+    var canvas = document.getElementById("gameWorld");
+    var ctx = canvas.getContext("2d");
     var gameEngine = new GameEngine();
-    var bg = new Background(gameEngine);
-    var cld = new Cloud(gameEngine);
-    var sun = new Sun(gameEngine);
-    var monster = new Dragon(gameEngine);
-    var bird = new Bird(gameEngine);
-    var tower = new Tower(gameEngine)
-
-    gameEngine.addEntity(bg);
-    gameEngine.addEntity(cld);
-    gameEngine.addEntity(sun);
-    gameEngine.addEntity(monster);
-    gameEngine.addEntity(bird);
-    gameEngine.addEntity(tower);
-
     gameEngine.init(ctx);
     gameEngine.start();
+    
+    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
+    // board = new function() {
+    //     new board(gameEngine);
+    // } 
+    // GAMEBOARD = board.GAMEBOARD;
+    // gameEngine.addEntity(board);
+    gameEngine.addEntity(new board(gameEngine));
+    gameEngine.addEntity(new redTea(gameEngine, -50, 250, false, .75));
+    gameEngine.addEntity(new iceGolem(gameEngine, -50, 250, .6));
+    gameEngine.addEntity(new cola(gameEngine, -50, 250, 1));
+    gameEngine.addEntity(new slimeGreen(gameEngine, 500, 300, 1));
+    sleep(2000).then(() => {
+        gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false, .75));
+    })
+    sleep(8000).then(() => {
+        gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true, .75));
+    })
+
+    // BOBA BULLET TESTING
+    gameEngine.addEntity(new boba(gameEngine,500, 500, 300, 350));
+
+    sleep(8000).then(() => {
+        gameEngine.addEntity(new boba(gameEngine,500, 500, 300, 350));
+    })
+
+    sleep(10000).then(() => {
+        gameEngine.addEntity(new boba(gameEngine,500, 500, 200, 200));
+    })
+
+    sleep(11000).then(() => {
+        gameEngine.addEntity(new boba(gameEngine,100, 100, 200, 200));
+    })
+
+    sleep(8000).then(() => {
+        gameEngine.addEntity(new boba(gameEngine,0, 500, 900, 50));
+    })
+    
+    gameEngine.addEntity(new display(gameEngine, this.generateGenericTowers(gameEngine)));
+
+    console.log("All Done!");
+
+    var pg = new PlayGame(gameEngine);
+    gameEngine.addEntity(pg);
+
+    gameEngine.running = false;
 });
+
+function generateGenericTowers(game) {
+    var firstTower = new tower(game, "Tower 1", 300, "Tower 1 \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerG2.png"));
+    var secondTower = new tower(game, "Tower 2", 320, "Tower 2 \ncan shoot 5 bobas \nevery second.",AM.getAsset("./img/towerR2.png"));
+    var thirdTower = new tower(game, "Tower 3", 400, "Tower 3 \ncan shoot 10 bobas \nevery second.",AM.getAsset("./img/towerY2.png"));
+    var fourthTower = new tower(game, "Tower 4", 500, "Tower 4 \ncan shoot 30 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var fifthTower = new tower(game, "Tower 5", 200, "Tower 5 \ncan shoot 2 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var sixthTower = new tower(game, "Tower 6", 100, "Tower 6 \ncan shoot 1 boba \nevery second.",AM.getAsset("./img/holder.png"));
+    var seventhTower = new tower(game, "Tower 7", 1000, "Tower 7 \ncan shoot 15 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var eightTower = new tower(game, "Tower 8", 2000, "Tower 8 \ncan shoot 20 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    var ninthTower = new tower(game, "Tower 9", 2200, "Tower 9 \ncan shoot 21 bobas \nevery second.",AM.getAsset("./img/holder.png"));
+    
+    var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower,eightTower,ninthTower]];
+    return temp;
+}
 
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
