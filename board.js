@@ -89,7 +89,7 @@ board.prototype.drawRect = function (i,j) {
   // ctx.strokeStyle = "green";
   // ctx.rect(x,y,w,h);
   // ctx.stroke();
-  ctx.fillStyle = "green";
+  ctx.fillStyle = "gray";
   ctx.fillRect(x,y,w,h);
 }
 
