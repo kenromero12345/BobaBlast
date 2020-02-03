@@ -20,7 +20,7 @@ function iceGolem(game, spawnX, spawnY, scale) {
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
-    this.hp = 10;
+    this.hp = 100;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/iceg.png")
     , 0, 180, 194, 180, 4, 0.5, 4, true, scale, false );
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/iceg.png")
@@ -56,7 +56,7 @@ iceGolem.prototype.update = function () {
         // else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && collide(ent, this)) {
+            if (ent !== this && ent.isBoba && ent.isIce && collide(ent, this)) {
                 ent.removeFromWorld = true;
                 this.hp--;
             }
