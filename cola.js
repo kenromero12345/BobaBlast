@@ -120,7 +120,7 @@ function cola(game, spawnX, spawnY, scale) {
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
-    this.hp = 50;
+    this.hp = 10;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/cola.png")
     , 0, 137, 65, 65, 4, 0.1, 4, true, 1, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/cola.png")
@@ -156,7 +156,7 @@ cola.prototype.update = function () {
         // else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            if (ent !== this && ent.isIce && collide(ent, this)) {
+            if (ent !== this && ent.isBoba && collide(ent, this)) {
                 ent.removeFromWorld = true;
                 this.hp--;
             }

@@ -24,7 +24,7 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.moveDirection = 1; //1 is right, down, left, up
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
-    tea.hp = 10;
+    tea.hp = 1;
     if (tea.paceWalk) {
         tea.width = tea.walkWidth;
         tea.height = tea.walkHeight;
