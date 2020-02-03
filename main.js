@@ -14,9 +14,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
     this.elapsedTime = 0;
     this.loop = loop;
     this.scale = scale;
-    this.flip = flip;
-    this.offsetY = 0;
-    this.offsetX = 0;
+	this.flip = flip
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
@@ -38,7 +36,7 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y) {
     ctx.drawImage(this.spriteSheet,
                  xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
                  this.frameWidth, this.frameHeight,
-                 x + this.offsetX, y + this.offsetY,
+                 x, y,
                  this.frameWidth * this.scale,
                  this.frameHeight * this.scale);
     }
@@ -70,8 +68,6 @@ AM.queueDownload("./img/iceg.png");
 AM.queueDownload("./img/icegFlip.png");
 AM.queueDownload("./img/cola.png");
 AM.queueDownload("./img/colaFlip.png");
-AM.queueDownload("./img/slime.png");
-AM.queueDownload("./img/slimeFlip.png");
   
 
 function Background(game, spritesheet) {
@@ -108,7 +104,6 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new redTea(gameEngine, -50, 250, false, .75));
     gameEngine.addEntity(new iceGolem(gameEngine, -50, 250, .6));
     gameEngine.addEntity(new cola(gameEngine, -50, 250, 1));
-    gameEngine.addEntity(new slimeGreen(gameEngine, 500, 300, 1));
     sleep(2000).then(() => {
         gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false, .75));
     })
