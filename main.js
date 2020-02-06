@@ -108,7 +108,7 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new redTea(gameEngine, -50, 250, false, .75));
     gameEngine.addEntity(new iceGolem(gameEngine, -50, 250, .6));
     gameEngine.addEntity(new cola(gameEngine, -50, 250, .85));
-    gameEngine.addEntity(new slime(gameEngine, 465, 250, .75, 1));//465//250
+    gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 1));//450//250
     sleep(2000).then(() => {
         gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false, .75));
         // gameEngine.addEntity(new slime(gameEngine, -50, 250, 1, 1));
