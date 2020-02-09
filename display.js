@@ -71,11 +71,11 @@ display.prototype.draw = function () {
     this.generateScoreBoard();
     this.generateLifeBoard();
     this.generateTowerBoard();
-    if(!this.game.running) {
+    if(!this.game.running && !paused) {
         this.generateStartButton();
-    } else if (paused) {
+    } else if (!this.game.running && paused) {
         this.generateResumeButton();
-    } else if (!paused) {
+    } else if (this.game.running && !paused) {
         this.generatePauseButton();
     }
     this.generateDescriptionBox();
@@ -106,7 +106,7 @@ display.prototype.draw = function () {
         // Hover Over Feature for Starting Round
         if(mouse.x < this.buttonStartX + this.buttonWidth + 10 && mouse.x >= this.buttonStartX 
             && mouse.y < this.buttonStartY + this.buttonHeight && mouse.y >= this.buttonStartY) {
-            if(!this.game.running) {
+            if(!this.game.running && !paused) {
                 var x = this.buttonStartX;
                 var y = this.buttonStartY;
                 var w = this.buttonWidth;
@@ -122,6 +122,41 @@ display.prototype.draw = function () {
                 ctx.fillText("R", this.buttonStartX + 120, this.buttonStartY + 40  );
                 ctx.font = '26px Bahnschrift Light';
                 ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 40  );
+            }
+            if(this.game.running && !paused) {
+                var x = this.buttonStartX;
+                var y = this.buttonStartY;
+                var w = this.buttonWidth;
+                var h = this.buttonHeight;
+                ctx.fillStyle = "green";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("P", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("AUSE", this.buttonStartX + 50, this.buttonStartY + 40  );
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("G", this.buttonStartX + 120, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("AME", this.buttonStartX + 140, this.buttonStartY + 40  );
+            }
+            if(!this.game.running && paused) {
+                var ctx = this.ctx;
+                var x = this.buttonStartX;
+                var y = this.buttonStartY;
+                var w = this.buttonWidth;
+                var h = this.buttonHeight;
+                ctx.fillStyle = "green";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("ESUME", this.buttonStartX + 55, this.buttonStartY + 40  );
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("G", this.buttonStartX + 150, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("AME", this.buttonStartX + 170, this.buttonStartY + 40  );
             }
         }
     }
@@ -141,10 +176,14 @@ display.prototype.draw = function () {
         // Start Round Button Click
         if(click.x < this.buttonStartX + this.buttonWidth + 10 && click.x >= this.buttonStartX 
             && click.y < this.buttonStartY + this.buttonHeight && click.y >= this.buttonStartY) {
-                if(!this.game.running) {
+                if(!this.game.running && !paused) {
                     this.game.running = true;
-                } else if(this.game.running) {
+                } else if(this.game.running && !paused) {
                     this.game.running = false;
+                    paused = true;
+                } else if(!this.game.running && paused) {
+                    this.game.running = true;
+                    paused = false;
                 }
         }
         this.game.click = false;
@@ -240,7 +279,7 @@ display.prototype.generatePauseButton = function() {
     ctx.font = '30px Bahnschrift Light';
     ctx.fillText("P", this.buttonStartX + 35, this.buttonStartY + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("AUSE", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.fillText("AUSE", this.buttonStartX + 50, this.buttonStartY + 40  );
     ctx.font = '30px Bahnschrift Light';
     ctx.fillText("G", this.buttonStartX + 120, this.buttonStartY + 40  );
     ctx.font = '26px Bahnschrift Light';
