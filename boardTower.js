@@ -38,9 +38,12 @@ boardTower.prototype.draw = function () {
     } else if (this.pointDirection === 'S') {
         this.animationSouth.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
         if(this.shootBoba) {
+            
+        sleep(1000).then(() => {
             this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY));
             this.shootBoba = false;
-         }
+         });
+        }
          if(this.upgradeMode) {
             this.ctx.save();
             this.ctx.globalAlpha = 0.25;
@@ -109,7 +112,7 @@ boardTower.prototype.update = function () {
                 this.yOffset = 0;
             } */
         // TESTING CLICK TO SHOOT FUNCTIONALITY
-           /* if(!this.shootBoba) {
+            if(!this.shootBoba) {
                 this.shootBoba = true;
                 if(this.pointDirection = 'S') {
                     this.shootOutX = this.x + 15;
@@ -117,33 +120,15 @@ boardTower.prototype.update = function () {
                 }
             } else {
                 this.shootBoba = false;
-            }  */
+            }  
 
         }
     }
-    // Click Mode: If you click a tower, set global variable for selected tower row/column
-  /*  if (this.game.click) {
-        console.log("CLICK");
-        var click = this.game.click;
-        if(click.x >= this.x && click.x < this.x + 70 && click.y >= this.y && click.y < this.y + 70) {
-            purchaseMode = true;
-            selectedTowerColumn = this.storeGridX;
-            selectedTowerRow =this.storeGridY;
-        }
-    }
-    // Hover Mode: If hover over a tower, set global variable for hover tower row/column
-    if (this.game.mouse) {
-        var mouse = this.game.mouse;
-        if(mouse.x >= this.x && mouse.x < this.x + 70 && mouse.y >= this.y && mouse.y < this.y + 70) {
-            hoverTowerRow = this.storeGridY;
-            hoverTowerColumn = this.storeGridX;
-        } 
-    } */
     for (var i = 0; i < this.game.entities.length; i++) {
         var ent = this.game.entities[i];
         if (ent !== this && ent.isEnemy) {
             var temp = this.enemyInRange(ent);
-            if(temp !== undefined) {
+            if(temp) {
                 console.log("ENEMY IN RANGE");
                 this.shootBoba = true;
             }
@@ -157,11 +142,11 @@ boardTower.prototype.enemyInRange = function (rect) {
   //      && rect.y < this.centerY + this.radius && this.y + this.height > this.centerY);
     if (rect.x < this.centerX + this.radius && rect.x + rect.width > this.centerX - this.radius
         && rect.y < this.centerY + this.radius && rect.y + rect.height > this.centerY - this.radius) {
-        this.shootDestinationX = rect.x + rect.width / 2;
-        this.shootDestinationY = rect.y + rect.height / 2;
+        this.shootDestinationX = rect.x + rect.width / 2 ;
+        this.shootDestinationY = rect.y + rect.height / 2 ;
        // return {x: rect.x + (rect.width / 2), y: rect.y + (rect.height/2)};
        return true;
     } else {
-        return undefined;
+        return false;
     }
 }

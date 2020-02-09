@@ -7,6 +7,7 @@ function boba(game, startX, startY, destinationX, destinationY) {
     this.destinationX = destinationX;
     this.destinationY = destinationY;
     this.backward = false;
+    this.upward = false;
     this.yDiff = destinationY - startY;
     this.xDiff = destinationX - startX;
     if(this.xDiff === 0) {
@@ -17,7 +18,12 @@ function boba(game, startX, startY, destinationX, destinationY) {
     if(this.xDiff < 0) {
         this.backward = true;
     }
-    if(this.backward && this.yDiff < 0) {
+    if(this.yDiff < 0) {
+        this.upward = true;
+    }
+    if(this.backward && this.upward) {
+        this.slope = -1 * this.slope;
+    } else if (this.backward) {
         this.slope = -1 * this.slope;
     }
     this.width = 28;
@@ -43,8 +49,12 @@ boba.prototype.update = function () {
         } else if (this.slope !== undefined)  {
             this.x -= this.game.clockTick * this.speed;
         }
-        if(this.slope === undefined)  this.y += this.game.clockTick * this.speed;
-        else this.y += this.slope * this.game.clockTick * this.speed;
+        if(this.slope === undefined)  {
+            this.y += this.game.clockTick * this.speed;
+        }
+        else {
+            this.y += this.slope * this.game.clockTick * this.speed;
+        }
     }
 
 
