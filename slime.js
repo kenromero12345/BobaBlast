@@ -483,7 +483,7 @@ function slime(game, spawnX, spawnY, scale, num) {
     // console.log(slimeOffsetY)
     this.width = 79 * scale;
     this.height = 80 * scale;
-    this.name = "green slime";
+    this.name = "slime";
     this.speed = 100;
     this.x = spawnX - 50;
     this.y = spawnY - 50;
