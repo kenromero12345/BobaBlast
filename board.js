@@ -98,7 +98,7 @@ board.prototype.draw = function () {
     for(var j = 0; j < this.height; j++) {
       // this.drawRect(i,j);
       if (GAMEBOARD[i][j].occupied) {
-        this.drawRect(i, j);
+       // this.drawRect(i, j);
         for(var z = 0; z < ACTIVETOWERS.length; z++) {
         // this.ctx.drawImage(ACTIVETOWERS[z][2], this.startingXPoint + ACTIVETOWERS[z][0] * 100, this.startingYPoint + 100 * ACTIVETOWERS[z][1]);
         

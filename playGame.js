@@ -19,7 +19,7 @@ PlayGame.prototype.draw = function () {
         ctx.font = "16pt Calibri";
         ctx.fillStyle = "white";
        // ctx.fillRect(0,0,900,900);
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "green";
         ctx.fillText("In this prototype, we have the following features incorporated:", 50, 130);
         ctx.fillText("Click to play functionality. Green tea, red tea, ice golem animations. ", 50, 160);
         ctx.fillText("Collision detection and death animated for the teas. Collision detection for ice golem. ", 50, 190);
