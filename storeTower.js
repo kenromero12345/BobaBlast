@@ -32,7 +32,7 @@ storeTower.prototype.draw = function () {
 
 storeTower.prototype.update = function () {
     // Click Mode: If you click a tower, set global variable for selected tower row/column
-    if (this.game.click) {
+    if (this.game.click && this.game.running) {
         console.log("CLICK");
         var click = this.game.click;
         if(click.x >= this.x && click.x < this.x + 70 && click.y >= this.y && click.y < this.y + 70) {
@@ -42,7 +42,7 @@ storeTower.prototype.update = function () {
         }
     }
     // Hover Mode: If hover over a tower, set global variable for hover tower row/column
-    if (this.game.mouse) {
+    if (this.game.mouse && this.game.running) {
         var mouse = this.game.mouse;
         if(mouse.x >= this.x && mouse.x < this.x + 70 && mouse.y >= this.y && mouse.y < this.y + 70) {
             hoverTowerRow = this.storeGridY;
