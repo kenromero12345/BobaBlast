@@ -76,6 +76,7 @@ AM.queueDownload("./img/slimeFlip.png");
   
 
 function Background(game, spritesheet) {
+    this.isEnemy = false;
     this.x = 0;
     this.y = 0;
     this.spritesheet = spritesheet;

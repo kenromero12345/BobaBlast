@@ -20,11 +20,14 @@ function boardTower(game, gridX, gridY, type) {
     this.animationSouthWest = new Animation(this.spritesheet, 1460, 560, 350, 350, 1, 0.1, 1, true, 0.2);
     this.x = (gridX - 1) * 100 + 20;
     this.y = gridY * 100 + 10;
-    this.shootOutX = this.x;
-    this.shootOutY = this.y;
+    this.centerX = this.x + 25;
+    this.centerY = this.y + 25;
+    this.shootOutX = this.x + 15; // for testing purposes for sSOUTH
+    this.shootOutY = this.y + 50; // for testing purposes for SOUTH
     this.shootBoba = false; 
+    this.upgradeMode = false;
     this.shootBobaSpeed = null; // TODO
-    this.radius = null; // TODO
+    this.radius = 150; // TODO
     this.shootDestinationX = null; // TODO
     this.shootDestinationY = null; // TODO
 }
@@ -38,6 +41,15 @@ boardTower.prototype.draw = function () {
             this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootOutX, this.shootOutY + 200));
             this.shootBoba = false;
          }
+         if(this.upgradeMode) {
+            this.ctx.save();
+            this.ctx.globalAlpha = 0.25;
+            this.ctx.fillStyle = "white";
+            this.ctx.beginPath();
+            this.ctx.arc(this.centerX, this.centerY, this.radius, 0, 2 * Math.PI);
+            this.ctx.fill();
+            this.ctx.restore();
+        }
     } else if (this.pointDirection === 'E') {
         this.animationEast.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
     } else if (this.pointDirection === 'NE') {
@@ -61,7 +73,7 @@ boardTower.prototype.update = function () {
         var width = 100;
         var height = 100;
         if(click.x >= upperLeftX && click.x < upperLeftX + width && click.y >= upperLeftY && click.y < upperLeftY + height) {
-        
+            this.upgradeMode = !this.upgradeMode;
         // UNCOMMENT BELOW TO TEST CLICK TO SPIN FUNCTIONALITY
             /*   if(this.pointDirection === 'S') {
                 this.pointDirection = 'SE';
@@ -97,7 +109,7 @@ boardTower.prototype.update = function () {
                 this.yOffset = 0;
             } */
         // TESTING CLICK TO SHOOT FUNCTIONALITY
-            if(!this.shootBoba) {
+           /* if(!this.shootBoba) {
                 this.shootBoba = true;
                 if(this.pointDirection = 'S') {
                     this.shootOutX = this.x + 15;
@@ -105,7 +117,8 @@ boardTower.prototype.update = function () {
                 }
             } else {
                 this.shootBoba = false;
-            }
+            }  */
+
         }
     }
     // Click Mode: If you click a tower, set global variable for selected tower row/column
@@ -126,8 +139,29 @@ boardTower.prototype.update = function () {
             hoverTowerColumn = this.storeGridX;
         } 
     } */
+    for (var i = 0; i < this.game.entities.length; i++) {
+        var ent = this.game.entities[i];
+        if (ent !== this && ent.isEnemy) {
+            var temp = this.enemyInRange(ent);
+            if(temp !== undefined) {
+                console.log("ENEMY IN RANGE");
+                //this.shootBoba = true;
+                this.shootDestinationX = temp.x;
+                this.shootDestinationY = temp.y; 
+            }
+        }
+    }
 }
 
-boardTower.prototype.towerRadius = function () {
+// Determines if an Enemy is within Range of Tower
+boardTower.prototype.enemyInRange = function (rect) {
+ //   console.log(rect.x < this.centerX + this.radius && rect.x + rect.width > this.centerX - this.radius
+  //      && rect.y < this.centerY + this.radius && this.y + this.height > this.centerY);
+    if (rect.x < this.centerX + this.radius && rect.x + rect.width > this.centerX - this.radius
+        && rect.y < this.centerY + this.radius && rect.y + rect.height > this.centerY - this.radius) {
 
+        return {x: rect.x + (rect.width / 2), y: rect.y + (rect.height/2)};
+    } else {
+        return undefined;
+    }
 }

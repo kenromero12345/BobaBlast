@@ -1,4 +1,5 @@
 function slimeGreen(game, spawnX, spawnY, scale) {
+    this.isEnemy = true;
     this.width = 65 * scale;
     this.height = 65 * scale;
     this.name = "green slime";
