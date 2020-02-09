@@ -1,4 +1,5 @@
 function boardTower(game, gridX, gridY, type) {
+    this.shootTimer = Date.now();
     this.pointDirection = 'S';
     this.currentDirection = null; // TODO
     this.intendedDirection = null; // TODO
@@ -27,9 +28,10 @@ function boardTower(game, gridX, gridY, type) {
     this.shootBoba = false; 
     this.upgradeMode = false;
     this.shootBobaSpeed = null; // TODO
-    this.radius = 150; // TODO
-    this.shootDestinationX = 0; // TODO
-    this.shootDestinationY = 0; // TODO
+    this.radius = 150; 
+    this.actualRadiusOverlay = 175;
+    this.shootDestinationX = 0; 
+    this.shootDestinationY = 0; 
 }
 
 boardTower.prototype.draw = function () {
@@ -38,18 +40,19 @@ boardTower.prototype.draw = function () {
     } else if (this.pointDirection === 'S') {
         this.animationSouth.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
         if(this.shootBoba) {
-            
-        sleep(1000).then(() => {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY));
-            this.shootBoba = false;
-         });
+            // SHOOT EVERY 1 SECOND
+            if(this.shootTimer < Date.now()) {
+                this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY));
+                this.shootBoba = false;
+                this.shootTimer = Date.now() + 1000;
+            }
         }
          if(this.upgradeMode) {
             this.ctx.save();
             this.ctx.globalAlpha = 0.25;
             this.ctx.fillStyle = "white";
             this.ctx.beginPath();
-            this.ctx.arc(this.centerX, this.centerY, this.radius, 0, 2 * Math.PI);
+            this.ctx.arc(this.centerX, this.centerY, this.actualRadiusOverlay, 0, 2 * Math.PI);
             this.ctx.fill();
             this.ctx.restore();
         }
@@ -112,7 +115,7 @@ boardTower.prototype.update = function () {
                 this.yOffset = 0;
             } */
         // TESTING CLICK TO SHOOT FUNCTIONALITY
-            if(!this.shootBoba) {
+          /*  if(!this.shootBoba) {
                 this.shootBoba = true;
                 if(this.pointDirection = 'S') {
                     this.shootOutX = this.x + 15;
@@ -120,7 +123,7 @@ boardTower.prototype.update = function () {
                 }
             } else {
                 this.shootBoba = false;
-            }  
+            }  */
 
         }
     }
@@ -138,15 +141,13 @@ boardTower.prototype.update = function () {
 
 // Determines if an Enemy is within Range of Tower
 boardTower.prototype.enemyInRange = function (rect) {
- //   console.log(rect.x < this.centerX + this.radius && rect.x + rect.width > this.centerX - this.radius
-  //      && rect.y < this.centerY + this.radius && this.y + this.height > this.centerY);
     if (rect.x < this.centerX + this.radius && rect.x + rect.width > this.centerX - this.radius
         && rect.y < this.centerY + this.radius && rect.y + rect.height > this.centerY - this.radius) {
         this.shootDestinationX = rect.x + rect.width / 2 ;
         this.shootDestinationY = rect.y + rect.height / 2 ;
-       // return {x: rect.x + (rect.width / 2), y: rect.y + (rect.height/2)};
        return true;
     } else {
         return false;
     }
 }
+
