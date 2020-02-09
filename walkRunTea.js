@@ -1,4 +1,5 @@
 var constructor = function (tea, game, spawnX, spawnY, isRun) {
+    tea.isEnemy = true;
     tea.x = spawnX - 50;
     tea.y = spawnY - 50;
     if (isRun) {

@@ -2,8 +2,11 @@ var currentMoney = 650;
 var currentLifes = 100;
 
 var purchaseMode = false;
-var selectedTowerRow = 0;
-var selectedTowerColumn = 0;
+var paused = false;
+var selectedTowerRow = -1;
+var selectedTowerColumn = -1;
+var hoverTowerRow = -1;
+var hoverTowerColumn = -1;
 var towerArray = [];
 
 
@@ -68,47 +71,123 @@ display.prototype.draw = function () {
     this.generateScoreBoard();
     this.generateLifeBoard();
     this.generateTowerBoard();
-    this.generateStartButton();
-    this.generateDescriptionBox(null);
-
-    if (this.game.click) {
-        purchaseMode = false;
-        var click = this.game.click;
-        if(click.x >= 945 && click.x < 1155 && click.y >= 200 && click.y < 410) {
-            // console.log("X: " + click.x + "Y" + click.y);
-            var xIndex = Math.floor((click.x - this.towerStartX - 20)/70);
-            var yIndex = Math.floor((click.y - this.towerStartY - 30)/70);
-            purchaseMode = true;
-            selectedTowerRow = xIndex;
-            selectedTowerColumn = yIndex;
-           // this.ctx.drawImage(this.towerArray[xIndex][yIndex], this.towerStartX + 20 + 70 * xIndex, this.towerStartY + 30 + 70 * yIndex);
-            this.ctx.fillStyle = "green";
-            this.ctx.fillRect(this.towerStartX + 20 + 70 * xIndex, this.towerStartY + 30 + 70 * yIndex,70,70);
-            this.generateDescriptionBox(towerArray[xIndex][yIndex]);
-        }
-        // if statement for click on purchase button
-        // if statement for click on start round button
-      }
+    if(!this.game.running && !paused) {
+        this.generateStartButton();
+    } else if (!this.game.running && paused) {
+        this.generateResumeButton();
+    } else if (this.game.running && !paused) {
+        this.generatePauseButton();
+    }
+    this.generateDescriptionBox();
 
     if (this.game.mouse) {
         var mouse = this.game.mouse;
-        if(mouse.x >= 945 && mouse.x < 1155 && mouse.y >= 200 && mouse.y < 410) {
-            this.ctx.save();
-            this.ctx.globalAlpha = 0.5;
-            console.log("X: " + mouse.x + "Y" + mouse.y);
-            var xIndex = Math.floor((mouse.x - this.towerStartX - 20)/70);
-            var yIndex = Math.floor((mouse.y - this.towerStartY - 30)/70);
-           // this.ctx.drawImage(this.towerArray[xIndex][yIndex], this.towerStartX + 20 + 70 * xIndex, this.towerStartY + 30 + 70 * yIndex);
-            this.ctx.fillStyle = "green";
-            this.ctx.fillRect(this.towerStartX + 20 + 70 * xIndex, this.towerStartY + 30 + 70 * yIndex,70,70);
-           this.ctx.restore();
-            this.generateDescriptionBox(towerArray[xIndex][yIndex]);
+        // Disable Hover Mode if Not Within Bounds of Boba Tower Store
+        if(mouse.x < 945 || mouse.x >= 1155 || mouse.y < 200 && mouse.y >= 410) {
+            hoverTowerColumn = -1;
+            hoverTowerRow = -1;
         }
-                // if statement for click on purchase button
-        // if statement for click on start round button
-      }
+        // Hover Over Feature for Cancelling Purchase
+        if(mouse.x < this.descriptionBoxStartX - 30 + this.descriptionBoxWidth && mouse.x >= this.descriptionBoxStartX + 20 
+            && mouse.y < this.descriptionBoxStartY - 5 + this.descriptionBoxHeight && mouse.y >= this.descriptionBoxStartY + 80) {
+            if (purchaseMode) {
+                var purchaseX = this.descriptionBoxStartX + 20;
+                var purchaseY = this.descriptionBoxStartY + 80;
+                var purchaseW = this.descriptionBoxWidth - 50;
+                var purchaseH = this.descriptionBoxHeight - 85;
+                ctx.fillStyle = "red";
+                ctx.fillRect(purchaseX,purchaseY,purchaseW,purchaseH);
+            
+                ctx.fillStyle = "white";
+                ctx.font = '20px Bahnschrift Light';
+                ctx.fillText("Cancel Purchase", purchaseX + 25, purchaseY + 20  ); 
+            }
+        }
+        // Hover Over Feature for Starting Round
+        if(mouse.x < this.buttonStartX + this.buttonWidth + 10 && mouse.x >= this.buttonStartX 
+            && mouse.y < this.buttonStartY + this.buttonHeight && mouse.y >= this.buttonStartY) {
+            if(!this.game.running && !paused) {
+                var x = this.buttonStartX;
+                var y = this.buttonStartY;
+                var w = this.buttonWidth;
+                var h = this.buttonHeight;
+                ctx.fillStyle = "green";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("S", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("TART", this.buttonStartX + 55, this.buttonStartY + 40  );
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("R", this.buttonStartX + 120, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 40  );
+            }
+            if(this.game.running && !paused) {
+                var x = this.buttonStartX;
+                var y = this.buttonStartY;
+                var w = this.buttonWidth;
+                var h = this.buttonHeight;
+                ctx.fillStyle = "green";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("P", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("AUSE", this.buttonStartX + 50, this.buttonStartY + 40  );
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("G", this.buttonStartX + 120, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("AME", this.buttonStartX + 140, this.buttonStartY + 40  );
+            }
+            if(!this.game.running && paused) {
+                var ctx = this.ctx;
+                var x = this.buttonStartX;
+                var y = this.buttonStartY;
+                var w = this.buttonWidth;
+                var h = this.buttonHeight;
+                ctx.fillStyle = "green";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("ESUME", this.buttonStartX + 55, this.buttonStartY + 40  );
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("G", this.buttonStartX + 150, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("AME", this.buttonStartX + 170, this.buttonStartY + 40  );
+            }
+        }
+    }
 
-
+    if (this.game.click) {
+        var click = this.game.click;
+        // Cancel Button Click Deselects the Current Tower Selection
+        if (purchaseMode) {
+            if(click.x < this.descriptionBoxStartX - 30 + this.descriptionBoxWidth
+                && click.x >= this.descriptionBoxStartX + 20 
+                && click.y < this.descriptionBoxStartY - 5 + this.descriptionBoxHeight && click.y >= this.descriptionBoxStartY + 80)  {
+                purchaseMode = false;
+                selectedTowerColumn = -1;
+                selectedTowerRow = -1;
+            }
+        }
+        // Start Round Button Click
+        if(click.x < this.buttonStartX + this.buttonWidth + 10 && click.x >= this.buttonStartX 
+            && click.y < this.buttonStartY + this.buttonHeight && click.y >= this.buttonStartY) {
+                if(!this.game.running && !paused) {
+                    this.game.running = true;
+                } else if(this.game.running && !paused) {
+                    this.game.running = false;
+                    paused = true;
+                } else if(!this.game.running && paused) {
+                    this.game.running = true;
+                    paused = false;
+                }
+        }
+        this.game.click = false;
+    }
 }
 
 display.prototype.generateScoreBoard = function () {
@@ -148,11 +227,6 @@ display.prototype.generateTowerBoard = function () {
     ctx.fillStyle = "black";
     ctx.font = '20px Bahnschrift Light';
     ctx.fillText("Boba Tower Store", this.towerStartX + 40, this.towerStartY + 25);
-    for(var i = 0; i < 3; i++) {
-        for(var j=0; j < 3; j++) {
-        this.ctx.drawImage(towerArray[i][j].spritesheet , this.towerStartX + 20 + 70 * i, this.towerStartY + 30 + 70 * j);
-        }
-    }
 }
 
 display.prototype.generateStartButton = function() {
@@ -174,7 +248,45 @@ display.prototype.generateStartButton = function() {
     ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 40  );
 }
 
-display.prototype.generateDescriptionBox = function(currentTower) {
+display.prototype.generateResumeButton = function() {
+    var ctx = this.ctx;
+    var x = this.buttonStartX;
+    var y = this.buttonStartY;
+    var w = this.buttonWidth;
+    var h = this.buttonHeight;
+    ctx.fillStyle = "#ff4747";
+    ctx.fillRect(x,y,w,h);
+    ctx.fillStyle = "black";
+    ctx.font = '30px Bahnschrift Light';
+    ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("ESUME", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.font = '30px Bahnschrift Light';
+    ctx.fillText("G", this.buttonStartX + 150, this.buttonStartY + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("AME", this.buttonStartX + 170, this.buttonStartY + 40  );
+}
+
+display.prototype.generatePauseButton = function() {
+    var ctx = this.ctx;
+    var x = this.buttonStartX;
+    var y = this.buttonStartY;
+    var w = this.buttonWidth;
+    var h = this.buttonHeight;
+    ctx.fillStyle = "#ff4747";
+    ctx.fillRect(x,y,w,h);
+    ctx.fillStyle = "black";
+    ctx.font = '30px Bahnschrift Light';
+    ctx.fillText("P", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("AUSE", this.buttonStartX + 50, this.buttonStartY + 40  );
+    ctx.font = '30px Bahnschrift Light';
+    ctx.fillText("G", this.buttonStartX + 120, this.buttonStartY + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("AME", this.buttonStartX + 140, this.buttonStartY + 40  );
+}
+
+display.prototype.generateDescriptionBox = function() {
     var ctx = this.ctx;
     var x = this.descriptionBoxStartX;
     var y = this.descriptionBoxStartY;
@@ -182,9 +294,19 @@ display.prototype.generateDescriptionBox = function(currentTower) {
     var h = this.descriptionBoxHeight;
     ctx.fillStyle = "#ff4747";
     ctx.fillRect(x,y,w,h);
-    if(currentTower === null) return;
+
+    var xGrid = hoverTowerColumn;
+    var yGrid = hoverTowerRow; 
+    if(xGrid === -1 && yGrid === -1) {
+        xGrid = selectedTowerColumn;
+        yGrid = selectedTowerRow;
+    }
+    if(xGrid === -1 && yGrid === -1) {
+        return;
+    }
+    var currentTower = towerArray[yGrid][xGrid];
     ctx.fillStyle = "black";
-    ctx.font = '16px Bahnschrift SemiBold';
+    ctx.font = '14px Bahnschrift SemiBold';
     ctx.fillText("Name: " + currentTower.name, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
     ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 140, this.descriptionBoxStartY + 20);
 
@@ -198,16 +320,18 @@ display.prototype.generateDescriptionBox = function(currentTower) {
         ctx.fillText(lines[i], lineX, lineY + (i*lineheight) );
     }
 
-    var purchaseX = this.descriptionBoxStartX + 20;
-    var purchaseY = this.descriptionBoxStartY + 80;
-    var purchaseW = this.descriptionBoxWidth - 50;
-    var purchaseH = this.descriptionBoxHeight - 85;
-    ctx.fillStyle = "#56fc53";
-    ctx.fillRect(purchaseX,purchaseY,purchaseW,purchaseH);
-
-    ctx.fillStyle = "black";
-    ctx.font = '20px Bahnschrift Light';
-    ctx.fillText("Purchase Tower", purchaseX + 25, purchaseY + 20  );
+    if (purchaseMode && towerArray[yGrid][xGrid] === towerArray[selectedTowerRow][selectedTowerColumn] ) {
+        var purchaseX = this.descriptionBoxStartX + 20;
+        var purchaseY = this.descriptionBoxStartY + 80;
+        var purchaseW = this.descriptionBoxWidth - 50;
+        var purchaseH = this.descriptionBoxHeight - 85;
+        ctx.fillStyle = "#56fc53";
+        ctx.fillRect(purchaseX,purchaseY,purchaseW,purchaseH);
+    
+        ctx.fillStyle = "black";
+        ctx.font = '20px Bahnschrift Light';
+        ctx.fillText("Cancel Purchase", purchaseX + 25, purchaseY + 20  ); 
+    }
 }
 
 display.prototype.update = function () {

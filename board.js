@@ -98,16 +98,15 @@ board.prototype.draw = function () {
     for(var j = 0; j < this.height; j++) {
       // this.drawRect(i,j);
       if (GAMEBOARD[i][j].occupied) {
-        this.drawRect(i, j);
+       // this.drawRect(i, j);
         for(var z = 0; z < ACTIVETOWERS.length; z++) {
-         this.ctx.drawImage(ACTIVETOWERS[z][2], this.startingXPoint + ACTIVETOWERS[z][0] * 100, this.startingYPoint + 100 * ACTIVETOWERS[z][1]);
+        // this.ctx.drawImage(ACTIVETOWERS[z][2], this.startingXPoint + ACTIVETOWERS[z][0] * 100, this.startingYPoint + 100 * ACTIVETOWERS[z][1]);
+        
         }
        
       }
     }
   } 
-
-
 
 
     // Shadow Effect
@@ -127,8 +126,7 @@ board.prototype.draw = function () {
       if (gridX >= 0 && gridX < GAMEBOARD.length && gridY >= 0 && gridY < GAMEBOARD[0].length
         && !GAMEBOARD[gridX][gridY].end && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
         && isPath(-50, 250, gridX, gridY)) {
-        this.drawRect(Math.floor(mouse.x/100) + 1, Math.floor(mouse.y/100));
-        this.ctx.drawImage(towerArray[selectedTowerRow][selectedTowerColumn].spritesheet, upperLeftX, upperLeftY); 
+       this.drawRect(Math.floor(mouse.x/100) + 1, Math.floor(mouse.y/100));
       }
       this.ctx.restore();
     }
@@ -144,7 +142,7 @@ board.prototype.update = function () {
 
   for (var i = 0; i < this.game.entities.length; i++) {
     var ent = this.game.entities[i];
-    if (ent !== this) {
+    if (ent !== this && !ent.isTower) {
         var xy = getXY(ent.centerX, ent.centerY);
         // console.log(xy)
         if (xy.x && xy.y) {
@@ -165,6 +163,10 @@ board.prototype.update = function () {
         }
     }
 }
+
+// BUG : If in purchase mode, and I click on a place hwere I cannot put down tower (e.g. enemy is there) 
+// and I dont select another tower, it will put down the tower once the enemy has passed
+// PATCHED BUG WITH ELSE STATEMENT SETTING CLICK TO FALSE
   if (this.game.click && purchaseMode === true) {
     var click = this.game.click;
     if(click.x >= 0 && click.x < 900 && click.y >= 0 && click.y < 600) {
@@ -172,9 +174,15 @@ board.prototype.update = function () {
       var gridY = Math.floor(click.y/100);
       // console.log("X: " + click.x + "Y" + click.y);
       if (isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].hasEnemyRadius) {
-        purchaseMode = true;
         GAMEBOARD[gridX][gridY].occupied = true;
-        ACTIVETOWERS.push([gridX, gridY,towerArray[selectedTowerRow][selectedTowerColumn].spritesheet]);
+        var tempTower = new boardTower(this.game, gridX, gridY, towerArray[selectedTowerRow][selectedTowerColumn]);
+        this.game.addEntity(tempTower);
+      //  ACTIVETOWERS.push([gridX, gridY,towerArray[selectedTowerRow][selectedTowerColumn].spritesheet]);
+        selectedTowerRow = -1;
+        selectedTowerColumn = -1;
+        purchaseMode = false;
+      } else {
+        this.game.click = false;
       }
       // console.log(ACTIVETOWERS[0][0]);
     }

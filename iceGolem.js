@@ -1,4 +1,5 @@
 function iceGolem(game, spawnX, spawnY, scale) {
+    this.isEnemy = true;
     this.width = 194 * scale;
     this.height = 180 * scale;
     this.name = "ice";
