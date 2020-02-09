@@ -44,6 +44,12 @@ boba.prototype.draw = function () {
 
 boba.prototype.update = function () {
     if(this.game.running) {
+        // Remove Boba if It Goes Out of Range
+        if(this.backward && this.x < this.destinationX) {
+            this.removeFromWorld = true;
+        } else if (!this.backward && this.x > this.destinationX) {
+            this.removeFromWorld = true;
+        }
         if(!this.backward && this.slope !== undefined) {
             this.x += this.game.clockTick * this.speed;
         } else if (this.slope !== undefined)  {
