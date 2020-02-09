@@ -108,28 +108,28 @@ function cola(game, spawnX, spawnY, scale) {
     this.y = spawnY - 50;
     this.centerX = this.x + this.width / 2;
     this.centerY = this.y + this.height / 2;
-        console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
+        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
     var difX = this.centerX - spawnX;
     var difY =  spawnY - this.centerY;
-    console.log("dx:" + difX + ", dy:" + difY);
+    // console.log("dx:" + difX + ", dy:" + difY);
     this.centerX = this.centerX - difX;
     this.centerY = this.centerY + difY;
     this.x = this.x - difX;
     this.y = this.y + difY;
-        console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
+        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
     this.game = game;
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/cola.png")
-    , 0, 137, 65, 65, 4, 0.1, 4, true, 1, false);
+    , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/cola.png")
-    , 0, 341, 70, 65, 5, 0.2, 5, false, 1, false);
+    , 0, 341, 70, 65, 5, 0.2, 5, false, scale, false);
     this.animationWalkRight = new Animation(AM.getAsset("./img/colaFlip.png")
-    , 239, 137, 65, 65, 4, 0.10, 4, true, 1, true);
+    , 239, 137, 65, 65, 4, 0.10, 4, true, scale, true);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/colaFlip.png")
-    , 0, 341, 70, 65, 5, 0.2, 5, false, 1, true);
+    , 0, 341, 70, 65, 5, 0.2, 5, false, scale, true);
 }
 
 cola.prototype.draw = function () {

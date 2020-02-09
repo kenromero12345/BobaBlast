@@ -25,7 +25,7 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.moveDirection = 1; //1 is right, down, left, up
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
-    tea.hp = 1;
+    tea.hp = 10;
     if (tea.paceWalk) {
         tea.width = tea.walkWidth;
         tea.height = tea.walkHeight;
@@ -230,9 +230,11 @@ var update = function (tea) {
     // console.log(tea.centerX)
     // console.log(x - tea.centerX);
     // console.log(tea.y - tea.centerY);
+         //&& ((tea.centerX +  100) % 100 > 40 
+    // && (tea.centerX + 100) % 100 < 60 && tea.centerY % 100 > 40 && tea.centerY % 100 < 60)
     xy = getXY(tea.centerX, tea.centerY);
     if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
-        tea.hp = 0; //dead
+       tea.hp = 0; //dead
         // console.log("true");
         // console.log(GAMEBOARD.length);
         // console.log(xy);
@@ -263,7 +265,7 @@ var update = function (tea) {
         var ent = tea.game.entities[i];
         if (ent !== tea && ent.isBoba && collide(ent, tea)) {
             //collide
-             console.log(tea.name + " collide with " + ent.name);
+            //  console.log(tea.name + " collide with " + ent.name);
             ent.removeFromWorld = true;
             tea.hp--;
         }
