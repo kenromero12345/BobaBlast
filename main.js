@@ -25,7 +25,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
-    // if(this.currentFrame() != 2){
+    // if(this.currentFrame() != 6){
         this.elapsedTime += tick;
     // }
     if (!(this.isDone() && !this.loop)) {
@@ -88,6 +88,8 @@ AM.queueDownload("./img/miniCake.png");
 AM.queueDownload("./img/miniCakeFlip.png");
 AM.queueDownload("./img/biscuitWarrior.png");
 AM.queueDownload("./img/biscuitWarriorFlip.png");
+AM.queueDownload("./img/cakeChoco.png");
+AM.queueDownload("./img/cakeChocoFlip.png");
 
 function Background(game, spritesheet) {
     this.x = 0;
@@ -127,6 +129,7 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new watermelon(gameEngine, -50, 350, .75, 6));
     gameEngine.addEntity(new miniCake(gameEngine, -50, 350, .75, 6));
     gameEngine.addEntity(new biscuit(gameEngine, -50, 350, .75, 6));
+    gameEngine.addEntity(new cakeChoco(gameEngine, -50, 350, .75, 6));
     sleep(2000).then(() => {
         gameEngine.addEntity(new greenTea(gameEngine, -50, 350, false, .75));
         gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 10));//450//250

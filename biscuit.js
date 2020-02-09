@@ -1,7 +1,7 @@
 function biscuit(game, spawnX, spawnY, scale) {
     // console.log(slimeOffsetY)
-    this.width = 67 * scale;
-    this.height = 48 * scale;
+    this.width = 98 * scale;
+    this.height = 94 * scale;
     this.name = "biscuit";
     this.speed = 100;
     this.x = spawnX - 50;
