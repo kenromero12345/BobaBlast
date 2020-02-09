@@ -1,7 +1,7 @@
 function boardTower(game, gridX, gridY, type) {
     this.pointDirection = 'S';
-    this.currentDirection = null;
-    this.intendedDirection = null;
+    this.currentDirection = null; // TODO
+    this.intendedDirection = null; // TODO
     this.game = game;
     this.ctx = game.ctx;
     this.gridX = gridX;
@@ -20,6 +20,13 @@ function boardTower(game, gridX, gridY, type) {
     this.animationSouthWest = new Animation(this.spritesheet, 1460, 560, 350, 350, 1, 0.1, 1, true, 0.2);
     this.x = (gridX - 1) * 100 + 20;
     this.y = gridY * 100 + 10;
+    this.shootOutX = this.x;
+    this.shootOutY = this.y;
+    this.shootBoba = false; 
+    this.shootBobaSpeed = null; // TODO
+    this.radius = null; // TODO
+    this.shootDestinationX = null; // TODO
+    this.shootDestinationY = null; // TODO
 }
 
 boardTower.prototype.draw = function () {
@@ -27,6 +34,10 @@ boardTower.prototype.draw = function () {
         this.animationSouthEast.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
     } else if (this.pointDirection === 'S') {
         this.animationSouth.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
+        if(this.shootBoba) {
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootOutX, this.shootOutY + 200));
+            this.shootBoba = false;
+         }
     } else if (this.pointDirection === 'E') {
         this.animationEast.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
     } else if (this.pointDirection === 'NE') {
@@ -50,7 +61,9 @@ boardTower.prototype.update = function () {
         var width = 100;
         var height = 100;
         if(click.x >= upperLeftX && click.x < upperLeftX + width && click.y >= upperLeftY && click.y < upperLeftY + height) {
-            if(this.pointDirection === 'S') {
+        
+        // UNCOMMENT BELOW TO TEST CLICK TO SPIN FUNCTIONALITY
+            /*   if(this.pointDirection === 'S') {
                 this.pointDirection = 'SE';
                 this.xOffset = 0;
                 this.yOffset = 0;
@@ -82,6 +95,16 @@ boardTower.prototype.update = function () {
                 this.pointDirection = 'S';
                 this.xOffset = 0;
                 this.yOffset = 0;
+            } */
+        // TESTING CLICK TO SHOOT FUNCTIONALITY
+            if(!this.shootBoba) {
+                this.shootBoba = true;
+                if(this.pointDirection = 'S') {
+                    this.shootOutX = this.x + 15;
+                    this.shootOutY = this.y + 50;
+                }
+            } else {
+                this.shootBoba = false;
             }
         }
     }
@@ -103,4 +126,8 @@ boardTower.prototype.update = function () {
             hoverTowerColumn = this.storeGridX;
         } 
     } */
+}
+
+boardTower.prototype.towerRadius = function () {
+
 }
