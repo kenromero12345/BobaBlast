@@ -28,8 +28,8 @@ function boardTower(game, gridX, gridY, type) {
     this.upgradeMode = false;
     this.shootBobaSpeed = null; // TODO
     this.radius = 150; // TODO
-    this.shootDestinationX = null; // TODO
-    this.shootDestinationY = null; // TODO
+    this.shootDestinationX = 0; // TODO
+    this.shootDestinationY = 0; // TODO
 }
 
 boardTower.prototype.draw = function () {
@@ -38,7 +38,7 @@ boardTower.prototype.draw = function () {
     } else if (this.pointDirection === 'S') {
         this.animationSouth.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
         if(this.shootBoba) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootOutX, this.shootOutY + 200));
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY));
             this.shootBoba = false;
          }
          if(this.upgradeMode) {
@@ -145,9 +145,7 @@ boardTower.prototype.update = function () {
             var temp = this.enemyInRange(ent);
             if(temp !== undefined) {
                 console.log("ENEMY IN RANGE");
-                //this.shootBoba = true;
-                this.shootDestinationX = temp.x;
-                this.shootDestinationY = temp.y; 
+                this.shootBoba = true;
             }
         }
     }
@@ -159,8 +157,10 @@ boardTower.prototype.enemyInRange = function (rect) {
   //      && rect.y < this.centerY + this.radius && this.y + this.height > this.centerY);
     if (rect.x < this.centerX + this.radius && rect.x + rect.width > this.centerX - this.radius
         && rect.y < this.centerY + this.radius && rect.y + rect.height > this.centerY - this.radius) {
-
-        return {x: rect.x + (rect.width / 2), y: rect.y + (rect.height/2)};
+        this.shootDestinationX = rect.x + rect.width / 2;
+        this.shootDestinationY = rect.y + rect.height / 2;
+       // return {x: rect.x + (rect.width / 2), y: rect.y + (rect.height/2)};
+       return true;
     } else {
         return undefined;
     }
