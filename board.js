@@ -142,7 +142,7 @@ board.prototype.update = function () {
 
   for (var i = 0; i < this.game.entities.length; i++) {
     var ent = this.game.entities[i];
-    if (ent !== this) {
+    if (ent !== this && !ent.isTower) {
         var xy = getXY(ent.centerX, ent.centerY);
         // console.log(xy)
         if (xy.x && xy.y) {

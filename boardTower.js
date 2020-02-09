@@ -1,4 +1,5 @@
 function boardTower(game, gridX, gridY, type) {
+    this.isTower = true;
     this.shootTimer = Date.now();
     this.pointDirection = 'S';
     this.currentDirection = null; // TODO
