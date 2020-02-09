@@ -17,10 +17,17 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
     this.flip = flip;
     this.offsetY = 0;
     this.offsetX = 0;
+    if (this.frameWidth < 0 ) {
+        this.reverse = true;
+    } else {
+        this.reverse = false;
+    }
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
-    this.elapsedTime += tick;
+    // if(this.currentFrame() != 13){
+        this.elapsedTime += tick;
+    // }
     if (!(this.isDone() && !this.loop)) {
     if (this.isDone()) {
         if (this.loop) this.elapsedTime = 0;
@@ -34,7 +41,10 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y) {
 		xindex = this.sheetWidth - 1 -frame % this.sheetWidth;
 	} else {
 		xindex = frame % this.sheetWidth;
-	}
+    }
+    if (this.reverse) {
+        x -= this.frameWidth;
+    }
     ctx.drawImage(this.spriteSheet,
                  xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
                  this.frameWidth, this.frameHeight,
@@ -72,6 +82,8 @@ AM.queueDownload("./img/cola.png");
 AM.queueDownload("./img/colaFlip.png");
 AM.queueDownload("./img/slime.png");
 AM.queueDownload("./img/slimeFlip.png");
+AM.queueDownload("./img/watermelon.png");
+AM.queueDownload("./img/watermelonFlip.png");
   
 
 function Background(game, spritesheet) {
@@ -105,16 +117,42 @@ AM.downloadAll(function () {
     // GAMEBOARD = board.GAMEBOARD;
     // gameEngine.addEntity(board);
     gameEngine.addEntity(new board(gameEngine));
-    gameEngine.addEntity(new redTea(gameEngine, -50, 250, false, .75));
-    gameEngine.addEntity(new iceGolem(gameEngine, -50, 250, .6));
-    gameEngine.addEntity(new cola(gameEngine, -50, 250, .85));
-    gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 1));//450//250
+    gameEngine.addEntity(new redTea(gameEngine, -50, 350, false, .75));
+    gameEngine.addEntity(new iceGolem(gameEngine, -50, 350, .6));
+    gameEngine.addEntity(new cola(gameEngine, -50, 350, .85));
+    gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 6));//450//250
+    gameEngine.addEntity(new watermelon(gameEngine, -50, 350, .75, 6));
     sleep(2000).then(() => {
-        gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false, .75));
-        // gameEngine.addEntity(new slime(gameEngine, -50, 250, 1, 1));
+        gameEngine.addEntity(new greenTea(gameEngine, -50, 350, false, .75));
+        gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 10));//450//250
+    })
+    sleep(4000).then(() => {
+        gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 7));//450//250
+    })
+    sleep(6000).then(() => {
+        gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 8));//450//250
     })
     sleep(8000).then(() => {
-        gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true, .75));
+        gameEngine.addEntity(new yellowTea(gameEngine, -50, 350, true, .75));
+        gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 5));//450//250
+    })
+    sleep(10000).then(() => {
+        gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 4));//450//250
+    })
+    sleep(12000).then(() => {
+        gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 3));//450//250
+    })
+    sleep(14000).then(() => {
+        gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 0));//450//250
+    })
+    sleep(16000).then(() => {
+        gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 2));//450//250
+    })
+    sleep(18000).then(() => {
+        gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 1));//450//250
+    })
+    sleep(20000).then(() => {
+        gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 9));//450//250
     })
 
     // BOBA BULLET TESTING
