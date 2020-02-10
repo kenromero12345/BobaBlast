@@ -125,7 +125,7 @@ board.prototype.draw = function () {
       // console.log(isPath(-50, 250, gridX, gridY));
       if (gridX >= 0 && gridX < GAMEBOARD.length && gridY >= 0 && gridY < GAMEBOARD[0].length
         && !GAMEBOARD[gridX][gridY].end && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
-        && isPath(-50, 250, gridX, gridY)) {
+        && isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].occupied) {
        this.drawRect(Math.floor(mouse.x/100) + 1, Math.floor(mouse.y/100));
       }
       this.ctx.restore();
@@ -173,7 +173,8 @@ board.prototype.update = function () {
       var gridX = Math.floor(click.x/100) + 1;
       var gridY = Math.floor(click.y/100);
       // console.log("X: " + click.x + "Y" + click.y);
-      if (isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].hasEnemyRadius) {
+      if (isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
+        && !GAMEBOARD[gridX][gridY].occupied) {
         GAMEBOARD[gridX][gridY].occupied = true;
         var tempTower = new boardTower(this.game, gridX, gridY, towerArray[selectedTowerRow][selectedTowerColumn]);
         this.game.addEntity(tempTower);
