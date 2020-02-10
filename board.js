@@ -82,6 +82,36 @@ board.prototype.buildGameboard = function () {
 	  GAMEBOARD[i][j].centery = this.startingYPoint + 50 + this.height * this.ygap;
     }
   }
+
+//   for(var i = 0; i < this.width; i++) {
+//     for(var j = 0; j < this.height; j++) {
+//       GAMEBOARD[i][j].hasEnemyRadius = false;
+//     }
+//   }
+
+//   for (var i = 0; i < this.game.entities.length; i++) {
+//     var ent = this.game.entities[i];
+//     if (ent !== this && !ent.isTower) {
+//         var xy = getXY(ent.centerX, ent.centerY);
+//         // console.log(xy)
+//         if (xy.x && xy.y) {
+//           GAMEBOARD[xy.x][xy.y].hasEnemyRadius = true;  
+//           if (xy.x + 1< GAMEBOARD.length && xy.x + 1 >= 0) {
+//             GAMEBOARD[xy.x + 1][xy.y].hasEnemyRadius = true;  
+//           }  
+//           if (xy.y + 1 < GAMEBOARD[0].length && xy.y + 1 >= 0) {
+//             GAMEBOARD[xy.x][xy.y + 1].hasEnemyRadius = true;  
+//           }
+//           if (xy.x - 1 < GAMEBOARD.length && xy.x - 1 >= 0) {
+//             GAMEBOARD[xy.x - 1][xy.y].hasEnemyRadius = true;
+//           }
+//           if (xy.y - 1 < GAMEBOARD[0].length && xy.y - 1 >= 0) {
+//             GAMEBOARD[xy.x][xy.y - 1].hasEnemyRadius = true;  
+//           }  
+          
+//         }
+//     }
+// }
 }
 
 // Rectangle for Testing Purposes DELETE WHEN DONE
@@ -128,6 +158,7 @@ board.prototype.draw = function () {
       //   console.log(GAMEBOARD);
       // }
       // console.log(isPath(-50, 250, gridX, gridY));
+      // console.log(GAMEBOARD[gridX][gridY].hasEnemyRadius);
       if (gridX >= 0 && gridX < GAMEBOARD.length && gridY >= 0 && gridY < GAMEBOARD[0].length
         && !GAMEBOARD[gridX][gridY].end && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
         && isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].occupied) {
@@ -147,7 +178,7 @@ board.prototype.update = function () {
 
   for (var i = 0; i < this.game.entities.length; i++) {
     var ent = this.game.entities[i];
-    if (ent !== this && !ent.isTower) {
+    if (ent !== this && ent.isEnemy) {//&& !isTower
         var xy = getXY(ent.centerX, ent.centerY);
         // console.log(xy)
         if (xy.x && xy.y) {

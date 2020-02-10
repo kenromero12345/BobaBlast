@@ -151,7 +151,21 @@ function Entity(game, x, y) {
 }
 
 Entity.prototype.update = function () {
+    // drawRect(this);
 }
+
+var drawRect = function (ent) { 
+    var ctx = this.ctx;
+    var x = ent.x + ent.offsetX;
+    var y = ent.y + ent.offsetY;
+    var w = ent.width;
+    var h = ent.height;
+    ctx.strokeStyle = "green";
+    ctx.rect(x,y,w,h);
+    ctx.stroke();
+    // ctx.fillStyle = "green";
+    // ctx.fillRect(x,y,w,h);
+  }
 
 Entity.prototype.draw = function (ctx) {
     if (this.game.showOutlines && this.radius) {
@@ -161,6 +175,7 @@ Entity.prototype.draw = function (ctx) {
         this.game.ctx.stroke();
         this.game.ctx.closePath();
     }
+    // drawRect(this);
 }
 
 Entity.prototype.rotateAndCache = function (image, angle) {
@@ -185,6 +200,6 @@ var collide = function (rect1, rect2) {
     // && rect1.y < rect2.y + rect2.walkHeight && rect1.walkHeight + rect1.y > rect2.y))
     // || (!rect1.paceWalk && (rect1.x < rect2.x + rect2.runWidth && rect1.x + rect1.runWidth > rect2.x 
     //     && rect1.y < rect2.y + rect2.runHeight && rect1.runHeight + rect1.y > rect2.y));
-    return (rect1.x < rect2.x + rect2.width && rect1.x + rect1.width > rect2.x 
-        && rect1.y < rect2.y + rect2.height && rect1.height + rect1.y > rect2.y);
+    return (rect1.x + rect1.offsetX < rect2.x + rect2.offsetX + rect2.width && rect1.x + rect1.offsetX + rect1.width > rect2.x + rect2.offsetX
+        && rect1.y + rect1.offsetY < rect2.y + rect2.offsetY  + rect2.height && rect1.height + rect1.y + rect1.offsetY  > rect2.y + rect2.offsetY );
 };

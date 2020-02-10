@@ -25,7 +25,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
-    // if(this.currentFrame() != 3){
+    // if(this.currentFrame() != 2){
         this.elapsedTime += tick;
     // }
     if (!(this.isDone() && !this.loop)) {
@@ -137,6 +137,7 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new redTea(gameEngine, -50, 350, false, .75));
     gameEngine.addEntity(new iceGolem(gameEngine, -50, 350, .6));
     gameEngine.addEntity(new cola(gameEngine, -50, 350, .85, false));
+    gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 1));//450//250
     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 6));//450//250
     gameEngine.addEntity(new watermelon(gameEngine, -50, 350, .75, 6));
     gameEngine.addEntity(new miniCake(gameEngine, -50, 350, .75, 6));
