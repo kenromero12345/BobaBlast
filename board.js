@@ -3,7 +3,7 @@ var ACTIVETOWERS = [];
 
 function board(game) {
 	GAMEBOARD = [];
-	this.width = 11;
+	this.width = 12;
 	this.height = 6;
 	this.xgap = 100;
   this.ygap = 100;
@@ -33,8 +33,8 @@ board.prototype.buildGameboard = function () {
 
   GAMEBOARD[0][2].start = true;
   GAMEBOARD[0][3].start = true;
-  GAMEBOARD[10][2].end = true;
-  GAMEBOARD[10][3].end = true;
+  GAMEBOARD[11][2].end = true;
+  GAMEBOARD[11][3].end = true;
 
   GAMEBOARD[0][0].occupied = true;
   GAMEBOARD[0][1].occupied = true;
@@ -45,6 +45,11 @@ board.prototype.buildGameboard = function () {
   GAMEBOARD[10][1].occupied = true;
   GAMEBOARD[10][4].occupied = true;
   GAMEBOARD[10][5].occupied = true;
+
+  GAMEBOARD[11][0].occupied = true;
+  GAMEBOARD[11][1].occupied = true;
+  GAMEBOARD[11][4].occupied = true;
+  GAMEBOARD[11][5].occupied = true;
 
   // GAMEBOARD[1][1].occupied = true;
 
