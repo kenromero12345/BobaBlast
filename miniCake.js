@@ -4,7 +4,7 @@ function miniCake(game, spawnX, spawnY, scale) {
     this.width = 67 * scale;
     this.height = 48 * scale;
     this.name = "minicake";
-    this.speed = 25;
+    this.speed = 50;
     this.x = spawnX - 50;
     this.y = spawnY - 50;
     this.centerX = this.x + this.width / 2;
@@ -117,7 +117,8 @@ miniCake.prototype.update = function () {
             enemyUpdateLookHelper(this);
         }
 
-        enemyUpdateHelper(this);
+        //enemyUpdateHelper(this);
+        miniCakeUpdate(this);
 
         xy = getXY(this.centerX, this.centerY);
         if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
@@ -130,6 +131,47 @@ miniCake.prototype.update = function () {
             if (ent !== this && ent.isBoba && collide(ent, this)) {
                 ent.removeFromWorld = true;
                 this.hp--;
+            }
+        }
+    }
+}
+
+var miniCakeUpdate = function (enemy) {
+    // console.log(enemy.centerX + " " + enemy.centerY)
+    if (enemy.hp > 0) {
+        if (enemy.moveDirection == 1) {
+            if (enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 6) {
+                enemy.x += enemy.game.clockTick * enemy.speed;
+                enemy.centerX += enemy.game.clockTick * enemy.speed;
+            }
+        } else if (enemy.moveDirection == 2) {
+            if (enemy.lookDirectionRight) {
+                if (enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 6) {
+                    enemy.y += enemy.game.clockTick * enemy.speed;
+                    enemy.centerY +=enemy.game.clockTick * enemy.speed;
+                }
+            } else {
+                if (enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 6) {
+                    enemy.y += enemy.game.clockTick * enemy.speed;
+                    enemy.centerY += enemy.game.clockTick * enemy.speed;
+                }
+            }
+        } else if (enemy.moveDirection == 3) {
+            if (enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 6) {
+                enemy.x -= enemy.game.clockTick * enemy.speed;
+                enemy.centerX -= enemy.game.clockTick * enemy.speed;
+            }
+        } else {
+            if (enemy.lookDirectionRight) {
+                if (enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 6) {
+                    enemy.y -= enemy.game.clockTick * enemy.speed;
+                    enemy.centerY -= enemy.game.clockTick * enemy.speed;
+                }                    
+            } else {
+                if (enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 6) {
+                    enemy.y -= enemy.game.clockTick * enemy.speed;
+                    enemy.centerY -= enemy.game.clockTick * enemy.speed;
+                }
             }
         }
     }

@@ -25,7 +25,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
-    // if(this.currentFrame() != 6){
+    // if(this.currentFrame() != 3){
         this.elapsedTime += tick;
     // }
     if (!(this.isDone() && !this.loop)) {
@@ -93,6 +93,14 @@ AM.queueDownload("./img/cakeChoco.png");
 AM.queueDownload("./img/cakeChocoFlip.png");
 AM.queueDownload("./img/sprite.png");
 AM.queueDownload("./img/spriteFlip.png");
+AM.queueDownload("./img/cake.png");
+AM.queueDownload("./img/cakeFlip.png");
+AM.queueDownload("./img/bigCake.png");
+AM.queueDownload("./img/bigCakeFlip.png");
+AM.queueDownload("./img/pumpkinGood.png");
+AM.queueDownload("./img/pumpkinGoodFlip.png");
+AM.queueDownload("./img/pumpkinEvil.png");
+AM.queueDownload("./img/pumpkinEvilFlip.png");
 
 function Background(game, spritesheet) {
     this.isEnemy = false;
@@ -134,6 +142,11 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new miniCake(gameEngine, -50, 350, .75, 6));
     gameEngine.addEntity(new biscuit(gameEngine, -50, 350, .75, 6));
     gameEngine.addEntity(new cakeChoco(gameEngine, -50, 350, .75, 6));
+    gameEngine.addEntity(new cake(gameEngine, -50, 350, .75, 6));
+    // gameEngine.addEntity(new bigCake(gameEngine, -50, 350, .75, 6));
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, -50, 350, .75, 6));
+    // gameEngine.addEntity(new pumpkinGood(gameEngine, -50, 350, .75, 6));
+    // gameEngine.addEntity(new squareSlime(gameEngine, -50, 350, .75, 6));
     sleep(2000).then(() => {
         gameEngine.addEntity(new greenTea(gameEngine, -50, 350, false, .75));
         gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 10));//450//250
