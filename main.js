@@ -91,6 +91,8 @@ AM.queueDownload("./img/biscuitWarrior.png");
 AM.queueDownload("./img/biscuitWarriorFlip.png");
 AM.queueDownload("./img/cakeChoco.png");
 AM.queueDownload("./img/cakeChocoFlip.png");
+AM.queueDownload("./img/sprite.png");
+AM.queueDownload("./img/spriteFlip.png");
 
 function Background(game, spritesheet) {
     this.isEnemy = false;
@@ -126,7 +128,7 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new board(gameEngine));
     gameEngine.addEntity(new redTea(gameEngine, -50, 350, false, .75));
     gameEngine.addEntity(new iceGolem(gameEngine, -50, 350, .6));
-    gameEngine.addEntity(new cola(gameEngine, -50, 350, .85));
+    gameEngine.addEntity(new cola(gameEngine, -50, 350, .85, false));
     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 6));//450//250
     gameEngine.addEntity(new watermelon(gameEngine, -50, 350, .75, 6));
     gameEngine.addEntity(new miniCake(gameEngine, -50, 350, .75, 6));
@@ -138,6 +140,7 @@ AM.downloadAll(function () {
     })
     sleep(4000).then(() => {
         gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 7));//450//250
+        gameEngine.addEntity(new cola(gameEngine, -50, 350, .85, true));
     })
     sleep(6000).then(() => {
         gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 8));//450//250

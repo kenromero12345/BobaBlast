@@ -449,6 +449,7 @@
 // }
 
 function slime(game, spawnX, spawnY, scale, num) {
+    this.isEnemy = true;
     this.slimeOffsetY = 0;//green
     this.slimeDisappearOffsetY = 0;
     if (num == 1) {//blue

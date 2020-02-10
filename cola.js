@@ -98,7 +98,8 @@
 // ColaDrinkLookLeft.prototype.update = function () {
 // }
 
-function cola(game, spawnX, spawnY, scale) {
+function cola(game, spawnX, spawnY, scale, isWhite) {
+    this.isWhite = isWhite;
     this.isEnemy = true;
     this.width = 65 * scale;
     this.height = 65 * scale;
@@ -122,14 +123,26 @@ function cola(game, spawnX, spawnY, scale) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 50;
-    this.animationWalkLeft = new Animation(AM.getAsset("./img/cola.png")
-    , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
-    this.animationDisappearLeft = new Animation(AM.getAsset("./img/cola.png")
-    , 0, 341, 70, 65, 5, 0.2, 5, false, scale, false);
-    this.animationWalkRight = new Animation(AM.getAsset("./img/colaFlip.png")
-    , 239, 137, 65, 65, 4, 0.10, 4, true, scale, true);
-    this.animationDisappearRight = new Animation(AM.getAsset("./img/colaFlip.png")
-    , 0, 341, 70, 65, 5, 0.2, 5, false, scale, true);
+    if (isWhite) {
+        this.animationWalkLeft = new Animation(AM.getAsset("./img/sprite.png")
+        , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
+        this.animationDisappearLeft = new Animation(AM.getAsset("./img/sprite.png")
+        , 0, 341, 70, 65, 5, 0.2, 5, false, scale, false);
+        this.animationWalkRight = new Animation(AM.getAsset("./img/spriteFlip.png")
+        , 239, 137, 65, 65, 4, 0.10, 4, true, scale, true);
+        this.animationDisappearRight = new Animation(AM.getAsset("./img/spriteFlip.png")
+        , 0, 341, 70, 65, 5, 0.2, 5, false, scale, true);
+    } else {
+        this.animationWalkLeft = new Animation(AM.getAsset("./img/cola.png")
+        , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
+        this.animationDisappearLeft = new Animation(AM.getAsset("./img/cola.png")
+        , 0, 341, 70, 65, 5, 0.2, 5, false, scale, false);
+        this.animationWalkRight = new Animation(AM.getAsset("./img/colaFlip.png")
+        , 239, 137, 65, 65, 4, 0.10, 4, true, scale, true);
+        this.animationDisappearRight = new Animation(AM.getAsset("./img/colaFlip.png")
+        , 0, 341, 70, 65, 5, 0.2, 5, false, scale, true);
+    }
+
 }
 
 cola.prototype.draw = function () {

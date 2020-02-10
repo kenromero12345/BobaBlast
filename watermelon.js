@@ -1,4 +1,5 @@
 function watermelon(game, spawnX, spawnY, scale) {
+    this.isEnemy = true;
     // console.log(slimeOffsetY)
     this.width = 62 * scale;
     this.height = 68 * scale;

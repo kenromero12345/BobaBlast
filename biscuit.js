@@ -1,4 +1,5 @@
 function biscuit(game, spawnX, spawnY, scale) {
+    this.isEnemy = true;
     // console.log(slimeOffsetY)
     this.width = 98 * scale;
     this.height = 94 * scale;

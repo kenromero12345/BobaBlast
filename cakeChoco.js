@@ -1,4 +1,5 @@
 function cakeChoco(game, spawnX, spawnY, scale) {
+    this.isEnemy = true;
     // console.log(slimeOffsetY)
     this.width = 96 * scale;
     this.height = 101 * scale;
