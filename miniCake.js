@@ -31,6 +31,8 @@ function miniCake(game, spawnX, spawnY, scale) {
     , 714, 66, -67, 48, 6, .135, 6, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/miniCakeFlip.png")
     , 714, 189, -67, 74, 9, .25, 9, false, scale, false);
+    this.boxes = false;
+    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
 }
 
 miniCake.prototype.draw = function () {
@@ -128,7 +130,7 @@ miniCake.prototype.update = function () {
         else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && collide(ent, this)) {
+            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
                 ent.removeFromWorld = true;
                 this.hp--;
             }

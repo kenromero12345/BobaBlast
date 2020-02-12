@@ -33,6 +33,8 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
         tea.width = tea.runWidth;
         tea.height = tea.runHeight;
     }
+    tea.boxes = false;
+    tea.boundingbox = new BoundingBox(tea.x, tea.y, tea.width, tea.height);
 }
 
 var draw = function (tea) {
@@ -263,9 +265,7 @@ var update = function (tea) {
 
     for (var i = 0; i < tea.game.entities.length; i++) {
         var ent = tea.game.entities[i];
-        if (ent !== tea && ent.isBoba && collide(ent, tea)) {
-            //collide
-            //  console.log(tea.name + " collide with " + ent.name);
+        if (ent !== tea && ent.isBoba && tea.boundingbox.collide(ent.boundingbox)) {
             ent.removeFromWorld = true;
             tea.hp--;
         }

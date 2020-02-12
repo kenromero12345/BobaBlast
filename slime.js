@@ -514,6 +514,8 @@ function slime(game, spawnX, spawnY, scale, num) {
     , 769, 70 + this.slimeOffsetY + this.slimeDisappearOffsetY, -79, 80, 7, .135, 7, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeFlip.png")
     , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
+    this.boxes = false;
+    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
 }
 
 slime.prototype.draw = function () {
@@ -728,7 +730,7 @@ slime.prototype.update = function () {
         // else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && collide(ent, this)) {
+            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
                 ent.removeFromWorld = true;
                 this.hp--;
             }
