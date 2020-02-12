@@ -1,4 +1,5 @@
 function miniCake(game, spawnX, spawnY, scale) {
+    this.scale = scale;
     this.isEnemy = true;
     // console.log(slimeOffsetY)
     this.width = 67 * scale;

@@ -1,5 +1,6 @@
 function cake(game, spawnX, spawnY, scale) {
     this.isEnemy = true;
+    this.scale = scale;
     // console.log(slimeOffsetY)
     this.width = 96 * scale;
     this.height = 90 * scale;
@@ -31,8 +32,34 @@ function cake(game, spawnX, spawnY, scale) {
     , 879, 85, -96, 90, 5, .135, 5, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/cakeFlip.png")
     , 879, 270, -96, 103, 8, .2, 8, false, scale, false);
-    this.boxes = false;
-    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
+    this.boxes = true;
+    this.setBoundingBox();
+}
+
+cake.prototype.setBoundingBox = function() {
+    if(this.lookDirectionRight || this.moveDirection == 1 ) {
+        this.boundingbox = new BoundingBox(this.x + 20 * this.scale, this.y + 20 * this.scale
+            , this.width - 30 * this.scale , this.height -20 * this.scale);
+    } else {
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 20 * this.scale
+            , this.width - 30 * this.scale , this.height - 20 * this.scale);
+    }
+}
+
+cake.prototype.drawBoundingBox = function() {
+    if (this.boxes) {
+        if (this.moveDirection == 1 || this.lookDirectionRight) {
+            this.ctx.strokeStyle = "red";
+            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+            this.ctx.strokeStyle = "green";
+            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+        } else {
+            this.ctx.strokeStyle = "red";
+            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+            this.ctx.strokeStyle = "green";
+            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+        }
+    }
 }
 
 cake.prototype.draw = function () {
@@ -125,6 +152,7 @@ cake.prototype.draw = function () {
                     cakeChocoLeft(this);
                 }
             }
+            this.drawBoundingBox();
         }
     }
 }
@@ -167,6 +195,8 @@ cake.prototype.update = function () {
             enemyUpdateLookHelper(this);
         }
 
+        this.setBoundingBox();
+
         //enemyUpdateHelper(this);
         cakeUpdate(this);
         
@@ -193,34 +223,40 @@ var cakeUpdate = function (enemy) {
             if (enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
                 enemy.x += enemy.game.clockTick * enemy.speed;
                 enemy.centerX += enemy.game.clockTick * enemy.speed;
+                enemy.boundingbox.x += enemy.game.clockTick * enemy.speed;
             }
         } else if (enemy.moveDirection == 2) {
             if (enemy.lookDirectionRight) {
                 if (enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
                     enemy.y += enemy.game.clockTick * enemy.speed;
                     enemy.centerY +=enemy.game.clockTick * enemy.speed;
+                    enemy.boundingbox.y += enemy.game.clockTick * enemy.speed;
                 }
             } else {
                 if (enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 5) {
                     enemy.y += enemy.game.clockTick * enemy.speed;
                     enemy.centerY += enemy.game.clockTick * enemy.speed;
+                    enemy.boundingbox.y += enemy.game.clockTick * enemy.speed;
                 }
             }
         } else if (enemy.moveDirection == 3) {
             if (enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 5) {
                 enemy.x -= enemy.game.clockTick * enemy.speed;
                 enemy.centerX -= enemy.game.clockTick * enemy.speed;
+                enemy.boundingbox.x -= enemy.game.clockTick * enemy.speed;
             }
         } else {
             if (enemy.lookDirectionRight) {
                 if (enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
                     enemy.y -= enemy.game.clockTick * enemy.speed;
                     enemy.centerY -= enemy.game.clockTick * enemy.speed;
+                    enemy.boundingbox.y -= enemy.game.clockTick * enemy.speed;
                 }                    
             } else {
                 if (enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 5) {
                     enemy.y -= enemy.game.clockTick * enemy.speed;
                     enemy.centerY -= enemy.game.clockTick * enemy.speed;
+                    enemy.boundingbox.y -= enemy.game.clockTick * enemy.speed;
                 }
             }
         }

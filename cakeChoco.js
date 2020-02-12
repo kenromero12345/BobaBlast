@@ -1,5 +1,6 @@
 function cakeChoco(game, spawnX, spawnY, scale) {
     this.isEnemy = true;
+    this.scale = scale;
     // console.log(slimeOffsetY)
     this.width = 96 * scale;
     this.height = 101 * scale;
@@ -31,8 +32,34 @@ function cakeChoco(game, spawnX, spawnY, scale) {
     , 847, 122, -96, 102, 6, .135, 6, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/cakeChocoFlip.png")
     , 847, 221, -91, 94, 7, .2, 7, false, scale, false);
-    this.boxes = false;
-    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
+    this.boxes = true;
+    this.setBoundingBox();
+}
+
+cakeChoco.prototype.setBoundingBox = function() {
+    if(this.lookDirectionRight || this.moveDirection == 1 ) {
+        this.boundingbox = new BoundingBox(this.x + 22 * this.scale, this.y + 23 * this.scale
+            , this.width - 32 * this.scale , this.height -23 * this.scale);
+    } else {
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 23 * this.scale
+            , this.width - 32 * this.scale , this.height - 23 * this.scale);
+    }
+}
+
+cakeChoco.prototype.drawBoundingBox = function() {
+    if (this.boxes) {
+        if (this.moveDirection == 1 || this.lookDirectionRight) {
+            this.ctx.strokeStyle = "red";
+            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+            this.ctx.strokeStyle = "green";
+            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+        } else {
+            this.ctx.strokeStyle = "red";
+            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+            this.ctx.strokeStyle = "green";
+            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+        }
+    }
 }
 
 cakeChoco.prototype.draw = function () {
@@ -161,6 +188,7 @@ cakeChoco.prototype.draw = function () {
                     cakeChocoLeft(this);
                 }
             }
+            this.drawBoundingBox();
         }
     }
 }
@@ -202,6 +230,8 @@ cakeChoco.prototype.update = function () {
             this.moveDirection = getShortestPath(this.centerX, this.centerY);
             enemyUpdateLookHelper(this);
         }
+
+        this.setBoundingBox();
 
         enemyUpdateHelper(this);
 
