@@ -72,12 +72,13 @@ GameEngine.prototype.startInput = function () {
     }
 
     this.ctx.canvas.addEventListener("keydown", function (e) {
-        if (String.fromCharCode(e.which) === ' ') that.space = true;
-        if (String.fromCharCode(e.which) === 'A') {that.left = true;}
-        if (String.fromCharCode(e.which) === 'S') that.down = true;
-        if (String.fromCharCode(e.which) === 'D') that.right = true;
-        if (String.fromCharCode(e.which) === 'W') that.up = true;
-        if (String.fromCharCode(e.which) === 'R') that.run = true;
+        // if (String.fromCharCode(e.which) === ' ') that.space = true;
+        // if (String.fromCharCode(e.which) === 'A') {that.left = true;}
+        // if (String.fromCharCode(e.which) === 'S') that.down = true;
+        // if (String.fromCharCode(e.which) === 'D') that.right = true;
+        // if (String.fromCharCode(e.which) === 'W') that.up = true;
+        // if (String.fromCharCode(e.which) === 'R') that.run = true;
+        if (String.fromCharCode(e.which) === 'G') that.godMode = true;
     //    console.log(String.fromCharCode(e.which));
         e.preventDefault();
     }, false);
@@ -135,12 +136,13 @@ GameEngine.prototype.loop = function () {
     this.clockTick = this.timer.tick();
     this.update();
     this.draw();
-    this.space = null;
-    this.up = null;
-    this.down = null;
-    this.left = null;
-    this.right = null;
-    this.run = null;
+    // this.space = null;
+    // this.up = null;
+    // this.down = null;
+    // this.left = null;
+    // this.right = null;
+    // this.run = null;
+    this.godMode = null;
 }
 
 function Entity(game, x, y) {
