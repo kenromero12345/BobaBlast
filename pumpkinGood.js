@@ -22,7 +22,7 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = !false;
-    this.hp = 0;//
+    this.hp = 40;//
     this.animationWalkLeft = new Animation(AM.getAsset("./img/pumpkinGood.png")
     , 0, 87, 81, 84, 4, .135, 4, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/pumpkinGood.png")
