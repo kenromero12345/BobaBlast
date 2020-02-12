@@ -24,13 +24,13 @@ function bigCake(game, spawnX, spawnY, scale) {
     this.lookDirectionRight = !false;
     this.hp = 40;//
     this.animationWalkLeft = new Animation(AM.getAsset("./img/bigCake.png")
-    , 0, 115, 125, 112, 8, .135, 8, true, scale, false);
+    , 0, 400, 298, 400, 8, .135, 8, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/bigCake.png")
     , 15, 286, 115, 172, 10, .2, 10, false, scale, false);
     this.animationWalkRight = new Animation(AM.getAsset("./img/bigCakeFlip.png")
-    , 4738, 400, -294, 400, 8, .135, 8, true, scale, false);
+    , 4732, 400, -298, 400, 8, .135, 8, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/bigCakeFlip.png")
-    , 1320, 286, -110, 172, 10, .2, 10, false, scale, false);
+    , 4732, 1830, -334, 400, 10, .2, 10, true, scale, false);
 }
 
 bigCake.prototype.draw = function () {
@@ -188,35 +188,35 @@ var bigCakeUpdate = function (enemy) {
     // console.log(enemy.centerX + " " + enemy.centerY)
     if (enemy.hp > 0) {
         if (enemy.moveDirection == 1) {
-            if (enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
+            if (true ){//enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
                 enemy.x += enemy.game.clockTick * enemy.speed;
                 enemy.centerX += enemy.game.clockTick * enemy.speed;
             }
         } else if (enemy.moveDirection == 2) {
             if (enemy.lookDirectionRight) {
-                if (enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
+                if (true){//enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
                     enemy.y += enemy.game.clockTick * enemy.speed;
                     enemy.centerY +=enemy.game.clockTick * enemy.speed;
                 }
             } else {
-                if (enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 5) {
+                if (true){//enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 5) {
                     enemy.y += enemy.game.clockTick * enemy.speed;
                     enemy.centerY += enemy.game.clockTick * enemy.speed;
                 }
             }
         } else if (enemy.moveDirection == 3) {
-            if (enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 5) {
+            if (true){//enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 5) {
                 enemy.x -= enemy.game.clockTick * enemy.speed;
                 enemy.centerX -= enemy.game.clockTick * enemy.speed;
             }
         } else {
             if (enemy.lookDirectionRight) {
-                if (enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
+                if (true){//enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
                     enemy.y -= enemy.game.clockTick * enemy.speed;
                     enemy.centerY -= enemy.game.clockTick * enemy.speed;
                 }                    
             } else {
-                if (enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 5) {
+                if (true){//enemy.animationWalkLeft.currentFrame() >= 1 && enemy.animationWalkLeft.currentFrame() <= 5) {
                     enemy.y -= enemy.game.clockTick * enemy.speed;
                     enemy.centerY -= enemy.game.clockTick * enemy.speed;
                 }
