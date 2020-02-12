@@ -30,6 +30,8 @@ function iceGolem(game, spawnX, spawnY, scale) {
     , 870, 180, 194, 180, 4, 0.5, 4, true, scale, true );
     this.animationDisappearRight = new Animation(AM.getAsset("./img/icegFlip.png")
     , 0, 745, 238, 180, 7, 0.25, 7, false, scale, true);
+    this.boxes = false;
+    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
 }
 
 iceGolem.prototype.draw = function () {
@@ -57,7 +59,7 @@ iceGolem.prototype.update = function () {
         // else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && ent.isIce && collide(ent, this)) {
+            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
                 ent.removeFromWorld = true;
                 this.hp--;
             }

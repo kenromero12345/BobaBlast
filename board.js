@@ -170,6 +170,10 @@ board.prototype.draw = function () {
 
 
 board.prototype.update = function () {
+  if (this.game.godMode) {
+    currentMoney = Number.MAX_VALUE;
+    currentLifes = Number.MAX_VALUE;
+  }
   for(var i = 0; i < this.width; i++) {
     for(var j = 0; j < this.height; j++) {
       GAMEBOARD[i][j].hasEnemyRadius = false;

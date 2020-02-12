@@ -32,6 +32,8 @@ function boba(game, startX, startY, destinationX, destinationY) {
     this.game = game;
     this.ctx = game.ctx;
     this.noCollision = true;
+    this.boxes = false;
+    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
 }
 
 boba.prototype.draw = function () {

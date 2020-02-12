@@ -72,12 +72,13 @@ GameEngine.prototype.startInput = function () {
     }
 
     this.ctx.canvas.addEventListener("keydown", function (e) {
-        if (String.fromCharCode(e.which) === ' ') that.space = true;
-        if (String.fromCharCode(e.which) === 'A') {that.left = true;}
-        if (String.fromCharCode(e.which) === 'S') that.down = true;
-        if (String.fromCharCode(e.which) === 'D') that.right = true;
-        if (String.fromCharCode(e.which) === 'W') that.up = true;
-        if (String.fromCharCode(e.which) === 'R') that.run = true;
+        // if (String.fromCharCode(e.which) === ' ') that.space = true;
+        // if (String.fromCharCode(e.which) === 'A') {that.left = true;}
+        // if (String.fromCharCode(e.which) === 'S') that.down = true;
+        // if (String.fromCharCode(e.which) === 'D') that.right = true;
+        // if (String.fromCharCode(e.which) === 'W') that.up = true;
+        // if (String.fromCharCode(e.which) === 'R') that.run = true;
+        if (String.fromCharCode(e.which) === 'G') that.godMode = true;
     //    console.log(String.fromCharCode(e.which));
         e.preventDefault();
     }, false);
@@ -135,12 +136,13 @@ GameEngine.prototype.loop = function () {
     this.clockTick = this.timer.tick();
     this.update();
     this.draw();
-    this.space = null;
-    this.up = null;
-    this.down = null;
-    this.left = null;
-    this.right = null;
-    this.run = null;
+    // this.space = null;
+    // this.up = null;
+    // this.down = null;
+    // this.left = null;
+    // this.right = null;
+    // this.run = null;
+    this.godMode = null;
 }
 
 function Entity(game, x, y) {
@@ -195,11 +197,28 @@ Entity.prototype.rotateAndCache = function (image, angle) {
     return offscreenCanvas;
 }
 
-var collide = function (rect1, rect2) {
-    // return (rect1.paceWalk && (rect1.x < rect2.x + rect2.walkWidth && rect1.x + rect1.walkWidth > rect2.x 
-    // && rect1.y < rect2.y + rect2.walkHeight && rect1.walkHeight + rect1.y > rect2.y))
-    // || (!rect1.paceWalk && (rect1.x < rect2.x + rect2.runWidth && rect1.x + rect1.runWidth > rect2.x 
-    //     && rect1.y < rect2.y + rect2.runHeight && rect1.runHeight + rect1.y > rect2.y));
-    return (rect1.x + rect1.offsetX < rect2.x + rect2.offsetX + rect2.width && rect1.x + rect1.offsetX + rect1.width > rect2.x + rect2.offsetX
-        && rect1.y + rect1.offsetY < rect2.y + rect2.offsetY  + rect2.height && rect1.height + rect1.y + rect1.offsetY  > rect2.y + rect2.offsetY );
-};
+// var collide = function (rect1, rect2) {
+//     // return (rect1.paceWalk && (rect1.x < rect2.x + rect2.walkWidth && rect1.x + rect1.walkWidth > rect2.x 
+//     // && rect1.y < rect2.y + rect2.walkHeight && rect1.walkHeight + rect1.y > rect2.y))
+//     // || (!rect1.paceWalk && (rect1.x < rect2.x + rect2.runWidth && rect1.x + rect1.runWidth > rect2.x 
+//     //     && rect1.y < rect2.y + rect2.runHeight && rect1.runHeight + rect1.y > rect2.y));
+//     return (rect1.x + rect1.offsetX < rect2.x + rect2.offsetX + rect2.width && rect1.x + rect1.offsetX + rect1.width > rect2.x + rect2.offsetX
+//         && rect1.y + rect1.offsetY < rect2.y + rect2.offsetY  + rect2.height && rect1.height + rect1.y + rect1.offsetY  > rect2.y + rect2.offsetY );
+// };
+
+function BoundingBox(x, y, width, height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+
+    this.left = x;
+    this.top = y;
+    this.right = this.left + width;
+    this.bottom = this.top + height;
+}
+
+BoundingBox.prototype.collide = function (oth) {
+    if (this.right > oth.left && this.left < oth.right && this.top < oth.bottom && this.bottom > oth.top) return true;
+    return false;
+}

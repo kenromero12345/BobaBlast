@@ -31,6 +31,8 @@ function biscuit(game, spawnX, spawnY, scale) {
     , 803-6, 111, -98, 94, 6, .135, 6, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/biscuitWarriorFlip.png")
     , 803-15, 221, -91, 94, 7, .25, 7, false, scale, false);
+    this.boxes = false;
+    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
 }
 
 biscuit.prototype.draw = function () {
@@ -135,7 +137,7 @@ biscuit.prototype.update = function () {
         else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && collide(ent, this)) {
+            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
                 ent.removeFromWorld = true;
                 this.hp--;
             }

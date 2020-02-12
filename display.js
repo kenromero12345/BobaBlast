@@ -336,6 +336,6 @@ display.prototype.generateDescriptionBox = function() {
 
 display.prototype.update = function () {
     if(!this.game.running) return;
-    currentMoney++;
-    currentLifes--;
+    // currentMoney--;
+    // currentLifes--;
 }
