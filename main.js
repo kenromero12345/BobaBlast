@@ -144,9 +144,9 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new biscuit(gameEngine, -50, 350, .75, 6));
     gameEngine.addEntity(new cakeChoco(gameEngine, -50, 350, .75, 6));
     gameEngine.addEntity(new cake(gameEngine, -50, 350, .75, 6));
-    // gameEngine.addEntity(new bigCake(gameEngine, -50, 350, .75, 6));
+    gameEngine.addEntity(new bigCake(gameEngine, -50, 350, .75, 6));
     gameEngine.addEntity(new pumpkinEvil(gameEngine, -50, 350, .75, 6));
-    gameEngine.addEntity(new pumpkinGood(gameEngine, 500, 550, .75, 6));
+    gameEngine.addEntity(new pumpkinGood(gameEngine, -50, 550, .75, 6));
     // gameEngine.addEntity(new squareSlime(gameEngine, -50, 350, .75, 6));
     sleep(2000).then(() => {
         gameEngine.addEntity(new greenTea(gameEngine, -50, 350, false, .75));
