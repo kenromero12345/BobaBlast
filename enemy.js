@@ -31,7 +31,7 @@ var enemyDraw = function(enemy) {
                 }
             }
         }
-        this.drawBoundingBox();
+        enemy.drawBoundingBox();
     }
 }
 

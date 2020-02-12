@@ -31,6 +31,34 @@ function bigCake(game, spawnX, spawnY, scale) {
     , 4732, 400, -298, 400, 8, .135, 8, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/bigCakeFlip.png")
     , 4732, 1830, -334, 400, 10, .2, 10, true, scale, false);
+    this.boxes = true;
+    this.setBoundingBox();
+}
+
+bigCake.prototype.setBoundingBox = function() {
+    if(this.lookDirectionRight || this.moveDirection == 1 ) {
+        this.boundingbox = new BoundingBox(this.x + 0 * this.scale, this.y + 0 * this.scale
+            , this.width - 0 * this.scale , this.height -0 * this.scale);
+    } else {
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
+            , this.width - 20 * this.scale , this.height -13 * this.scale);
+    }
+}
+
+bigCake.prototype.drawBoundingBox = function() {
+    if (this.boxes) {
+        if (this.moveDirection == 1 || this.lookDirectionRight) {
+            this.ctx.strokeStyle = "red";
+            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+            this.ctx.strokeStyle = "green";
+            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+        } else {
+            this.ctx.strokeStyle = "red";
+            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+            this.ctx.strokeStyle = "green";
+            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+        }
+    }
 }
 
 bigCake.prototype.draw = function () {
@@ -123,6 +151,7 @@ bigCake.prototype.draw = function () {
                     bigCakeLeft(this);
                 }
             }
+            this.drawBoundingBox();
         }
     }
 }
@@ -165,6 +194,7 @@ bigCake.prototype.update = function () {
             enemyUpdateLookHelper(this);
         }
 
+        this.setBoundingBox();
         //enemyUpdateHelper(this);
         bigCakeUpdate(this);
         

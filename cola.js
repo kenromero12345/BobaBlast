@@ -149,11 +149,11 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
 
 cola.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 22 * this.scale, this.y + 23 * this.scale
-            , this.width - 32 * this.scale , this.height -23 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
+            , this.width - 20 * this.scale , this.height -13 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 23 * this.scale
-            , this.width - 32 * this.scale , this.height - 23 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
+            , this.width - 20 * this.scale , this.height -13 * this.scale);
     }
 }
 
