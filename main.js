@@ -216,6 +216,10 @@ function generateStoreTowers(game) {
     return temp;
 }
 
+//sleep in some milliseconds
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
+
+// make other js be off if this is true
+var boxesOff = true;

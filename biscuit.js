@@ -32,6 +32,9 @@ function biscuit(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/biscuitWarriorFlip.png")
     , 803-15, 221, -91, 94, 7, .25, 7, false, scale, false);
     this.boxes = false;
+    // if (boxesOff) {
+    //     boxes = false;
+    // }
     this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
 }
 
