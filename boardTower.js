@@ -133,7 +133,7 @@ boardTower.prototype.update = function () {
         if (ent !== this && ent.isEnemy) {
             var temp = this.enemyInRange(ent);
             if(temp) {
-                console.log("ENEMY IN RANGE");
+                // console.log("ENEMY IN RANGE");
                 this.shootBoba = true;
             }
         }

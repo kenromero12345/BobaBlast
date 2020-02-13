@@ -99,6 +99,9 @@
 // }
 
 function cola(game, spawnX, spawnY, scale, isWhite) {
+    this.spawnX = spawnX;
+    this.spawnY = spawnY;
+    this.lifeDeduction = 2;
     this.scale = scale;
     this.isWhite = isWhite;
     this.isEnemy = true;
@@ -108,17 +111,6 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     this.speed = 100;
     this.x = spawnX - 50;
     this.y = spawnY - 50;
-    this.centerX = this.x + this.width / 2;
-    this.centerY = this.y + this.height / 2;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
-    var difX = this.centerX - spawnX;
-    var difY =  spawnY - this.centerY;
-    // console.log("dx:" + difX + ", dy:" + difY);
-    this.centerX = this.centerX - difX;
-    this.centerY = this.centerY + difY;
-    this.x = this.x - difX;
-    this.y = this.y + difY;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
     this.game = game;
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
@@ -145,6 +137,7 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     }
     this.boxes = true;
     this.setBoundingBox();
+    enemyCenterUpdate(this);
 }
 
 cola.prototype.setBoundingBox = function() {
@@ -162,23 +155,6 @@ cola.prototype.draw = function () {
     enemyDraw(this);
 }
 
-
-cola.prototype.drawBoundingBox = function() {
-    if (this.boxes) {
-        if (this.moveDirection == 1 || this.lookDirectionRight) {
-            this.ctx.strokeStyle = "red";
-            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
-            this.ctx.strokeStyle = "green";
-            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
-        } else {
-            this.ctx.strokeStyle = "red";
-            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
-            this.ctx.strokeStyle = "green";
-            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
-        }
-    }
-}
-
 cola.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
@@ -188,15 +164,13 @@ cola.prototype.update = function () {
             this.moveDirection = getShortestPath(this.centerX, this.centerY);
             enemyUpdateLookHelper(this);
         }
-        this.setBoundingBox();
-        enemyUpdateHelper(this);
-
-        xy = getXY(this.centerX, this.centerY);
-        if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
-            this.hp = 0; //dead
-        } 
         
-        // else i
+        enemyUpdateHelper(this);
+        
+        this.setBoundingBox();
+
+        enemyEscape(this);
+
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
             if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {

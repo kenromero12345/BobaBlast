@@ -60,19 +60,20 @@ boba.prototype.update = function () {
         }
         if(!this.backward && this.slope !== undefined) {
             this.x += this.game.clockTick * this.speed;
-            this.boundingbox.x += this.game.clockTick * this.speed;
+            // this.boundingbox.x += this.game.clockTick * this.speed;
         } else if (this.slope !== undefined)  {
             this.x -= this.game.clockTick * this.speed;
-            this.boundingbox.x -= this.game.clockTick * this.speed;
+            // this.boundingbox.x -= this.game.clockTick * this.speed;
         }
         if(this.slope === undefined)  {
             this.y += this.game.clockTick * this.speed;
-            this.boundingbox.y += this.game.clockTick * this.speed;
+            // this.boundingbox.y += this.game.clockTick * this.speed;
         }
         else {
             this.y += this.slope * this.game.clockTick * this.speed;
-            this.boundingbox.y += this.slope * this.game.clockTick * this.speed;
+            // this.boundingbox.y += this.slope * this.game.clockTick * this.speed;
         }
+        this.boundingbox = new BoundingBox(this.x + 5, this.y + 5, this.width -10, this.height - 10);
     }
 
 

@@ -101,7 +101,7 @@ GameEngine.prototype.startInput = function () {
 }
 
 GameEngine.prototype.addEntity = function (entity) {
-    console.log('added entity');
+    // console.log('added entity');
     this.entities.push(entity);
 }
 
@@ -219,8 +219,11 @@ function BoundingBox(x, y, width, height) {
 }
 
 BoundingBox.prototype.collide = function (oth) {
+    // console.log(this);
+    // console.log(oth);
     if (this.right > oth.left && this.left < oth.right && this.top < oth.bottom && this.bottom > oth.top) return true;
     return false;
+    // return collide()
 }
 
 var getXY = function(x, y) {

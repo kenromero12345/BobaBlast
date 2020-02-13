@@ -449,6 +449,9 @@
 // }
 
 function slime(game, spawnX, spawnY, scale, num) {
+    this.spawnX = spawnX;
+    this.spawnY = spawnY;
+    this.lifeDeduction = 2;
     this.scale = scale;
     this.isEnemy = true;
     this.slimeOffsetY = 0;//green
@@ -489,17 +492,6 @@ function slime(game, spawnX, spawnY, scale, num) {
     this.speed = 100;
     this.x = spawnX - 50;
     this.y = spawnY - 50;
-    this.centerX = this.x + this.width / 2;
-    this.centerY = this.y + this.height / 2;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
-    var difX = this.centerX - spawnX;
-    var difY =  spawnY - this.centerY;
-    // console.log("dx:" + difX + ", dy:" + difY);
-    this.centerX = this.centerX - difX;
-    this.centerY = this.centerY + difY;
-    this.x = this.x - difX;
-    this.y = this.y + difY;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
     this.game = game;
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
@@ -515,8 +507,19 @@ function slime(game, spawnX, spawnY, scale, num) {
     , 769, 70 + this.slimeOffsetY + this.slimeDisappearOffsetY, -79, 80, 7, .135, 7, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeFlip.png")
     , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
-    this.boxes = false;
-    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
+    this.boxes = true;
+    this.setBoundingBox();
+    enemyCenterUpdate(this);
+}
+
+slime.prototype.setBoundingBox = function() {
+    if(this.lookDirectionRight || this.moveDirection == 1 ) {
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
+            , this.width - 20 * this.scale , this.height -40 * this.scale);
+    } else {
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
+            , this.width - 25 * this.scale , this.height -40 * this.scale);
+    }
 }
 
 slime.prototype.draw = function () {
@@ -578,6 +581,7 @@ slime.prototype.draw = function () {
                 }
             }
         }
+        drawBoundingBox(this);
         // if (this.boxes) {
         //     if (this.moveDirection == 1 || this.lookDirectionRight) {
         //         this.ctx.strokeStyle = "red";
@@ -733,13 +737,12 @@ slime.prototype.update = function () {
             this.moveDirection = getShortestPath(this.centerX, this.centerY);
             enemyUpdateLookHelper(this);
         }
-
+        
         slimeUpdate(this);
 
-        xy = getXY(this.centerX, this.centerY);
-        if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
-            this.hp = 0; //dead
-        } 
+        this.setBoundingBox();
+        
+        enemyEscape(this);
         
         // else i
         for (var i = 0; i < this.game.entities.length; i++) {

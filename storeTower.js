@@ -33,7 +33,7 @@ storeTower.prototype.draw = function () {
 storeTower.prototype.update = function () {
     // Click Mode: If you click a tower, set global variable for selected tower row/column
     if (this.game.click && gameStarted && !paused) {
-        console.log("CLICK");
+        // console.log("CLICK");
         var click = this.game.click;
         if(click.x >= this.x && click.x < this.x + 70 && click.y >= this.y && click.y < this.y + 70) {
             purchaseMode = true;

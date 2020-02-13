@@ -1,23 +1,15 @@
 function pumpkinGood(game, spawnX, spawnY, scale) {
+    this.spawnX = spawnX;
+    this.spawnY = spawnY;
+    this.lifeDeduction = 7;
     this.isEnemy = true;
     // console.log(slimeOffsetY)
     this.width = 81 * scale;
     this.height = 84 * scale;
-    this.name = "pumpkinGood";
+    this.name = "good pumpkin";
     this.speed = 100;
     this.x = spawnX - 50;
     this.y = spawnY - 50;
-    this.centerX = this.x + this.width / 2;
-    this.centerY = this.y + this.height / 2;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
-    var difX = this.centerX - spawnX;
-    var difY =  spawnY - this.centerY;
-    // console.log("dx:" + difX + ", dy:" + difY);
-    this.centerX = this.centerX - difX;
-    this.centerY = this.centerY + difY;
-    this.x = this.x - difX;
-    this.y = this.y + difY;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
     this.game = game;
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
@@ -31,11 +23,19 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     , 712, 87, -81, 84, 4, .135, 4, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinGoodFlip.png")
     , 720, 260, -84, 76, 7, .2, 7, false, scale, false);
-    this.boxes = false;
-    // if (boxesOff) {
-    //     boxes = false;
-    // }
-    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
+    this.boxes = true;
+    this.setBoundingBox();
+    enemyCenterUpdate(this);
+}
+
+pumpkinGood.prototype.setBoundingBox = function() {
+    if(this.lookDirectionRight || this.moveDirection == 1 ) {
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
+            , this.width - 20 * this.scale , this.height -40 * this.scale);
+    } else {
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
+            , this.width - 25 * this.scale , this.height -40 * this.scale);
+    }
 }
 
 pumpkinGood.prototype.draw = function () {
@@ -129,6 +129,7 @@ pumpkinGood.prototype.draw = function () {
                 }
             }
         }
+        drawBoundingBox(this);
     }
 }
 
@@ -169,16 +170,14 @@ pumpkinGood.prototype.update = function () {
             this.moveDirection = getShortestPath(this.centerX, this.centerY);
             enemyUpdateLookHelper(this);
         }
-
+        
         //enemyUpdateHelper(this);
         pumpkinGoodUpdate(this);
+
+        this.setBoundingBox();
         
-        xy = getXY(this.centerX, this.centerY);
-        if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
-            this.hp = 0; //dead
-        } 
+        enemyEscape(this);
         
-        else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
             if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {

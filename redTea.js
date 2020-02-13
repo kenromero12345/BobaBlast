@@ -1,4 +1,5 @@
 function redTea(game, spawnX, spawnY, isRun, scale) {
+    this.lifeDeduction = 1;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/22137.png")
     , 0, 0, 65, 95, 4, 0.20, 4, true, scale, false);
     this.animationRunLeft = new Animation(AM.getAsset("./img/22137.png")

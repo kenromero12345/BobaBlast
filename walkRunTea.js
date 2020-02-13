@@ -1,4 +1,6 @@
 var constructor = function (tea, game, spawnX, spawnY, isRun) {
+    tea.spawnX = spawnX;
+    tea.spawnY = spawnY;
     tea.isEnemy = true;
     tea.x = spawnX - 50;
     tea.y = spawnY - 50;
@@ -9,15 +11,6 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
         tea.centerX = tea.x + tea.walkWidth / 2;
         tea.centerY = tea.y + tea.walkHeight / 2;
     }
-    // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
-    var difX = tea.centerX - spawnX;
-    var difY =  spawnY - tea.centerY;
-    // console.log("dx:" + difX + ", dy:" + difY);
-    tea.centerX = tea.centerX - difX;
-    tea.centerY = tea.centerY + difY;
-    tea.x = tea.x - difX;
-    tea.y = tea.y + difY;
-    // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
     tea.walkSpeed = 100;
     tea.runSpeed = 200;
     tea.game = game;
@@ -33,8 +26,36 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
         tea.width = tea.runWidth;
         tea.height = tea.runHeight;
     }
-    tea.boxes = false;
-    tea.boundingbox = new BoundingBox(tea.x, tea.y, tea.width, tea.height);
+    tea.boxes = true;
+    teaSetBoundingBox(tea);
+    enemyCenterUpdate(tea);
+    if (isRun) {
+        tea.centerX = tea.x + tea.runWidth / 2;
+        tea.centerY = tea.y + tea.runHeight / 2;
+    } else {
+        tea.centerX = tea.x + tea.walkWidth / 2;
+        tea.centerY = tea.y + tea.walkHeight / 2;
+    }
+}
+
+teaSetBoundingBox = function(tea) {
+    if (tea.isRun) {
+        if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
+            tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 10 * tea.scale
+                , tae.width - 20 * tea.scale , tae.height -40 * thiteas.scale);
+        } else {
+            tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 10 * tea.scale
+                , tea.width - 25 * tea.scale , tea.height -40 * tea.scale);
+        }
+    } else {
+        if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
+            tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 10 * tea.scale
+                , tea.width - 20 * tea.scale , tea.height -40 * tea.scale);
+        } else {
+            tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 10 * tea.scale
+                , tea.width - 25 * tea.scale , tea.height -40 * tea.scale);
+        }
+    }
 }
 
 var draw = function (tea) {
@@ -88,6 +109,7 @@ var draw = function (tea) {
             }
         }
     }
+    drawBoundingBox(tea);
 }
 
 var update = function (tea) {
@@ -225,6 +247,9 @@ var update = function (tea) {
             }
         }
     }
+
+
+    teaSetBoundingBox(tea);
     // tea.centerX = tea.x + width / 2;
     // tea.centerY = tea.y + height / 2;
     // console.log(tea.moveDirection)
@@ -234,14 +259,7 @@ var update = function (tea) {
     // console.log(tea.y - tea.centerY);
          //&& ((tea.centerX +  100) % 100 > 40 
     // && (tea.centerX + 100) % 100 < 60 && tea.centerY % 100 > 40 && tea.centerY % 100 < 60)
-    xy = getXY(tea.centerX, tea.centerY);
-    if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
-       tea.hp = 0; //dead
-        // console.log("true");
-        // console.log(GAMEBOARD.length);
-        // console.log(xy);
-        // console.log(tea.centerX)
-    } 
+    enemyEscape(tea);
     
     // else if (xy.x > GAMEBOARD.length - 1) {
         // console.log(xy)

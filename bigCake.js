@@ -1,23 +1,15 @@
 function bigCake(game, spawnX, spawnY, scale) {
+    this.spawnX = spawnX;
+    this.spawnY = spawnY;
+    this.lifeDeduction = 10;
     this.isEnemy = true;
     // console.log(slimeOffsetY)
-    this.width = 290 * scale;
+    this.width = 298 * scale;
     this.height = 400 * scale;
     this.name = "bigCake";
-    this.speed = 100;
+    this.speed = 50;
     this.x = spawnX - 50;
     this.y = spawnY - 50;
-    this.centerX = this.x + this.width / 2;
-    this.centerY = this.y + this.height / 2;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
-    var difX = this.centerX - spawnX;
-    var difY =  spawnY - this.centerY;
-    // console.log("dx:" + difX + ", dy:" + difY);
-    this.centerX = this.centerX - difX;
-    this.centerY = this.centerY + difY;
-    this.x = this.x - difX;
-    this.y = this.y + difY;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
     this.game = game;
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
@@ -33,6 +25,7 @@ function bigCake(game, spawnX, spawnY, scale) {
     , 4732, 1830, -334, 400, 10, .2, 10, true, scale, false);
     this.boxes = true;
     this.setBoundingBox();
+    enemyCenterUpdate(this);
 }
 
 bigCake.prototype.setBoundingBox = function() {
@@ -42,22 +35,6 @@ bigCake.prototype.setBoundingBox = function() {
     } else {
         this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
             , this.width - 20 * this.scale , this.height -13 * this.scale);
-    }
-}
-
-bigCake.prototype.drawBoundingBox = function() {
-    if (this.boxes) {
-        if (this.moveDirection == 1 || this.lookDirectionRight) {
-            this.ctx.strokeStyle = "red";
-            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
-            this.ctx.strokeStyle = "green";
-            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
-        } else {
-            this.ctx.strokeStyle = "red";
-            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
-            this.ctx.strokeStyle = "green";
-            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
-        }
     }
 }
 
@@ -151,7 +128,8 @@ bigCake.prototype.draw = function () {
                     bigCakeLeft(this);
                 }
             }
-            this.drawBoundingBox();
+            // this.drawBoundingBox();
+            drawBoundingBox(this);
         }
     }
 }
@@ -194,22 +172,19 @@ bigCake.prototype.update = function () {
             enemyUpdateLookHelper(this);
         }
 
-        this.setBoundingBox();
         //enemyUpdateHelper(this);
         bigCakeUpdate(this);
+
+        this.setBoundingBox();
         
-        xy = getXY(this.centerX, this.centerY);
-        if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
-            this.hp = 0; //dead
-        } 
-        
-        else i
+        enemyEscape(this);
+
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            // if (ent !== this && ent.isBoba &&  this.boundingbox.collide(ent.boundingbox)) {
-            //     ent.removeFromWorld = true;
-            //     this.hp--;
-            // }
+            if (ent !== this && ent.isBoba &&  this.boundingbox.collide(ent.boundingbox)) {
+                ent.removeFromWorld = true;
+                this.hp--;
+            }
         }
     }
 }
