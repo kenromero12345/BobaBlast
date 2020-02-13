@@ -3,6 +3,7 @@ function biscuit(game, spawnX, spawnY, scale) {
     // console.log(slimeOffsetY)
     this.width = 98 * scale;
     this.height = 94 * scale;
+    this.scale = scale;
     this.name = "biscuit";
     this.speed = 100;
     this.x = spawnX - 50;
@@ -31,11 +32,39 @@ function biscuit(game, spawnX, spawnY, scale) {
     , 803-6, 111, -98, 94, 6, .135, 6, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/biscuitWarriorFlip.png")
     , 803-15, 221, -91, 94, 7, .25, 7, false, scale, false);
-    this.boxes = false;
+    this.boxes = true;
     // if (boxesOff) {
     //     boxes = false;
     // }
-    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
+
+    //w = .75
+    this.setBoundingBox();
+}
+
+biscuit.prototype.setBoundingBox = function() {
+    if(this.lookDirectionRight || this.moveDirection == 1 ) {
+        this.boundingbox = new BoundingBox(this.x + 14 * this.scale, this.y + 7 * this.scale
+            , this.width - 40 * this.scale , this.height - 7 * this.scale);
+    } else {
+        this.boundingbox = new BoundingBox(this.x + 26 * this.scale, this.y + 7 * this.scale
+            , this.width - 40 * this.scale , this.height - 7 * this.scale);
+    }
+}
+
+biscuit.prototype.drawBoundingBox = function() {
+    if (this.boxes) {
+        if (this.moveDirection == 1 || this.lookDirectionRight) {
+            this.ctx.strokeStyle = "red";
+            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+            this.ctx.strokeStyle = "green";
+            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+        } else {
+            this.ctx.strokeStyle = "red";
+            this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+            this.ctx.strokeStyle = "green";
+            this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+        }
+    }
 }
 
 biscuit.prototype.draw = function () {
@@ -88,6 +117,7 @@ biscuit.prototype.draw = function () {
                     biscuitLeft(this);
                 }
             }
+            this.drawBoundingBox();
         }
     }
 }
@@ -129,6 +159,8 @@ biscuit.prototype.update = function () {
             this.moveDirection = getShortestPath(this.centerX, this.centerY);
             enemyUpdateLookHelper(this);
         }
+
+        this.setBoundingBox();
 
         enemyUpdateHelper(this);
 

@@ -31,6 +31,7 @@ var enemyDraw = function(enemy) {
                 }
             }
         }
+        enemy.drawBoundingBox();
     }
 }
 
@@ -49,35 +50,40 @@ var enemyUpdateHelper = function (enemy) {
      
                 enemy.x += enemy.game.clockTick * enemy.speed;
                 enemy.centerX += enemy.game.clockTick * enemy.speed;
+                enemy.boundingbox.x += enemy.game.clockTick * enemy.speed;
             
         } else if (enemy.moveDirection == 2) {
             if (enemy.lookDirectionRight) {
              
                     enemy.y += enemy.game.clockTick * enemy.speed;
                     enemy.centerY +=enemy.game.clockTick * enemy.speed;
+                    enemy.boundingbox.y += enemy.game.clockTick * enemy.speed;
                 
             } else {
            
                     enemy.y += enemy.game.clockTick * enemy.speed;
                     enemy.centerY += enemy.game.clockTick * enemy.speed;
+                    enemy.boundingbox.y += enemy.game.clockTick * enemy.speed;
                 
             }
         } else if (enemy.moveDirection == 3) {
         
                 enemy.x -= enemy.game.clockTick * enemy.speed;
                 enemy.centerX -= enemy.game.clockTick * enemy.speed;
+                enemy.boundingbox.x -= enemy.game.clockTick * enemy.speed;
             
         } else {
             if (enemy.lookDirectionRight) {
             
                     enemy.y -= enemy.game.clockTick * enemy.speed;
                     enemy.centerY -= enemy.game.clockTick * enemy.speed;
-                
+                    enemy.boundingbox.y -= enemy.game.clockTick * enemy.speed;
                     
             } else {
                 
                     enemy.y -= enemy.game.clockTick * enemy.speed;
                     enemy.centerY -= enemy.game.clockTick * enemy.speed;
+                    enemy.boundingbox.y -= enemy.game.clockTick * enemy.speed;
                 
             }
         }

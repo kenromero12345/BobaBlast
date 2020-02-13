@@ -449,6 +449,7 @@
 // }
 
 function slime(game, spawnX, spawnY, scale, num) {
+    this.scale = scale;
     this.isEnemy = true;
     this.slimeOffsetY = 0;//green
     this.slimeDisappearOffsetY = 0;
@@ -514,7 +515,7 @@ function slime(game, spawnX, spawnY, scale, num) {
     , 769, 70 + this.slimeOffsetY + this.slimeDisappearOffsetY, -79, 80, 7, .135, 7, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeFlip.png")
     , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
-    this.boxes = true;
+    this.boxes = false;
     this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
 }
 
@@ -577,19 +578,19 @@ slime.prototype.draw = function () {
                 }
             }
         }
-        if (this.boxes) {
-            if (this.moveDirection == 1 || this.lookDirectionRight) {
-                this.ctx.strokeStyle = "red";
-                this.ctx.strokeRect(this.x, this.y, this.width, this.height);
-                this.ctx.strokeStyle = "green";
-                this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
-            } else {
-                this.ctx.strokeStyle = "red";
-                this.ctx.strokeRect(this.x, this.y, this.width, this.height);
-                this.ctx.strokeStyle = "green";
-                this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
-            }
-        }
+        // if (this.boxes) {
+        //     if (this.moveDirection == 1 || this.lookDirectionRight) {
+        //         this.ctx.strokeStyle = "red";
+        //         this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+        //         this.ctx.strokeStyle = "green";
+        //         this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+        //     } else {
+        //         this.ctx.strokeStyle = "red";
+        //         this.ctx.strokeRect(this.x, this.y, this.width, this.height);
+        //         this.ctx.strokeStyle = "green";
+        //         this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+        //     }
+        // }
     }
 }
 

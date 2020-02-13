@@ -1,8 +1,8 @@
 function pumpkinGood(game, spawnX, spawnY, scale) {
     this.isEnemy = true;
     // console.log(slimeOffsetY)
-    this.width = 96 * scale;
-    this.height = 90 * scale;
+    this.width = 81 * scale;
+    this.height = 84 * scale;
     this.name = "pumpkinGood";
     this.speed = 100;
     this.x = spawnX - 50;
@@ -31,6 +31,11 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     , 712, 87, -81, 84, 4, .135, 4, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinGoodFlip.png")
     , 720, 260, -84, 76, 7, .2, 7, false, scale, false);
+    this.boxes = false;
+    // if (boxesOff) {
+    //     boxes = false;
+    // }
+    this.boundingbox = new BoundingBox(this.x, this.y, this.width, this.height);
 }
 
 pumpkinGood.prototype.draw = function () {
@@ -176,10 +181,10 @@ pumpkinGood.prototype.update = function () {
         else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            // if (ent !== this && ent.isBoba && collide(ent, this)) {
-            //     ent.removeFromWorld = true;
-            //     this.hp--;
-            // }
+            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
+                ent.removeFromWorld = true;
+                this.hp--;
+            }
         }
     }
 }
