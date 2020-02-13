@@ -176,10 +176,10 @@ pumpkinEvil.prototype.update = function () {
         else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && collide(ent, this)) {
-                ent.removeFromWorld = true;
-                this.hp--;
-            }
+            // if (ent !== this && ent.isBoba && collide(ent, this)) {
+            //     ent.removeFromWorld = true;
+            //     this.hp--;
+            // }
         }
     }
 }

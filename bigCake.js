@@ -1,8 +1,8 @@
 function bigCake(game, spawnX, spawnY, scale) {
     this.isEnemy = true;
     // console.log(slimeOffsetY)
-    this.width = 96 * scale;
-    this.height = 90 * scale;
+    this.width = 290 * scale;
+    this.height = 400 * scale;
     this.name = "bigCake";
     this.speed = 100;
     this.x = spawnX - 50;
@@ -30,7 +30,7 @@ function bigCake(game, spawnX, spawnY, scale) {
     this.animationWalkRight = new Animation(AM.getAsset("./img/bigCakeFlip.png")
     , 4732, 400, -298, 400, 8, .135, 8, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/bigCakeFlip.png")
-    , 4732, 1830, -334, 400, 10, .2, 10, true, scale, false);
+    , 4732, 1830, -334, 400, 10, .2, 10, false, scale, false);
 }
 
 bigCake.prototype.draw = function () {
@@ -176,10 +176,10 @@ bigCake.prototype.update = function () {
         else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && collide(ent, this)) {
-                ent.removeFromWorld = true;
-                this.hp--;
-            }
+            // if (ent !== this && ent.isBoba &&  this.boundingbox.collide(ent.boundingbox)) {
+            //     ent.removeFromWorld = true;
+            //     this.hp--;
+            // }
         }
     }
 }
