@@ -1,4 +1,5 @@
 function bigCake(game, spawnX, spawnY, scale) {
+    this.scale = scale;
     this.spawnX = spawnX;
     this.spawnY = spawnY;
     this.lifeDeduction = 10;
@@ -29,6 +30,7 @@ function bigCake(game, spawnX, spawnY, scale) {
 }
 
 bigCake.prototype.setBoundingBox = function() {
+    // console.log("a")
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
         this.boundingbox = new BoundingBox(this.x + 0 * this.scale, this.y + 0 * this.scale
             , this.width - 0 * this.scale , this.height -0 * this.scale);

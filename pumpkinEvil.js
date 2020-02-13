@@ -1,4 +1,5 @@
 function pumpkinEvil(game, spawnX, spawnY, scale) {
+    this.scale = scale;
     this.spawnX = spawnX;
     this.spawnY = spawnY;
     this.lifeDeduction = 10;

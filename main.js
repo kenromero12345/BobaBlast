@@ -135,19 +135,20 @@ AM.downloadAll(function () {
     // gameEngine.addEntity(board);
 
     gameEngine.addEntity(new board(gameEngine));
+    // gameEngine.addEntity(new bigCake(gameEngine, -50, 350, .25));
+    gameEngine.addEntity(new pumpkinEvil(gameEngine, -50, 350, .75));
+    // gameEngine.addEntity(new pumpkinGood(gameEngine, -50, 350, .75));
     // gameEngine.addEntity(new redTea(gameEngine, -50, 350, false, .75));
+
     // gameEngine.addEntity(new iceGolem(gameEngine, -50, 350));
     // gameEngine.addEntity(new cola(gameEngine, -50, 350, .85, false));
     // // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 1));//450//250
     // gameEngine.addEntity(new slime(gameEngine, -50, 350, .75));//450//250
-    gameEngine.addEntity(new watermelon(gameEngine, -50, 350, .75));
+    // gameEngine.addEntity(new watermelon(gameEngine, -50, 350, .75));
     // gameEngine.addEntity(new miniCake(gameEngine, -50, 350, .75));
     // gameEngine.addEntity(new biscuit(gameEngine, -50, 350, .75));
     // gameEngine.addEntity(new cakeChoco(gameEngine, -50, 350, .75));
     // gameEngine.addEntity(new cake(gameEngine, -50, 350, .75));
-    // gameEngine.addEntity(new bigCake(gameEngine, -50, 350, .25));
-    gameEngine.addEntity(new pumpkinEvil(gameEngine, -50, 350, .75));
-    gameEngine.addEntity(new pumpkinGood(gameEngine, -50, 350, .75));
     // // gameEngine.addEntity(new squareSlime(gameEngine, -50, 350, .75));
     // sleep(2000).then(() => {
     //     gameEngine.addEntity(new greenTea(gameEngine, -50, 350, false, .75));
