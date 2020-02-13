@@ -37,11 +37,11 @@ function iceGolem(game, spawnX, spawnY, scale) {
 
 iceGolem.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 0 * this.scale, this.y + 0 * this.scale
-            , this.width - 0 * this.scale , this.height -0 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
+            , this.width - 20 * this.scale , this.height -40 * this.scale);
     } else {
         this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 20 * this.scale , this.height -13 * this.scale);
+            , this.width - 25 * this.scale , this.height -40 * this.scale);
     }
 }
 
