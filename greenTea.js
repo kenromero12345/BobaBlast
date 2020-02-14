@@ -17,7 +17,7 @@ function greenTea(game, spawnX, spawnY, isRun, scale) {
     this.runWidth = 72 * scale;
     this.runHeight= 85 * scale;
     this.scale = scale;
-    this.name = "green";
+    this.name = "green bubble tea";
     constructor(this, game, spawnX, spawnY, isRun);
 }
 

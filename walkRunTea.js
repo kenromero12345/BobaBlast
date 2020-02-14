@@ -18,7 +18,7 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.moveDirection = 1; //1 is right, down, left, up
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
-    tea.hp = 10;
+    tea.hp = 20;
     if (tea.paceWalk) {
         tea.width = tea.walkWidth;
         tea.height = tea.walkHeight;
@@ -29,31 +29,34 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.boxes = true;
     teaSetBoundingBox(tea);
     enemyCenterUpdate(tea);
-    if (isRun) {
-        tea.centerX = tea.x + tea.runWidth / 2;
-        tea.centerY = tea.y + tea.runHeight / 2;
-    } else {
-        tea.centerX = tea.x + tea.walkWidth / 2;
-        tea.centerY = tea.y + tea.walkHeight / 2;
-    }
 }
 
 teaSetBoundingBox = function(tea) {
-    if (tea.isRun) {
+    if (!tea.paceWalk) {
         if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
-            tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 10 * tea.scale
-                , tae.width - 20 * tea.scale , tae.height -40 * thiteas.scale);
+            tea.boundingbox = new BoundingBox(tea.x + 18 * tea.scale, tea.y + 15 * tea.scale
+                , tea.width - 30 * tea.scale , tea.height -23 * tea.scale);
         } else {
-            tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 10 * tea.scale
-                , tea.width - 25 * tea.scale , tea.height -40 * tea.scale);
+            tea.boundingbox = new BoundingBox(tea.x + 8 * tea.scale, tea.y + 15 * tea.scale
+                , tea.width - 30 * tea.scale , tea.height -23 * tea.scale);
         }
     } else {
-        if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
-            tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 10 * tea.scale
-                , tea.width - 20 * tea.scale , tea.height -40 * tea.scale);
+        if (tea.name == "green bubble tea") {
+            if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
+                tea.boundingbox = new BoundingBox(tea.x + 23 * tea.scale, tea.y + 30 * tea.scale
+                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+            } else {
+                tea.boundingbox = new BoundingBox(tea.x + 13 * tea.scale, tea.y + 30 * tea.scale
+                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+            }
         } else {
-            tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 10 * tea.scale
-                , tea.width - 25 * tea.scale , tea.height -40 * tea.scale);
+            if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
+                tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 30 * tea.scale
+                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+            } else {
+                tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 30 * tea.scale
+                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+            }
         }
     }
 }
@@ -134,7 +137,7 @@ var update = function (tea) {
     if (((tea.centerX +  100) % 100 > 43 && (tea.centerX + 100) % 100 < 57
         && tea.centerY % 100 > 43 && tea.centerY % 100 < 57) && !tea.paceWalk
         || ((tea.centerX +  100) % 100 > 49 && (tea.centerX + 100) % 100 < 51
-        && tea.centerY % 100 > 49 && tea.centerY % 100 < 51) && tea.paceWalk) {
+        && tea.centerY % 100 > 48 && tea.centerY % 100 < 52) && tea.paceWalk) {
             // console.log(tea.centerX + " " + tea.centerY)
         tea.moveDirection = getShortestPath(tea.centerX, tea.centerY);
         if (tea.moveDirection == 1) {
