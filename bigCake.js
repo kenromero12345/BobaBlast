@@ -23,7 +23,7 @@ function bigCake(game, spawnX, spawnY, scale) {
     this.animationWalkRight = new Animation(AM.getAsset("./img/bigCakeFlip.png")
     , 4732, 400, -298, 400, 8, .135, 8, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/bigCakeFlip.png")
-    , 4732, 1830, -334, 400, 10, .2, 10, true, scale, false);
+    , 4732, 1830, -334, 400, 10, .2, 10, false, scale, false);
     this.boxes = true;
     this.setBoundingBox();
     enemyCenterUpdate(this);
