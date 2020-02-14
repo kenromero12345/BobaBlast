@@ -514,11 +514,11 @@ function slime(game, spawnX, spawnY, scale, num) {
 
 slime.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 20 * this.scale , this.height -40 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 18 * this.scale, this.y + 30 * this.scale
+            , this.width - 23 * this.scale , this.height -35 * this.scale);
     } else {
         this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 25 * this.scale , this.height -40 * this.scale);
+            , this.width - 25 * this.scale , this.height -30 * this.scale);
     }
 }
 
