@@ -136,8 +136,8 @@ AM.downloadAll(function () {
 
     gameEngine.addEntity(new board(gameEngine));
     // gameEngine.addEntity(new bigCake(gameEngine, -50, 350, .25));
-    gameEngine.addEntity(new pumpkinEvil(gameEngine, -50, 350, .75));
-    // gameEngine.addEntity(new pumpkinGood(gameEngine, -50, 350, .75));
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, -50, 350, .75));
+    gameEngine.addEntity(new pumpkinGood(gameEngine, -50, 350, .75));
     // gameEngine.addEntity(new redTea(gameEngine, -50, 350, false, .75));
 
     // gameEngine.addEntity(new iceGolem(gameEngine, -50, 350));

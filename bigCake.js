@@ -23,20 +23,22 @@ function bigCake(game, spawnX, spawnY, scale) {
     this.animationWalkRight = new Animation(AM.getAsset("./img/bigCakeFlip.png")
     , 4732, 400, -298, 400, 8, .135, 8, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/bigCakeFlip.png")
-    , 4732, 1830, -334, 400, 10, .2, 10, true, scale, false);
+    , 4732, 1830, -334, 400, 10, .2, 10, false, scale, false);
     this.boxes = true;
     this.setBoundingBox();
     enemyCenterUpdate(this);
+    this.animationWalkRight.offsetX = -150;
+    this.animationDisappearRight.offsetX = -150;
 }
 
 bigCake.prototype.setBoundingBox = function() {
     // console.log("a")
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 0 * this.scale, this.y + 0 * this.scale
-            , this.width - 0 * this.scale , this.height -0 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 50 * this.scale, this.y + 60 * this.scale
+            , this.width - 60 * this.scale , this.height -80 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 20 * this.scale , this.height -13 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 60 * this.scale
+            , this.width - 60 * this.scale , this.height -80 * this.scale);
     }
 }
 

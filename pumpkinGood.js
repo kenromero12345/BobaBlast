@@ -17,11 +17,11 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     this.lookDirectionRight = !false;
     this.hp = 40;//
     this.animationWalkLeft = new Animation(AM.getAsset("./img/pumpkinGood.png")
-    , 0, 87, 81, 84, 4, .135, 4, true, scale, false);
+    , 5, 87, 81, 84, 4, .135, 4, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/pumpkinGood.png")
     , 8, 260, 84, 76, 7, .2, 7, false, scale, false);
     this.animationWalkRight = new Animation(AM.getAsset("./img/pumpkinGoodFlip.png")
-    , 712, 87, -81, 84, 4, .135, 4, true, scale, false);
+    , 712-5, 87, -81, 84, 4, .135, 4, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinGoodFlip.png")
     , 720, 260, -84, 76, 7, .2, 7, false, scale, false);
     this.boxes = true;
@@ -31,11 +31,11 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
 
 pumpkinGood.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 20 * this.scale , this.height -40 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 15 * this.scale
+            , this.width - 30 * this.scale , this.height -35 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 25 * this.scale , this.height -40 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 20 * this.scale, this.y + 15 * this.scale
+            , this.width - 30 * this.scale , this.height -35 * this.scale);
     }
 }
 
