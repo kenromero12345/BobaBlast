@@ -2,8 +2,8 @@ function boardTower(game, gridX, gridY, type) {
     this.isTower = true;
     this.shootTimer = Date.now();
     this.pointDirection = 'S';
-    this.currentDirection = null; // TODO
-    this.intendedDirection = null; // TODO
+    this.currentDirection = 'S'; // TODO
+    this.intendedDirection = 'S'; // TODO
     this.game = game;
     this.ctx = game.ctx;
     this.gridX = gridX;
@@ -53,7 +53,7 @@ boardTower.prototype.draw = function () {
             this.ctx.globalAlpha = 0.25;
             this.ctx.fillStyle = "white";
             this.ctx.beginPath();
-            this.ctx.arc(this.centerX, this.centerY, this.actualRadiusOverlay, 0, 2 * Math.PI);
+            this.ctx.arc(this.centerX, this.centerY, this.radius, 0, 2 * Math.PI);
             this.ctx.fill();
             this.ctx.restore();
         }
@@ -142,13 +142,41 @@ boardTower.prototype.update = function () {
 
 // Determines if an Enemy is within Range of Tower
 boardTower.prototype.enemyInRange = function (rect) {
-    if (rect.x < this.centerX + this.radius && rect.x + rect.width > this.centerX - this.radius
+    // Center of Circle Minus Center of Rectangle
+    var circleDistanceX = Math.abs(this.centerX - rect.centerX);
+    var circleDistanceY = Math.abs(this.centerY - rect.centerY);
+
+    if(circleDistanceX > rect.boundingbox.width/2 + this.radius) return false;
+    if(circleDistanceY > rect.boundingbox.height/2 + this.radius) return false;
+
+    if(circleDistanceX <= rect.boundingbox.width/2) {
+        this.shootDestinationX = rect.centerX;
+        this.shootDestinationY = rect.centerY;
+         return true;
+     }
+    if(circleDistanceY <= rect.boundingbox.height/2) {
+        this.shootDestinationX = rect.centerX;
+        this.shootDestinationY = rect.centerY;
+        return true;
+    }
+
+    var cornerDistance_sq = Math.pow(circleDistanceX - rect.boundingbox.width / 2, 2) + 
+                            Math.pow(circleDistanceY - rect.boundingbox.height /2, 2); 
+
+    if(cornerDistance_sq <= Math.pow(this.radius, 2)) {
+        this.shootDestinationX = rect.centerX;
+        this.shootDestinationY = rect.centerY;
+        return true;
+    } else {
+        return false;
+    }
+  /*  if (rect.x < this.centerX + this.radius && rect.x + rect.width > this.centerX - this.radius
         && rect.y < this.centerY + this.radius && rect.y + rect.height > this.centerY - this.radius) {
         this.shootDestinationX = rect.x + rect.width / 2 ;
         this.shootDestinationY = rect.y + rect.height / 2 ;
        return true;
     } else {
         return false;
-    }
+    }*/
 }
 
