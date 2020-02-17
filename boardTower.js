@@ -1,9 +1,9 @@
 function boardTower(game, gridX, gridY, type) {
     this.isTower = true;
+    this.spin = false;
     this.shootTimer = Date.now();
     this.pointDirection = 'S';
-    this.currentDirection = 'S'; // TODO
-    this.intendedDirection = 'S'; // TODO
+    this.intendedDirection = 'S';
     this.game = game;
     this.ctx = game.ctx;
     this.gridX = gridX;
@@ -24,8 +24,8 @@ function boardTower(game, gridX, gridY, type) {
     this.y = gridY * 100 + 10;
     this.centerX = this.x + 25;
     this.centerY = this.y + 25;
-    this.shootOutX = this.x + 15; // for testing purposes for sSOUTH
-    this.shootOutY = this.y + 50; // for testing purposes for SOUTH
+    this.shootOutX = this.x; // CHANGES WHEN DIRECITON CHANGES
+    this.shootOutY = this.y; // CHANGES WHEN DIRECTION CHANGES
     this.shootBoba = false; 
     this.upgradeMode = false;
     this.shootBobaSpeed = null; // TODO
@@ -33,46 +33,106 @@ function boardTower(game, gridX, gridY, type) {
     this.actualRadiusOverlay = 175;
     this.shootDestinationX = 0; 
     this.shootDestinationY = 0; 
+    this.shootBobaEveryMS = 1000;         // SHOOT EVERY 1 SECOND
+    this.directions = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
+    this.shootOutXOffset = [15, 45, 55, 45, 10, -20, -30, -25 ];
+    this.shootOutYOffset = [50,40, 5, -5, -20, -5, 10, 40];
 }
 
 boardTower.prototype.draw = function () {
+    if(this.upgradeMode) {
+        this.ctx.save();
+        this.ctx.globalAlpha = 0.25;
+        this.ctx.fillStyle = "white";
+        this.ctx.beginPath();
+        this.ctx.arc(this.centerX, this.centerY, this.radius, 0, 2 * Math.PI);
+        this.ctx.fill();
+        this.ctx.restore();
+    }
     if(this.pointDirection === 'SE') {
+        this.xOffset = 0;
+        this.yOffset = 0;
         this.animationSouthEast.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
     } else if (this.pointDirection === 'S') {
+        this.xOffset = 0;
+        this.yOffset = 0;
         this.animationSouth.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
-        if(this.shootBoba) {
-            // SHOOT EVERY 1 SECOND
-            if(this.shootTimer < Date.now()) {
-                this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY));
-                this.shootBoba = false;
-                this.shootTimer = Date.now() + 1000;
-            }
-        }
-         if(this.upgradeMode) {
-            this.ctx.save();
-            this.ctx.globalAlpha = 0.25;
-            this.ctx.fillStyle = "white";
-            this.ctx.beginPath();
-            this.ctx.arc(this.centerX, this.centerY, this.radius, 0, 2 * Math.PI);
-            this.ctx.fill();
-            this.ctx.restore();
-        }
     } else if (this.pointDirection === 'E') {
+        this.xOffset = -11;
+        this.yOffset = -6;
         this.animationEast.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
     } else if (this.pointDirection === 'NE') {
+        this.xOffset = -10;
+        this.yOffset = -2;
         this.animationNorthEast.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
     } else if (this.pointDirection === 'N') {
+        this.xOffset = -9;
+        this.yOffset = -5;
         this.animationNorth.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
     } else if (this.pointDirection === 'NW') {
+        this.xOffset = -8;
+        this.yOffset = -5;
         this.animationNorthWest.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
     } else if (this.pointDirection === 'W') {
+        this.xOffset = -23;
+        this.yOffset = -9;
         this.animationWest.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
     } else if (this.pointDirection === 'SW') {
+        this.xOffset = -14;
+            this.yOffset = -1;
         this.animationSouthWest.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
+    }
+
+    if(this.shootBoba) {
+        if(this.shootTimer < Date.now()) {
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY));
+            this.shootBoba = false;
+            this.shootTimer = Date.now() + this.shootBobaEveryMS;
+        }
     }
 }
 
 boardTower.prototype.update = function () {
+    if(this.spin) {
+        if(this.pointDirection === 'S') {
+            this.pointDirection = 'SE';
+            this.xOffset = 0;
+            this.yOffset = 0;
+        } else if (this.pointDirection === 'SE') {
+            this.pointDirection = 'E';
+            this.xOffset = -11;
+            this.yOffset = -6;
+        } else if (this.pointDirection === 'E') {
+            this.pointDirection = 'NE';
+            this.xOffset = -10;
+            this.yOffset = -2;
+        } else if (this.pointDirection === 'NE') {
+            this.pointDirection = 'N';
+            this.xOffset = -9;
+            this.yOffset = -5;
+        } else if (this.pointDirection === 'N') {
+            this.pointDirection = 'NW';
+            this.xOffset = -8;
+            this.yOffset = -5;
+        } else if (this.pointDirection === 'NW') {
+            this.pointDirection = 'W';
+            this.xOffset = -23;
+            this.yOffset = -9;
+        } else if (this.pointDirection === 'W') {
+            this.pointDirection = 'SW';
+            this.xOffset = -14;
+            this.yOffset = -1;
+        } else  {
+            this.pointDirection = 'S';
+            this.xOffset = 0;
+            this.yOffset = 0;
+        }
+    }
+
+    if(this.spin && this.pointDirection === this.intendedDirection) {
+        this.spin = false;
+    }
+
     if(this.game.click) {
         var click = this.game.click;
         var upperLeftX = (this.gridX - 1) * 100;
@@ -82,7 +142,7 @@ boardTower.prototype.update = function () {
         if(click.x >= upperLeftX && click.x < upperLeftX + width && click.y >= upperLeftY && click.y < upperLeftY + height) {
             this.upgradeMode = !this.upgradeMode;
         // UNCOMMENT BELOW TO TEST CLICK TO SPIN FUNCTIONALITY
-            /*   if(this.pointDirection === 'S') {
+             /*  if(this.pointDirection === 'S') {
                 this.pointDirection = 'SE';
                 this.xOffset = 0;
                 this.yOffset = 0;
@@ -125,7 +185,6 @@ boardTower.prototype.update = function () {
             } else {
                 this.shootBoba = false;
             }  */
-
         }
     }
     for (var i = 0; i < this.game.entities.length; i++) {
@@ -134,6 +193,7 @@ boardTower.prototype.update = function () {
             var temp = this.enemyInRange(ent);
             if(temp) {
                 // console.log("ENEMY IN RANGE");
+                this.calculateDirection(ent);
                 this.shootBoba = true;
             }
         }
@@ -180,3 +240,34 @@ boardTower.prototype.enemyInRange = function (rect) {
     }*/
 }
 
+boardTower.prototype.calculateDirection = function (target) {
+    var tempDirection = null;
+    var tempShortestDistance = Infinity;
+    var bestIndex = null;
+    for(var i = 0; i < this.directions.length; i++) {
+        var tempX = this.x + this.shootOutXOffset[i];
+        var tempY = this.y + this.shootOutYOffset[i];
+        var tempDistance = getDistance(target.centerX, target.centerY, tempX, tempY);
+        if(tempDistance < tempShortestDistance) {
+            tempDirection = this.directions[i];
+            tempShortestDistance = tempDistance;
+            bestIndex = i;
+        }
+    }
+    this.intendedDirection = tempDirection;
+    this.shootOutX = this.x + this.shootOutXOffset[bestIndex];
+    this.shootOutY = this.y + this.shootOutYOffset[bestIndex];
+    if(this.pointDirection != this.intendedDirection) {
+        this.spin = true;
+    }
+}
+
+function getDistance(x1, y1, x2, y2) {
+	var xs = x2 - x1;
+    var ys = y2 - y1;		
+      
+    xs *= xs;
+    ys *= ys;
+         
+    return Math.sqrt( xs + ys );
+}
