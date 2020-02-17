@@ -241,6 +241,7 @@ boardTower.prototype.enemyInRange = function (rect) {
 }
 
 boardTower.prototype.calculateDirection = function (target) {
+    if(this.shootTimer >= Date.now())  return;
     var tempDirection = null;
     var tempShortestDistance = Infinity;
     var bestIndex = null;
