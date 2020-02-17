@@ -21,6 +21,8 @@ function roundPlan(game) {
     this.isEnding = false;
     this.game.running = false;
     this.spawningFinish = false;
+    this.displayRoundDone = false;
+    this.gameOverWin = false;
 }
 
 roundPlan.prototype.roundEntity = function(time, game, entity, isRoundEnding) {
@@ -43,6 +45,63 @@ roundPlan.prototype.isNoEnemy = function() {
     return true;
 }
 
+roundPlan.prototype.generateRoundDone = function() {
+    var ctx = this.ctx;
+    var x = 0;
+    var y = 0;
+    var w = 250;
+    var h = 50;
+    ctx.fillStyle = "#ff4747";
+    ctx.fillRect(x,y,w,h);
+    ctx.fillStyle = "black";
+    ctx.font = '30px Bahnschrift Light';
+    ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("OUND", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.font = '30px Bahnschrift Light';
+    ctx.fillText(this.round + " D", this.buttonStartX + 120, this.buttonStartY + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("ONE", this.buttonStartX + 140, this.buttonStartY + 40  );
+}
+
+roundPlan.prototype.generateGameOverLose = function() {
+    var ctx = this.ctx;
+    var x = 0;
+    var y = 0;
+    var w = 250;
+    var h = 50;
+    ctx.fillStyle = "#ff4747";
+    ctx.fillRect(x,y,w,h);
+    ctx.fillStyle = "black";
+    ctx.font = '30px Bahnschrift Light';
+    ctx.fillText("G", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("AME", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.font = '30px Bahnschrift Light';
+    ctx.fillText("O", this.buttonStartX + 120, this.buttonStartY + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("ver(lose)", this.buttonStartX + 140, this.buttonStartY + 40  );
+}
+
+roundPlan.prototype.generateGameOverWin = function() {
+    var ctx = this.ctx;
+    var x = 0;
+    var y = 0;
+    var w = 250;
+    var h = 50;
+    ctx.fillStyle = "#ff4747";
+    ctx.fillRect(x,y,w,h);
+    ctx.fillStyle = "black";
+    ctx.font = '30px Bahnschrift Light';
+    ctx.fillText("G", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("AME", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.font = '30px Bahnschrift Light';
+    ctx.fillText("O", this.buttonStartX + 120, this.buttonStartY + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("ver(win)", this.buttonStartX + 140, this.buttonStartY + 40  );
+}
+
 roundPlan.prototype.update = function () {
     if (this.isRoundStart && this.game.running) {
             this.round++;
@@ -54,6 +113,7 @@ roundPlan.prototype.update = function () {
             this.isRoundStart = true;
             this.game.running = false;
             this.index = 1;
+            this.displayRoundDone = true;
     }
 
     if (!this.isRoundStart && !this.isEnding && !this.spawningFinish) {
@@ -202,11 +262,28 @@ roundPlan.prototype.update = function () {
         } else if (this.round == 5) {
             //end
             //show gameover you win
+            this.gameOverWin = true;
         } 
         this.spawningFinish = true;
     }
 }
 
 roundPlan.prototype.draw = function () {
-  
+    if (this.displayRoundDone) {
+        this.generateRoundDone();
+        sleep(2000).then(() => {
+            this.displayRoundDone = false;
+        });
+        if (this.game.running) {
+            this.displayRoundDone = false;
+        }
+    }
+
+    if (currentLifes < 1) {
+        this.generateGameOverLose();
+    }
+
+    if (this.gameOverWin) {
+        this.generateGameOverWin();
+    }
 }
