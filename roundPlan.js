@@ -199,7 +199,10 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 8));
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 9));
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 10), true);            
-        }
+        } else if (this.round == 5) {
+            //end
+            //show gameover you win
+        } 
         this.spawningFinish = true;
     }
 }
