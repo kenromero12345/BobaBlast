@@ -118,7 +118,7 @@ var enemyEscape = function(enemy) {
 var enemyCenterUpdate = function(enemy) {
     enemy.centerX = enemy.boundingbox.x + enemy.boundingbox.width / 2;
     enemy.centerY = enemy.boundingbox.y + enemy.boundingbox.height / 2;
-        console.log("x:" + enemy.x + ", y:" + enemy.y + ", cx" + enemy.centerX + ", cy:" + enemy.centerY);
+        // console.log("x:" + enemy.x + ", y:" + enemy.y + ", cx" + enemy.centerX + ", cy:" + enemy.centerY);
     var difX = enemy.centerX - enemy.spawnX;
     var difY =  enemy.spawnY - enemy.centerY;
     // console.log("dx:" + difX + ", dy:" + difY);
