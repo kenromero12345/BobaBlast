@@ -27,6 +27,8 @@ function pumpkinEvil(game, spawnX, spawnY, scale) {
     this.boxes = true;
     this.setBoundingBox();
     enemyCenterUpdate(this);
+    this.animationDisappearRight.offsetY = -50;
+    this.animationDisappearLeft.offsetY = -50;
 }
 
 pumpkinEvil.prototype.setBoundingBox = function() {
