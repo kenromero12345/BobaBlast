@@ -158,6 +158,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap, this.game, new biscuit(this.game, -50, 350, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new biscuit(this.game, -50, 350, .75), true);
         } else if (this.round == 4) {
+            console.log("WE HAVE REACHED ROUND 4");
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 0));
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 1));
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 2));

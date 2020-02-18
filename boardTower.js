@@ -34,7 +34,6 @@ function boardTower(game, gridX, gridY, type) {
     this.upgradeMode = false;
     this.shootBobaSpeed = null; // TODO
     this.radius = this.towerType.radius; 
-    this.actualRadiusOverlay = 175;
     this.shootDestinationX = 0; 
     this.shootDestinationY = 0; 
     this.shootBobaEveryMS = this.towerType.frequency;      
