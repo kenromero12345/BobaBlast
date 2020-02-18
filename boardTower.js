@@ -33,11 +33,11 @@ function boardTower(game, gridX, gridY, type) {
     this.shootBoba = false; 
     this.upgradeMode = false;
     this.shootBobaSpeed = null; // TODO
-    this.radius = 150; 
+    this.radius = this.towerType.radius; 
     this.actualRadiusOverlay = 175;
     this.shootDestinationX = 0; 
     this.shootDestinationY = 0; 
-    this.shootBobaEveryMS = 100;         // SHOOT EVERY 1 SECOND
+    this.shootBobaEveryMS = this.towerType.frequency;      
     this.directions = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
     this.shootOutXOffset = [15, 45, 55, 45, 10, -20, -30, -25 ];
     this.shootOutYOffset = [50,40, 5, -5, -20, -5, 10, 40];

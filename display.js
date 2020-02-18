@@ -1,4 +1,4 @@
-var currentMoney = 650;
+var currentMoney = 1000;
 var currentLifes = 100;
 
 var purchaseMode = false;

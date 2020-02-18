@@ -1,7 +1,9 @@
-function storeTower(game, name, cost, description, spritesheet, xCoordinate, yCoordinate, width, height, storeGridX, storeGridY) {
+function storeTower(game, name, cost, frequency, radius, description, spritesheet, xCoordinate, yCoordinate, width, height, storeGridX, storeGridY) {
     this.game = game;
     this.name = name;
     this.cost = cost;
+    this.frequency = frequency;
+    this.radius = radius;
     this.description = description;
     this.spritesheet = spritesheet;
     this.ctx = game.ctx;

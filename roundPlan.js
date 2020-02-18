@@ -49,19 +49,13 @@ roundPlan.prototype.generateRoundDone = function() {
     var ctx = this.ctx;
     var x = 0;
     var y = 0;
-    var w = 250;
+    var w = 300;
     var h = 50;
     ctx.fillStyle = "#ff4747";
     ctx.fillRect(x,y,w,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 40  );
-    ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("OUND", this.buttonStartX + 55, this.buttonStartY + 40  );
-    ctx.font = '30px Bahnschrift Light';
-    ctx.fillText(this.round + " D", this.buttonStartX + 120, this.buttonStartY + 40  );
-    ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("ONE", this.buttonStartX + 140, this.buttonStartY + 40  );
+    ctx.fillText("Round " + this.round + " Complete", x + 35, y + 40  );
 }
 
 roundPlan.prototype.generateGameOverLose = function() {
@@ -69,18 +63,20 @@ roundPlan.prototype.generateGameOverLose = function() {
     var x = 0;
     var y = 0;
     var w = 250;
-    var h = 50;
+    var h = 100;
     ctx.fillStyle = "#ff4747";
     ctx.fillRect(x,y,w,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("G", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.fillText("G", x + 35, y + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("AME", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.fillText("AME", x + 55, y + 40  );
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("O", this.buttonStartX + 120, this.buttonStartY + 40  );
+    ctx.fillText("O", x + 120, y + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("ver(lose)", this.buttonStartX + 140, this.buttonStartY + 40  );
+    ctx.fillText("VER", x + 140, y + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("YOU LOSE!", x + 35, y + 70  );
 }
 
 roundPlan.prototype.generateGameOverWin = function() {
@@ -88,18 +84,20 @@ roundPlan.prototype.generateGameOverWin = function() {
     var x = 0;
     var y = 0;
     var w = 250;
-    var h = 50;
+    var h = 100;
     ctx.fillStyle = "#ff4747";
     ctx.fillRect(x,y,w,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("G", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.fillText("G", x + 35, y + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("AME", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.fillText("AME", x + 55, y + 40  );
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("O", this.buttonStartX + 120, this.buttonStartY + 40  );
+    ctx.fillText("O", x + 120, y + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("ver(win)", this.buttonStartX + 140, this.buttonStartY + 40  );
+    ctx.fillText("VER", x + 140, y + 40  );
+    ctx.font = '26px Bahnschrift Light';
+    ctx.fillText("YOU WIN!", x + 35, y + 70  );
 }
 
 roundPlan.prototype.update = function () {
@@ -271,12 +269,12 @@ roundPlan.prototype.update = function () {
 roundPlan.prototype.draw = function () {
     if (this.displayRoundDone) {
         this.generateRoundDone();
-        sleep(2000).then(() => {
+        sleep(4000).then(() => {
             this.displayRoundDone = false;
         });
         if (this.game.running) {
             this.displayRoundDone = false;
-        }
+        } 
     }
 
     if (currentLifes < 1) {
