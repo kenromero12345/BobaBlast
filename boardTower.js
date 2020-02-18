@@ -14,6 +14,7 @@ function boardTower(game, gridX, gridY, type) {
     this.xOffset = 0;
     this.yOffset = 1;
     this.towerType = type;
+    this.cost = this.towerType.cost;
     this.spritesheet = type.spritesheet;
     this.animationSouthEast = new Animation(this.spritesheet, 580, 90, 350, 350, 1, 0.1, 1, true, 0.2);
     this.animationSouth = new Animation(this.spritesheet, 105, 90, 350, 350, 1, 0.1 , 1, true, 0.2); 
@@ -27,12 +28,12 @@ function boardTower(game, gridX, gridY, type) {
     this.y = gridY * 100 + 10;
     this.centerX = this.x + 25;
     this.centerY = this.y + 25;
-    this.shootOutX = this.x; // CHANGES WHEN DIRECITON CHANGES
-    this.shootOutY = this.y; // CHANGES WHEN DIRECTION CHANGES
+    this.shootOutX = this.x;
+    this.shootOutY = this.y;
     this.shootBoba = false; 
     this.upgradeMode = false;
     this.shootBobaSpeed = null; // TODO
-    this.radius = 300; 
+    this.radius = 150; 
     this.actualRadiusOverlay = 175;
     this.shootDestinationX = 0; 
     this.shootDestinationY = 0; 

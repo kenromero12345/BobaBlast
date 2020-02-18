@@ -215,9 +215,12 @@ board.prototype.update = function () {
       // console.log("X: " + click.x + "Y" + click.y);
       if (isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
         && !GAMEBOARD[gridX][gridY].occupied) {
-        GAMEBOARD[gridX][gridY].occupied = true;
-        var tempTower = new boardTower(this.game, gridX, gridY, towerArray[selectedTowerRow][selectedTowerColumn]);
-        this.game.addEntity(tempTower);
+        if(currentMoney - towerArray[selectedTowerRow][selectedTowerColumn].cost >= 0) {
+          GAMEBOARD[gridX][gridY].occupied = true;
+          var tempTower = new boardTower(this.game, gridX, gridY, towerArray[selectedTowerRow][selectedTowerColumn]);
+          this.game.addEntity(tempTower);
+          currentMoney = currentMoney - tempTower.cost;
+        }
       //  ACTIVETOWERS.push([gridX, gridY,towerArray[selectedTowerRow][selectedTowerColumn].spritesheet]);
         selectedTowerRow = -1;
         selectedTowerColumn = -1;
