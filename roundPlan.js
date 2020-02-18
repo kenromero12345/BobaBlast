@@ -151,7 +151,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
-            this.roundEntity(this.index * this.timeGap, this.game, new iceGolem(this.game, -50, 350));
+            this.roundEntity(this.index * this.timeGap, this.game, new iceGolem(this.game, -50, 350, .70));
             this.roundEntity(this.index * this.timeGap, this.game, new pumpkinEvil(this.game, -50, 350, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new pumpkinGood(this.game, -50, 350, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new bigCake(this.game, -50, 350, .25));
