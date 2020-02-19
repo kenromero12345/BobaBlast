@@ -140,7 +140,7 @@ var moneyUpdate = function(enemy) {
 var collideUpdate = function(enemy) {
     for (var i = 0; i < enemy.game.entities.length; i++) {
         var ent = enemy.game.entities[i];
-        if (ent !== enemy) {
+        if (ent !== enemy && enemy.hp > 0) {
             if (ent.isFreeze && enemy.boundingbox.collide(ent.boundingbox)) {
                 //TODO: by chance
                 if (Math.random() < enemy.freezeResistance ? false : true) {
