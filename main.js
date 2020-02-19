@@ -17,10 +17,17 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
     this.flip = flip;
     this.offsetY = 0;
     this.offsetX = 0;
+    if (this.frameWidth < 0 ) {
+        this.reverse = true;
+    } else {
+        this.reverse = false;
+    }
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
-    this.elapsedTime += tick;
+    // if(this.currentFrame() != 2){
+        this.elapsedTime += tick;
+    // }
     if (!(this.isDone() && !this.loop)) {
     if (this.isDone()) {
         if (this.loop) this.elapsedTime = 0;
@@ -34,7 +41,10 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y) {
 		xindex = this.sheetWidth - 1 -frame % this.sheetWidth;
 	} else {
 		xindex = frame % this.sheetWidth;
-	}
+    }
+    if (this.reverse) {
+        x -= this.frameWidth * .75;
+    }
     ctx.drawImage(this.spriteSheet,
                  xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
                  this.frameWidth, this.frameHeight,
@@ -63,18 +73,37 @@ AM.queueDownload("./img/yellowTeaFlip.png");
 // AM.queueDownload("./img/origTeaFlip.png");
 AM.queueDownload("./img/background.png");
 AM.queueDownload("./img/holder.png");
-AM.queueDownload("./img/towerG2.png");
-AM.queueDownload("./img/towerR2.png");
-AM.queueDownload("./img/towerY2.png");
+AM.queueDownload("./img/tower.png");
+AM.queueDownload("./img/towerG.png");
+AM.queueDownload("./img/towerR.png");
+AM.queueDownload("./img/towerY.png");
 AM.queueDownload("./img/iceg.png");
 AM.queueDownload("./img/icegFlip.png");
 AM.queueDownload("./img/cola.png");
 AM.queueDownload("./img/colaFlip.png");
 AM.queueDownload("./img/slime.png");
 AM.queueDownload("./img/slimeFlip.png");
-  
+AM.queueDownload("./img/watermelon.png");
+AM.queueDownload("./img/watermelonFlip.png");
+AM.queueDownload("./img/miniCake.png");
+AM.queueDownload("./img/miniCakeFlip.png");
+AM.queueDownload("./img/biscuitWarrior.png");
+AM.queueDownload("./img/biscuitWarriorFlip.png");
+AM.queueDownload("./img/cakeChoco.png");
+AM.queueDownload("./img/cakeChocoFlip.png");
+AM.queueDownload("./img/sprite.png");
+AM.queueDownload("./img/spriteFlip.png");
+AM.queueDownload("./img/cake.png");
+AM.queueDownload("./img/cakeFlip.png");
+AM.queueDownload("./img/bigCake.png");
+AM.queueDownload("./img/bigCakeFlip.png");
+AM.queueDownload("./img/pumpkinGood.png");
+AM.queueDownload("./img/pumpkinGoodFlip.png");
+AM.queueDownload("./img/pumpkinEvil.png");
+AM.queueDownload("./img/pumpkinEvilFlip.png");
 
 function Background(game, spritesheet) {
+    this.isEnemy = false;
     this.x = 0;
     this.y = 0;
     this.spritesheet = spritesheet;
@@ -97,45 +126,22 @@ AM.downloadAll(function () {
     var gameEngine = new GameEngine();
     gameEngine.init(ctx);
     gameEngine.start();
-    
+
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
     // board = new function() {
     //     new board(gameEngine);
-    // } 
+    // }
     // GAMEBOARD = board.GAMEBOARD;
     // gameEngine.addEntity(board);
+
     gameEngine.addEntity(new board(gameEngine));
-    gameEngine.addEntity(new redTea(gameEngine, -50, 250, false, .75));
-    gameEngine.addEntity(new iceGolem(gameEngine, -50, 250, .6));
-    gameEngine.addEntity(new cola(gameEngine, -50, 250, 1));
-    gameEngine.addEntity(new slimeGreen(gameEngine, 500, 300, 1));
-    sleep(2000).then(() => {
-        gameEngine.addEntity(new greenTea(gameEngine, -50, 250, false, .75));
-    })
-    sleep(8000).then(() => {
-        gameEngine.addEntity(new yellowTea(gameEngine, -50, 250, true, .75));
-    })
+
+    gameEngine.addEntity(new roundPlan(gameEngine));
 
     // BOBA BULLET TESTING
-    gameEngine.addEntity(new boba(gameEngine,500, 500, 300, 350));
+    gameEngine.addEntity(new display(gameEngine));
+    towerArray = generateStoreTowers(gameEngine);
 
-    sleep(8000).then(() => {
-        gameEngine.addEntity(new boba(gameEngine,500, 500, 300, 350));
-    })
-
-    sleep(10000).then(() => {
-        gameEngine.addEntity(new boba(gameEngine,500, 500, 200, 200));
-    })
-
-    sleep(11000).then(() => {
-        gameEngine.addEntity(new boba(gameEngine,100, 100, 200, 200));
-    })
-
-    sleep(8000).then(() => {
-        gameEngine.addEntity(new boba(gameEngine,0, 500, 900, 50));
-    })
-    
-    gameEngine.addEntity(new display(gameEngine, this.generateGenericTowers(gameEngine)));
 
     console.log("All Done!");
 
@@ -145,21 +151,85 @@ AM.downloadAll(function () {
     gameEngine.running = false;
 });
 
-function generateGenericTowers(game) {
-    var firstTower = new tower(game, "Tower 1", 300, "Tower 1 \ncan shoot 3 bobas \nevery second.",AM.getAsset("./img/towerG2.png"));
-    var secondTower = new tower(game, "Tower 2", 320, "Tower 2 \ncan shoot 5 bobas \nevery second.",AM.getAsset("./img/towerR2.png"));
-    var thirdTower = new tower(game, "Tower 3", 400, "Tower 3 \ncan shoot 10 bobas \nevery second.",AM.getAsset("./img/towerY2.png"));
-    var fourthTower = new tower(game, "Tower 4", 500, "Tower 4 \ncan shoot 30 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var fifthTower = new tower(game, "Tower 5", 200, "Tower 5 \ncan shoot 2 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var sixthTower = new tower(game, "Tower 6", 100, "Tower 6 \ncan shoot 1 boba \nevery second.",AM.getAsset("./img/holder.png"));
-    var seventhTower = new tower(game, "Tower 7", 1000, "Tower 7 \ncan shoot 15 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var eightTower = new tower(game, "Tower 8", 2000, "Tower 8 \ncan shoot 20 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    var ninthTower = new tower(game, "Tower 9", 2200, "Tower 9 \ncan shoot 21 bobas \nevery second.",AM.getAsset("./img/holder.png"));
-    
+function generateStoreTowers(game) {
+    var firstTower = new storeTower(game, "Seattle", 100, 1000, 150, "Seattle Tower \ncan shoot one boba per second.",AM.getAsset("./img/tower.png"), 945, 200, 70,70,0,0);
+    var secondTower = new storeTower(game, "Portland", 250, 250, 300, "Portland Tower \ncan shoot 4 bobas \nevery second.",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0);
+    var thirdTower = new storeTower(game, "Los Angeles", 500, 100, 300,"Los Angeles Tower \ncan shoot 10 bobas \nevery second.",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0);
+    var fourthTower = new storeTower(game, "San Diego", 1000, 50, 500, "San Diego Tower \ncan shoot 20 bobas \nevery second.",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1);
+    var fifthTower = new storeTower(game, "Tower 5", 200, 1000, 150, "Tower 5 \ncan shoot 2 bobas \nevery second.",AM.getAsset("./img/holder.png"), 1015, 270, 70,70,1,1);
+    var sixthTower = new storeTower(game, "Tower 6", 100, 1000, 150, "Tower 6 \ncan shoot 1 boba \nevery second.",AM.getAsset("./img/holder.png"), 1085, 270, 70,70,2,1);
+    var seventhTower = new storeTower(game, "Tower 7", 1000, 1000, 150,"Tower 7 \ncan shoot 15 bobas \nevery second.",AM.getAsset("./img/holder.png"), 945, 340,70,70,0,2);
+    var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \ncan shoot 20 bobas \nevery second.",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2);
+    var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \ncan shoot 21 bobas \nevery second.",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2);
+
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower,eightTower,ninthTower]];
+    for(var i = 0; i < 3; i++) {
+        for(var j = 0; j < 3; j++) {
+            game.addEntity(temp[i][j]);
+        }
+    }
     return temp;
 }
 
+//sleep in some milliseconds
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
-  }
+}
+
+// make other js be off if this is true
+var boxesOff = true;
+
+// if there is no enemy when the last enemy is spawned
+// means round is done, round ++, (round starts at 1)
+//if round is 5, you win, game over
+// else game over, you lose
+
+
+ // gameEngine.addEntity(new bigCake(gameEngine, -50, 350, .25));
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, -50, 350, .75));
+    // gameEngine.addEntity(new pumpkinGood(gameEngine, -50, 350, .75));
+    // gameEngine.addEntity(new redTea(gameEngine, -50, 350, false, .75));
+
+    // gameEngine.addEntity(new iceGolem(gameEngine, -50, 350));
+    // gameEngine.addEntity(new cola(gameEngine, -50, 350, .85, false));
+    // // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 1));//450//250
+    // gameEngine.addEntity(new slime(gameEngine, -50, 350, .75));//450//250
+    // gameEngine.addEntity(new watermelon(gameEngine, -50, 350, .75));
+    // gameEngine.addEntity(new miniCake(gameEngine, -50, 350, .75));
+    // gameEngine.addEntity(new biscuit(gameEngine, -50, 350, .75));
+    // gameEngine.addEntity(new cakeChoco(gameEngine, -50, 350, .75));
+    // gameEngine.addEntity(new cake(gameEngine, -50, 350, .75));
+    // // gameEngine.addEntity(new squareSlime(gameEngine, -50, 350, .75));
+    // sleep(2000).then(() => {
+    //     gameEngine.addEntity(new greenTea(gameEngine, -50, 350, false, .75));
+    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 10));//450//250
+    // })
+    // sleep(4000).then(() => {
+    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 7));//450//250
+    //     gameEngine.addEntity(new cola(gameEngine, -50, 350, .85, true));
+    // })
+    // sleep(6000).then(() => {
+    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 8));//450//250
+    // })
+    // sleep(8000).then(() => {
+    //     gameEngine.addEntity(new yellowTea(gameEngine, -50, 350, true, .75));
+    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 5));//450//250
+    // })
+    // sleep(10000).then(() => {
+    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 4));//450//250
+    // })
+    // sleep(12000).then(() => {
+    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 3));//450//250
+    // })
+    // sleep(14000).then(() => {
+    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 0));//450//250
+    // })
+    // sleep(16000).then(() => {
+    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 2));//450//250
+    // })
+    // sleep(18000).then(() => {
+    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 1));//450//250
+    // })
+    // sleep(20000).then(() => {
+    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 9));//450//250
+    // })
