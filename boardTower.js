@@ -188,8 +188,11 @@ boardTower.prototype.update = function () {
         if (ent !== this && ent.isEnemy) {
             var temp = this.enemyInRange(ent);
             if(temp) {
-                this.calculateDirection(ent);
-                this.shootBoba = true;
+                var buffer = ent.hp;
+                if(buffer>0){
+                    this.calculateDirection(ent);
+                    this.shootBoba = true;
+                }
             }
         }
     }
