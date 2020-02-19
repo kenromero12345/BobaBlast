@@ -15,7 +15,7 @@ function bigCake(game, spawnX, spawnY, scale) {
     this.animationWalkRight.offsetX = -150;
     this.animationDisappearRight.offsetX = -150;
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
 }
 
 bigCake.prototype.setBoundingBox = function() {
@@ -83,8 +83,8 @@ bigCake.prototype.update = function () {
             enemyUpdateLookHelper(this);
         }
 
-        // enemyUpdateHelper(this);
-        bigCakeUpdate(this);
+        enemyUpdateHelper(this);
+        // bigCakeUpdate(this);
 
         this.setBoundingBox();
         

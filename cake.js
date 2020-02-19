@@ -13,7 +13,7 @@ function cake(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/cakeFlip.png")
     , 879, 270, -96, 103, 8, .2, 8, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
 }
 
 cake.prototype.setBoundingBox = function() {

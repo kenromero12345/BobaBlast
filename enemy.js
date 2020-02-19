@@ -224,7 +224,7 @@ var enemyFreezeUpdate = function(enemy) {
     }
 }
 
-var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, game, speed) {
+var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, game, speed, frameDuration) {
     enemy.spawnX = spawnX;
     enemy.spawnY = spawnY;
     enemy.scale = scale;
@@ -232,6 +232,7 @@ var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, gam
     enemy.width = width * scale;
     enemy.height = height * scale;
     enemy.tempSpeed = speed;
+    enemy.tempFrameDuration = frameDuration;
     enemy.x = spawnX - 50;
     enemy.y = spawnY - 50;
     enemy.game = game;

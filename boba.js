@@ -33,7 +33,7 @@ function boba(game, startX, startY, destinationX, destinationY) {
     this.ctx = game.ctx;
     this.noCollision = true;
     this.boxes = true;
-    this.boundingbox = new BoundingBox(this.x + 5, this.y + 5, this.width -10, this.height - 10);
+    this.boundingbox = new BoundingBox(this.x + 7, this.y + 13, this.width -21, this.height - 23);
 }
 
 boba.prototype.draw = function () {
@@ -73,6 +73,6 @@ boba.prototype.update = function () {
             this.y += this.slope * this.game.clockTick * this.speed;
             // this.boundingbox.y += this.slope * this.game.clockTick * this.speed;
         }
-        this.boundingbox = new BoundingBox(this.x + 5, this.y + 5, this.width -10, this.height - 10);
+        this.boundingbox = new BoundingBox(this.x + 7, this.y + 13, this.width -21, this.height - 23);
     }
 }

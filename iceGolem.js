@@ -13,7 +13,7 @@ function iceGolem(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/icegFlip.png")
     , 0, 745, 238, 180, 7, 0.25, 7, false, scale, true);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
 }
 
 iceGolem.prototype.setBoundingBox = function() {

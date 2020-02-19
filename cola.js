@@ -25,7 +25,7 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
         , 0, 341, 70, 65, 5, 0.2, 5, false, scale, true);
     }
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
 }
 
 cola.prototype.setBoundingBox = function() {
