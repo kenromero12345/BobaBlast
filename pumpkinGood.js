@@ -25,6 +25,7 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinGoodFlip.png")
     , 720, 260, -84, 76, 7, .2, 7, false, scale, false);
     this.boxes = true;
+    this.money = 20;
     this.setBoundingBox();
     enemyCenterUpdate(this);
 }
@@ -179,13 +180,16 @@ pumpkinGood.prototype.update = function () {
         
         enemyEscape(this);
         
-        for (var i = 0; i < this.game.entities.length; i++) {
-            var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
-                ent.removeFromWorld = true;
-                this.hp--;
-            }
-        }
+        // for (var i = 0; i < this.game.entities.length; i++) {
+        //     var ent = this.game.entities[i];
+        //     if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
+        //         ent.removeFromWorld = true;
+        //         this.hp--;
+        //     }
+        // }
+        collideUpdate(this);
+        
+        moneyUpdate(this);
     }
 }
 

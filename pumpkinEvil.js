@@ -16,6 +16,7 @@ function pumpkinEvil(game, spawnX, spawnY, scale) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = !false;
     this.hp = 40;//
+    this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/pumpkinEvil.png")
     , 0, 115, 125, 112, 6, .135, 6, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/pumpkinEvil.png")
@@ -180,13 +181,16 @@ pumpkinEvil.prototype.update = function () {
         
         enemyEscape(this);
 
-        for (var i = 0; i < this.game.entities.length; i++) {
-            var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
-                ent.removeFromWorld = true;
-                this.hp--;
-            }
-        }
+        // for (var i = 0; i < this.game.entities.length; i++) {
+        //     var ent = this.game.entities[i];
+        //     if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
+        //         ent.removeFromWorld = true;
+        //         this.hp--;
+        //     }
+        // }
+        collideUpdate(this);
+        
+        moneyUpdate(this);
     }
 }
 

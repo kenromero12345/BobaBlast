@@ -116,6 +116,7 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 50;
+    this.money = 20;
     if (isWhite) {
         this.animationWalkLeft = new Animation(AM.getAsset("./img/sprite.png")
         , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
@@ -171,12 +172,15 @@ cola.prototype.update = function () {
 
         enemyEscape(this);
 
-        for (var i = 0; i < this.game.entities.length; i++) {
-            var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
-                ent.removeFromWorld = true;
-                this.hp--;
-            }
-        }
+        // for (var i = 0; i < this.game.entities.length; i++) {
+        //     var ent = this.game.entities[i];
+        //     if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
+        //         ent.removeFromWorld = true;
+        //         this.hp--;
+        //     }
+        // }
+        collideUpdate(this);
+        
+        moneyUpdate(this);
     }
 }

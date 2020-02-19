@@ -11,12 +11,12 @@ function cake(game, spawnX, spawnY, scale) {
     this.speed = 100;
     this.x = spawnX - 50;
     this.y = spawnY - 50;
-
     this.game = game;
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = !false;
     this.hp = 40;//
+    this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/cake.png")
     , 0, 85, 96, 90, 5, .135, 5, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/cake.png")
@@ -180,13 +180,16 @@ cake.prototype.update = function () {
         
         enemyEscape(this);
         
-        for (var i = 0; i < this.game.entities.length; i++) {
-            var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
-                ent.removeFromWorld = true;
-                this.hp--;
-            }
-        }
+        // for (var i = 0; i < this.game.entities.length; i++) {
+        //     var ent = this.game.entities[i];
+        //     if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
+        //         ent.removeFromWorld = true;
+        //         this.hp--;
+        //     }
+        // }
+        collideUpdate(this);
+        
+        moneyUpdate(this);
     }
 }
 

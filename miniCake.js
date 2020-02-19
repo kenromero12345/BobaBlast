@@ -16,6 +16,7 @@ function miniCake(game, spawnX, spawnY, scale) {
     this.moveDirection = 3; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 20;//
+    this.money = 10;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/miniCake.png")
     , 0, 66, 67, 48, 6, .135, 6, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/miniCake.png")
@@ -131,13 +132,16 @@ miniCake.prototype.update = function () {
 
         enemyEscape(this);
         
-        for (var i = 0; i < this.game.entities.length; i++) {
-            var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
-                ent.removeFromWorld = true;
-                this.hp--;
-            }
-        }
+        // for (var i = 0; i < this.game.entities.length; i++) {
+        //     var ent = this.game.entities[i];
+        //     if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
+        //         ent.removeFromWorld = true;
+        //         this.hp--;
+        //     }
+        // }
+        collideUpdate(this);
+        
+        moneyUpdate(this);
     }
 }
 

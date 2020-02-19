@@ -16,6 +16,7 @@ function biscuit(game, spawnX, spawnY, scale) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = !false;
     this.hp = 30;//
+    this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/biscuitWarrior.png")
     , 7, 111, 98, 94, 6, .135, 6, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/biscuitWarrior.png")
@@ -143,16 +144,19 @@ biscuit.prototype.update = function () {
 
         enemyEscape(this);
         
-        for (var i = 0; i < this.game.entities.length; i++) {
-            var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
-                ent.removeFromWorld = true;
-                this.hp--;
-            }
-            // console.log(this.hp);
-            // if (ent.isBoba) {
-            // // console.log(this.boundingbox.collide(ent.boundingbox));
-            // }
-        }
+        // for (var i = 0; i < this.game.entities.length; i++) {
+        //     var ent = this.game.entities[i];
+        //     if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
+        //         ent.removeFromWorld = true;
+        //         this.hp--;
+        //     }
+        //     // console.log(this.hp);
+        //     // if (ent.isBoba) {
+        //     // // console.log(this.boundingbox.collide(ent.boundingbox));
+        //     // }
+        // }
+        collideUpdate(this);
+
+        moneyUpdate(this);
     }
 }

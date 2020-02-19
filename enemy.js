@@ -128,3 +128,21 @@ var enemyCenterUpdate = function(enemy) {
     enemy.y = enemy.y + difY;
         // console.log("x:" + enemy.x + ", y:" + enemy.y + ", cx" + enemy.centerX + ", cy:" + enemy.centerY);
 }
+
+var moneyUpdate = function(enemy) {
+    var xy = getXY(enemy.centerX, enemy.centerY);
+    if(enemy.hp <= 0 && !GAMEBOARD[xy.x][xy.y].end) {
+        currentMoney += enemy.money;
+        enemy.money = 0;
+    }
+}
+
+var collideUpdate = function(enemy) {
+    for (var i = 0; i < enemy.game.entities.length; i++) {
+        var ent = enemy.game.entities[i];
+        if (ent !== enemy && ent.isBoba &&  enemy.boundingbox.collide(ent.boundingbox)) {
+            ent.removeFromWorld = true;
+            enemy.hp--;
+        }
+    }
+}

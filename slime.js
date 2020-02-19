@@ -497,6 +497,7 @@ function slime(game, spawnX, spawnY, scale, num) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 10;//
+    this.money = 10;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/slime.png")
     , 5, 70 + this.slimeOffsetY, 79, 80, 7, .135, 7, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/slime.png")
@@ -745,13 +746,16 @@ slime.prototype.update = function () {
         enemyEscape(this);
         
         // else i
-        for (var i = 0; i < this.game.entities.length; i++) {
-            var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
-                ent.removeFromWorld = true;
-                this.hp--;
-            }
-        }
+        // for (var i = 0; i < this.game.entities.length; i++) {
+        //     var ent = this.game.entities[i];
+        //     if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
+        //         ent.removeFromWorld = true;
+        //         this.hp--;
+        //     }
+        // }
+        collideUpdate(this);
+        
+        moneyUpdate(this);
     }
 }
 

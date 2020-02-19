@@ -102,16 +102,22 @@ roundPlan.prototype.generateGameOverWin = function() {
 
 roundPlan.prototype.update = function () {
     if (this.isRoundStart && this.game.running) {
-            this.round++;
-            this.isRoundStart = false;
-            this.isEnding = false;
-            this.spawningFinish = false;
+        this.round++;
+        this.isRoundStart = false;
+        this.isEnding = false;
+        this.spawningFinish = false;
     } else if (this.isEnding && this.isNoEnemy() && this.game.running) {
-            this.isEnding = false;
-            this.isRoundStart = true;
-            this.game.running = false;
-            this.index = 1;
-            this.displayRoundDone = true;
+        this.isEnding = false;
+        this.isRoundStart = true;
+        this.game.running = false;
+        this.index = 1;
+        this.displayRoundDone = true;
+        for (var i = 0; i < this.game.entities.length; i++) {
+            var ent = this.game.entities[i];
+            if (ent.isBoba) {
+                ent.removeFromWorld = true;
+            }
+        }
     }
 
     if (!this.isRoundStart && !this.isEnding && !this.spawningFinish) {
