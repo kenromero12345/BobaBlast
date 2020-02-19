@@ -1,6 +1,6 @@
 function boba(game, startX, startY, destinationX, destinationY) {
     this.name = "BOBA";
-    this.animation = new Animation(AM.getAsset("./img/22137.png"), 14, 445, 28, 28, 1, 0.1, 1, true, 1);
+    this.animation = new Animation(AM.getAsset("./img/boba.png"), 0, 0, 20, 20, 1, 0.1, 1, true, 1);
     this.x = startX;
     this.y = startY;
     this.isBoba = true;
@@ -28,7 +28,7 @@ function boba(game, startX, startY, destinationX, destinationY) {
     }
     this.width = 28;
     this.height = 28;
-    this.speed = 100;
+    this.speed = 200;
     this.game = game;
     this.ctx = game.ctx;
     this.noCollision = true;
