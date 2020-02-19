@@ -39,6 +39,7 @@ function GameEngine() {
     this.surfaceHeight = null;
     this.towers = null;
     this.display = null;
+    this.activeTowers = [];
 }
 
 GameEngine.prototype.init = function (ctx) {
