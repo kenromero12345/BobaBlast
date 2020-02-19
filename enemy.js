@@ -136,3 +136,13 @@ var moneyUpdate = function(enemy) {
         enemy.money = 0;
     }
 }
+
+var collideUpdate = function(enemy) {
+    for (var i = 0; i < enemy.game.entities.length; i++) {
+        var ent = enemy.game.entities[i];
+        if (ent !== enemy && ent.isBoba &&  enemy.boundingbox.collide(ent.boundingbox)) {
+            ent.removeFromWorld = true;
+            enemy.hp--;
+        }
+    }
+}

@@ -228,13 +228,14 @@ var update = function (tea) {
 
     enemyEscape(tea);
 
-    for (var i = 0; i < tea.game.entities.length; i++) {
-        var ent = tea.game.entities[i];
-        if (ent !== tea && ent.isBoba && tea.boundingbox.collide(ent.boundingbox)) {
-            ent.removeFromWorld = true;
-            tea.hp--;
-        }
-    }
+    // for (var i = 0; i < tea.game.entities.length; i++) {
+    //     var ent = tea.game.entities[i];
+    //     if (ent !== tea && ent.isBoba && tea.boundingbox.collide(ent.boundingbox)) {
+    //         ent.removeFromWorld = true;
+    //         tea.hp--;
+    //     }
+    // }
+    collideUpdate(tea);
 
     moneyUpdate(tea);
 }
