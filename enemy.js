@@ -141,39 +141,39 @@ var collideUpdate = function(enemy) {
     for (var i = 0; i < enemy.game.entities.length; i++) {
         var ent = enemy.game.entities[i];
         if (ent !== enemy) {
+            if (ent.isFreeze && enemy.boundingbox.collide(ent.boundingbox)) {
+                //TODO: by chance
+                if (Math.random() < enemy.freezeResistance ? false : true) {
+                    enemy.isFrozen = true;
+                    enemy.speed = enemy.tempSpeed / 2;
+                    enemy.freezeDate = Date.now() + 500;
+                }
+            }
+            if (ent.isParalyze && enemy.boundingbox.collide(ent.boundingbox)) {
+                //TODO: by chance
+                if (Math.random() < enemy.paralysisResistance ? false : true) {
+                    enemy.isParalyzed = true;
+                    enemy.speed = 0;
+                    enemy.paralyzeDate = Date.now() + 2000;
+                }
+            } 
+            if (ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
+                //TODO: by chance
+                if (Math.random() < enemy.poisonResistance ? false : true) {
+                    enemy.isPoisoned = true;
+                    enemy.poisonDate = Date.now() + 10000;
+                }
+            } 
+            if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
+                //TODO: by chance
+                if (Math.random() < enemy.burnResistance ? false : true) {
+                    enemy.isBurned = true;
+                    enemy.burnDate = Date.now() + 10000;
+                }
+            } 
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
                 ent.removeFromWorld = true;
                 enemy.hp--;
-            } 
-            if (ent.isBoba && ent.isFrozen && enemy.boundingbox.collide(ent.boundingbox)) {
-                ent.freezeDate = Date.now() + 500;
-                ent.tempSpeed = ent.speed;
-                ent.speed = ent.tempSpeed / 2;
-                // sleep(10000).then(() => {
-                //     ent.speed *= 2;
-                // })
-            }
-            if (ent.isBoba && ent.isParalyzed && enemy.boundingbox.collide(ent.boundingbox)) {
-                ent.tempSpeed = ent.speed;
-                ent.speed = 0;
-                ent.paralyzeDate = Date.now() + 500;
-                // sleep(500).then(() => {
-                //     ent.speed = temp;
-                // })
-            } 
-            if (ent.isBoba && ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
-                ent.isPoisoned = true;
-                // sleep(10000).then(() => {
-                //     ent.isPoisoned = false;
-                // })
-                ent.poisonDate = Date.now() + 10000;
-            } 
-            if (ent.isExplosion && enemy.boundingbox.collide(ent.boundingbox)) {
-                ent.isBurned = true;
-                ent.burnDate = Date.now() + 10000;
-                // sleep(10000).then(() => {
-                //     ent.isPoisoned = false;
-                // })
             } 
         }
     }
@@ -206,7 +206,7 @@ var enemyBurnUpdate = function(enemy) {
 
 var enemyParalyzeUpdate = function(enemy) {
     if (enemy.isParalyzed) {
-        // ent.hp--;
+        ent.hp--;
         if (Date.now() >= enemy.paralyzeDate) {
             enemy.isParalyzed = false;
             enemy.speed = tempSpeed;
@@ -216,7 +216,7 @@ var enemyParalyzeUpdate = function(enemy) {
 
 var enemyFreezeUpdate = function(enemy) {
     if (enemy.isFrozen) {
-        // ent.hp--;
+        ent.hp--;
         if (Date.now() >= enemy.freezeDate) {
             enemy.isFrozen = false;
             enemy.speed = tempSpeed;
@@ -224,14 +224,14 @@ var enemyFreezeUpdate = function(enemy) {
     }
 }
 
-var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, game) {
+var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, game, speed) {
     enemy.spawnX = spawnX;
     enemy.spawnY = spawnY;
     enemy.scale = scale;
     enemy.isEnemy = true;
     enemy.width = width * scale;
     enemy.height = height * scale;
-
+    enemy.tempSpeed = speed;
     enemy.x = spawnX - 50;
     enemy.y = spawnY - 50;
     enemy.game = game;
@@ -246,4 +246,12 @@ var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, gam
     enemy.isBurned = false;
     enemy.isFrozen = false;
     enemy.isParalyzed = false;
+    enemy.poisonDate = Date.now();
+    enemy.burnDate = Date.now();
+    enemy.freezeDate = Date.now();
+    enemy.paralyzeDate = Date.now();
+    enemy.burnResistance = .25;
+    enemy.poisonResistance = .25;
+    enemy.paralysisResistance = .25;
+    enemy.freezeResistance = .25;
 }

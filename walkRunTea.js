@@ -33,6 +33,11 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     this.isBurned = false;
     this.isFrozen = false;
     this.isParalyzed = false;
+    tea.tempSpeed = tea.speed;
+    tea.poisonDate = Date.now();
+    tea.burnDate = Date.now();
+    tea.freezeDate = Date.now();
+    tea.paralyzeDate = Date.now();
 }
 
 teaSetBoundingBox = function(tea) {

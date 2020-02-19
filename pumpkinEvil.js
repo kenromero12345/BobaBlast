@@ -12,7 +12,8 @@ function pumpkinEvil(game, spawnX, spawnY, scale) {
     , 1335, 115, -125, 112, 6, .135, 6, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinEvilFlip.png")
     , 1320, 286, -110, 172, 10, .2, 10, false, scale, false);
-    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth, this.animationWalkLeft.frameHeight, game);
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
+        , this.animationWalkLeft.frameHeight, game, this.speed);
 }
 
 pumpkinEvil.prototype.setBoundingBox = function() {
