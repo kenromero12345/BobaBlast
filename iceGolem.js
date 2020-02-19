@@ -1,19 +1,7 @@
 function iceGolem(game, spawnX, spawnY, scale) {
-    this.spawnX = spawnX;
-    this.spawnY = spawnY;
     this.lifeDeduction = 10;
-    this.scale = scale;
-    this.isEnemy = true;
-    this.width = 194 * scale;
-    this.height = 180 * scale;
-    this.name = "ice";
+    this.name = "ice golem";
     this.speed = 15;
-    this.x = spawnX - 50;
-    this.y = spawnY - 50;
-    this.game = game;
-    this.ctx = game.ctx;
-    this.moveDirection = 1; //1 is right, down, left, up
-    this.lookDirectionRight = true;
     this.hp = 100;
     this.money = 200;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/iceg.png")
@@ -24,13 +12,7 @@ function iceGolem(game, spawnX, spawnY, scale) {
     , 870, 180, 194, 180, 4, 0.5, 4, true, scale, true );
     this.animationDisappearRight = new Animation(AM.getAsset("./img/icegFlip.png")
     , 0, 745, 238, 180, 7, 0.25, 7, false, scale, true);
-    this.boxes = true;
-    this.setBoundingBox();
-    enemyCenterUpdate(this);
-    this.isPoisoned = false;
-    this.isBurned = false;
-    this.isFrozen = false;
-    this.isParalyzed = false;
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth, this.animationWalkLeft.frameHeight, game);
 }
 
 iceGolem.prototype.setBoundingBox = function() {

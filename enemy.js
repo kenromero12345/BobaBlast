@@ -223,3 +223,27 @@ var enemyFreezeUpdate = function(enemy) {
         }
     }
 }
+
+var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, game) {
+    enemy.spawnX = spawnX;
+    enemy.spawnY = spawnY;
+    enemy.scale = scale;
+    enemy.isEnemy = true;
+    enemy.width = width * scale;
+    enemy.height = height * scale;
+
+    enemy.x = spawnX - 50;
+    enemy.y = spawnY - 50;
+    enemy.game = game;
+    enemy.ctx = game.ctx;
+    enemy.moveDirection = 1; //1 is right, down, left, up
+    enemy.lookDirectionRight = true;
+
+    enemy.boxes = true;
+    enemy.setBoundingBox();
+    enemyCenterUpdate(enemy);
+    enemy.isPoisoned = false;
+    enemy.isBurned = false;
+    enemy.isFrozen = false;
+    enemy.isParalyzed = false;
+}

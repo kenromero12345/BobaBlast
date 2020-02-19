@@ -1,20 +1,7 @@
 function bigCake(game, spawnX, spawnY, scale) {
-    this.scale = scale;
-    this.spawnX = spawnX;
-    this.spawnY = spawnY;
     this.lifeDeduction = 10;
-    this.isEnemy = true;
-    // console.log(slimeOffsetY)
-    this.width = 298 * scale;
-    this.height = 400 * scale;
     this.name = "bigCake";
     this.speed = 50;
-    this.x = spawnX - 50;
-    this.y = spawnY - 50;
-    this.game = game;
-    this.ctx = game.ctx;
-    this.moveDirection = 1; //1 is right, down, left, up
-    this.lookDirectionRight = !false;
     this.hp = 40;//
     this.money = 100;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/bigCake.png")
@@ -25,19 +12,12 @@ function bigCake(game, spawnX, spawnY, scale) {
     , 4732, 400, -298, 400, 8, .135, 8, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/bigCakeFlip.png")
     , 4732, 1830, -334, 400, 10, .2, 10, false, scale, false);
-    this.boxes = true;
-    this.setBoundingBox();
-    enemyCenterUpdate(this);
     this.animationWalkRight.offsetX = -150;
     this.animationDisappearRight.offsetX = -150;
-    this.isPoisoned = false;
-    this.isBurned = false;
-    this.isFrozen = false;
-    this.isParalyzed = false;
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth, this.animationWalkLeft.frameHeight, game);
 }
 
 bigCake.prototype.setBoundingBox = function() {
-    // console.log("a")
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
         this.boundingbox = new BoundingBox(this.x + 50 * this.scale, this.y + 60 * this.scale
             , this.width - 60 * this.scale , this.height -80 * this.scale);

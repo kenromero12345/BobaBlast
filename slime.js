@@ -449,11 +449,7 @@
 // }
 
 function slime(game, spawnX, spawnY, scale, num) {
-    this.spawnX = spawnX;
-    this.spawnY = spawnY;
     this.lifeDeduction = 2;
-    this.scale = scale;
-    this.isEnemy = true;
     this.slimeOffsetY = 0;//green
     this.slimeDisappearOffsetY = 0;
     if (num == 1) {//blue
@@ -478,24 +474,8 @@ function slime(game, spawnX, spawnY, scale, num) {
     } else if (num == 10) {//chistmas 2 color, green, pink
         this.slimeOffsetY = 3236;
     } 
-    //christmas hat
-    ////not implemented because it has weird dying animation
-    //else if (num == 11) {//christmas hat
-      //  this.slimeOffsetY = 3540;
-      //  this.slimeDisappearOffsetY = 13;
-    //}
-
-    // console.log(slimeOffsetY)
-    this.width = 79 * scale;
-    this.height = 80 * scale;
     this.name = "slime";
     this.speed = 100;
-    this.x = spawnX - 50;
-    this.y = spawnY - 50;
-    this.game = game;
-    this.ctx = game.ctx;
-    this.moveDirection = 1; //1 is right, down, left, up
-    this.lookDirectionRight = true;
     this.hp = 10;//
     this.money = 10;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/slime.png")
@@ -508,13 +488,7 @@ function slime(game, spawnX, spawnY, scale, num) {
     , 769, 70 + this.slimeOffsetY + this.slimeDisappearOffsetY, -79, 80, 7, .135, 7, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeFlip.png")
     , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
-    this.boxes = true;
-    this.setBoundingBox();
-    enemyCenterUpdate(this);
-    this.isPoisoned = false;
-    this.isBurned = false;
-    this.isFrozen = false;
-    this.isParalyzed = false;
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth, this.animationWalkLeft.frameHeight, game);
 }
 
 slime.prototype.setBoundingBox = function() {

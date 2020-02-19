@@ -1,20 +1,7 @@
 function miniCake(game, spawnX, spawnY, scale) {
-    this.spawnX = spawnX;
-    this.spawnY = spawnY;
     this.lifeDeduction = 3;
-    this.scale = scale;
-    this.isEnemy = true;
-    // console.log(slimeOffsetY)
-    this.width = 67 * scale;
-    this.height = 48 * scale;
     this.name = "minicake";
     this.speed = 50;
-    this.x = spawnX - 50;
-    this.y = spawnY - 50;
-    this.game = game;
-    this.ctx = game.ctx;
-    this.moveDirection = 3; //1 is right, down, left, up
-    this.lookDirectionRight = true;
     this.hp = 20;//
     this.money = 10;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/miniCake.png")
@@ -25,13 +12,7 @@ function miniCake(game, spawnX, spawnY, scale) {
     , 714, 66, -67, 48, 6, .135, 6, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/miniCakeFlip.png")
     , 714, 189, -67, 74, 9, .25, 9, false, scale, false);
-    this.boxes = true;
-    this.setBoundingBox();
-    enemyCenterUpdate(this);
-    this.isPoisoned = false;
-    this.isBurned = false;
-    this.isFrozen = false;
-    this.isParalyzed = false;
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth, this.animationWalkLeft.frameHeight, game);
 }
 
 miniCake.prototype.setBoundingBox = function() {

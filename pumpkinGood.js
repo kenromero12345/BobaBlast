@@ -1,20 +1,7 @@
 function pumpkinGood(game, spawnX, spawnY, scale) {
-    this.scale = scale;
-    this.spawnX = spawnX;
-    this.spawnY = spawnY;
     this.lifeDeduction = 7;
-    this.isEnemy = true;
-    // console.log(slimeOffsetY)
-    this.width = 81 * scale;
-    this.height = 84 * scale;
     this.name = "good pumpkin";
     this.speed = 100;
-    this.x = spawnX - 50;
-    this.y = spawnY - 50;
-    this.game = game;
-    this.ctx = game.ctx;
-    this.moveDirection = 1; //1 is right, down, left, up
-    this.lookDirectionRight = !false;
     this.hp = 40;//
     this.animationWalkLeft = new Animation(AM.getAsset("./img/pumpkinGood.png")
     , 5, 87, 81, 84, 4, .135, 4, true, scale, false);
@@ -24,14 +11,7 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     , 712-5, 87, -81, 84, 4, .135, 4, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinGoodFlip.png")
     , 720, 260, -84, 76, 7, .2, 7, false, scale, false);
-    this.boxes = true;
-    this.money = 20;
-    this.setBoundingBox();
-    enemyCenterUpdate(this);
-    this.isPoisoned = false;
-    this.isBurned = false;
-    this.isFrozen = false;
-    this.isParalyzed = false;
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth, this.animationWalkLeft.frameHeight, game);
 }
 
 pumpkinGood.prototype.setBoundingBox = function() {

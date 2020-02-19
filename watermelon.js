@@ -1,20 +1,7 @@
 function watermelon(game, spawnX, spawnY, scale) {
-    this.spawnX = spawnX;
-    this.spawnY = spawnY;
     this.lifeDeduction = 10;
-    this.scale = scale;
-    this.isEnemy = true;
-    // console.log(slimeOffsetY)
-    this.width = 62 * scale;
-    this.height = 68 * scale;
     this.name = "watermelon";
     this.speed = 100;
-    this.x = spawnX - 50;
-    this.y = spawnY - 50;
-    this.game = game;
-    this.ctx = game.ctx;
-    this.moveDirection = 1; //1 is right, down, left, up
-    this.lookDirectionRight = true;
     this.hp = 50;//
     this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/watermelon.png")
@@ -25,13 +12,7 @@ function watermelon(game, spawnX, spawnY, scale) {
     , 1394, 82, -62, 68, 4, .135, 4, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/watermelonFlip.png")
     , 1394, 245, -62, 74, 14, .25, 14, false, scale, false);
-    this.boxes = true;
-    this.setBoundingBox();
-    enemyCenterUpdate(this);
-    this.isPoisoned = false;
-    this.isBurned = false;
-    this.isFrozen = false;
-    this.isParalyzed = false;
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth, this.animationWalkLeft.frameHeight, game);
 }
 
 watermelon.prototype.setBoundingBox = function() {
