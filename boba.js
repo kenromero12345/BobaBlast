@@ -75,6 +75,4 @@ boba.prototype.update = function () {
         }
         this.boundingbox = new BoundingBox(this.x + 5, this.y + 5, this.width -10, this.height - 10);
     }
-
-
 }

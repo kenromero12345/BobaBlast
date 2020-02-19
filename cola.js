@@ -139,6 +139,10 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     this.boxes = true;
     this.setBoundingBox();
     enemyCenterUpdate(this);
+    this.isPoisoned = false;
+    this.isBurned = false;
+    this.isFrozen = false;
+    this.isParalyzed = false;
 }
 
 cola.prototype.setBoundingBox = function() {
@@ -180,7 +184,9 @@ cola.prototype.update = function () {
         //     }
         // }
         collideUpdate(this);
-        
+
         moneyUpdate(this);
+
+        enemyStatusEffectUpdate(this);
     }
 }

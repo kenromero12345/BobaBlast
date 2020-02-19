@@ -28,6 +28,10 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     this.money = 20;
     this.setBoundingBox();
     enemyCenterUpdate(this);
+    this.isPoisoned = false;
+    this.isBurned = false;
+    this.isFrozen = false;
+    this.isParalyzed = false;
 }
 
 pumpkinGood.prototype.setBoundingBox = function() {
@@ -188,8 +192,10 @@ pumpkinGood.prototype.update = function () {
         //     }
         // }
         collideUpdate(this);
-        
+
         moneyUpdate(this);
+
+        enemyStatusEffectUpdate(this);
     }
 }
 

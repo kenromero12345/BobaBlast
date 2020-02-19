@@ -29,6 +29,10 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.boxes = true;
     teaSetBoundingBox(tea);
     enemyCenterUpdate(tea);
+    this.isPoisoned = false;
+    this.isBurned = false;
+    this.isFrozen = false;
+    this.isParalyzed = false;
 }
 
 teaSetBoundingBox = function(tea) {
@@ -238,4 +242,6 @@ var update = function (tea) {
     collideUpdate(tea);
 
     moneyUpdate(tea);
+
+    enemyStatusEffectUpdate(tea);
 }

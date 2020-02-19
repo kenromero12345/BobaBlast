@@ -33,6 +33,10 @@ function biscuit(game, spawnX, spawnY, scale) {
     //w = .75
     this.setBoundingBox();
     enemyCenterUpdate(this);
+    this.isPoisoned = false;
+    this.isBurned = false;
+    this.isFrozen = false;
+    this.isParalyzed = false;
 }
 
 biscuit.prototype.setBoundingBox = function() {
@@ -158,5 +162,7 @@ biscuit.prototype.update = function () {
         collideUpdate(this);
 
         moneyUpdate(this);
+
+        enemyStatusEffectUpdate(this);
     }
 }

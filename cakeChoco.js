@@ -28,6 +28,10 @@ function cakeChoco(game, spawnX, spawnY, scale) {
     this.boxes = true;
     this.setBoundingBox();
     enemyCenterUpdate(this);
+    this.isPoisoned = false;
+    this.isBurned = false;
+    this.isFrozen = false;
+    this.isParalyzed = false;
 }
 
 cakeChoco.prototype.setBoundingBox = function() {
@@ -224,7 +228,9 @@ cakeChoco.prototype.update = function () {
         //     }
         // }
         collideUpdate(this);
-        
+
         moneyUpdate(this);
+
+        enemyStatusEffectUpdate(this);
     }
 }

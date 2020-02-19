@@ -30,6 +30,10 @@ function bigCake(game, spawnX, spawnY, scale) {
     enemyCenterUpdate(this);
     this.animationWalkRight.offsetX = -150;
     this.animationDisappearRight.offsetX = -150;
+    this.isPoisoned = false;
+    this.isBurned = false;
+    this.isFrozen = false;
+    this.isParalyzed = false;
 }
 
 bigCake.prototype.setBoundingBox = function() {
@@ -192,8 +196,10 @@ bigCake.prototype.update = function () {
         //     }
         // }
         collideUpdate(this);
-        
+
         moneyUpdate(this);
+
+        enemyStatusEffectUpdate(this);
     }
 }
 

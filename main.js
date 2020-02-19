@@ -139,9 +139,9 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new roundPlan(gameEngine));
 
     // BOBA BULLET TESTING
-    gameEngine.addEntity(new display(gameEngine));
+    // gameEngine.addEntity(new display(gameEngine));
+    gameEngine.display = new display(gameEngine);
     towerArray = generateStoreTowers(gameEngine);
-
 
     console.log("All Done!");
 
@@ -165,9 +165,10 @@ function generateStoreTowers(game) {
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower,eightTower,ninthTower]];
     for(var i = 0; i < 3; i++) {
         for(var j = 0; j < 3; j++) {
-            game.addEntity(temp[i][j]);
+            // game.addEntity(temp[i][j]);
         }
     }
+    game.towers = temp;
     return temp;
 }
 

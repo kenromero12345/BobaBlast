@@ -30,6 +30,10 @@ function pumpkinEvil(game, spawnX, spawnY, scale) {
     enemyCenterUpdate(this);
     this.animationDisappearRight.offsetY = -50;
     this.animationDisappearLeft.offsetY = -50;
+    this.isPoisoned = false;
+    this.isBurned = false;
+    this.isFrozen = false;
+    this.isParalyzed = false;
 }
 
 pumpkinEvil.prototype.setBoundingBox = function() {
@@ -189,8 +193,10 @@ pumpkinEvil.prototype.update = function () {
         //     }
         // }
         collideUpdate(this);
-        
+
         moneyUpdate(this);
+
+        enemyStatusEffectUpdate(this);
     }
 }
 

@@ -140,9 +140,86 @@ var moneyUpdate = function(enemy) {
 var collideUpdate = function(enemy) {
     for (var i = 0; i < enemy.game.entities.length; i++) {
         var ent = enemy.game.entities[i];
-        if (ent !== enemy && ent.isBoba &&  enemy.boundingbox.collide(ent.boundingbox)) {
-            ent.removeFromWorld = true;
-            enemy.hp--;
+        if (ent !== enemy) {
+            if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
+                ent.removeFromWorld = true;
+                enemy.hp--;
+            } 
+            if (ent.isBoba && ent.isFrozen && enemy.boundingbox.collide(ent.boundingbox)) {
+                ent.freezeDate = Date.now() + 500;
+                ent.tempSpeed = ent.speed;
+                ent.speed = ent.tempSpeed / 2;
+                // sleep(10000).then(() => {
+                //     ent.speed *= 2;
+                // })
+            }
+            if (ent.isBoba && ent.isParalyzed && enemy.boundingbox.collide(ent.boundingbox)) {
+                ent.tempSpeed = ent.speed;
+                ent.speed = 0;
+                ent.paralyzeDate = Date.now() + 500;
+                // sleep(500).then(() => {
+                //     ent.speed = temp;
+                // })
+            } 
+            if (ent.isBoba && ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
+                ent.isPoisoned = true;
+                // sleep(10000).then(() => {
+                //     ent.isPoisoned = false;
+                // })
+                ent.poisonDate = Date.now() + 10000;
+            } 
+            if (ent.isExplosion && enemy.boundingbox.collide(ent.boundingbox)) {
+                ent.isBurned = true;
+                ent.burnDate = Date.now() + 10000;
+                // sleep(10000).then(() => {
+                //     ent.isPoisoned = false;
+                // })
+            } 
+        }
+    }
+}
+
+var enemyStatusEffectUpdate = function(enemy) {
+    enemyPoisonUpdate(enemy);
+    enemyBurnUpdate(enemy);
+    enemyParalyzeUpdate(enemy);
+    enemyFreezeUpdate(enemy);
+}
+
+var enemyPoisonUpdate = function(enemy) {
+    if (enemy.isPoisoned) {
+        ent.hp--;
+        if (Date.now() >= enemy.poisonDate) {
+            enemy.isPoisoned = false;
+        }
+    }
+}
+
+var enemyBurnUpdate = function(enemy) {
+    if (enemy.isBurned) {
+        ent.hp--;
+        if (Date.now() >= enemy.burnDate) {
+            enemy.isBurned = false;
+        }
+    }
+}
+
+var enemyParalyzeUpdate = function(enemy) {
+    if (enemy.isParalyzed) {
+        // ent.hp--;
+        if (Date.now() >= enemy.paralyzeDate) {
+            enemy.isParalyzed = false;
+            enemy.speed = tempSpeed;
+        }
+    }
+}
+
+var enemyFreezeUpdate = function(enemy) {
+    if (enemy.isFrozen) {
+        // ent.hp--;
+        if (Date.now() >= enemy.freezeDate) {
+            enemy.isFrozen = false;
+            enemy.speed = tempSpeed;
         }
     }
 }

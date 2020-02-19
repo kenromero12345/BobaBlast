@@ -28,6 +28,10 @@ function watermelon(game, spawnX, spawnY, scale) {
     this.boxes = true;
     this.setBoundingBox();
     enemyCenterUpdate(this);
+    this.isPoisoned = false;
+    this.isBurned = false;
+    this.isFrozen = false;
+    this.isParalyzed = false;
 }
 
 watermelon.prototype.setBoundingBox = function() {
@@ -208,7 +212,9 @@ watermelon.prototype.update = function () {
         //     }
         // }
         collideUpdate(this);
-        
+
         moneyUpdate(this);
+
+        enemyStatusEffectUpdate(this);
     }
 }

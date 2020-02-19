@@ -37,6 +37,8 @@ function GameEngine() {
     this.wheel = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
+    this.towers = null;
+    this.display = null;
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -105,11 +107,29 @@ GameEngine.prototype.addEntity = function (entity) {
     this.entities.push(entity);
 }
 
+GameEngine.prototype.enqueueEntity = function (entity) {
+    // console.log('added entity');
+
+    this.entities.unshift(entity);
+    console.log(this.entities);
+}
+
 GameEngine.prototype.draw = function () {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.save();
     for (var i = 0; i < this.entities.length; i++) {
         this.entities[i].draw(this.ctx);
+    }
+    if (this.display) {
+        this.display.draw(this.ctx);        
+    }
+
+    if (this.towers) {
+        for (var i = 0; i < this.towers.length; i++) {
+            for (var j = 0; j < this.towers[i].length; j++) {
+                this.towers[i][j].draw(this.ctx);
+            }
+        }
     }
     this.ctx.restore();
 }
@@ -122,6 +142,18 @@ GameEngine.prototype.update = function () {
 
         if (!entity.removeFromWorld) {
             entity.update();
+        }
+    }
+
+    if (this.display) {
+        this.display.update();
+    }
+
+    if (this.towers) {
+        for (var i = 0; i < this.towers.length; i++) {
+            for (var j = 0; j < this.towers[i].length; j++) {
+                this.towers[i][j].update();
+            }
         }
     }
 
