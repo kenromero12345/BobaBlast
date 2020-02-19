@@ -16,6 +16,7 @@ function watermelon(game, spawnX, spawnY, scale) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 50;//
+    this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/watermelon.png")
     , 0, 82, 62, 68, 4, .135, 4, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/watermelon.png")
@@ -206,5 +207,7 @@ watermelon.prototype.update = function () {
                 this.hp--;
             }
         }
+
+        moneyUpdate(this);
     }
 }

@@ -16,6 +16,7 @@ function bigCake(game, spawnX, spawnY, scale) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = !false;
     this.hp = 40;//
+    this.money = 100;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/bigCake.png")
     , 0, 400, 298, 400, 8, .135, 8, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/bigCake.png")
@@ -190,6 +191,8 @@ bigCake.prototype.update = function () {
                 this.hp--;
             }
         }
+
+        moneyUpdate(this);
     }
 }
 

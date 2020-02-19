@@ -15,6 +15,7 @@ function iceGolem(game, spawnX, spawnY, scale) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 100;
+    this.money = 200;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/iceg.png")
     , 0, 180, 194, 180, 4, 0.5, 4, true, scale, false );
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/iceg.png")
@@ -66,5 +67,7 @@ iceGolem.prototype.update = function () {
                 this.hp--;
             }
         }
+        
+        moneyUpdate(this);
     }
 }

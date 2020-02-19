@@ -128,3 +128,11 @@ var enemyCenterUpdate = function(enemy) {
     enemy.y = enemy.y + difY;
         // console.log("x:" + enemy.x + ", y:" + enemy.y + ", cx" + enemy.centerX + ", cy:" + enemy.centerY);
 }
+
+var moneyUpdate = function(enemy) {
+    var xy = getXY(enemy.centerX, enemy.centerY);
+    if(enemy.hp <= 0 && !GAMEBOARD[xy.x][xy.y].end) {
+        currentMoney += enemy.money;
+        enemy.money = 0;
+    }
+}

@@ -16,6 +16,7 @@ function pumpkinEvil(game, spawnX, spawnY, scale) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = !false;
     this.hp = 40;//
+    this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/pumpkinEvil.png")
     , 0, 115, 125, 112, 6, .135, 6, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/pumpkinEvil.png")
@@ -187,6 +188,8 @@ pumpkinEvil.prototype.update = function () {
                 this.hp--;
             }
         }
+
+        moneyUpdate(this);
     }
 }
 

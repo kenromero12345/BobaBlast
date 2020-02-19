@@ -16,6 +16,7 @@ function biscuit(game, spawnX, spawnY, scale) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = !false;
     this.hp = 30;//
+    this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/biscuitWarrior.png")
     , 7, 111, 98, 94, 6, .135, 6, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/biscuitWarrior.png")
@@ -154,5 +155,7 @@ biscuit.prototype.update = function () {
             // // console.log(this.boundingbox.collide(ent.boundingbox));
             // }
         }
+
+        moneyUpdate(this);
     }
 }

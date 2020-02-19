@@ -116,6 +116,7 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 50;
+    this.money = 20;
     if (isWhite) {
         this.animationWalkLeft = new Animation(AM.getAsset("./img/sprite.png")
         , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
@@ -178,5 +179,7 @@ cola.prototype.update = function () {
                 this.hp--;
             }
         }
+
+        moneyUpdate(this);
     }
 }

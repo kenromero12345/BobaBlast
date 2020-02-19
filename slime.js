@@ -497,6 +497,7 @@ function slime(game, spawnX, spawnY, scale, num) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 10;//
+    this.money = 10;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/slime.png")
     , 5, 70 + this.slimeOffsetY, 79, 80, 7, .135, 7, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/slime.png")
@@ -752,6 +753,8 @@ slime.prototype.update = function () {
                 this.hp--;
             }
         }
+
+        moneyUpdate(this);
     }
 }
 

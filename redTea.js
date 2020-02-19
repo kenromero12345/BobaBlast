@@ -18,6 +18,7 @@ function redTea(game, spawnX, spawnY, isRun, scale) {
     this.runHeight= 85 * scale;
     this.scale = scale;
     this.name = "red";
+    this.money = 10;
     constructor(this, game, spawnX, spawnY, isRun);
 }
 

@@ -16,6 +16,7 @@ function cakeChoco(game, spawnX, spawnY, scale) {
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = !false;
     this.hp = 30;//
+    this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/cakeChoco.png")
     , 0, 122, 96, 101, 6, .135, 6, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/cakeChoco.png")
@@ -222,5 +223,7 @@ cakeChoco.prototype.update = function () {
                 this.hp--;
             }
         }
+
+        moneyUpdate(this);
     }
 }

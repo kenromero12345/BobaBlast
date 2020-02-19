@@ -16,6 +16,7 @@ function miniCake(game, spawnX, spawnY, scale) {
     this.moveDirection = 3; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 20;//
+    this.money = 10;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/miniCake.png")
     , 0, 66, 67, 48, 6, .135, 6, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/miniCake.png")
@@ -138,6 +139,8 @@ miniCake.prototype.update = function () {
                 this.hp--;
             }
         }
+
+        moneyUpdate(this);
     }
 }
 

@@ -25,6 +25,7 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinGoodFlip.png")
     , 720, 260, -84, 76, 7, .2, 7, false, scale, false);
     this.boxes = true;
+    this.money = 20;
     this.setBoundingBox();
     enemyCenterUpdate(this);
 }
@@ -186,6 +187,8 @@ pumpkinGood.prototype.update = function () {
                 this.hp--;
             }
         }
+
+        moneyUpdate(this);
     }
 }
 

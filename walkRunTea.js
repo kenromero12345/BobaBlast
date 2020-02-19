@@ -146,10 +146,7 @@ var update = function (tea) {
             tea.lookDirectionRight = false;
         }
     }
-    // console.log(xy);
-    // console.log(tea.centerX + " " +  tea.centerY);
-    // var width;
-    // var height;
+
     if (tea.hp > 0) {
         if (tea.paceWalk) {
             if (tea.moveDirection == 1) {
@@ -253,36 +250,8 @@ var update = function (tea) {
 
 
     teaSetBoundingBox(tea);
-    // tea.centerX = tea.x + width / 2;
-    // tea.centerY = tea.y + height / 2;
-    // console.log(tea.moveDirection)
-    // console.log(tea.lookDirectionRight)
-    // console.log(tea.centerX)
-    // console.log(x - tea.centerX);
-    // console.log(tea.y - tea.centerY);
-         //&& ((tea.centerX +  100) % 100 > 40 
-    // && (tea.centerX + 100) % 100 < 60 && tea.centerY % 100 > 40 && tea.centerY % 100 < 60)
-    enemyEscape(tea);
-    
-    // else if (xy.x > GAMEBOARD.length - 1) {
-        // console.log(xy)
-    // }
-    // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
-    // var difX = this.centerX - spawnX;
-    // var difY =  spawnY - this.centerY;
-    // // console.log("dx:" + difX + ", dy:" + difY);
-    // this.centerX = this.centerX - Math.abs(difX);
-    // this.centerY = this.centerY - Math.abs(difY);
-    // tea.centerX = ( width - x ) / 2;
-    // tea.centerY = ( height - y ) / 2;
-    // console.log(tea.centerX + " " + tea.centerY)
-    // console.log(getXY(this.centerX, this.centerY));
-    // console.log ("x: " + tea.centerX + " y: " + tea.centerY );
 
-    //start at -50 50 
-    // console.log("x: " + x + " y: " + y + " w: " + width + " h: " + height);
-    // drawRect(tea.ctx, tea.startX, tea.startY, tea.frameWidth, tea.frameHeight);
-    // console.log(tea.game.entities.length);
+    enemyEscape(tea);
 
     for (var i = 0; i < tea.game.entities.length; i++) {
         var ent = tea.game.entities[i];
@@ -291,4 +260,6 @@ var update = function (tea) {
             tea.hp--;
         }
     }
+
+    moneyUpdate(tea);
 }
