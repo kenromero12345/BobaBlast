@@ -1,4 +1,5 @@
 function greenTea(game, spawnX, spawnY, isRun, scale) {
+    this.lifeDeduction = 1;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/greenTea.png")
     , 0, 0, 65, 95, 4, 0.20, 4, true, scale, false);
     this.animationRunLeft = new Animation(AM.getAsset("./img/greenTea.png")
@@ -16,7 +17,7 @@ function greenTea(game, spawnX, spawnY, isRun, scale) {
     this.runWidth = 72 * scale;
     this.runHeight= 85 * scale;
     this.scale = scale;
-    this.name = "green";
+    this.name = "green bubble tea";
     constructor(this, game, spawnX, spawnY, isRun);
 }
 

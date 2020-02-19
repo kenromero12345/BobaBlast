@@ -98,7 +98,12 @@
 // ColaDrinkLookLeft.prototype.update = function () {
 // }
 
-function cola(game, spawnX, spawnY, scale) {
+function cola(game, spawnX, spawnY, scale, isWhite) {
+    this.spawnX = spawnX;
+    this.spawnY = spawnY;
+    this.lifeDeduction = 2;
+    this.scale = scale;
+    this.isWhite = isWhite;
     this.isEnemy = true;
     this.width = 65 * scale;
     this.height = 65 * scale;
@@ -106,30 +111,43 @@ function cola(game, spawnX, spawnY, scale) {
     this.speed = 100;
     this.x = spawnX - 50;
     this.y = spawnY - 50;
-    this.centerX = this.x + this.width / 2;
-    this.centerY = this.y + this.height / 2;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
-    var difX = this.centerX - spawnX;
-    var difY =  spawnY - this.centerY;
-    // console.log("dx:" + difX + ", dy:" + difY);
-    this.centerX = this.centerX - difX;
-    this.centerY = this.centerY + difY;
-    this.x = this.x - difX;
-    this.y = this.y + difY;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
     this.game = game;
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
     this.lookDirectionRight = true;
     this.hp = 50;
-    this.animationWalkLeft = new Animation(AM.getAsset("./img/cola.png")
-    , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
-    this.animationDisappearLeft = new Animation(AM.getAsset("./img/cola.png")
-    , 0, 341, 70, 65, 5, 0.2, 5, false, scale, false);
-    this.animationWalkRight = new Animation(AM.getAsset("./img/colaFlip.png")
-    , 239, 137, 65, 65, 4, 0.10, 4, true, scale, true);
-    this.animationDisappearRight = new Animation(AM.getAsset("./img/colaFlip.png")
-    , 0, 341, 70, 65, 5, 0.2, 5, false, scale, true);
+    if (isWhite) {
+        this.animationWalkLeft = new Animation(AM.getAsset("./img/sprite.png")
+        , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
+        this.animationDisappearLeft = new Animation(AM.getAsset("./img/sprite.png")
+        , 0, 341, 70, 65, 5, 0.2, 5, false, scale, false);
+        this.animationWalkRight = new Animation(AM.getAsset("./img/spriteFlip.png")
+        , 239, 137, 65, 65, 4, 0.10, 4, true, scale, true);
+        this.animationDisappearRight = new Animation(AM.getAsset("./img/spriteFlip.png")
+        , 0, 341, 70, 65, 5, 0.2, 5, false, scale, true);
+    } else {
+        this.animationWalkLeft = new Animation(AM.getAsset("./img/cola.png")
+        , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
+        this.animationDisappearLeft = new Animation(AM.getAsset("./img/cola.png")
+        , 0, 341, 70, 65, 5, 0.2, 5, false, scale, false);
+        this.animationWalkRight = new Animation(AM.getAsset("./img/colaFlip.png")
+        , 239, 137, 65, 65, 4, 0.10, 4, true, scale, true);
+        this.animationDisappearRight = new Animation(AM.getAsset("./img/colaFlip.png")
+        , 0, 341, 70, 65, 5, 0.2, 5, false, scale, true);
+    }
+    this.boxes = true;
+    this.setBoundingBox();
+    enemyCenterUpdate(this);
+}
+
+cola.prototype.setBoundingBox = function() {
+    if(this.lookDirectionRight || this.moveDirection == 1 ) {
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
+            , this.width - 20 * this.scale , this.height -13 * this.scale);
+    } else {
+        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
+            , this.width - 20 * this.scale , this.height -13 * this.scale);
+    }
 }
 
 cola.prototype.draw = function () {
@@ -146,18 +164,16 @@ cola.prototype.update = function () {
             this.moveDirection = getShortestPath(this.centerX, this.centerY);
             enemyUpdateLookHelper(this);
         }
-
-        enemyUpdateHelper(this);
-
-        xy = getXY(this.centerX, this.centerY);
-        if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
-            this.hp = 0; //dead
-        } 
         
-        // else i
+        enemyUpdateHelper(this);
+        
+        this.setBoundingBox();
+
+        enemyEscape(this);
+
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            if (ent !== this && ent.isIce && collide(ent, this)) {
+            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
                 ent.removeFromWorld = true;
                 this.hp--;
             }

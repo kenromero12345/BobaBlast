@@ -32,11 +32,19 @@ function boba(game, startX, startY, destinationX, destinationY) {
     this.game = game;
     this.ctx = game.ctx;
     this.noCollision = true;
+    this.boxes = true;
+    this.boundingbox = new BoundingBox(this.x + 5, this.y + 5, this.width -10, this.height - 10);
 }
 
 boba.prototype.draw = function () {
     if(this.game.running) {
         if(this.noCollision) {
+            if (this.boxes) {
+                this.ctx.strokeStyle = "red";
+                this.ctx.strokeRect(this.x, this.y, this.animation.frameWidth, this.animation.frameHeight);
+                this.ctx.strokeStyle = "green";
+                this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
+            }
             this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
         }
     }
@@ -52,15 +60,20 @@ boba.prototype.update = function () {
         }
         if(!this.backward && this.slope !== undefined) {
             this.x += this.game.clockTick * this.speed;
+            // this.boundingbox.x += this.game.clockTick * this.speed;
         } else if (this.slope !== undefined)  {
             this.x -= this.game.clockTick * this.speed;
+            // this.boundingbox.x -= this.game.clockTick * this.speed;
         }
         if(this.slope === undefined)  {
             this.y += this.game.clockTick * this.speed;
+            // this.boundingbox.y += this.game.clockTick * this.speed;
         }
         else {
             this.y += this.slope * this.game.clockTick * this.speed;
+            // this.boundingbox.y += this.slope * this.game.clockTick * this.speed;
         }
+        this.boundingbox = new BoundingBox(this.x + 5, this.y + 5, this.width -10, this.height - 10);
     }
 
 

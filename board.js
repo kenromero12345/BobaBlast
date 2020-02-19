@@ -3,7 +3,7 @@ var ACTIVETOWERS = [];
 
 function board(game) {
 	GAMEBOARD = [];
-	this.width = 11;
+	this.width = 12;
 	this.height = 6;
 	this.xgap = 100;
   this.ygap = 100;
@@ -33,8 +33,8 @@ board.prototype.buildGameboard = function () {
 
   GAMEBOARD[0][2].start = true;
   GAMEBOARD[0][3].start = true;
-  GAMEBOARD[10][2].end = true;
-  GAMEBOARD[10][3].end = true;
+  GAMEBOARD[11][2].end = true;
+  GAMEBOARD[11][3].end = true;
 
   GAMEBOARD[0][0].occupied = true;
   GAMEBOARD[0][1].occupied = true;
@@ -45,6 +45,11 @@ board.prototype.buildGameboard = function () {
   GAMEBOARD[10][1].occupied = true;
   GAMEBOARD[10][4].occupied = true;
   GAMEBOARD[10][5].occupied = true;
+
+  GAMEBOARD[11][0].occupied = true;
+  GAMEBOARD[11][1].occupied = true;
+  GAMEBOARD[11][4].occupied = true;
+  GAMEBOARD[11][5].occupied = true;
 
   // GAMEBOARD[1][1].occupied = true;
 
@@ -77,6 +82,36 @@ board.prototype.buildGameboard = function () {
 	  GAMEBOARD[i][j].centery = this.startingYPoint + 50 + this.height * this.ygap;
     }
   }
+
+//   for(var i = 0; i < this.width; i++) {
+//     for(var j = 0; j < this.height; j++) {
+//       GAMEBOARD[i][j].hasEnemyRadius = false;
+//     }
+//   }
+
+//   for (var i = 0; i < this.game.entities.length; i++) {
+//     var ent = this.game.entities[i];
+//     if (ent !== this && !ent.isTower) {
+//         var xy = getXY(ent.centerX, ent.centerY);
+//         // console.log(xy)
+//         if (xy.x && xy.y) {
+//           GAMEBOARD[xy.x][xy.y].hasEnemyRadius = true;  
+//           if (xy.x + 1< GAMEBOARD.length && xy.x + 1 >= 0) {
+//             GAMEBOARD[xy.x + 1][xy.y].hasEnemyRadius = true;  
+//           }  
+//           if (xy.y + 1 < GAMEBOARD[0].length && xy.y + 1 >= 0) {
+//             GAMEBOARD[xy.x][xy.y + 1].hasEnemyRadius = true;  
+//           }
+//           if (xy.x - 1 < GAMEBOARD.length && xy.x - 1 >= 0) {
+//             GAMEBOARD[xy.x - 1][xy.y].hasEnemyRadius = true;
+//           }
+//           if (xy.y - 1 < GAMEBOARD[0].length && xy.y - 1 >= 0) {
+//             GAMEBOARD[xy.x][xy.y - 1].hasEnemyRadius = true;  
+//           }  
+          
+//         }
+//     }
+// }
 }
 
 // Rectangle for Testing Purposes DELETE WHEN DONE
@@ -123,6 +158,7 @@ board.prototype.draw = function () {
       //   console.log(GAMEBOARD);
       // }
       // console.log(isPath(-50, 250, gridX, gridY));
+      // console.log(GAMEBOARD[gridX][gridY].hasEnemyRadius);
       if (gridX >= 0 && gridX < GAMEBOARD.length && gridY >= 0 && gridY < GAMEBOARD[0].length
         && !GAMEBOARD[gridX][gridY].end && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
         && isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].occupied) {
@@ -134,6 +170,10 @@ board.prototype.draw = function () {
 
 
 board.prototype.update = function () {
+  if (this.game.godMode) {
+    currentMoney = Number.MAX_VALUE;
+    currentLifes = Number.MAX_VALUE;
+  }
   for(var i = 0; i < this.width; i++) {
     for(var j = 0; j < this.height; j++) {
       GAMEBOARD[i][j].hasEnemyRadius = false;
@@ -142,7 +182,7 @@ board.prototype.update = function () {
 
   for (var i = 0; i < this.game.entities.length; i++) {
     var ent = this.game.entities[i];
-    if (ent !== this && !ent.isTower) {
+    if (ent !== this && ent.isEnemy) {//&& !isTower
         var xy = getXY(ent.centerX, ent.centerY);
         // console.log(xy)
         if (xy.x && xy.y) {
@@ -175,9 +215,12 @@ board.prototype.update = function () {
       // console.log("X: " + click.x + "Y" + click.y);
       if (isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
         && !GAMEBOARD[gridX][gridY].occupied) {
-        GAMEBOARD[gridX][gridY].occupied = true;
-        var tempTower = new boardTower(this.game, gridX, gridY, towerArray[selectedTowerRow][selectedTowerColumn]);
-        this.game.addEntity(tempTower);
+        if(currentMoney - towerArray[selectedTowerRow][selectedTowerColumn].cost >= 0) {
+          GAMEBOARD[gridX][gridY].occupied = true;
+          var tempTower = new boardTower(this.game, gridX, gridY, towerArray[selectedTowerRow][selectedTowerColumn]);
+          this.game.addEntity(tempTower);
+          currentMoney = currentMoney - tempTower.cost;
+        }
       //  ACTIVETOWERS.push([gridX, gridY,towerArray[selectedTowerRow][selectedTowerColumn].spritesheet]);
         selectedTowerRow = -1;
         selectedTowerColumn = -1;

@@ -1,7 +1,9 @@
-function storeTower(game, name, cost, description, spritesheet, xCoordinate, yCoordinate, width, height, storeGridX, storeGridY) {
+function storeTower(game, name, cost, frequency, radius, description, spritesheet, xCoordinate, yCoordinate, width, height, storeGridX, storeGridY) {
     this.game = game;
     this.name = name;
     this.cost = cost;
+    this.frequency = frequency;
+    this.radius = radius;
     this.description = description;
     this.spritesheet = spritesheet;
     this.ctx = game.ctx;
@@ -33,7 +35,7 @@ storeTower.prototype.draw = function () {
 storeTower.prototype.update = function () {
     // Click Mode: If you click a tower, set global variable for selected tower row/column
     if (this.game.click && gameStarted && !paused) {
-        console.log("CLICK");
+        // console.log("CLICK");
         var click = this.game.click;
         if(click.x >= this.x && click.x < this.x + 70 && click.y >= this.y && click.y < this.y + 70) {
             purchaseMode = true;

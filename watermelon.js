@@ -1,4 +1,9 @@
 function watermelon(game, spawnX, spawnY, scale) {
+    this.spawnX = spawnX;
+    this.spawnY = spawnY;
+    this.lifeDeduction = 10;
+    this.scale = scale;
+    this.isEnemy = true;
     // console.log(slimeOffsetY)
     this.width = 62 * scale;
     this.height = 68 * scale;
@@ -6,17 +11,6 @@ function watermelon(game, spawnX, spawnY, scale) {
     this.speed = 100;
     this.x = spawnX - 50;
     this.y = spawnY - 50;
-    this.centerX = this.x + this.width / 2;
-    this.centerY = this.y + this.height / 2;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
-    var difX = this.centerX - spawnX;
-    var difY =  spawnY - this.centerY;
-    // console.log("dx:" + difX + ", dy:" + difY);
-    this.centerX = this.centerX - difX;
-    this.centerY = this.centerY + difY;
-    this.x = this.x - difX;
-    this.y = this.y + difY;
-        // console.log("x:" + this.x + ", y:" + this.y + ", cx" + this.centerX + ", cy:" + this.centerY);
     this.game = game;
     this.ctx = game.ctx;
     this.moveDirection = 1; //1 is right, down, left, up
@@ -30,6 +24,19 @@ function watermelon(game, spawnX, spawnY, scale) {
     , 1394, 82, -62, 68, 4, .135, 4, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/watermelonFlip.png")
     , 1394, 245, -62, 74, 14, .25, 14, false, scale, false);
+    this.boxes = true;
+    this.setBoundingBox();
+    enemyCenterUpdate(this);
+}
+
+watermelon.prototype.setBoundingBox = function() {
+    if (this.lookDirectionRight || this.moveDirection == 1 ) {
+        this.boundingbox = new BoundingBox(this.x + 6 * this.scale, this.y + 12 * this.scale
+            , this.width - 14 * this.scale , this.height -22 * this.scale);
+    } else {
+        this.boundingbox = new BoundingBox(this.x + 8 * this.scale, this.y + 10 * this.scale
+            , this.width - 14 * this.scale , this.height -22 * this.scale);
+    }
 }
 
 watermelon.prototype.draw = function () {
@@ -170,6 +177,7 @@ watermelon.prototype.draw = function () {
                 }
             }
         }
+        drawBoundingBox(this);
     }
 }
 
@@ -186,15 +194,14 @@ watermelon.prototype.update = function () {
         //slimeUpdate(this);
         enemyUpdateHelper(this);
 
-        xy = getXY(this.centerX, this.centerY);
-        if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
-            this.hp = 0; //dead
-        } 
+        this.setBoundingBox();
+
+        enemyEscape(this);
         
         // else i
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
-            if (ent !== this && ent.isBoba && collide(ent, this)) {
+            if (ent !== this && ent.isBoba && this.boundingbox.collide(ent.boundingbox)) {
                 ent.removeFromWorld = true;
                 this.hp--;
             }

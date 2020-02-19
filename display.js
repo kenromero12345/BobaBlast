@@ -1,4 +1,4 @@
-var currentMoney = 650;
+var currentMoney = 1000;
 var currentLifes = 100;
 
 var purchaseMode = false;
@@ -336,6 +336,6 @@ display.prototype.generateDescriptionBox = function() {
 
 display.prototype.update = function () {
     if(!this.game.running) return;
-    currentMoney++;
-    currentLifes--;
+    // currentMoney--;
+    // currentLifes--;
 }

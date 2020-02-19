@@ -1,4 +1,6 @@
 var constructor = function (tea, game, spawnX, spawnY, isRun) {
+    tea.spawnX = spawnX;
+    tea.spawnY = spawnY;
     tea.isEnemy = true;
     tea.x = spawnX - 50;
     tea.y = spawnY - 50;
@@ -9,15 +11,6 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
         tea.centerX = tea.x + tea.walkWidth / 2;
         tea.centerY = tea.y + tea.walkHeight / 2;
     }
-    // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
-    var difX = tea.centerX - spawnX;
-    var difY =  spawnY - tea.centerY;
-    // console.log("dx:" + difX + ", dy:" + difY);
-    tea.centerX = tea.centerX - difX;
-    tea.centerY = tea.centerY + difY;
-    tea.x = tea.x - difX;
-    tea.y = tea.y + difY;
-    // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
     tea.walkSpeed = 100;
     tea.runSpeed = 200;
     tea.game = game;
@@ -25,13 +18,46 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.moveDirection = 1; //1 is right, down, left, up
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
-    tea.hp = 10;
+    tea.hp = 20;
     if (tea.paceWalk) {
         tea.width = tea.walkWidth;
         tea.height = tea.walkHeight;
     } else {
         tea.width = tea.runWidth;
         tea.height = tea.runHeight;
+    }
+    tea.boxes = true;
+    teaSetBoundingBox(tea);
+    enemyCenterUpdate(tea);
+}
+
+teaSetBoundingBox = function(tea) {
+    if (!tea.paceWalk) {
+        if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
+            tea.boundingbox = new BoundingBox(tea.x + 18 * tea.scale, tea.y + 15 * tea.scale
+                , tea.width - 30 * tea.scale , tea.height -23 * tea.scale);
+        } else {
+            tea.boundingbox = new BoundingBox(tea.x + 8 * tea.scale, tea.y + 15 * tea.scale
+                , tea.width - 30 * tea.scale , tea.height -23 * tea.scale);
+        }
+    } else {
+        if (tea.name == "green bubble tea") {
+            if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
+                tea.boundingbox = new BoundingBox(tea.x + 23 * tea.scale, tea.y + 30 * tea.scale
+                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+            } else {
+                tea.boundingbox = new BoundingBox(tea.x + 13 * tea.scale, tea.y + 30 * tea.scale
+                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+            }
+        } else {
+            if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
+                tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 30 * tea.scale
+                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+            } else {
+                tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 30 * tea.scale
+                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+            }
+        }
     }
 }
 
@@ -86,6 +112,7 @@ var draw = function (tea) {
             }
         }
     }
+    drawBoundingBox(tea);
 }
 
 var update = function (tea) {
@@ -110,7 +137,7 @@ var update = function (tea) {
     if (((tea.centerX +  100) % 100 > 43 && (tea.centerX + 100) % 100 < 57
         && tea.centerY % 100 > 43 && tea.centerY % 100 < 57) && !tea.paceWalk
         || ((tea.centerX +  100) % 100 > 49 && (tea.centerX + 100) % 100 < 51
-        && tea.centerY % 100 > 49 && tea.centerY % 100 < 51) && tea.paceWalk) {
+        && tea.centerY % 100 > 48 && tea.centerY % 100 < 52) && tea.paceWalk) {
             // console.log(tea.centerX + " " + tea.centerY)
         tea.moveDirection = getShortestPath(tea.centerX, tea.centerY);
         if (tea.moveDirection == 1) {
@@ -223,6 +250,9 @@ var update = function (tea) {
             }
         }
     }
+
+
+    teaSetBoundingBox(tea);
     // tea.centerX = tea.x + width / 2;
     // tea.centerY = tea.y + height / 2;
     // console.log(tea.moveDirection)
@@ -232,14 +262,7 @@ var update = function (tea) {
     // console.log(tea.y - tea.centerY);
          //&& ((tea.centerX +  100) % 100 > 40 
     // && (tea.centerX + 100) % 100 < 60 && tea.centerY % 100 > 40 && tea.centerY % 100 < 60)
-    xy = getXY(tea.centerX, tea.centerY);
-    if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end) {
-       tea.hp = 0; //dead
-        // console.log("true");
-        // console.log(GAMEBOARD.length);
-        // console.log(xy);
-        // console.log(tea.centerX)
-    } 
+    enemyEscape(tea);
     
     // else if (xy.x > GAMEBOARD.length - 1) {
         // console.log(xy)
@@ -263,117 +286,9 @@ var update = function (tea) {
 
     for (var i = 0; i < tea.game.entities.length; i++) {
         var ent = tea.game.entities[i];
-        if (ent !== tea && ent.isBoba && collide(ent, tea)) {
-            //collide
-            //  console.log(tea.name + " collide with " + ent.name);
+        if (ent !== tea && ent.isBoba && tea.boundingbox.collide(ent.boundingbox)) {
             ent.removeFromWorld = true;
             tea.hp--;
         }
     }
 }
-
-var getXY = function(x, y) {
-    var i = Math.floor(x/100) + 1;
-    var j = Math.floor(y/100);
-  
-    return {x: i, y: j}
-}
-
-//make it bidirection ?
-function getShortestPath(x, y) {
-    var queue = [];
-
-	for(var i = 0; i < GAMEBOARD.length; i++) {
-	  	for(var j = 0; j < GAMEBOARD[i].length; j++) {
-            GAMEBOARD[i][j].distToXY = -1;
-            GAMEBOARD[i][j].dir = -1;
-	  	}
-	}
-
-    var xy = getXY(x, y);
-    GAMEBOARD[xy.x][xy.y].distToXY = 0;
-    GAMEBOARD[xy.x][xy.y].dir = 0;
-    queue.push(xy);
-
-    while (queue.length !== 0) {
-        for (let i = 0; i < queue.length; i++) {
-            var node = queue.shift();
-            // if (node.x == 2 && node.y > 0) {
-            //     console.log("problem")
-            // }
-            if (GAMEBOARD[node.x][node.y].end) {
-				return helperToGetDirection(node);
-            }
-
-            if (node.x + 1 < GAMEBOARD.length && node.x + 1 >= 0 && !GAMEBOARD[node.x + 1][node.y].occupied 
-                && GAMEBOARD[node.x + 1][node.y].dir < 0) {
-                var newNode = Object.assign({}, node);
-                newNode.x++;
-                queue.push(newNode);
-				GAMEBOARD[node.x + 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
-				GAMEBOARD[node.x + 1][node.y].dir = 1;
-            }
-            if (node.y + 1 < GAMEBOARD[0].length && node.y + 1 >= 0 && !GAMEBOARD[node.x][node.y + 1].occupied 
-                && GAMEBOARD[node.x][node.y + 1].dir < 0) {
-                var newNode = Object.assign({}, node);
-                newNode.y++;
-                queue.push(newNode);
-				GAMEBOARD[node.x][node.y + 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
-				GAMEBOARD[node.x][node.y + 1].dir = 2;
-            }
-            if (node.x - 1 < GAMEBOARD.length && node.x - 1 >= 0 && !GAMEBOARD[node.x - 1][node.y].occupied 
-                && GAMEBOARD[node.x - 1][node.y].dir < 0) {
-                var newNode = Object.assign({}, node);
-                newNode.x--;
-                queue.push(newNode);
-				GAMEBOARD[node.x - 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
-				GAMEBOARD[node.x - 1][node.y].dir = 3;
-            }
-            if (node.y - 1 < GAMEBOARD[0].length && node.y - 1 >= 0 && !GAMEBOARD[node.x][node.y - 1].occupied 
-                && GAMEBOARD[node.x][node.y - 1].dir < 0) {
-                var newNode = Object.assign({}, node);
-                newNode.y--;
-                queue.push(newNode);
-				GAMEBOARD[node.x][node.y - 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
-				GAMEBOARD[node.x][node.y - 1].dir = 4;
-            }
-        }
-    }
-    return 0; // no shortest path
-};
-
-function helperToGetDirection(node) {
-
-    // if (node.x == 2 && node.y > 0) {
-    //     console.log("problem")
-    // }
-	if(GAMEBOARD[node.x][node.y].distToXY == 0) {
-		return node.linkedDir;
-	}
-
-	if (node.x + 1 < GAMEBOARD.length && node.x + 1 >= 0 && !GAMEBOARD[node.x + 1][node.y].occupied
-		&& GAMEBOARD[node.x + 1][node.y].distToXY == GAMEBOARD[node.x][node.y].distToXY - 1) {
-		node.linkedDir = GAMEBOARD[node.x][node.y].dir;
-		node.x++;
-		return helperToGetDirection(node);
-	}
-	if (node.y + 1 < GAMEBOARD[0].length && node.y + 1 >= 0 && !GAMEBOARD[node.x][node.y + 1].occupied
-		&& GAMEBOARD[node.x][node.y + 1].distToXY == GAMEBOARD[node.x][node.y].distToXY - 1) {
-		node.linkedDir = GAMEBOARD[node.x][node.y].dir;
-		node.y++;
-		return helperToGetDirection(node);
-	}
-	if (node.x - 1 < GAMEBOARD.length && node.x - 1 >= 0 && !GAMEBOARD[node.x - 1][node.y].occupied
-		&& GAMEBOARD[node.x - 1][node.y].distToXY == GAMEBOARD[node.x][node.y].distToXY - 1) {
-		node.linkedDir = GAMEBOARD[node.x][node.y].dir;
-		node.x--;
-		return helperToGetDirection(node);
-	}
-	if (node.y - 1 < GAMEBOARD[0].length && node.y - 1 >= 0 && !GAMEBOARD[node.x][node.y - 1].occupied 
-		&& GAMEBOARD[node.x][node.y - 1].distToXY == GAMEBOARD[node.x][node.y].distToXY - 1) {
-		node.linkedDir = GAMEBOARD[node.x][node.y].dir;
-        node.y--;
-		return helperToGetDirection(node);
-	}
-};
-

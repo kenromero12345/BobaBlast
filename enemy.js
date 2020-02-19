@@ -31,6 +31,8 @@ var enemyDraw = function(enemy) {
                 }
             }
         }
+        // enemy.drawBoundingBox();
+        drawBoundingBox(enemy);
     }
 }
 
@@ -49,37 +51,80 @@ var enemyUpdateHelper = function (enemy) {
      
                 enemy.x += enemy.game.clockTick * enemy.speed;
                 enemy.centerX += enemy.game.clockTick * enemy.speed;
+                // enemy.boundingbox.x += enemy.game.clockTick * enemy.speed;
             
         } else if (enemy.moveDirection == 2) {
             if (enemy.lookDirectionRight) {
              
                     enemy.y += enemy.game.clockTick * enemy.speed;
                     enemy.centerY +=enemy.game.clockTick * enemy.speed;
+                    // enemy.boundingbox.y += enemy.game.clockTick * enemy.speed;
                 
             } else {
            
                     enemy.y += enemy.game.clockTick * enemy.speed;
                     enemy.centerY += enemy.game.clockTick * enemy.speed;
+                    // enemy.boundingbox.y += enemy.game.clockTick * enemy.speed;
                 
             }
         } else if (enemy.moveDirection == 3) {
         
                 enemy.x -= enemy.game.clockTick * enemy.speed;
                 enemy.centerX -= enemy.game.clockTick * enemy.speed;
+                // enemy.boundingbox.x -= enemy.game.clockTick * enemy.speed;
             
         } else {
             if (enemy.lookDirectionRight) {
             
                     enemy.y -= enemy.game.clockTick * enemy.speed;
                     enemy.centerY -= enemy.game.clockTick * enemy.speed;
-                
+                    // enemy.boundingbox.y -= enemy.game.clockTick * enemy.speed;
                     
             } else {
                 
                     enemy.y -= enemy.game.clockTick * enemy.speed;
                     enemy.centerY -= enemy.game.clockTick * enemy.speed;
+                    // enemy.boundingbox.y -= enemy.game.clockTick * enemy.speed;
                 
             }
         }
     }
+}
+
+var drawBoundingBox = function(enemy) {
+    if (enemy.boxes) {
+        if (enemy.moveDirection == 1 || enemy.lookDirectionRight) {
+            enemy.ctx.strokeStyle = "red";
+            enemy.ctx.strokeRect(enemy.x, enemy.y, enemy.width, enemy.height);
+            enemy.ctx.strokeStyle = "green";
+            enemy.ctx.strokeRect(enemy.boundingbox.x, enemy.boundingbox.y, enemy.boundingbox.width, enemy.boundingbox.height);
+        } else {
+            enemy.ctx.strokeStyle = "red";
+            enemy.ctx.strokeRect(enemy.x, enemy.y, enemy.width, enemy.height);
+            enemy.ctx.strokeStyle = "green";
+            enemy.ctx.strokeRect(enemy.boundingbox.x, enemy.boundingbox.y, enemy.boundingbox.width, enemy.boundingbox.height);
+        }
+    }
+}
+
+var enemyEscape = function(enemy) {
+    xy = getXY(enemy.centerX, enemy.centerY);
+    if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end && enemy.hp > 0) {
+        enemy.hp = 0; //dead
+        currentLifes -= enemy.lifeDeduction;
+    } 
+}
+
+var enemyCenterUpdate = function(enemy) {
+    enemy.centerX = enemy.boundingbox.x + enemy.boundingbox.width / 2;
+    enemy.centerY = enemy.boundingbox.y + enemy.boundingbox.height / 2;
+        // console.log("x:" + enemy.x + ", y:" + enemy.y + ", cx" + enemy.centerX + ", cy:" + enemy.centerY);
+    var difX = enemy.centerX - enemy.spawnX;
+    var difY =  enemy.spawnY - enemy.centerY;
+    // console.log("dx:" + difX + ", dy:" + difY);
+    enemy.centerX = enemy.centerX - difX;
+    enemy.centerY = enemy.centerY + difY;
+    enemy.x = enemy.x - difX;
+    enemy.y = enemy.y + difY;
+        // console.log("x:" + enemy.x + ", y:" + enemy.y + ", cx" + enemy.centerX + ", cy:" + enemy.centerY);
 }
