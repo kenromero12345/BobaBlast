@@ -188,7 +188,7 @@ var enemyStatusEffectUpdate = function(enemy) {
 
 var enemyPoisonUpdate = function(enemy) {
     if (enemy.isPoisoned) {
-        ent.hp--;
+        enemy.hp--;
         if (Date.now() >= enemy.poisonDate) {
             enemy.isPoisoned = false;
         }
@@ -197,7 +197,7 @@ var enemyPoisonUpdate = function(enemy) {
 
 var enemyBurnUpdate = function(enemy) {
     if (enemy.isBurned) {
-        ent.hp--;
+        enemy.hp--;
         if (Date.now() >= enemy.burnDate) {
             enemy.isBurned = false;
         }
@@ -206,7 +206,7 @@ var enemyBurnUpdate = function(enemy) {
 
 var enemyParalyzeUpdate = function(enemy) {
     if (enemy.isParalyzed) {
-        ent.hp--;
+        enemy.hp--;
         if (Date.now() >= enemy.paralyzeDate) {
             enemy.isParalyzed = false;
             enemy.speed = tempSpeed;
@@ -216,10 +216,10 @@ var enemyParalyzeUpdate = function(enemy) {
 
 var enemyFreezeUpdate = function(enemy) {
     if (enemy.isFrozen) {
-        ent.hp--;
+        enemy.hp--;
         if (Date.now() >= enemy.freezeDate) {
             enemy.isFrozen = false;
-            enemy.speed = tempSpeed;
+            enemy.speed = enemy.tempSpeed;
         }
     }
 }
