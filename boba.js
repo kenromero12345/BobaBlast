@@ -28,7 +28,7 @@ function boba(game, startX, startY, destinationX, destinationY) {
     }
     this.width = 28;
     this.height = 28;
-    this.speed = 200;
+    this.speed = 500;
     this.game = game;
     this.ctx = game.ctx;
     this.noCollision = true;
