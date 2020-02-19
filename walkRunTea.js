@@ -154,47 +154,34 @@ var update = function (tea) {
                     tea.x += tea.game.clockTick * tea.walkSpeed;
                     tea.centerX += tea.game.clockTick * tea.walkSpeed;
                 }
-                // width = tea.animationWalkRight.frameWidth;
-                // height =  tea.animationWalkRight.frameHeight;
             } else if (tea.moveDirection == 2) {
                 if (tea.lookDirectionRight) {
                     if (tea.animationWalkRight.elapsedTime < tea.animationWalkRight.totalTime * 8 / 14) {
                         tea.y += tea.game.clockTick * tea.walkSpeed;
                         tea.centerY += tea.game.clockTick * tea.walkSpeed;
                     }
-                    // width =  tea.animationWalkRight.frameWidth;
-                    // height =  tea.animationWalkRight.frameHeight;
                 } else {
                     if (tea.animationWalkLeft.elapsedTime < tea.animationWalkLeft.totalTime * 8 / 14) {
                         tea.y += tea.game.clockTick * tea.walkSpeed;
                         tea.centerY += tea.game.clockTick * tea.walkSpeed;
                     }
-                    // width =  tea.animationWalkLeft.frameWidth;
-                    // height =  tea.animationWalkLeft.frameHeight;
                 }
             } else if (tea.moveDirection == 3) {
                 if (tea.animationWalkLeft.elapsedTime < tea.animationWalkLeft.totalTime * 8 / 14) {
                     tea.x -= tea.game.clockTick * tea.walkSpeed;
                     tea.centerX -= tea.game.clockTick * tea.walkSpeed;
                 }
-                // width =  tea.animationWalkLeft.frameWidth;
-                // height =  tea.animationWalkLeft.frameHeight;
             } else {
                 if (tea.lookDirectionRight) {
                     if (tea.animationWalkRight.elapsedTime < tea.animationWalkRight.totalTime * 8 / 14) {
                         tea.y -= tea.game.clockTick * tea.walkSpeed;
                         tea.centerY -= tea.game.clockTick * tea.walkSpeed;
                     }
-                    // width =  tea.animationWalkRight.frameWidth;
-                    // height =  tea.animationWalkRight.frameHeight;
-                        // console.log(width);
                 } else {
                     if (tea.animationWalkLeft.elapsedTime < tea.animationWalkLeft.totalTime * 8 / 14) {
                         tea.y -= tea.game.clockTick * tea.walkSpeed;
                         tea.centerY -= tea.game.clockTick * tea.walkSpeed;
                     }
-                    // width =  tea.animationWalkLeft.frameWidth;
-                    // height =  tea.animationWalkLeft.frameHeight;
                 }
             }
         } else {
@@ -203,46 +190,34 @@ var update = function (tea) {
                     tea.x += tea.game.clockTick * tea.runSpeed;
                     tea.centerX += tea.game.clockTick * tea.runSpeed;
                 }
-                    // width =  tea.animationRunRight.frameWidth;
-                    // height =  tea.animationRunRight.frameHeight;
             } else if (tea.moveDirection == 2) {
                 if (tea.lookDirectionRight) {
                     if (tea.animationRunRight.elapsedTime < tea.animationRunRight.totalTime * 8 / 14) {
                         tea.y += tea.game.clockTick * tea.runSpeed;
                         tea.centerY += tea.game.clockTick * tea.runSpeed;
                     }
-                    // width =  tea.animationRunRight.frameWidth;
-                    // height =  tea.animationRunRight.frameHeight;
                 } else {
                     if (tea.animationRunLeft.elapsedTime < tea.animationRunLeft.totalTime * 8 / 14) {
                         tea.y += tea.game.clockTick * tea.runSpeed;
                         tea.centerY += tea.game.clockTick * tea.runSpeed;
                     }
-                    // width =  tea.animationRunLeft.frameWidth;
-                    // height =  tea.animationRunLeft.frameHeight;
                 }
             } else if (tea.moveDirection == 3) {
                 if (tea.animationRunLeft.elapsedTime < tea.animationRunLeft.totalTime * 8 / 14) {
                     tea.x -= tea.game.clockTick * tea.runSpeed;
                     tea.centerX -= tea.game.clockTick * tea.runSpeed;
                 }
-                // width =  tea.animationRunLeft.frameWidth;
-                // height =  tea.animationRunLeft.frameHeight;
             } else {
                 if (tea.lookDirectionRight) {
                     if (tea.animationRunRight.elapsedTime < tea.animationRunRight.totalTime * 8 / 14) {
                         tea.y -= tea.game.clockTick * tea.runSpeed;
                         tea.centerY -= tea.game.clockTick * tea.runSpeed;
                     }
-                    // width = tea.animationRunRight.frameWidth;
-                    // height = tea.animationRunRight.frameHeight;
                 } else {
                     if (tea.animationRunLeft.elapsedTime < tea.animationRunLeft.totalTime * 8 / 14) {
                         tea.y -= tea.game.clockTick * tea.runSpeed;
                         tea.centerY -= tea.game.clockTick * tea.runSpeed;
                     }
-                    // width =  tea.animationRunLeft.frameWidth;
-                    // height =  tea.animationRunLeft.frameHeight;
                 }
             }
         }
