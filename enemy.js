@@ -141,10 +141,7 @@ var collideUpdate = function(enemy) {
     for (var i = 0; i < enemy.game.entities.length; i++) {
         var ent = enemy.game.entities[i];
         if (ent !== enemy && enemy.hp > 0) {
-            // console.log(ent.isFreeze);
             if (ent.isFreeze && enemy.boundingbox.collide(ent.boundingbox)) {
-                // console.log("a")
-                //TODO: by chance
                 if (Math.random() < enemy.freezeResistance ? false : true) {
                     enemy.isFrozen = true;
                     if (enemy.type && enemy.type == "tea") {
@@ -157,7 +154,6 @@ var collideUpdate = function(enemy) {
                 }
             }
             if (ent.isParalyze && enemy.boundingbox.collide(ent.boundingbox)) {
-                //TODO: by chance
                if (Math.random() < enemy.paralysisResistance ? false : true) {
                     enemy.isParalyzed = true;
                     if (enemy.type && enemy.type == "tea") {
@@ -170,21 +166,18 @@ var collideUpdate = function(enemy) {
                }
             }
             if (ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
-                //TODO: by chance
                 if (Math.random() < enemy.poisonResistance ? false : true) {
                     enemy.isPoisoned = true;
                     enemy.poisonDate = Date.now() + 10000;
                 }
             } 
             if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
-                //TODO: by chance
                 if (Math.random() < enemy.burnResistance ? false : true) {
                     enemy.isBurned = true;
                     enemy.burnDate = Date.now() + 10000;
                 }
             } 
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
-                // console.log("a");
                 ent.removeFromWorld = true;
                 enemy.hp--;
             } 
