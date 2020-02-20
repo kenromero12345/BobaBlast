@@ -1,5 +1,26 @@
-function boba(game, startX, startY, destinationX, destinationY) {
+function boba(game, startX, startY, destinationX, destinationY, name) {
     this.name = "BOBA";
+    this.isFreeze = false;
+    if(name ==='blue') {
+        this.isFreeze = true;
+    }
+    this.isPoison = false;
+    if(name ==='green') {
+        this.isPoison = true;
+    }
+    this.isParalyze = false;
+    if(name ==='purple') {
+        this.isParalyze = true;
+    }
+    this.isExplosion = false;
+    if(name ==='red') {
+        this.isExplosion = true;
+    }
+    /*
+        this.isFire = false;
+    if(name ==='poop') {
+        this.isFire = true;
+    }*/
     this.animation = new Animation(AM.getAsset("./img/boba.png"), 0, 0, 20, 20, 1, 0.1, 1, true, 1);
     this.x = startX;
     this.y = startY;
