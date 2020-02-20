@@ -12,7 +12,8 @@ function cakeChoco(game, spawnX, spawnY, scale) {
     , 847, 122, -96, 102, 6, .135, 6, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/cakeChocoFlip.png")
     , 847, 221, -91, 94, 7, .2, 7, false, scale, false);
-    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth, this.animationWalkLeft.frameHeight, game);
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
 }
 
 cakeChoco.prototype.setBoundingBox = function() {

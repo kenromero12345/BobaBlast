@@ -17,19 +17,19 @@ function redTea(game, spawnX, spawnY, isRun, scale) {
     this.runWidth = 72 * scale;
     this.runHeight= 85 * scale;
     this.scale = scale;
-    this.name = "red";
+    this.name = "red bubble tea";
     this.money = 10;
-    constructor(this, game, spawnX, spawnY, isRun);
+    walkRunTeaConstructor(this, game, spawnX, spawnY, isRun);
 }
 
 redTea.prototype.draw = function () {
     if(this.game.running) {
-        draw(this);
+        walkRunTeaDraw(this);
     }
 }
 
 redTea.prototype.update = function () {
     if(this.game.running) {
-        update(this);
+        walkRunTeaUpdate(this);
     }
 }

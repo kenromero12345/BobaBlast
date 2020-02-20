@@ -118,6 +118,10 @@ roundPlan.prototype.update = function () {
                 ent.removeFromWorld = true;
             }
         }
+        for (var i = 0; i < this.game.activeTowers.length; i++) {
+            var ent = this.game.activeTowers[i];
+            ent.shootBoba = false;
+        }
     }
 
     if (!this.isRoundStart && !this.isEnding && !this.spawningFinish) {

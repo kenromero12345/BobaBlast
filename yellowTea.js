@@ -19,17 +19,17 @@ function yellowTea(game, spawnX, spawnY, isRun, scale) {
     this.scale = scale;
     this.name = "yellow";
     this.money = 20;
-    constructor(this, game, spawnX, spawnY, isRun);
+    walkRunTeaConstructor(this, game, spawnX, spawnY, isRun);
 }
 
 yellowTea.prototype.draw = function () {
     if(this.game.running) {
-        draw(this);
+        walkRunTeaDraw(this);
     }
 }
 
 yellowTea.prototype.update = function () {
     if(this.game.running) {
-        update(this);
+        walkRunTeaUpdate(this);
     }
 }

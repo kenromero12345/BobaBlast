@@ -12,7 +12,8 @@ function miniCake(game, spawnX, spawnY, scale) {
     , 714, 66, -67, 48, 6, .135, 6, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/miniCakeFlip.png")
     , 714, 189, -67, 74, 9, .25, 9, false, scale, false);
-    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth, this.animationWalkLeft.frameHeight, game);
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
 }
 
 miniCake.prototype.setBoundingBox = function() {

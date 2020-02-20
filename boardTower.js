@@ -1,4 +1,5 @@
 function boardTower(game, gridX, gridY, type) {
+    this.name = type.towerType;
     this.isTower = true;
     this.spin = false;
     this.counterclockwise = true;
@@ -88,7 +89,7 @@ boardTower.prototype.draw = function () {
 
     if(this.shootBoba) {
         if(this.shootTimer < Date.now()) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY));
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY, this.name));
             this.shootBoba = false;
             this.shootTimer = Date.now() + this.shootBobaEveryMS;
         }

@@ -14,7 +14,8 @@ function bigCake(game, spawnX, spawnY, scale) {
     , 4732, 1830, -334, 400, 10, .2, 10, false, scale, false);
     this.animationWalkRight.offsetX = -150;
     this.animationDisappearRight.offsetX = -150;
-    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth, this.animationWalkLeft.frameHeight, game);
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
 }
 
 bigCake.prototype.setBoundingBox = function() {
@@ -31,69 +32,11 @@ bigCake.prototype.draw = function () {
     if(this.game.running) {
         if (this.hp <= 0) {
             if (this.lookDirectionRight) {
-                // if ( this.animationDisappearRight.currentFrame() == 2) {
-                //     this.animationDisappearRight.offsetX = 0;
-                //     this.animationDisappearRight.startX = 879-17;
-                //     this.animationDisappearRight.frameWidth = -96;
-                // } else if ( this.animationDisappearRight.currentFrame() == 3) {
-                //     this.animationDisappearRight.offsetX = 0;
-                //     this.animationDisappearRight.startX = 879;
-                //     this.animationDisappearRight.frameWidth = -110;
-                // } else if ( this.animationDisappearRight.currentFrame() == 4) {
-                //     this.animationDisappearRight.offsetX = 0;
-                //     this.animationDisappearRight.startX = 879+20;
-                //     this.animationDisappearRight.frameWidth = -120;
-                // } else if ( this.animationDisappearRight.currentFrame() == 5) {
-                //     this.animationDisappearRight.offsetX = 0;
-                //     this.animationDisappearRight.startX = 879-85;
-                //     this.animationDisappearRight.frameWidth = -100;
-                // } else if ( this.animationDisappearRight.currentFrame() == 6) {
-                //     this.animationDisappearRight.offsetX = -3;
-                //     this.animationDisappearRight.startX = 879-85;
-                //     this.animationDisappearRight.frameWidth = -100;
-                // } else if ( this.animationDisappearRight.currentFrame() == 7) {
-                //     this.animationDisappearRight.offsetX = -5;
-                //     this.animationDisappearRight.startX = 879-85;
-                //     this.animationDisappearRight.frameWidth = -100;
-                // } else {
-                //     this.animationDisappearRight.offsetX = 0;
-                //     this.animationDisappearRight.startX = 879;
-                //     this.animationDisappearRight.frameWidth = -96;
-                // }
                 this.animationDisappearRight.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
                 if (this.animationDisappearRight.isDone()) {
                     this.removeFromWorld = true;
                 }
             } else {
-                // if ( this.animationDisappearLeft.currentFrame() == 2) {
-                //     this.animationDisappearLeft.offsetX = 0;
-                //     this.animationDisappearLeft.startX = 17;
-                //     this.animationDisappearLeft.frameWidth = 96;
-                // } else if ( this.animationDisappearLeft.currentFrame() == 3) {
-                //     this.animationDisappearLeft.offsetX = -10;
-                //     this.animationDisappearLeft.startX = 0;
-                //     this.animationDisappearLeft.frameWidth = 110;
-                // } else if ( this.animationDisappearLeft.currentFrame() == 4) {
-                //     this.animationDisappearLeft.offsetX = -20;
-                //     this.animationDisappearLeft.startX = -20;
-                //     this.animationDisappearLeft.frameWidth = 120;
-                // } else if ( this.animationDisappearLeft.currentFrame() == 5) {
-                //     this.animationDisappearLeft.offsetX = 0;
-                //     this.animationDisappearLeft.startX = 85;
-                //     this.animationDisappearLeft.frameWidth = 100;
-                // } else if ( this.animationDisappearLeft.currentFrame() == 6) {
-                //     this.animationDisappearLeft.offsetX = 5;
-                //     this.animationDisappearLeft.startX = 85;
-                //     this.animationDisappearLeft.frameWidth = 100;
-                // } else if ( this.animationDisappearLeft.currentFrame() == 7) {
-                //     this.animationDisappearLeft.offsetX = 5;
-                //     this.animationDisappearLeft.startX = 85;
-                //     this.animationDisappearLeft.frameWidth = 100;
-                // } else {
-                //     this.animationDisappearLeft.offsetX = 0;
-                //     this.animationDisappearLeft.startX = 0;
-                //     this.animationDisappearLeft.frameWidth = 96;
-                // }
                 this.animationDisappearLeft.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
                 if (this.animationDisappearLeft.isDone()) {
                     this.removeFromWorld = true;
@@ -124,35 +67,14 @@ bigCake.prototype.draw = function () {
 }
 
 var bigCakeLeft = function(enemy) {
-    // if (enemy.animationWalkLeft.currentFrame() == 5) {
-    //     enemy.animationWalkLeft.startX = 11;
-    //     enemy.animationWalkLeft.width = 100;
-    //     enemy.animationWalkLeft.offsetX = 0;
-    // } else {
-    //     enemy.animationWalkLeft.startX = 7;
-    //     enemy.animationWalkLeft.width = 98;
-    //     enemy.animationWalkLeft.offsetX = 0;
-    // }
     enemy.animationWalkLeft.drawFrame(enemy.game.clockTick, enemy.ctx, enemy.x, enemy.y);
 }
 
 var bigCakeRight = function(enemy) {
-    // if (enemy.animationWalkRight.currentFrame() == 5) {
-    //     enemy.animationWalkRight.startX = 803-11;
-    //     enemy.animationWalkRight.width = -100;
-    //     enemy.animationWalkRight.offsetX = 0;
-    // } else if (enemy.animationWalkRight.currentFrame() == 2) {
-    //     enemy.animationWalkRight.startX = 803-6;
-    // } else {
-    //     enemy.animationWalkRight.startX = 803-7;
-    //     enemy.animationWalkRight.width = -98;
-    //     enemy.animationWalkRight.offsetX = 0;
-    // }
     enemy.animationWalkRight.drawFrame(enemy.game.clockTick, enemy.ctx, enemy.x, enemy.y);
 }
 
 bigCake.prototype.update = function () {
-    // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
         var xy = getXY(this.centerX, this.centerY);
         if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
@@ -161,8 +83,8 @@ bigCake.prototype.update = function () {
             enemyUpdateLookHelper(this);
         }
 
-        //enemyUpdateHelper(this);
-        bigCakeUpdate(this);
+        enemyUpdateHelper(this);
+        // bigCakeUpdate(this);
 
         this.setBoundingBox();
         
