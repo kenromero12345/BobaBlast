@@ -147,18 +147,28 @@ var collideUpdate = function(enemy) {
                 //TODO: by chance
                 if (Math.random() < enemy.freezeResistance ? false : true) {
                     enemy.isFrozen = true;
-                    enemy.speed = enemy.tempSpeed / 4;
+                    if (enemy.type && enemy.type == "tea") {
+                        enemy.walkSpeed = enemy.tempWalkSpeed / 4;
+                        enemy.runSpeed = enemy.tempRunSpeed / 4;
+                    } else {
+                        enemy.speed = enemy.tempSpeed / 4;
+                    }
                     enemy.freezeDate = Date.now() + 10000;
                 }
             }
             if (ent.isParalyze && enemy.boundingbox.collide(ent.boundingbox)) {
                 //TODO: by chance
-              //  if (Math.random() < enemy.paralysisResistance ? false : true) {
+               if (Math.random() < enemy.paralysisResistance ? false : true) {
                     enemy.isParalyzed = true;
-                    enemy.speed = 0;
+                    if (enemy.type && enemy.type == "tea") {
+                        enemy.walkSpeed = 0;
+                        enemy.runSpeed = 0;
+                    } else {
+                        enemy.speed = 0;
+                    }
                     enemy.paralyzeDate = Date.now() + 2000;
-             //   }
-            } 
+               }
+            }
             if (ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
                 //TODO: by chance
                 if (Math.random() < enemy.poisonResistance ? false : true) {
@@ -213,7 +223,12 @@ var enemyParalyzeUpdate = function(enemy) {
         enemy.hp -= 0.05;
         if (Date.now() >= enemy.paralyzeDate) {
             enemy.isParalyzed = false;
-            enemy.speed = enemy.tempSpeed;
+            if (enemy.type && enemy.type == "tea") {
+                enemy.walkSpeed = enemy.tempWalkSpeed;
+                enemy.runSpeed = enemy.tempRunSpeed;
+            } else {
+                enemy.speed = enemy.tempSpeed;
+            }
         }
     }
 }
@@ -223,7 +238,12 @@ var enemyFreezeUpdate = function(enemy) {
         enemy.hp -= 0.05;
         if (Date.now() >= enemy.freezeDate) {
             enemy.isFrozen = false;
-            enemy.speed = enemy.tempSpeed;
+            if (enemy.type && enemy.type == "tea") {
+                enemy.walkSpeed = enemy.tempWalkSpeed;
+                enemy.runSpeed = enemy.tempRunSpeed;
+            } else {
+                enemy.speed = enemy.tempSpeed;
+            }
         }
     }
 }

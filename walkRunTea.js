@@ -1,4 +1,5 @@
 var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
+    tea.type = "tea"
     tea.spawnX = spawnX;
     tea.spawnY = spawnY;
     tea.isEnemy = true;
@@ -19,19 +20,22 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
     tea.hp = 20;
+    tea.tempWalkSpeed = tea.walkSpeed;
+    tea.tempRunSpeed = tea.runSpeed;
     if (tea.paceWalk) {
         tea.width = tea.walkWidth;
         tea.height = tea.walkHeight;
         tea.tempFrameDuration = tea.animationWalkLeft.frameDuration;
+        
     } else {
         tea.width = tea.runWidth;
         tea.height = tea.runHeight;
         tea.tempFrameDuration = tea.animationRunLeft.frameDuration;
+        
     }
     tea.boxes = true;
     teaSetBoundingBox(tea);
     enemyCenterUpdate(tea);
-    tea.tempSpeed = tea.speed;
     tea.isPoisoned = false;
     tea.isBurned = false;
     tea.isFrozen = false;
