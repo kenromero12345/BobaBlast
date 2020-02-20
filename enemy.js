@@ -146,7 +146,7 @@ var collideUpdate = function(enemy) {
                 if (Math.random() < enemy.freezeResistance ? false : true) {
                     enemy.isFrozen = true;
                     enemy.speed = enemy.tempSpeed / 2;
-                    enemy.freezeDate = Date.now() + 500;
+                    enemy.freezeDate = Date.now() + 10000;
                 }
             }
             if (ent.isParalyze && enemy.boundingbox.collide(ent.boundingbox)) {
@@ -188,7 +188,7 @@ var enemyStatusEffectUpdate = function(enemy) {
 
 var enemyPoisonUpdate = function(enemy) {
     if (enemy.isPoisoned) {
-        enemy.hp--;
+        enemy.hp -= 0.1;
         if (Date.now() >= enemy.poisonDate) {
             enemy.isPoisoned = false;
         }
@@ -197,7 +197,7 @@ var enemyPoisonUpdate = function(enemy) {
 
 var enemyBurnUpdate = function(enemy) {
     if (enemy.isBurned) {
-        enemy.hp--;
+        enemy.hp -= 0.1;
         if (Date.now() >= enemy.burnDate) {
             enemy.isBurned = false;
         }
@@ -206,17 +206,17 @@ var enemyBurnUpdate = function(enemy) {
 
 var enemyParalyzeUpdate = function(enemy) {
     if (enemy.isParalyzed) {
-        enemy.hp--;
+        enemy.hp -= 0.1;
         if (Date.now() >= enemy.paralyzeDate) {
             enemy.isParalyzed = false;
-            enemy.speed = tempSpeed;
+            enemy.speed = enemy.tempSpeed;
         }
     }
 }
 
 var enemyFreezeUpdate = function(enemy) {
     if (enemy.isFrozen) {
-        enemy.hp--;
+        enemy.hp -= 0.1;
         if (Date.now() >= enemy.freezeDate) {
             enemy.isFrozen = false;
             enemy.speed = enemy.tempSpeed;
