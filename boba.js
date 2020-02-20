@@ -12,9 +12,9 @@ function boba(game, startX, startY, destinationX, destinationY, name) {
     if(name ==='purple') {
         this.isParalyze = true;
     }
-    this.isExplosion = false;
+    this.isExplosive = false;
     if(name ==='red') {
-        this.isExplosion = true;
+        this.isExplosive = true;
     }
     /*
         this.isFire = false;

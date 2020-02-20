@@ -166,11 +166,6 @@ AM.downloadAll(function () {
     gameEngine.start();
 
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
-    // board = new function() {
-    //     new board(gameEngine);
-    // }
-    // GAMEBOARD = board.GAMEBOARD;
-    // gameEngine.addEntity(board);
 
     gameEngine.addEntity(new board(gameEngine));
 

@@ -183,6 +183,9 @@ var collideUpdate = function(enemy) {
                     enemy.burnDate = Date.now() + 10000;
                 }
             } 
+            if (ent.isBoba && ent.isExplosive && enemy.boundingbox.collide(ent.boundingbox)) {
+                //summon explosion
+            }
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
                 ent.removeFromWorld = true;
                 enemy.hp--;
