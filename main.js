@@ -45,12 +45,46 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y) {
     if (this.reverse) {
         x -= this.frameWidth * .75;
     }
-    ctx.drawImage(this.spriteSheet,
-                 xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
-                 this.frameWidth, this.frameHeight,
-                 x + this.offsetX, y + this.offsetY,
-                 this.frameWidth * this.scale,
-                 this.frameHeight * this.scale);
+
+    if (!this.statusEffect) {
+        ctx.drawImage(this.spriteSheet,
+                    xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
+                    this.frameWidth, this.frameHeight,
+                    x + this.offsetX, y + this.offsetY,
+                    this.frameWidth * this.scale,
+                    this.frameHeight * this.scale);
+    } else {
+        // step 1: draw in original image
+        ctx.globalCompositeOperation = "source-over";
+        ctx.drawImage(this.spriteSheet,
+                    xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
+                    this.frameWidth, this.frameHeight,
+                    x + this.offsetX, y + this.offsetY,
+                    this.frameWidth * this.scale,
+                    this.frameHeight * this.scale);
+
+        // step 2: adjust saturation (chroma, intensity)
+        ctx.globalCompositeOperation = "saturation";
+        ctx.fillStyle = "hsl(0," + 100 + "%, 50%)";  // hue doesn't matter here
+        ctx.fillRect(x + this.offsetX, y + this.offsetY, this.frameWidth, this.frameHeight);
+
+        // step 3: adjust hue, preserve luma and chroma
+        ctx.globalCompositeOperation = "hue";
+        ctx.fillStyle = "hsl(" + 50 + ",1%, 50%)";  // sat must be > 0, otherwise won't matter
+        ctx.fillRect(x + this.offsetX, y + this.offsetY, this.frameWidth, this.frameHeight);
+
+        // step 4: in our case, we need to clip as we filled the entire area
+        ctx.globalCompositeOperation = "destination-in";
+        ctx.drawImage(this.spriteSheet,
+            xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
+            this.frameWidth, this.frameHeight,
+            x + this.offsetX, y + this.offsetY,
+            this.frameWidth * this.scale,
+            this.frameHeight * this.scale);
+
+        // step 5: reset comp mode to default
+        ctx.globalCompositeOperation = "source-over";
+        }
     }
 }
 
