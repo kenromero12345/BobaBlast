@@ -3,7 +3,7 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     this.isWhite = isWhite;
     this.name = "cola";
     this.speed = 100;
-    this.hp = 50;
+    this.hp = 30;//50
     this.money = 20;
     if (isWhite) {
         this.animationWalkLeft = new Animation(AM.getAsset("./img/sprite.png")
