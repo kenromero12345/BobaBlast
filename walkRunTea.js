@@ -31,15 +31,19 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.boxes = true;
     teaSetBoundingBox(tea);
     enemyCenterUpdate(tea);
+    tea.tempSpeed = tea.speed;
     tea.isPoisoned = false;
     tea.isBurned = false;
     tea.isFrozen = false;
     tea.isParalyzed = false;
-    tea.tempSpeed = tea.speed;
     tea.poisonDate = Date.now();
     tea.burnDate = Date.now();
     tea.freezeDate = Date.now();
     tea.paralyzeDate = Date.now();
+    tea.burnResistance = .25;
+    tea.poisonResistance = .25;
+    tea.paralysisResistance = .25;
+    tea.freezeResistance = .25;
 }
 
 teaSetBoundingBox = function(tea) {
@@ -216,7 +220,6 @@ var walkRunTeaUpdate = function (tea) {
         }
     }
 
-
     teaSetBoundingBox(tea);
 
     enemyEscape(tea);
@@ -231,6 +234,6 @@ var walkRunTeaUpdate = function (tea) {
     collideUpdate(tea);
 
     moneyUpdate(tea);
-
+    // console.log("a")
     enemyStatusEffectUpdate(tea);
 }

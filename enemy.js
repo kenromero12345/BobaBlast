@@ -141,7 +141,9 @@ var collideUpdate = function(enemy) {
     for (var i = 0; i < enemy.game.entities.length; i++) {
         var ent = enemy.game.entities[i];
         if (ent !== enemy && enemy.hp > 0) {
+            // console.log(ent.isFreeze);
             if (ent.isFreeze && enemy.boundingbox.collide(ent.boundingbox)) {
+                // console.log("a")
                 //TODO: by chance
                 if (Math.random() < enemy.freezeResistance ? false : true) {
                     enemy.isFrozen = true;
@@ -172,6 +174,7 @@ var collideUpdate = function(enemy) {
                 }
             } 
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
+                // console.log("a");
                 ent.removeFromWorld = true;
                 enemy.hp--;
             } 
@@ -180,6 +183,7 @@ var collideUpdate = function(enemy) {
 }
 
 var enemyStatusEffectUpdate = function(enemy) {
+    // console.log("b")
     enemyPoisonUpdate(enemy);
     enemyBurnUpdate(enemy);
     enemyParalyzeUpdate(enemy);
@@ -188,7 +192,7 @@ var enemyStatusEffectUpdate = function(enemy) {
 
 var enemyPoisonUpdate = function(enemy) {
     if (enemy.isPoisoned) {
-        enemy.hp -= 0.1;
+        enemy.hp -= 0.05;
         if (Date.now() >= enemy.poisonDate) {
             enemy.isPoisoned = false;
         }
@@ -197,7 +201,7 @@ var enemyPoisonUpdate = function(enemy) {
 
 var enemyBurnUpdate = function(enemy) {
     if (enemy.isBurned) {
-        enemy.hp -= 0.1;
+        enemy.hp -= 0.05;
         if (Date.now() >= enemy.burnDate) {
             enemy.isBurned = false;
         }
@@ -206,17 +210,17 @@ var enemyBurnUpdate = function(enemy) {
 
 var enemyParalyzeUpdate = function(enemy) {
     if (enemy.isParalyzed) {
-        enemy.hp -= 0.1;
+        enemy.hp -= 0.05;
         if (Date.now() >= enemy.paralyzeDate) {
             enemy.isParalyzed = false;
-            enemy.speed = tempSpeed;
+            enemy.speed = enemy.tempSpeed;
         }
     }
 }
 
 var enemyFreezeUpdate = function(enemy) {
     if (enemy.isFrozen) {
-        enemy.hp -= 0.1;
+        enemy.hp -= 0.05;
         if (Date.now() >= enemy.freezeDate) {
             enemy.isFrozen = false;
             enemy.speed = enemy.tempSpeed;
