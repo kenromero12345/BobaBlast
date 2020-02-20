@@ -145,17 +145,17 @@ var collideUpdate = function(enemy) {
                 //TODO: by chance
                 if (Math.random() < enemy.freezeResistance ? false : true) {
                     enemy.isFrozen = true;
-                    enemy.speed = enemy.tempSpeed / 2;
+                    enemy.speed = enemy.tempSpeed / 4;
                     enemy.freezeDate = Date.now() + 10000;
                 }
             }
             if (ent.isParalyze && enemy.boundingbox.collide(ent.boundingbox)) {
                 //TODO: by chance
-                if (Math.random() < enemy.paralysisResistance ? false : true) {
+              //  if (Math.random() < enemy.paralysisResistance ? false : true) {
                     enemy.isParalyzed = true;
                     enemy.speed = 0;
                     enemy.paralyzeDate = Date.now() + 2000;
-                }
+             //   }
             } 
             if (ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
                 //TODO: by chance
