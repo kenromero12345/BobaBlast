@@ -1,5 +1,5 @@
 function Explosion(game, x, y) {
-    this.animation = new Animation(AM.getAsset("./img/explosion.png"),20, 33, 100, 100, 8, 0.1, 48, false, 1);
+    this.animation = new Animation(AM.getAsset("./img/explosion.png"),20, 28, 100, 100, 8, 0.1, 48, false, 1);
     this.game = game;
     this.ctx = game.ctx;
     this.isExplosion = true;
@@ -10,6 +10,13 @@ function Explosion(game, x, y) {
     this.height = this.animation.frameHeight;
     this.boxes = true;
     this.boundingbox = new BoundingBox(this.x + 25, this.y + 22, this.width - 50, this.height - 50);
+    // this.centerX = this.boundingbox.x + this.boundingbox.width / 2;
+    // this.centerY = this.boundingbox.y + this.boundingbox.height / 2;
+    // var difX = this.centerX - x;
+    // var difY =  y - this.centerY;
+    // this.x = this.x - difX;
+    // this.y = this.y + difY;
+    // this.boundingbox = new BoundingBox(this.x + 25, this.y + 22, this.width - 50, this.height - 50);
 }
 
 Explosion.prototype.draw = function() {
