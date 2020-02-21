@@ -190,6 +190,12 @@ var collideUpdate = function(enemy) {
                 ent.removeFromWorld = true;
                 enemy.hp--;
             } 
+            if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
+                enemy.hp-= 0.1;
+            }
+
+            //TODO:if laser(normal, freeze ray, etc..)
+
         }
     }
 }
