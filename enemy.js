@@ -185,7 +185,7 @@ var collideUpdate = function(enemy) {
             } 
             if (ent.isBoba && ent.isExplosive && enemy.boundingbox.collide(ent.boundingbox)) {
                // console.log("EXPLOSION");
-                enemy.game.addEntity(new Explosion(enemy.game, enemy.centerX, enemy.centerY));
+                enemy.game.addEntity(new Explosion(enemy.game, enemy.x, enemy.y));
             }
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
                 ent.removeFromWorld = true;
