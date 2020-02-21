@@ -4,19 +4,12 @@ function Explosion(game, x, y) {
     this.ctx = game.ctx;
     this.isExplosion = true;
     this.speed = 200;
-    this.x = x;
-    this.y = y;
+    this.x = x ;
+    this.y = y - 25;
     this.width = this.animation.frameWidth;
     this.height = this.animation.frameHeight;
     this.boxes = true;
     this.boundingbox = new BoundingBox(this.x + 25, this.y + 22, this.width - 50, this.height - 50);
-    // this.centerX = this.boundingbox.x + this.boundingbox.width / 2;
-    // this.centerY = this.boundingbox.y + this.boundingbox.height / 2;
-    // var difX = this.centerX - x;
-    // var difY =  y - this.centerY;
-    // this.x = this.x - difX;
-    // this.y = this.y + difY;
-    // this.boundingbox = new BoundingBox(this.x + 25, this.y + 22, this.width - 50, this.height - 50);
 }
 
 Explosion.prototype.draw = function() {
