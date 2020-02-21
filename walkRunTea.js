@@ -1,4 +1,5 @@
-var constructor = function (tea, game, spawnX, spawnY, isRun) {
+var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
+    tea.type = "tea"
     tea.spawnX = spawnX;
     tea.spawnY = spawnY;
     tea.isEnemy = true;
@@ -15,20 +16,38 @@ var constructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.runSpeed = 200;
     tea.game = game;
     tea.ctx = game.ctx;
-    tea.moveDirection = 1; //1 is right, down, left, up
+    tea.moveDirection = 1; 
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
     tea.hp = 20;
+    tea.tempWalkSpeed = tea.walkSpeed;
+    tea.tempRunSpeed = tea.runSpeed;
     if (tea.paceWalk) {
         tea.width = tea.walkWidth;
         tea.height = tea.walkHeight;
+        tea.tempFrameDuration = tea.animationWalkLeft.frameDuration;
+        
     } else {
         tea.width = tea.runWidth;
         tea.height = tea.runHeight;
+        tea.tempFrameDuration = tea.animationRunLeft.frameDuration;
+        
     }
     tea.boxes = true;
     teaSetBoundingBox(tea);
     enemyCenterUpdate(tea);
+    tea.isPoisoned = false;
+    tea.isBurned = false;
+    tea.isFrozen = false;
+    tea.isParalyzed = false;
+    tea.poisonDate = Date.now();
+    tea.burnDate = Date.now();
+    tea.freezeDate = Date.now();
+    tea.paralyzeDate = Date.now();
+    tea.burnResistance = .25;
+    tea.poisonResistance = .25;
+    tea.paralysisResistance = .25;
+    tea.freezeResistance = .25;
 }
 
 teaSetBoundingBox = function(tea) {
@@ -61,7 +80,7 @@ teaSetBoundingBox = function(tea) {
     }
 }
 
-var draw = function (tea) {
+var walkRunTeaDraw = function (tea) {
     if (tea.hp <= 0) {
         if (tea.lookDirectionRight) {
             tea.animationDisappearRight.drawFrame(tea.game.clockTick, tea.ctx, tea.x, tea.y);
@@ -115,25 +134,7 @@ var draw = function (tea) {
     drawBoundingBox(tea);
 }
 
-var update = function (tea) {
-    // console.log("x:" + tea.x + ", y:" + tea.y + ", cx" + tea.centerX + ", cy:" + tea.centerY);
-    //update moveDirection, lookDirection, pace
-    if (tea.game.space) tea.hp--;
-    // if (tea.moveDirection == 5) tea.moveDirection = 1;
-    if (tea.game.right) {
-        tea.moveDirection = 1;
-        tea.lookDirectionRight = true;
-    }
-    if (tea.game.down) tea.moveDirection = 2;
-    if (tea.game.left) {
-        tea.moveDirection = 3;
-        tea.lookDirectionRight = false;
-    }
-    if (tea.game.up) tea.moveDirection = 4;
-    if (tea.game.run) tea.paceWalk = !tea.paceWalk;
-    var xy = getXY(tea.centerX, tea.centerY);
-    // console.log(xy);
-    // console.log(tea.centerX + " " + tea.centerY)
+var walkRunTeaUpdate = function (tea) {
     if (((tea.centerX +  100) % 100 > 43 && (tea.centerX + 100) % 100 < 57
         && tea.centerY % 100 > 43 && tea.centerY % 100 < 57) && !tea.paceWalk
         || ((tea.centerX +  100) % 100 > 49 && (tea.centerX + 100) % 100 < 51
@@ -223,7 +224,6 @@ var update = function (tea) {
         }
     }
 
-
     teaSetBoundingBox(tea);
 
     enemyEscape(tea);
@@ -238,4 +238,6 @@ var update = function (tea) {
     collideUpdate(tea);
 
     moneyUpdate(tea);
+    // console.log("a")
+    enemyStatusEffectUpdate(tea);
 }

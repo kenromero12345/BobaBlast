@@ -1,20 +1,7 @@
 function cake(game, spawnX, spawnY, scale) {
-    this.spawnX = spawnX;
-    this.spawnY = spawnY;
     this.lifeDeduction = 8;
-    this.isEnemy = true;
-    this.scale = scale;
-    // console.log(slimeOffsetY)
-    this.width = 96 * scale;
-    this.height = 90 * scale;
     this.name = "cake";
     this.speed = 100;
-    this.x = spawnX - 50;
-    this.y = spawnY - 50;
-    this.game = game;
-    this.ctx = game.ctx;
-    this.moveDirection = 1; //1 is right, down, left, up
-    this.lookDirectionRight = !false;
     this.hp = 40;//
     this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/cake.png")
@@ -25,9 +12,8 @@ function cake(game, spawnX, spawnY, scale) {
     , 879, 85, -96, 90, 5, .135, 5, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/cakeFlip.png")
     , 879, 270, -96, 103, 8, .2, 8, false, scale, false);
-    this.boxes = true;
-    this.setBoundingBox();
-    enemyCenterUpdate(this);
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
 }
 
 cake.prototype.setBoundingBox = function() {
@@ -188,8 +174,10 @@ cake.prototype.update = function () {
         //     }
         // }
         collideUpdate(this);
-        
+
         moneyUpdate(this);
+
+        enemyStatusEffectUpdate(this);
     }
 }
 

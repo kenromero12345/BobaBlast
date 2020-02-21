@@ -140,9 +140,136 @@ var moneyUpdate = function(enemy) {
 var collideUpdate = function(enemy) {
     for (var i = 0; i < enemy.game.entities.length; i++) {
         var ent = enemy.game.entities[i];
-        if (ent !== enemy && ent.isBoba &&  enemy.boundingbox.collide(ent.boundingbox)) {
-            ent.removeFromWorld = true;
-            enemy.hp--;
+        if (ent !== enemy && enemy.hp > 0) {
+            if (ent.isFreeze && enemy.boundingbox.collide(ent.boundingbox)) {
+                if (Math.random() < enemy.freezeResistance ? false : true) {
+                    enemy.isFrozen = true;
+                    if (enemy.type && enemy.type == "tea") {
+                        enemy.walkSpeed = enemy.tempWalkSpeed / 4;
+                        enemy.runSpeed = enemy.tempRunSpeed / 4;
+                    } else {
+                        enemy.speed = enemy.tempSpeed / 4;
+                    }
+                    enemy.freezeDate = Date.now() + 10000;
+                }
+            }
+            if (ent.isParalyze && enemy.boundingbox.collide(ent.boundingbox)) {
+               if (Math.random() < enemy.paralysisResistance ? false : true) {
+                    enemy.isParalyzed = true;
+                    if (enemy.type && enemy.type == "tea") {
+                        enemy.walkSpeed = 0;
+                        enemy.runSpeed = 0;
+                    } else {
+                        enemy.speed = 0;
+                    }
+                    enemy.paralyzeDate = Date.now() + 2000;
+               }
+            }
+            if (ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
+                if (Math.random() < enemy.poisonResistance ? false : true) {
+                    enemy.isPoisoned = true;
+                    enemy.poisonDate = Date.now() + 10000;
+                }
+            } 
+            if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
+                if (Math.random() < enemy.burnResistance ? false : true) {
+                    enemy.isBurned = true;
+                    enemy.burnDate = Date.now() + 10000;
+                }
+            } 
+            if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
+                ent.removeFromWorld = true;
+                enemy.hp--;
+            } 
         }
     }
+}
+
+var enemyStatusEffectUpdate = function(enemy) {
+    // console.log("b")
+    enemyPoisonUpdate(enemy);
+    enemyBurnUpdate(enemy);
+    enemyParalyzeUpdate(enemy);
+    enemyFreezeUpdate(enemy);
+}
+
+var enemyPoisonUpdate = function(enemy) {
+    if (enemy.isPoisoned) {
+        enemy.hp -= 0.05;
+        if (Date.now() >= enemy.poisonDate) {
+            enemy.isPoisoned = false;
+        }
+    }
+}
+
+var enemyBurnUpdate = function(enemy) {
+    if (enemy.isBurned) {
+        enemy.hp -= 0.05;
+        if (Date.now() >= enemy.burnDate) {
+            enemy.isBurned = false;
+        }
+    }
+}
+
+var enemyParalyzeUpdate = function(enemy) {
+    if (enemy.isParalyzed) {
+        enemy.hp -= 0.05;
+        if (Date.now() >= enemy.paralyzeDate) {
+            enemy.isParalyzed = false;
+            if (enemy.type && enemy.type == "tea") {
+                enemy.walkSpeed = enemy.tempWalkSpeed;
+                enemy.runSpeed = enemy.tempRunSpeed;
+            } else {
+                enemy.speed = enemy.tempSpeed;
+            }
+        }
+    }
+}
+
+var enemyFreezeUpdate = function(enemy) {
+    if (enemy.isFrozen) {
+        enemy.hp -= 0.05;
+        if (Date.now() >= enemy.freezeDate) {
+            enemy.isFrozen = false;
+            if (enemy.type && enemy.type == "tea") {
+                enemy.walkSpeed = enemy.tempWalkSpeed;
+                enemy.runSpeed = enemy.tempRunSpeed;
+            } else {
+                enemy.speed = enemy.tempSpeed;
+            }
+        }
+    }
+}
+
+var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, game, speed, frameDuration) {
+    enemy.spawnX = spawnX;
+    enemy.spawnY = spawnY;
+    enemy.scale = scale;
+    enemy.isEnemy = true;
+    enemy.width = width * scale;
+    enemy.height = height * scale;
+    enemy.tempSpeed = speed;
+    enemy.tempFrameDuration = frameDuration;
+    enemy.x = spawnX - 50;
+    enemy.y = spawnY - 50;
+    enemy.game = game;
+    enemy.ctx = game.ctx;
+    enemy.moveDirection = 1; //1 is right, down, left, up
+    enemy.lookDirectionRight = true;
+
+    enemy.boxes = true;
+    enemy.setBoundingBox();
+    enemyCenterUpdate(enemy);
+    enemy.isPoisoned = false;
+    enemy.isBurned = false;
+    enemy.isFrozen = false;
+    enemy.isParalyzed = false;
+    enemy.poisonDate = Date.now();
+    enemy.burnDate = Date.now();
+    enemy.freezeDate = Date.now();
+    enemy.paralyzeDate = Date.now();
+    enemy.burnResistance = .25;
+    enemy.poisonResistance = .25;
+    enemy.paralysisResistance = .25;
+    enemy.freezeResistance = .25;
 }

@@ -218,6 +218,7 @@ board.prototype.update = function () {
         if(currentMoney - towerArray[selectedTowerRow][selectedTowerColumn].cost >= 0) {
           GAMEBOARD[gridX][gridY].occupied = true;
           var tempTower = new boardTower(this.game, gridX, gridY, towerArray[selectedTowerRow][selectedTowerColumn]);
+          this.game.activeTowers.push(tempTower);
           this.game.addEntity(tempTower);
           currentMoney = currentMoney - tempTower.cost;
         }

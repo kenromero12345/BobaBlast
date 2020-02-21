@@ -1,20 +1,7 @@
 function biscuit(game, spawnX, spawnY, scale) {
-    this.spawnX = spawnX;
-    this.spawnY = spawnY;
     this.lifeDeduction = 5;
-    this.isEnemy = true;
-    // console.log(slimeOffsetY)
-    this.width = 98 * scale;
-    this.height = 94 * scale;
-    this.scale = scale;
     this.name = "biscuit";
     this.speed = 100;
-    this.x = spawnX - 50;
-    this.y = spawnY - 50;
-    this.game = game;
-    this.ctx = game.ctx;
-    this.moveDirection = 1; //1 is right, down, left, up
-    this.lookDirectionRight = !false;
     this.hp = 30;//
     this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/biscuitWarrior.png")
@@ -26,13 +13,8 @@ function biscuit(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/biscuitWarriorFlip.png")
     , 803-15, 221, -91, 94, 7, .25, 7, false, scale, false);
     this.boxes = true;
-    // if (boxesOff) {
-    //     boxes = false;
-    // }
-
-    //w = .75
-    this.setBoundingBox();
-    enemyCenterUpdate(this);
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
 }
 
 biscuit.prototype.setBoundingBox = function() {
@@ -158,5 +140,7 @@ biscuit.prototype.update = function () {
         collideUpdate(this);
 
         moneyUpdate(this);
+
+        enemyStatusEffectUpdate(this);
     }
 }

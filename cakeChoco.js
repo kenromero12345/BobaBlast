@@ -1,20 +1,7 @@
 function cakeChoco(game, spawnX, spawnY, scale) {
-    this.spawnX = spawnX;
-    this.spawnY = spawnY;
     this.lifeDeduction = 8;
-    this.isEnemy = true;
-    this.scale = scale;
-    // console.log(slimeOffsetY)
-    this.width = 96 * scale;
-    this.height = 101 * scale;
     this.name = "choco cake";
     this.speed = 100;
-    this.x = spawnX - 50;
-    this.y = spawnY - 50;
-    this.game = game;
-    this.ctx = game.ctx;
-    this.moveDirection = 1; //1 is right, down, left, up
-    this.lookDirectionRight = !false;
     this.hp = 30;//
     this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/cakeChoco.png")
@@ -25,9 +12,8 @@ function cakeChoco(game, spawnX, spawnY, scale) {
     , 847, 122, -96, 102, 6, .135, 6, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/cakeChocoFlip.png")
     , 847, 221, -91, 94, 7, .2, 7, false, scale, false);
-    this.boxes = true;
-    this.setBoundingBox();
-    enemyCenterUpdate(this);
+    enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
 }
 
 cakeChoco.prototype.setBoundingBox = function() {
@@ -224,7 +210,9 @@ cakeChoco.prototype.update = function () {
         //     }
         // }
         collideUpdate(this);
-        
+
         moneyUpdate(this);
+
+        enemyStatusEffectUpdate(this);
     }
 }

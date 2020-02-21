@@ -143,9 +143,9 @@ AM.downloadAll(function () {
     gameEngine.addEntity(new roundPlan(gameEngine));
 
     // BOBA BULLET TESTING
-    gameEngine.addEntity(new display(gameEngine));
+    // gameEngine.addEntity(new display(gameEngine));
+    gameEngine.display = new display(gameEngine);
     towerArray = generateStoreTowers(gameEngine);
-
 
     console.log("All Done!");
 
@@ -166,12 +166,14 @@ function generateStoreTowers(game) {
     var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \ncan shoot 20 bobas \nevery second.",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2);
     var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \ncan shoot 21 bobas \nevery second.",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2);
 
+
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower,eightTower,ninthTower]];
     for(var i = 0; i < 3; i++) {
         for(var j = 0; j < 3; j++) {
-            game.addEntity(temp[i][j]);
+            // game.addEntity(temp[i][j]);
         }
     }
+    game.towers = temp;
     return temp;
 }
 
