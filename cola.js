@@ -3,7 +3,7 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     this.isWhite = isWhite;
     this.name = "cola";
     this.speed = 100;
-    this.hp = 50;
+    this.hp = 30;//50
     this.money = 20;
     if (isWhite) {
         this.animationWalkLeft = new Animation(AM.getAsset("./img/sprite.png")
@@ -26,15 +26,17 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     }
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        //                       this.moveDirection = 3;
+        // this.lookDirectionRight = false;
 }
 
 cola.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
         this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 20 * this.scale , this.height -13 * this.scale);
+            , this.width - 23 * this.scale , this.height -16 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 20 * this.scale , this.height -13 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 13 * this.scale, this.y + 10 * this.scale
+            , this.width - 23 * this.scale , this.height -16 * this.scale);
     }
 }
 

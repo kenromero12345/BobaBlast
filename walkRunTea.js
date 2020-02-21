@@ -31,7 +31,6 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
         tea.width = tea.runWidth;
         tea.height = tea.runHeight;
         tea.tempFrameDuration = tea.animationRunLeft.frameDuration;
-        
     }
     tea.boxes = true;
     teaSetBoundingBox(tea);

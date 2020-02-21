@@ -2,7 +2,7 @@ function iceGolem(game, spawnX, spawnY, scale) {
     this.lifeDeduction = 10;
     this.name = "ice golem";
     this.speed = 15;
-    this.hp = 100;
+    this.hp = 120;
     this.money = 200;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/iceg.png")
     , 0, 180, 194, 180, 4, 0.5, 4, true, scale, false );
@@ -14,15 +14,17 @@ function iceGolem(game, spawnX, spawnY, scale) {
     , 0, 745, 238, 180, 7, 0.25, 7, false, scale, true);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        //                               this.moveDirection = 3;
+        // this.lookDirectionRight = false;
 }
 
 iceGolem.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 20 * this.scale , this.height -40 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 60 * this.scale, this.y + 13 * this.scale
+            , this.width - 120 * this.scale , this.height -48 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 25 * this.scale , this.height -40 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 58 * this.scale, this.y + 13 * this.scale
+            , this.width - 120 * this.scale , this.height -48 * this.scale);
     }
 }
 

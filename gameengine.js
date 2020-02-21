@@ -364,3 +364,7 @@ function helperToGetDirection(node) {
 	}
 };
 
+//sleep in some milliseconds
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}

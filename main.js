@@ -45,12 +45,46 @@ Animation.prototype.drawFrame = function (tick, ctx, x, y) {
     if (this.reverse) {
         x -= this.frameWidth * .75;
     }
-    ctx.drawImage(this.spriteSheet,
-                 xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
-                 this.frameWidth, this.frameHeight,
-                 x + this.offsetX, y + this.offsetY,
-                 this.frameWidth * this.scale,
-                 this.frameHeight * this.scale);
+
+    if (!this.statusEffect) {
+        ctx.drawImage(this.spriteSheet,
+                    xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
+                    this.frameWidth, this.frameHeight,
+                    x + this.offsetX, y + this.offsetY,
+                    this.frameWidth * this.scale,
+                    this.frameHeight * this.scale);
+    } else {
+        // step 1: draw in original image
+        ctx.globalCompositeOperation = "source-over";
+        ctx.drawImage(this.spriteSheet,
+                    xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
+                    this.frameWidth, this.frameHeight,
+                    x + this.offsetX, y + this.offsetY,
+                    this.frameWidth * this.scale,
+                    this.frameHeight * this.scale);
+
+        // step 2: adjust saturation (chroma, intensity)
+        ctx.globalCompositeOperation = "saturation";
+        ctx.fillStyle = "hsl(0," + 100 + "%, 50%)";  // hue doesn't matter here
+        ctx.fillRect(x + this.offsetX, y + this.offsetY, this.frameWidth, this.frameHeight);
+
+        // step 3: adjust hue, preserve luma and chroma
+        ctx.globalCompositeOperation = "hue";
+        ctx.fillStyle = "hsl(" + 50 + ",1%, 50%)";  // sat must be > 0, otherwise won't matter
+        ctx.fillRect(x + this.offsetX, y + this.offsetY, this.frameWidth, this.frameHeight);
+
+        // step 4: in our case, we need to clip as we filled the entire area
+        ctx.globalCompositeOperation = "destination-in";
+        ctx.drawImage(this.spriteSheet,
+            xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
+            this.frameWidth, this.frameHeight,
+            x + this.offsetX, y + this.offsetY,
+            this.frameWidth * this.scale,
+            this.frameHeight * this.scale);
+
+        // step 5: reset comp mode to default
+        ctx.globalCompositeOperation = "source-over";
+        }
     }
 }
 
@@ -105,6 +139,7 @@ AM.queueDownload("./img/pumpkinEvil.png");
 AM.queueDownload("./img/pumpkinEvilFlip.png");
 AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
+AM.queueDownload("./img/explosion.png");
 
 function Background(game, spritesheet) {
     this.isEnemy = false;
@@ -132,11 +167,6 @@ AM.downloadAll(function () {
     gameEngine.start();
 
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
-    // board = new function() {
-    //     new board(gameEngine);
-    // }
-    // GAMEBOARD = board.GAMEBOARD;
-    // gameEngine.addEntity(board);
 
     gameEngine.addEntity(new board(gameEngine));
 
@@ -146,6 +176,23 @@ AM.downloadAll(function () {
     // gameEngine.addEntity(new display(gameEngine));
     gameEngine.display = new display(gameEngine);
     towerArray = generateStoreTowers(gameEngine);
+
+    //TEST here: comment ount some update of the enemy to be tested
+    // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+    // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new cola(gameEngine, 450, 250, .85, false));
+    // gameEngine.addEntity(new iceGolem(gameEngine, 450, 250, .7));
+    // gameEngine.addEntity(new miniCake(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75)); -----
+    // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 10));
+    // gameEngine.addEntity(new watermelon(gameEngine, 450, 250, .75));
+
+    // gameEngine.addEntity(new greenTea(gameEngine, 450, 250, false, .75));
+    // gameEngine.addEntity(new redTea(gameEngine, 450, 250, false, .75));
+    // gameEngine.addEntity(new yellowTea(gameEngine, 450, 250, true, .75));
 
     console.log("All Done!");
 
@@ -177,65 +224,25 @@ function generateStoreTowers(game) {
     return temp;
 }
 
-//sleep in some milliseconds
-const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
+//450//250
+//-50//350
 
-// make other js be off if this is true
-var boxesOff = true;
+// gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+// gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
+// gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
+// gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
+// gameEngine.addEntity(new cola(gameEngine, 450, 250, .85, false));
+// gameEngine.addEntity(new iceGolem(gameEngine, 450, 250, .7));
+// gameEngine.addEntity(new miniCake(gameEngine, 450, 250, .75));
+// gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75));
+// gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 250, .75));
+// gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 10));
+// gameEngine.addEntity(new watermelon(gameEngine, 450, 250, .75));
 
-// if there is no enemy when the last enemy is spawned
-// means round is done, round ++, (round starts at 1)
-//if round is 5, you win, game over
-// else game over, you lose
+// gameEngine.addEntity(new greenTea(gameEngine, 450, 250, false, .75));
+// gameEngine.addEntity(new redTea(gameEngine, 450, 250, false, .75));
+// gameEngine.addEntity(new yellowTea(gameEngine, 450, 250, true, .75));
 
 
- // gameEngine.addEntity(new bigCake(gameEngine, -50, 350, .25));
-    // gameEngine.addEntity(new pumpkinEvil(gameEngine, -50, 350, .75));
-    // gameEngine.addEntity(new pumpkinGood(gameEngine, -50, 350, .75));
-    // gameEngine.addEntity(new redTea(gameEngine, -50, 350, false, .75));
-
-    // gameEngine.addEntity(new iceGolem(gameEngine, -50, 350));
-    // gameEngine.addEntity(new cola(gameEngine, -50, 350, .85, false));
-    // // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 1));//450//250
-    // gameEngine.addEntity(new slime(gameEngine, -50, 350, .75));//450//250
-    // gameEngine.addEntity(new watermelon(gameEngine, -50, 350, .75));
-    // gameEngine.addEntity(new miniCake(gameEngine, -50, 350, .75));
-    // gameEngine.addEntity(new biscuit(gameEngine, -50, 350, .75));
-    // gameEngine.addEntity(new cakeChoco(gameEngine, -50, 350, .75));
-    // gameEngine.addEntity(new cake(gameEngine, -50, 350, .75));
-    // // gameEngine.addEntity(new squareSlime(gameEngine, -50, 350, .75));
-    // sleep(2000).then(() => {
-    //     gameEngine.addEntity(new greenTea(gameEngine, -50, 350, false, .75));
-    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 10));//450//250
-    // })
-    // sleep(4000).then(() => {
-    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 7));//450//250
-    //     gameEngine.addEntity(new cola(gameEngine, -50, 350, .85, true));
-    // })
-    // sleep(6000).then(() => {
-    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 8));//450//250
-    // })
-    // sleep(8000).then(() => {
-    //     gameEngine.addEntity(new yellowTea(gameEngine, -50, 350, true, .75));
-    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 5));//450//250
-    // })
-    // sleep(10000).then(() => {
-    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 4));//450//250
-    // })
-    // sleep(12000).then(() => {
-    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 3));//450//250
-    // })
-    // sleep(14000).then(() => {
-    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 0));//450//250
-    // })
-    // sleep(16000).then(() => {
-    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 2));//450//250
-    // })
-    // sleep(18000).then(() => {
-    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 1));//450//250
-    // })
-    // sleep(20000).then(() => {
-    //     gameEngine.addEntity(new slime(gameEngine, -50, 350, .75, 9));//450//250
-    // })
+// TODO
+// gameEngine.addEntity(new squareSlime(gameEngine, 450, 250, .75));

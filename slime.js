@@ -2,6 +2,7 @@ function slime(game, spawnX, spawnY, scale, num) {
     this.lifeDeduction = 2;
     this.slimeOffsetY = 0;//green
     this.slimeDisappearOffsetY = 0;
+    this.money = 10;
     if (num == 1) {//blue
         this.slimeOffsetY = 425;
     } else if (num == 2) {//yellow
@@ -16,9 +17,11 @@ function slime(game, spawnX, spawnY, scale, num) {
         this.slimeOffsetY = 1920;
         this.slimeDisappearOffsetY = 118;
     } else if (num == 7) {//silver
+        this.money = 500;
         this.slimeOffsetY = 2334;
     } else if (num == 8) {//gold
         this.slimeOffsetY = 2633;
+        this.money = 1000;
     } else if (num == 9) {//drunk
         this.slimeOffsetY = 2932;
     } else if (num == 10) {//chistmas 2 color, green, pink
@@ -27,7 +30,6 @@ function slime(game, spawnX, spawnY, scale, num) {
     this.name = "slime";
     this.speed = 100;
     this.hp = 10;//
-    this.money = 10;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/slime.png")
     , 5, 70 + this.slimeOffsetY, 79, 80, 7, .135, 7, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/slime.png")

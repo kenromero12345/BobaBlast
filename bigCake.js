@@ -16,15 +16,17 @@ function bigCake(game, spawnX, spawnY, scale) {
     this.animationDisappearRight.offsetX = -150;
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+    // this.moveDirection = 3;
+    // this.lookDirectionRight = false;
 }
 
 bigCake.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 50 * this.scale, this.y + 60 * this.scale
-            , this.width - 60 * this.scale , this.height -80 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 100 * this.scale, this.y + 60 * this.scale
+            , this.width - 190 * this.scale , this.height -90 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 60 * this.scale
-            , this.width - 60 * this.scale , this.height -80 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 85 * this.scale, this.y + 60 * this.scale
+            , this.width - 190 * this.scale , this.height -90 * this.scale);
     }
 }
 

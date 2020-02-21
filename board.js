@@ -163,6 +163,11 @@ board.prototype.draw = function () {
         && !GAMEBOARD[gridX][gridY].end && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
         && isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].occupied) {
        this.drawRect(Math.floor(mouse.x/100) + 1, Math.floor(mouse.y/100));
+       this.ctx.globalAlpha = 0.25;
+       this.ctx.fillStyle = "white";
+       this.ctx.beginPath();
+       this.ctx.arc((gridX - 1) * 100 + 50, gridY * 100 + 50, towerArray[selectedTowerRow][selectedTowerColumn].radius, 0, 2 * Math.PI);
+       this.ctx.fill();
       }
       this.ctx.restore();
     }
