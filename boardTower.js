@@ -184,15 +184,47 @@ boardTower.prototype.update = function () {
             }  */
         }
     }
+
+    // This shooting method always shoots the enemy that entered last.
+    /*
     for (var i = 0; i < this.game.entities.length; i++) {
         var ent = this.game.entities[i];
         if (ent !== this && ent.isEnemy) {
             var temp = this.enemyInRange(ent);
             if(temp && ent.hp >= 1) {
+                this.shootDestinationX = ent.centerX;
+                this.shootDestinationY = ent.centerY;
                 this.calculateDirection(ent);
                 this.shootBoba = true;
             }
         }
+    } */
+    
+
+    // This shooting method always shoots the enemy that is closest to the end.
+    var withinRange = [];
+    for (var i = 0; i < this.game.entities.length; i++) {
+        var ent = this.game.entities[i];
+        if (ent !== this && ent.isEnemy) {
+            var temp = this.enemyInRange(ent);
+            if(temp && ent.hp >= 1) {
+                var dist = distanceToEndPoint(ent.centerX, ent.centerY);
+                withinRange.push({enemy: ent, distToEnd: dist});
+            }
+        }
+    }
+
+    if(withinRange.length >= 1) {
+        var selectedEnemy = withinRange[0];
+        for(var i = 1; i < withinRange.length; i++) {
+            if(selectedEnemy.distToEnd >= withinRange[i].distToEnd) {
+                selectedEnemy = withinRange[i]
+            }
+        }
+        this.shootDestinationX = selectedEnemy.enemy.centerX;
+        this.shootDestinationY = selectedEnemy.enemy.centerY;
+        this.calculateDirection(selectedEnemy.enemy);
+        this.shootBoba = true;
     }
 }
 
@@ -206,13 +238,9 @@ boardTower.prototype.enemyInRange = function (rect) {
     if(circleDistanceY > rect.boundingbox.height/2 + this.radius) return false;
 
     if(circleDistanceX <= rect.boundingbox.width/2) {
-        this.shootDestinationX = rect.centerX;
-        this.shootDestinationY = rect.centerY;
          return true;
      }
     if(circleDistanceY <= rect.boundingbox.height/2) {
-        this.shootDestinationX = rect.centerX;
-        this.shootDestinationY = rect.centerY;
         return true;
     }
 
@@ -220,8 +248,6 @@ boardTower.prototype.enemyInRange = function (rect) {
                             Math.pow(circleDistanceY - rect.boundingbox.height /2, 2); 
 
     if(cornerDistance_sq <= Math.pow(this.radius, 2)) {
-        this.shootDestinationX = rect.centerX;
-        this.shootDestinationY = rect.centerY;
         return true;
     } else {
         return false;
@@ -261,6 +287,16 @@ boardTower.prototype.calculateDirection = function (target) {
 function getDistance(x1, y1, x2, y2) {
 	var xs = x2 - x1;
     var ys = y2 - y1;		
+      
+    xs *= xs;
+    ys *= ys;
+         
+    return Math.sqrt( xs + ys );
+}
+
+function distanceToEndPoint(x1, y1) {
+	var xs = 900 - x1;
+    var ys = 300 - y1;		
       
     xs *= xs;
     ys *= ys;
