@@ -27,8 +27,8 @@ function boardTower(game, gridX, gridY, type) {
     this.animationSouthWest = new Animation(this.spritesheet, 1460, 560, 350, 350, 1, 0.1, 1, true, 0.2);
     this.x = (gridX - 1) * 100 + 20;
     this.y = gridY * 100 + 10;
-    this.centerX = this.x + 25;
-    this.centerY = this.y + 25;
+    this.centerX = this.x + 30;//used to be +25, now plus +30 to make it total +50
+    this.centerY = this.y + 40;// used to be+25, now plus +40 to make it ottal +40
     this.shootOutX = this.x;
     this.shootOutY = this.y;
     this.shootBoba = false; 
