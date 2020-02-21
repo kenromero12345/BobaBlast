@@ -205,7 +205,7 @@ AM.downloadAll(function () {
 function generateStoreTowers(game) {
     var firstTower = new storeTower(game, "Seattle", 100, 1000, 150, "Seattle Tower \ncan shoot one boba per second.",AM.getAsset("./img/tower.png"), 945, 200, 70,70,0,0,"none");
     var secondTower = new storeTower(game, "Portland", 250, 250, 300, "Portland Tower \ncan shoot 4 bobas \nevery second.",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0,"green");
-    var thirdTower = new storeTower(game, "Los Angeles", 500, 100, 300,"Los Angeles Tower \ncan shoot 10 bobas \nevery second.",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0,"red");
+    var thirdTower = new storeTower(game, "Los Angeles", 500, 500, 300,"Los Angeles Tower \ncan shoot 10 bobas \nevery second.",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0,"red");
     var fourthTower = new storeTower(game, "San Diego", 1000, 50, 500, "San Diego Tower \ncan shoot 20 bobas \nevery second.",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1,"none");
     var fifthTower = new storeTower(game, "Wall", 20, 1, 1, "A pot of boba \nto stop the enemies \nfrom progressing.",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1,"none");
     var sixthTower = new storeTower(game, "Tower 6", 100, 1000, 150, "Tower 6 \ncan shoot 1 boba \nevery second.",AM.getAsset("./img/towerB.png"), 1085, 270, 70,70,2,1,"blue");
