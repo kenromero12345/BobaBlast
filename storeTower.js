@@ -39,6 +39,9 @@ storeTower.prototype.update = function () {
         // console.log("CLICK");
         var click = this.game.click;
         if(click.x >= this.x && click.x < this.x + 70 && click.y >= this.y && click.y < this.y + 70) {
+            if (currentMoney - this.cost < 0) {
+                return;
+            }
             purchaseMode = true;
             selectedTowerColumn = this.storeGridX;
             selectedTowerRow =this.storeGridY;
