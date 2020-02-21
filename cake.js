@@ -14,6 +14,8 @@ function cake(game, spawnX, spawnY, scale) {
     , 879, 270, -96, 103, 8, .2, 8, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+                // this.moveDirection = 3;
+        // this.lookDirectionRight = false;
 }
 
 cake.prototype.setBoundingBox = function() {
@@ -153,18 +155,18 @@ var cakeRight = function(enemy) {
 cake.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
-        var xy = getXY(this.centerX, this.centerY);
-        if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
-            && this.centerY % 100 > 48 && this.centerY % 100 < 52)) {
-            this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            enemyUpdateLookHelper(this);
-        }
+        // var xy = getXY(this.centerX, this.centerY);
+        // if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
+        //     && this.centerY % 100 > 48 && this.centerY % 100 < 52)) {
+        //     this.moveDirection = getShortestPath(this.centerX, this.centerY);
+        //     enemyUpdateLookHelper(this);
+        // }
 
-        //enemyUpdateHelper(this);
-        cakeUpdate(this);
+        // //enemyUpdateHelper(this);
+        // cakeUpdate(this);
         this.setBoundingBox();
         
-        enemyEscape(this);
+        // enemyEscape(this);
         
         // for (var i = 0; i < this.game.entities.length; i++) {
         //     var ent = this.game.entities[i];

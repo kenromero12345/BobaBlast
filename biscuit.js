@@ -15,15 +15,17 @@ function biscuit(game, spawnX, spawnY, scale) {
     this.boxes = true;
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        // this.moveDirection = 3;
+        // this.lookDirectionRight = false;
 }
 
 biscuit.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 14 * this.scale, this.y + 7 * this.scale
-            , this.width - 40 * this.scale , this.height - 7 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 22 * this.scale, this.y +15 * this.scale
+            , this.width - 60 * this.scale , this.height - 18 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 26 * this.scale, this.y + 7 * this.scale
-            , this.width - 40 * this.scale , this.height - 7 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 35 * this.scale, this.y + 15 * this.scale
+            , this.width - 60 * this.scale , this.height - 18 * this.scale);
     }
 }
 

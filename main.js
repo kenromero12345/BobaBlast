@@ -176,7 +176,8 @@ AM.downloadAll(function () {
     gameEngine.display = new display(gameEngine);
     towerArray = generateStoreTowers(gameEngine);
 
-    gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+    //TEST here: comment ount some update of the enemy to be tested
+    // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
     // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
