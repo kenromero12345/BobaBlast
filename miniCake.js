@@ -15,15 +15,17 @@ function miniCake(game, spawnX, spawnY, scale) {
     , 714, 189, -67, 74, 9, .25, 9, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        //                                   this.moveDirection = 3;
+        // this.lookDirectionRight = false;
 }
 
 miniCake.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 12 * this.scale, this.y + 10 * this.scale
-            , this.width - 20 * this.scale , this.height -10 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 13 * this.scale, this.y + 10 * this.scale
+            , this.width - 25 * this.scale , this.height -10 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 8 * this.scale, this.y + 10 * this.scale
-            , this.width - 20 * this.scale , this.height -10 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 12 * this.scale, this.y + 10 * this.scale
+            , this.width - 25 * this.scale , this.height -10 * this.scale);
     }
 }
 

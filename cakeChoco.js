@@ -14,15 +14,17 @@ function cakeChoco(game, spawnX, spawnY, scale) {
     , 847, 221, -91, 94, 7, .2, 7, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        //               this.moveDirection = 3;
+        // this.lookDirectionRight = false;
 }
 
 cakeChoco.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 22 * this.scale, this.y + 23 * this.scale
-            , this.width - 32 * this.scale , this.height -23 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 30 * this.scale, this.y + 23 * this.scale
+            , this.width - 65 * this.scale , this.height -25 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 23 * this.scale
-            , this.width - 32 * this.scale , this.height - 23 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 34 * this.scale, this.y + 23 * this.scale
+            , this.width - 65 * this.scale , this.height - 25 * this.scale);
     }
 }
 
