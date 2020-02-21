@@ -188,7 +188,7 @@ boardTower.prototype.update = function () {
         var ent = this.game.entities[i];
         if (ent !== this && ent.isEnemy) {
             var temp = this.enemyInRange(ent);
-            if(temp) {
+            if(temp && ent.hp >= 1) {
                 this.calculateDirection(ent);
                 this.shootBoba = true;
             }
