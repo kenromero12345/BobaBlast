@@ -139,6 +139,7 @@ AM.queueDownload("./img/pumpkinEvil.png");
 AM.queueDownload("./img/pumpkinEvilFlip.png");
 AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
+AM.queueDownload("./img/explosion.png");
 
 function Background(game, spritesheet) {
     this.isEnemy = false;
