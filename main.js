@@ -141,6 +141,9 @@ AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
 AM.queueDownload("./img/explosion.png");
 
+var audio = new Audio('./mp3/Your Sunset.mp3');
+
+
 function Background(game, spritesheet) {
     this.isEnemy = false;
     this.x = 0;
@@ -155,7 +158,7 @@ Background.prototype.draw = function() {
 }
 
 Background.prototype.update = function() {
-
+    audio.play();
 }
 
 // var GAMEBOARD = [];
@@ -178,14 +181,14 @@ AM.downloadAll(function () {
     towerArray = generateStoreTowers(gameEngine);
 
     //TEST here: comment ount some update of the enemy to be tested
-    // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+    // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
     // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cola(gameEngine, 450, 250, .85, false));
     // gameEngine.addEntity(new iceGolem(gameEngine, 450, 250, .7));
     // gameEngine.addEntity(new miniCake(gameEngine, 450, 250, .75));
-    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75)); 
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 10));
     // gameEngine.addEntity(new watermelon(gameEngine, 450, 250, .75));
@@ -203,15 +206,23 @@ AM.downloadAll(function () {
 });
 
 function generateStoreTowers(game) {
-    var firstTower = new storeTower(game, "Seattle", 100, 1000, 150, "Shooting Speed: Slow \nRange: Short",AM.getAsset("./img/tower.png"), 945, 200, 70,70,0,0,"none");
-    var secondTower = new storeTower(game, "Portland", 250, 250, 300, "Shooting Speed: Moderate \nRange: Moderate",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0,"green");
-    var thirdTower = new storeTower(game, "Los Angeles", 500, 500, 300,"Shooting Speed: Fast \nRange: Moderate \nSpecial Ability: Exploding Boba",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0,"red");
-    var fourthTower = new storeTower(game, "San Diego", 1000, 50, 500, "Shooting Speed: Very Fast \nRange: Large",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1,"gold");
-    var fifthTower = new storeTower(game, "Wall", 20, 1, 1, "A pot of boba \nto stop the enemies \nfrom progressing.",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1,"none");
-    var sixthTower = new storeTower(game, "Houston", 100, 1000, 150, "Shooting Speed: Slow \nRange: Moderate \nSpecial Ability: Freezing Boba",AM.getAsset("./img/towerB.png"), 1085, 270, 70,70,2,1,"blue");
-    var seventhTower = new storeTower(game, "Chicago", 1000, 1000, 150,"Shooting Speed: Moderate \nRange: Short \nSpecial Ability: Paralyzing Boba",AM.getAsset("./img/towerP.png"), 945, 340,70,70,0,2,"purple");
-    var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \ncan shoot 20 bobas \nevery second.",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2,"none");
-    var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \ncan shoot 21 bobas \nevery second.",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2,"none");
+    //basic tower
+    var firstTower = new storeTower(game, "Boba", 100, 1000, 150, "Basic boba shooter\nShooting Speed: Slow \nRange: Short",AM.getAsset("./img/tower.png"), 945, 200, 70,70,0,0, "none");
+    //poison tower
+    var secondTower = new storeTower(game, "Matcha Boba", 400, 300, 250, "Poisons enemies \nShooting Speed: Fast \nRange: Medium \n-Poison does damage over time",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0, "green");
+    //explosive tower
+    var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000, 250,"Burns enemies \nShooting Speed: Very slow \nRange: Medium \n-Burn makes enemies run faster \n-Does damage over time",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
+    //super tower
+    var fourthTower = new storeTower(game, "Golden Boba", 2000, 50, 500, "Super tower \nShooting Speed: Very fast \nRange: Large",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "gold");
+    //wall
+    var fifthTower = new storeTower(game, "Pot of Boba", 20, 1, 1, "A wall that \nstops the enemies \nfrom progressing",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1, "none");
+    //slow tower
+    var sixthTower = new storeTower(game, "Iced Boba", 200, 1000, 250, "Ices enemies \nShooting Speed: Slow \nMedium range \n-Ice makes enemies move slowly",AM.getAsset("./img/towerB.png"), 1085, 270, 70,70,2,1, "blue");
+    //stun tower
+    var seventhTower = new storeTower(game, "Taro Boba", 350, 600, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \n-Stun briefly stops enemies in place ",AM.getAsset("./img/towerP.png"), 945, 340,70,70,0,2, "purple");
+
+    var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \n(WIP) DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2, "none");
+    var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \n(WIP) DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2, "none");
 
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower]];//eightTower,ninthTower
     for(var i = 0; i < 3; i++) {
@@ -226,7 +237,7 @@ function generateStoreTowers(game) {
 //450//250
 //-50//350
 
-// gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+// gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
 // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
 // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
 // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
