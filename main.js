@@ -164,19 +164,23 @@ var audio = new Audio('./mp3/KSquare.mp3');
 audio.loop = true;
 audio.volume = 0.5;
 
-// var audio2 = new Audio('./mp3/Your Sunset.mp3');
-// audio2.loop = false;
-// audio2.volume = 0.5;
+var audio2 = new Audio('./mp3/Your Sunset.mp3');
+audio2.loop = false;
+audio2.volume = 0.5;
 
 Background.prototype.update = function() {
     var playPromise = audio.play();
-    // if(gameOverLose == true){
-    //     audio.pause();
-    //     audio2.play();
-    // }
+    
     if (playPromise !== undefined) {
         playPromise.then(_ => {
-            audio.play();
+            if(gameOverLose == false){
+                audio.play();
+            }else{
+                audio.pause();
+                audio2.play();
+            }
+            
+            
         })
         .catch(error => {
             
@@ -234,7 +238,7 @@ function generateStoreTowers(game) {
     //poison tower
     var secondTower = new storeTower(game, "Matcha Boba", 400, 300, 250, "Poisons enemies. \nShooting Speed: Fast \nRange: Medium \nSpecial Ability: Poison does damage\nover time",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0, "green");
     //explosive tower
-    var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000, 250,"Burns enemies. \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes enemies \nrun faster. Does damage over time",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
+    var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000, 250,"Burns enemies. \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes enemies \nrun faster & does damage over time",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
     //super tower
     var fourthTower = new storeTower(game, "Golden Boba", 2000, 50, 500, "Super tower. \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "gold");
     //wall
