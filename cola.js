@@ -6,6 +6,7 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     this.hp = 30;//50
     this.money = 20;
     if (isWhite) {
+        this.hp = 60;
         this.animationWalkLeft = new Animation(AM.getAsset("./img/sprite.png")
         , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
         this.animationDisappearLeft = new Animation(AM.getAsset("./img/sprite.png")
