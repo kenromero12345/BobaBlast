@@ -17,6 +17,7 @@ $510
 */
 var round;
 var gameOverLose = false;
+var gameOverWin = false;
 function roundPlan(game) {
     this.round = 0;
     this.index = 1;
@@ -106,6 +107,7 @@ roundPlan.prototype.generateGameOverWin = function() {
     ctx.fillText("VER", x + 140, y + 40  );
     ctx.font = '26px Bahnschrift Light';
     ctx.fillText("YOU WIN!", x + 35, y + 70  );
+    gameOverWin = true;
 }
 
 roundPlan.prototype.update = function () {
