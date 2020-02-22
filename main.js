@@ -208,7 +208,7 @@ function generateStoreTowers(game) {
     //poison tower
     var secondTower = new storeTower(game, "Portland", 300, 300, 250, "Poisons enemeies \nShoots moderately \nMedium range",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0, "green");
     //explosive tower
-    var thirdTower = new storeTower(game, "Los Angeles", 500, 2000, 250,"Creates explosions \nShoots very slowly \nMedium range",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
+    var thirdTower = new storeTower(game, "Los Angeles", 700, 2000, 250,"Creates explosions \nShoots very slowly \nMedium range",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
     //super tower
     var fourthTower = new storeTower(game, "San Diego", 2000, 50, 500, "Super tower \nShoots very fast \nLarge range",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "none");
     //wall

@@ -162,7 +162,7 @@ var collideUpdate = function(enemy) {
                     } else {
                         enemy.speed = 0;
                     }
-                    enemy.paralyzeDate = Date.now() + 2500;
+                    enemy.paralyzeDate = Date.now() + 1500;
                }
             }
             if (ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
@@ -175,12 +175,12 @@ var collideUpdate = function(enemy) {
                 if (Math.random() < enemy.burnResistance ? false : true) {
                     enemy.isBurned = true;
                     if (enemy.type && enemy.type == "tea") {
-                        enemy.walkSpeed = 1.5 * enemy.tempWalkSpeed;
-                        enemy.runSpeed = 1.5 * enemy.tempRunSpeed;
+                        enemy.walkSpeed = 2 * enemy.tempWalkSpeed;
+                        enemy.runSpeed = 2 * enemy.tempRunSpeed;
                     } else {
-                        enemy.speed = 1.5 * enemy.tempSpeed;
+                        enemy.speed = 2 * enemy.tempSpeed;
                     }
-                    enemy.burnDate = Date.now() + 10000;
+                    enemy.burnDate = Date.now() + 2000;
                 }
             } 
             if (ent.isBoba && ent.isExplosive && enemy.boundingbox.collide(ent.boundingbox)) {

@@ -159,6 +159,8 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
+            this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
+            this.roundEntity(this.index * this.timeGap, this.game, new watermelon(this.game, -50, 350, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new pumpkinGood(this.game, -50, 350, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new biscuit(this.game, -50, 350, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
@@ -166,10 +168,10 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
-            this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
-            this.roundEntity(this.index * this.timeGap, this.game, new watermelon(this.game, -50, 350, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new pumpkinEvil(this.game, -50, 350, .75));
+            this.roundEntity(this.index * this.timeGap, this.game, new biscuit(this.game, -50, 350, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new biscuit(this.game, -50, 350, .75), true);
+            
         } else if (this.round == 4) {
             this.roundEntity(this.index * this.timeGap, this.game, new redTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new redTea(this.game, -50, 350, false, .75));
@@ -186,7 +188,6 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap, this.game, new bigCake(this.game, -50, 350, .25));
             this.roundEntity(this.index * this.timeGap, this.game, new cakeChoco(this.game, -50, 350, .75), true);
 
-         
         } else if (this.round == 5) {         
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 0));
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 1));
