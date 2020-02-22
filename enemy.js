@@ -156,6 +156,8 @@ var collideUpdate = function(enemy) {
             if (ent.isParalyze && enemy.boundingbox.collide(ent.boundingbox)) {
                if (Math.random() < enemy.paralysisResistance ? false : true) {
                     enemy.isParalyzed = true;
+                    enemy.animationWalkLeft.stop = true;
+                    enemy.animationWalkRight.stop = true;
                     if (enemy.type && enemy.type == "tea") {
                         enemy.walkSpeed = 0;
                         enemy.runSpeed = 0;
@@ -236,6 +238,8 @@ var enemyParalyzeUpdate = function(enemy) {
     if (enemy.isParalyzed) {
         enemy.hp -= 0.025;
         if (Date.now() >= enemy.paralyzeDate) {
+            enemy.animationWalkLeft.stop = false;
+            enemy.animationWalkRight.stop = false;
             enemy.isParalyzed = false;
             if (enemy.type && enemy.type == "tea") {
                 enemy.walkSpeed = enemy.tempWalkSpeed;
