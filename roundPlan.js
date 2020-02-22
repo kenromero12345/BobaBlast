@@ -155,6 +155,8 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 9));
             this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 10), true);
+            this.roundEntity(this.index * this.timeGap, this.game, new biscuit(this.game, -50, 350, .75));
+            
                     
         } else if (this.round == 3) {
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
@@ -171,24 +173,24 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new pumpkinEvil(this.game, -50, 350, .75));
-            this.roundEntity(this.index * this.timeGap, this.game, new biscuit(this.game, -50, 350, .75));
+            this.roundEntity(this.index * this.timeGap, this.game, new cake(this.game, -50, 350, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new biscuit(this.game, -50, 350, .75), true);
             
         } else if (this.round == 4) {
             this.roundEntity(this.index * this.timeGap, this.game, new redTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new redTea(this.game, -50, 350, false, .75));
+            this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, true));
+            this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap, this.game, new redTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new redTea(this.game, -50, 350, false, .75));
+            this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, true));
+            this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap, this.game, new redTea(this.game, -50, 350, false, .75));
-            this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, true));
-            this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, true));
-            this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, true));
-            this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, true));
+            this.roundEntity(this.index * this.timeGap, this.game, new redTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap, this.game, new iceGolem(this.game, -50, 350, .70));
-            this.roundEntity(this.index * this.timeGap, this.game, new cake(this.game, -50, 350, .75));
-            this.roundEntity(this.index * this.timeGap, this.game, new bigCake(this.game, -50, 350, .25));
-            this.roundEntity(this.index * this.timeGap, this.game, new cakeChoco(this.game, -50, 350, .75), true);
+            this.roundEntity(this.index * this.timeGap, this.game, new bigCake(this.game, -50, 350, .25), true);
+            this.roundEntity(this.index * this.timeGap, this.game, new cakeChoco(this.game, -50, 350, .75));
 
         } else if (this.round == 5) {
             this.roundEntity(this.index * this.timeGap, this.game, new iceGolem(this.game, -50, 350, .70));
