@@ -1,5 +1,5 @@
 function Explosion(game, x, y) {
-    this.animation = new Animation(AM.getAsset("./img/explosion.png"),20, 28, 100, 100, 8, 0.1, 48, false, 1);
+    this.animation = new Animation(AM.getAsset("./img/explosion.png"),20, 28, 100, 100, 8, 0.05, 48, false, 1);
     this.game = game;
     this.ctx = game.ctx;
     this.isExplosion = true;
