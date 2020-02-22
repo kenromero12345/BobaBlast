@@ -181,7 +181,7 @@ display.prototype.draw = function () {
         }
         // Start Round Button Click
         if(click.x < this.buttonStartX + this.buttonWidth + 10 && click.x >= this.buttonStartX 
-            && click.y < this.buttonStartY + this.buttonHeight && click.y >= this.buttonStartY) {
+            && click.y < this.buttonStartY + this.buttonHeight && click.y >= this.buttonStartY && gameOverLose == false) {
                 if(!this.game.running && !paused) {
                     this.game.running = true;
                 } else if(this.game.running && !paused) {

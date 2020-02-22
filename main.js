@@ -159,12 +159,21 @@ Background.prototype.draw = function() {
     
 }
 
-var audio = new Audio('./mp3/Connecting.mp3');
+//Music
+var audio = new Audio('./mp3/KSquare.mp3');
 audio.loop = true;
 audio.volume = 0.5;
 
+// var audio2 = new Audio('./mp3/Your Sunset.mp3');
+// audio2.loop = false;
+// audio2.volume = 0.5;
+
 Background.prototype.update = function() {
     var playPromise = audio.play();
+    // if(gameOverLose == true){
+    //     audio.pause();
+    //     audio2.play();
+    // }
     if (playPromise !== undefined) {
         playPromise.then(_ => {
             audio.play();
@@ -225,7 +234,7 @@ function generateStoreTowers(game) {
     //poison tower
     var secondTower = new storeTower(game, "Matcha Boba", 400, 300, 250, "Poisons enemies \nShooting Speed: Fast \nRange: Medium \n-Poison does damage over time",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0, "green");
     //explosive tower
-    var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000, 250,"Burns enemies \nShooting Speed: Very slow \nRange: Medium \n-Burn makes enemies run faster \n-Does damage over time",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
+    var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000, 250,"Explodes and burns enemies \nShooting Speed: Very slow \nRange: Medium \n-Burn makes enemies run faster \n-Does damage over time",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
     //super tower
     var fourthTower = new storeTower(game, "Golden Boba", 2000, 50, 500, "Shoots golden boba \nShooting Speed: Very fast \nRange: Large \n-Boba homes in on enemies",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "gold");
     //wall
