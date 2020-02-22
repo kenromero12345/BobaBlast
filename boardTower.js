@@ -37,6 +37,7 @@ function boardTower(game, gridX, gridY, type) {
     this.radius = this.towerType.radius; 
     this.shootDestinationX = 0; 
     this.shootDestinationY = 0; 
+    this.target = null;
     this.shootBobaEveryMS = this.towerType.frequency;      
     this.directions = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
     this.shootOutXOffset = [15, 45, 65, 45, 17, -15, -30, -25 ];
@@ -89,7 +90,7 @@ boardTower.prototype.draw = function () {
 
     if(this.shootBoba) {
         if(this.shootTimer < Date.now()) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY, this.name));
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY, this.name, this.target));
             this.shootBoba = false;
             this.shootTimer = Date.now() + this.shootBobaEveryMS;
         }
@@ -223,6 +224,7 @@ boardTower.prototype.update = function () {
         }
         this.shootDestinationX = selectedEnemy.enemy.centerX - 10;
         this.shootDestinationY = selectedEnemy.enemy.centerY - 13;
+        this.target = selectedEnemy.enemy;
         this.calculateDirection(selectedEnemy.enemy);
         this.shootBoba = true;
     }

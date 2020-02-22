@@ -2,7 +2,7 @@ function cakeChoco(game, spawnX, spawnY, scale) {
     this.lifeDeduction = 8;
     this.name = "choco cake";
     this.speed = 100;
-    this.hp = 30;//
+    this.hp = 300;//
     this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/cakeChoco.png")
     , 0, 122, 96, 101, 6, .135, 6, true, scale, false);
