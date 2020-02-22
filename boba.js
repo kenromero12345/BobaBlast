@@ -33,7 +33,7 @@ function boba(game, startX, startY, destinationX, destinationY, name) {
     this.ctx = game.ctx;
     this.noCollision = true;
     this.boxes = true;
-    this.boundingbox = new BoundingBox(this.x + 7, this.y + 13, this.width -21, this.height - 23);
+    this.boundingbox = new BoundingBox(this.x + 6, this.y + 13, this.width -21, this.height - 23);
 }
 
 boba.prototype.draw = function () {
@@ -53,9 +53,12 @@ boba.prototype.draw = function () {
 boba.prototype.update = function () {
     if(this.game.running) {
         // Remove Boba if It Goes Out of Range
-        if(this.backward && this.x < this.destinationX) {
-            this.removeFromWorld = true;
-        } else if (!this.backward && this.x > this.destinationX) {
+        // if(this.backward && this.x < this.destinationX) {
+        //     this.removeFromWorld = true;
+        // } else if (!this.backward && this.x > this.destinationX) {
+        //     this.removeFromWorld = true;
+        // }
+        if (this.x < 0 || this.y < 0 || this.x > 1200 ||  this.y > 600) {
             this.removeFromWorld = true;
         }
         if(!this.backward && this.slope !== undefined) {
@@ -73,6 +76,6 @@ boba.prototype.update = function () {
             this.y += this.slope * this.game.clockTick * this.speed;
             // this.boundingbox.y += this.slope * this.game.clockTick * this.speed;
         }
-        this.boundingbox = new BoundingBox(this.x + 7, this.y + 13, this.width -21, this.height - 23);
+        this.boundingbox = new BoundingBox(this.x + 6, this.y + 13, this.width -21, this.height - 23);
     }
 }

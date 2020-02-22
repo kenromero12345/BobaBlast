@@ -221,8 +221,8 @@ boardTower.prototype.update = function () {
                 selectedEnemy = withinRange[i]
             }
         }
-        this.shootDestinationX = selectedEnemy.enemy.centerX;
-        this.shootDestinationY = selectedEnemy.enemy.centerY;
+        this.shootDestinationX = selectedEnemy.enemy.centerX - 10;
+        this.shootDestinationY = selectedEnemy.enemy.centerY - 13;
         this.calculateDirection(selectedEnemy.enemy);
         this.shootBoba = true;
     }

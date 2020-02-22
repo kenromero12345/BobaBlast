@@ -47,33 +47,35 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.poisonResistance = .25;
     tea.paralysisResistance = .25;
     tea.freezeResistance = .25;
+    // tea.moveDirection = 3;
+    // tea.lookDirectionRight = false;
 }
 
 teaSetBoundingBox = function(tea) {
     if (!tea.paceWalk) {
         if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
-            tea.boundingbox = new BoundingBox(tea.x + 18 * tea.scale, tea.y + 15 * tea.scale
-                , tea.width - 30 * tea.scale , tea.height -23 * tea.scale);
+            tea.boundingbox = new BoundingBox(tea.x + 28 * tea.scale, tea.y + 20 * tea.scale
+                , tea.width - 43 * tea.scale , tea.height -30 * tea.scale);
         } else {
-            tea.boundingbox = new BoundingBox(tea.x + 8 * tea.scale, tea.y + 15 * tea.scale
-                , tea.width - 30 * tea.scale , tea.height -23 * tea.scale);
+            tea.boundingbox = new BoundingBox(tea.x + 11 * tea.scale, tea.y + 20 * tea.scale
+                , tea.width - 43 * tea.scale , tea.height -30 * tea.scale);
         }
     } else {
         if (tea.name == "green bubble tea") {
             if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
-                tea.boundingbox = new BoundingBox(tea.x + 23 * tea.scale, tea.y + 30 * tea.scale
-                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+                tea.boundingbox = new BoundingBox(tea.x + 25 * tea.scale, tea.y + 34 * tea.scale
+                    , tea.width - 34 * tea.scale , tea.height -40 * tea.scale);
             } else {
-                tea.boundingbox = new BoundingBox(tea.x + 13 * tea.scale, tea.y + 30 * tea.scale
-                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+                tea.boundingbox = new BoundingBox(tea.x + 16 * tea.scale, tea.y + 34 * tea.scale
+                    , tea.width - 34 * tea.scale , tea.height -40 * tea.scale);
             }
         } else {
             if(tea.lookDirectionRight || tea.moveDirection == 1 ) {
-                tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 30 * tea.scale
-                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+                tea.boundingbox = new BoundingBox(tea.x + 12 * tea.scale, tea.y + 37 * tea.scale
+                    , tea.width - 32 * tea.scale , tea.height -42 * tea.scale);
             } else {
-                tea.boundingbox = new BoundingBox(tea.x + 10 * tea.scale, tea.y + 30 * tea.scale
-                    , tea.width - 30 * tea.scale , tea.height -35 * tea.scale);
+                tea.boundingbox = new BoundingBox(tea.x + 12 * tea.scale, tea.y + 37 * tea.scale
+                    , tea.width - 32 * tea.scale , tea.height -42 * tea.scale);
             }
         }
     }

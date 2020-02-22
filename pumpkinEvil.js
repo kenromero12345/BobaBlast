@@ -14,15 +14,17 @@ function pumpkinEvil(game, spawnX, spawnY, scale) {
     , 1320, 286, -110, 172, 10, .2, 10, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        //                                   this.moveDirection = 3;
+        // this.lookDirectionRight = false;
 }
 
 pumpkinEvil.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 20 * this.scale, this.y + 30 * this.scale
-            , this.width - 40 * this.scale , this.height -40 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 35 * this.scale, this.y + 35 * this.scale
+            , this.width - 65 * this.scale , this.height -55 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 20 * this.scale, this.y + 30 * this.scale
-            , this.width - 40 * this.scale , this.height -40 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 32 * this.scale, this.y + 35 * this.scale
+            , this.width - 65 * this.scale , this.height -55 * this.scale);
     }
 }
 
