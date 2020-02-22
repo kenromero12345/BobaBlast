@@ -1,6 +1,5 @@
 function boba(game, startX, startY, destinationX, destinationY, name) {
     this.name = "BOBA";
-<<<<<<< HEAD
     this.isFreeze = false;
     if(name ==='blue') {
         this.isFreeze = true;
@@ -22,8 +21,6 @@ function boba(game, startX, startY, destinationX, destinationY, name) {
     if(name ==='poop') {
         this.isFire = true;
     }*/
-=======
->>>>>>> parent of 31d2f18... Revert "Merge branch 'gordon' into newKen"
     this.animation = new Animation(AM.getAsset("./img/boba.png"), 0, 0, 20, 20, 1, 0.1, 1, true, 1);
     this.x = startX;
     this.y = startY;
