@@ -192,14 +192,14 @@ AM.downloadAll(function () {
     towerArray = generateStoreTowers(gameEngine);
 
     //TEST here: comment ount some update of the enemy to be tested
-    // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+    // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
     // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cola(gameEngine, 450, 250, .85, false));
     // gameEngine.addEntity(new iceGolem(gameEngine, 450, 250, .7));
     // gameEngine.addEntity(new miniCake(gameEngine, 450, 250, .75));
-    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75)); 
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 10));
     // gameEngine.addEntity(new watermelon(gameEngine, 450, 250, .75));
@@ -231,7 +231,7 @@ function generateStoreTowers(game) {
     var sixthTower = new storeTower(game, "Iced Boba", 200, 1000, 250, "Ices enemies \nShooting Speed: Slow \nMedium range \n-Ice makes enemies move slowly",AM.getAsset("./img/towerB.png"), 1085, 270, 70,70,2,1, "blue");
     //stun tower
     var seventhTower = new storeTower(game, "Taro Boba", 350, 600, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \n-Stun briefly stops enemies in place ",AM.getAsset("./img/towerP.png"), 945, 340,70,70,0,2, "purple");
-    
+
     var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \n(WIP) DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2, "none");
     var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \n(WIP) DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2, "none");
 
@@ -248,7 +248,7 @@ function generateStoreTowers(game) {
 //450//250
 //-50//350
 
-// gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+// gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
 // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
 // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
 // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
