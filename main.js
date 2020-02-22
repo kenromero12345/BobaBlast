@@ -143,10 +143,7 @@ AM.queueDownload("./img/pumpkinEvilFlip.png");
 AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
 AM.queueDownload("./img/explosion.png");
-
-var audio = new Audio('./mp3/Your Sunset.mp3');
-
-
+    
 function Background(game, spritesheet) {
     this.isEnemy = false;
     this.x = 0;
@@ -154,14 +151,37 @@ function Background(game, spritesheet) {
     this.spritesheet = spritesheet;
     this.game = game;
     this.ctx = game.ctx;
+    
 }
 
 Background.prototype.draw = function() {
     this.ctx.drawImage(this.spritesheet, this.x, this.y);
+    
 }
 
+//Music
+var audio = new Audio('./mp3/KSquare.mp3');
+audio.loop = true;
+audio.volume = 0.5;
+
+// var audio2 = new Audio('./mp3/Your Sunset.mp3');
+// audio2.loop = false;
+// audio2.volume = 0.5;
+
 Background.prototype.update = function() {
-    audio.play();
+    var playPromise = audio.play();
+    // if(gameOverLose == true){
+    //     audio.pause();
+    //     audio2.play();
+    // }
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            audio.play();
+        })
+        .catch(error => {
+            
+        });
+    }
 }
 
 // var GAMEBOARD = [];
