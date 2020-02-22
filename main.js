@@ -203,15 +203,15 @@ AM.downloadAll(function () {
 });
 
 function generateStoreTowers(game) {
-    var firstTower = new storeTower(game, "Seattle", 100, 1000, 150, "Seattle Tower\nShoots slowly \nShort range",AM.getAsset("./img/tower.png"), 945, 200, 70,70,0,0);
-    var secondTower = new storeTower(game, "Portland", 300, 300, 275, "Portland Tower \nShoots moderately \nModerate range",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0);
-    var thirdTower = new storeTower(game, "Los Angeles", 500, 300, 300,"Los Angeles Tower \nShoots fast \nModerate range",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0);
-    var fourthTower = new storeTower(game, "San Diego", 2000, 50, 500, "San Diego Tower \nShoots very fast \nLarge range",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1);
-    var fifthTower = new storeTower(game, "Wall", 20, 1, 1, "A pot of boba \nStops the enemies \nfrom progressing",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1);
-    var sixthTower = new storeTower(game, "Huston", 200, 900, 300, "Huston Tower \nShoots slowly \nModerate range",AM.getAsset("./img/towerB.png"), 1085, 270, 70,70,2,1);
-    var seventhTower = new storeTower(game, "Chicago", 250, 300, 150,"Chicago Tower \nShoots moderately \nShort range",AM.getAsset("./img/towerP.png"), 945, 340,70,70,0,2);
-    var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \nWIP!! DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2);
-    var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \nWIP!! DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2);
+    var firstTower = new storeTower(game, "Seattle", 100, 1000, 150, "Seattle Tower\nShoots slowly \nShort range",AM.getAsset("./img/tower.png"), 945, 200, 70,70,0,0, "none");
+    var secondTower = new storeTower(game, "Portland", 300, 300, 275, "Portland Tower \nShoots moderately \nModerate range",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0, "green");
+    var thirdTower = new storeTower(game, "Los Angeles", 500, 300, 300,"Los Angeles Tower \nShoots fast \nModerate range",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
+    var fourthTower = new storeTower(game, "San Diego", 2000, 50, 500, "San Diego Tower \nShoots very fast \nLarge range",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "none");
+    var fifthTower = new storeTower(game, "Wall", 20, 1, 1, "A pot of boba \nStops the enemies \nfrom progressing",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1, "none");
+    var sixthTower = new storeTower(game, "Huston", 200, 900, 300, "Huston Tower \nShoots slowly \nModerate range",AM.getAsset("./img/towerB.png"), 1085, 270, 70,70,2,1, "blue");
+    var seventhTower = new storeTower(game, "Chicago", 250, 300, 150,"Chicago Tower \nShoots moderately \nShort range",AM.getAsset("./img/towerP.png"), 945, 340,70,70,0,2, "purple");
+    var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \nWIP!! DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2, "none");
+    var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \nWIP!! DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2, "none");
 
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower,eightTower,ninthTower]];
     for(var i = 0; i < 3; i++) {
