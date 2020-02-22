@@ -310,7 +310,7 @@ display.prototype.generateDescriptionBox = function() {
     ctx.fillText("Name: " + currentTower.name, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
     ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 140, this.descriptionBoxStartY + 20);
 
-    var txt = 'Description: ' + currentTower.description;
+    var txt = currentTower.description;
     var lineX = this.descriptionBoxStartX + 15;
     var lineY = this.descriptionBoxStartY + 40;
     var lineheight = 15;
