@@ -14,15 +14,17 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     , 720, 260, -84, 76, 7, .2, 7, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+                                                  this.moveDirection = 3;
+        this.lookDirectionRight = false;
 }
 
 pumpkinGood.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 15 * this.scale
-            , this.width - 30 * this.scale , this.height -35 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 15 * this.scale, this.y + 25 * this.scale
+            , this.width - 45 * this.scale , this.height -50 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 20 * this.scale, this.y + 15 * this.scale
-            , this.width - 30 * this.scale , this.height -35 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 30 * this.scale, this.y + 25 * this.scale
+            , this.width - 45 * this.scale , this.height -50 * this.scale);
     }
 }
 

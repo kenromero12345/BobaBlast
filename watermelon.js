@@ -14,15 +14,17 @@ function watermelon(game, spawnX, spawnY, scale) {
     , 1394, 245, -62, 74, 14, .25, 14, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed);
+                                                  this.moveDirection = 3;
+        this.lookDirectionRight = false;
 }
 
 watermelon.prototype.setBoundingBox = function() {
     if (this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 6 * this.scale, this.y + 12 * this.scale
-            , this.width - 14 * this.scale , this.height -22 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 8 * this.scale, this.y + 16 * this.scale
+            , this.width - 22 * this.scale , this.height -28 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 8 * this.scale, this.y + 10 * this.scale
-            , this.width - 14 * this.scale , this.height -22 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 13 * this.scale, this.y + 16 * this.scale
+            , this.width - 22 * this.scale , this.height -28 * this.scale);
     }
 }
 
@@ -171,19 +173,18 @@ watermelon.prototype.draw = function () {
 watermelon.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
-        var xy = getXY(this.centerX, this.centerY);
-        if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
-            && this.centerY % 100 > 48 && this.centerY % 100 < 52)) {
-            this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            enemyUpdateLookHelper(this);
-        }
+        // var xy = getXY(this.centerX, this.centerY);
+        // if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
+        //     && this.centerY % 100 > 48 && this.centerY % 100 < 52)) {
+        //     this.moveDirection = getShortestPath(this.centerX, this.centerY);
+        //     enemyUpdateLookHelper(this);
+        // }
 
-        //slimeUpdate(this);
-        enemyUpdateHelper(this);
+        // enemyUpdateHelper(this);
 
         this.setBoundingBox();
 
-        enemyEscape(this);
+        // enemyEscape(this);
         
         // // else i
         // for (var i = 0; i < this.game.entities.length; i++) {

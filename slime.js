@@ -42,15 +42,17 @@ function slime(game, spawnX, spawnY, scale, num) {
     , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        //                                           this.moveDirection = 3;
+        // this.lookDirectionRight = false;
 }
 
 slime.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 18 * this.scale, this.y + 30 * this.scale
-            , this.width - 23 * this.scale , this.height -35 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 33 * this.scale, this.y + 45 * this.scale
+            , this.width - 53 * this.scale , this.height -70 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 10 * this.scale, this.y + 10 * this.scale
-            , this.width - 25 * this.scale , this.height -30 * this.scale);
+        this.boundingbox = new BoundingBox(this.x + 14 * this.scale, this.y + 45 * this.scale
+            , this.width - 53 * this.scale , this.height -70 * this.scale);
     }
 }
 

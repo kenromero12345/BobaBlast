@@ -185,7 +185,7 @@ AM.downloadAll(function () {
     // gameEngine.addEntity(new cola(gameEngine, 450, 250, .85, false));
     // gameEngine.addEntity(new iceGolem(gameEngine, 450, 250, .7));
     // gameEngine.addEntity(new miniCake(gameEngine, 450, 250, .75));
-    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75)); -----
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75)); 
     // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 10));
     // gameEngine.addEntity(new watermelon(gameEngine, 450, 250, .75));
