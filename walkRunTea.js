@@ -32,7 +32,7 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
         tea.height = tea.runHeight;
         tea.tempFrameDuration = tea.animationRunLeft.frameDuration;
     }
-    tea.boxes = false;
+    tea.boxes = true;
     teaSetBoundingBox(tea);
     enemyCenterUpdate(tea);
     tea.isPoisoned = false;
