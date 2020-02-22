@@ -13,6 +13,7 @@ All 11 slimes x9 => 99 slimes
 */
 var round = 0;
 function roundPlan(game) {
+    this.round = 0;
     this.index = 1;
     this.game = game;
     this.ctx = game.ctx;
@@ -55,7 +56,7 @@ roundPlan.prototype.generateRoundDone = function() {
     ctx.fillRect(x,y,w,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("Round " + round + " Complete", x + 35, y + 40  );
+    ctx.fillText("Round " + this.round + " Complete", x + 35, y + 40  );
 }
 
 roundPlan.prototype.generateGameOverLose = function() {
@@ -102,7 +103,7 @@ roundPlan.prototype.generateGameOverWin = function() {
 
 roundPlan.prototype.update = function () {
     if (this.isRoundStart && this.game.running) {
-        round++;
+        this.round++;
         this.isRoundStart = false;
         this.isEnding = false;
         this.spawningFinish = false;
@@ -123,9 +124,9 @@ roundPlan.prototype.update = function () {
             ent.shootBoba = false;
         }
     }
-
+    round = this.round;
     if (!this.isRoundStart && !this.isEnding && !this.spawningFinish) {
-        if (round == 1) {
+        if (this.round == 1) {
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
@@ -287,7 +288,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 8));
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 9));
             this.roundEntity(this.index * this.timeGap, this.game, new slime(this.game, -50, 350, .75, 10), true);   
-        } else if (round == 6) {
+        } else if (this.round == 6) {
             //end
             //show gameover you win
             this.gameOverWin = true;
