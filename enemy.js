@@ -168,7 +168,7 @@ var collideUpdate = function(enemy) {
             if (ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
                 if (Math.random() < enemy.poisonResistance ? false : true) {
                     enemy.isPoisoned = true;
-                    enemy.poisonDate = Date.now() + 10000;
+                    enemy.poisonDate = Date.now() + 5000;
                 }
             } 
             if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
