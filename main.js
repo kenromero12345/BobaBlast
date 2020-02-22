@@ -178,14 +178,14 @@ AM.downloadAll(function () {
     towerArray = generateStoreTowers(gameEngine);
 
     //TEST here: comment ount some update of the enemy to be tested
-    // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+    // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
     // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cola(gameEngine, 450, 250, .85, false));
     // gameEngine.addEntity(new iceGolem(gameEngine, 450, 250, .7));
     // gameEngine.addEntity(new miniCake(gameEngine, 450, 250, .75));
-    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75)); 
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 10));
     // gameEngine.addEntity(new watermelon(gameEngine, 450, 250, .75));
@@ -213,7 +213,6 @@ function generateStoreTowers(game) {
     var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \nWIP!! DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2);
     var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \nWIP!! DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2);
 
-
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower,eightTower,ninthTower]];
     for(var i = 0; i < 3; i++) {
         for(var j = 0; j < 3; j++) {
@@ -227,7 +226,7 @@ function generateStoreTowers(game) {
 //450//250
 //-50//350
 
-// gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+// gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
 // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
 // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
 // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
