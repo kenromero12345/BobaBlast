@@ -22,12 +22,17 @@ function display(game, towerArr) {
     this.scoreWidth = 250;
     this.scoreHeight = 40;
     this.scoreStartX = 925;
-    this.scoreStartY = 70;
+    this.scoreStartY = 120;
 
-    this.lifeWidth = 250;
+    this.lifeWidth = 125;
     this.lifeHeight = 40;
-    this.lifeStartX = 925;
-    this.lifeStartY = 120;
+    this.lifeStartX = 1050;
+    this.lifeStartY = 70;
+
+    this.roundWidth = 120;
+    this.roundHeight = 40;
+    this.roundStartX = 925;
+    this.roundStartY = 70;
 
     this.towerWidth = 250;
     this.towerHeight = 240;
@@ -68,6 +73,7 @@ display.prototype.draw = function () {
     ctx.fillText("B", this.centerFontX + 115, this.centerFontY);
     ctx.font = '44px Bahnschrift Light';
     ctx.fillText("LAST", this.centerFontX + 145, this.centerFontY);
+    this.generateRoundBoard();
     this.generateScoreBoard();
     this.generateLifeBoard();
     this.generateTowerBoard();
@@ -190,6 +196,19 @@ display.prototype.draw = function () {
     }
 }
 
+display.prototype.generateRoundBoard = function () {
+    var ctx = this.ctx;
+    var x = this.roundStartX;
+    var y = this.roundStartY;
+    var w = this.roundWidth;
+    var h = this.roundHeight;
+    ctx.fillStyle = "#3ac9a6";
+    ctx.fillRect(x,y,w,h);
+    ctx.fillStyle = "black";
+    ctx.font = '24px Bahnschrift Light';
+    ctx.fillText("Round " + round, this.roundStartX + 10, this.roundStartY + 30  );
+}
+
 display.prototype.generateScoreBoard = function () {
     var ctx = this.ctx;
     var x = this.scoreStartX;
@@ -199,7 +218,7 @@ display.prototype.generateScoreBoard = function () {
     ctx.fillStyle = "#3ac9a6";
     ctx.fillRect(x,y,w,h);
     ctx.fillStyle = "black";
-    ctx.font = '28px Bahnschrift Light';
+    ctx.font = '26px Bahnschrift Light';
     ctx.fillText("Money: " + currentMoney, this.scoreStartX + 20, this.scoreStartY + 30  );
 }
 
@@ -212,8 +231,8 @@ display.prototype.generateLifeBoard = function () {
     ctx.fillStyle = "#3ac9a6";
     ctx.fillRect(x,y,w,h);
     ctx.fillStyle = "black";
-    ctx.font = '28px Bahnschrift Light';
-    ctx.fillText("Lives: " + currentLifes, this.lifeStartX + 20, this.lifeStartY + 30  );
+    ctx.font = '24px Bahnschrift Light';
+    ctx.fillText("Lives: " + currentLifes, this.lifeStartX + 10, this.lifeStartY + 30  );
 }
 
 display.prototype.generateTowerBoard = function () {
