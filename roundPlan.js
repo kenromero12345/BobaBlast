@@ -11,7 +11,7 @@ Yellow bubble tea x10, ice golem x1, pumpkin evil x1, pumpkin good x1, bigCake x
 Round 4
 All 11 slimes x9 => 99 slimes
 */
-var round = 0;
+var round;
 function roundPlan(game) {
     this.round = 0;
     this.index = 1;

@@ -140,10 +140,7 @@ AM.queueDownload("./img/pumpkinEvilFlip.png");
 AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
 AM.queueDownload("./img/explosion.png");
-
-var audio = new Audio('./mp3/Your Sunset.mp3');
     
-
 function Background(game, spritesheet) {
     this.isEnemy = false;
     this.x = 0;
@@ -159,8 +156,20 @@ Background.prototype.draw = function() {
     
 }
 
+var audio = new Audio('./mp3/Connecting.mp3');
+audio.loop = true;
+audio.volume = 0.5;
+
 Background.prototype.update = function() {
-    // audio.play();
+    var playPromise = audio.play();
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            audio.play();
+        })
+        .catch(error => {
+            
+        });
+    }
 }
 
 // var GAMEBOARD = [];
@@ -215,7 +224,7 @@ function generateStoreTowers(game) {
     //explosive tower
     var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000, 250,"Burns enemies \nShooting Speed: Very slow \nRange: Medium \n-Burn makes enemies run faster \n-Does damage over time",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
     //super tower
-    var fourthTower = new storeTower(game, "Golden Boba", 2000, 50, 500, "Shoots golden boba \nShooting Speed: Very fast \nRange: Large \n-Boba home in on enemies",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "gold");
+    var fourthTower = new storeTower(game, "Golden Boba", 2000, 50, 500, "Shoots golden boba \nShooting Speed: Very fast \nRange: Large \n-Boba homes in on enemies",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "gold");
     //wall
     var fifthTower = new storeTower(game, "Pot of Boba", 20, 1, 1, "A wall that \nstops the enemies \nfrom progressing",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1, "none");
     //slow tower
