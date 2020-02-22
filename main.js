@@ -206,7 +206,7 @@ function generateStoreTowers(game) {
     var firstTower = new storeTower(game, "Seattle", 100, 1000, 150, "Shooting Speed: Slow \nRange: Short",AM.getAsset("./img/tower.png"), 945, 200, 70,70,0,0,"none");
     var secondTower = new storeTower(game, "Portland", 250, 250, 300, "Shooting Speed: Moderate \nRange: Moderate",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0,"green");
     var thirdTower = new storeTower(game, "Los Angeles", 500, 500, 300,"Shooting Speed: Fast \nRange: Moderate \nSpecial Ability: Exploding Boba",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0,"red");
-    var fourthTower = new storeTower(game, "San Diego", 1000, 50, 500, "Shooting Speed: Very Fast \nRange: Large",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1,"none");
+    var fourthTower = new storeTower(game, "San Diego", 1000, 50, 500, "Shooting Speed: Very Fast \nRange: Large",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1,"gold");
     var fifthTower = new storeTower(game, "Wall", 20, 1, 1, "A pot of boba \nto stop the enemies \nfrom progressing.",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1,"none");
     var sixthTower = new storeTower(game, "Houston", 100, 1000, 150, "Shooting Speed: Slow \nRange: Moderate \nSpecial Ability: Freezing Boba",AM.getAsset("./img/towerB.png"), 1085, 270, 70,70,2,1,"blue");
     var seventhTower = new storeTower(game, "Chicago", 1000, 1000, 150,"Shooting Speed: Moderate \nRange: Short \nSpecial Ability: Paralyzing Boba",AM.getAsset("./img/towerP.png"), 945, 340,70,70,0,2,"purple");

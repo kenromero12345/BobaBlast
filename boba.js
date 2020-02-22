@@ -1,4 +1,5 @@
-function boba(game, startX, startY, destinationX, destinationY, name) {
+function boba(game, startX, startY, destinationX, destinationY, name, target) {
+    this.target = target;
     this.name = "BOBA";
     this.isFreeze = false;
     if(name ==='blue') {
@@ -16,6 +17,9 @@ function boba(game, startX, startY, destinationX, destinationY, name) {
     if(name ==='red') {
         this.isExplosive = true;
     }
+    if(name ==='gold') {
+        this.homing = true;
+    }
     /*
         this.isFire = false;
     if(name ==='poop') {
@@ -25,27 +29,52 @@ function boba(game, startX, startY, destinationX, destinationY, name) {
     this.x = startX;
     this.y = startY;
     this.isBoba = true;
-    this.destinationX = destinationX;
-    this.destinationY = destinationY;
-    this.backward = false;
-    this.upward = false;
-    this.yDiff = destinationY - startY;
-    this.xDiff = destinationX - startX;
-    if(this.xDiff === 0) {
-        this.slope = undefined;
+    if (this.homing) {
+        this.destinationX = target.centerX;
+        this.destinationY = target.centerY;
+        this.backward = false;
+        this.upward = false;
+        this.yDiff = this.destinationY - startY;
+        this.xDiff = this.destinationX - startX;
+        if(this.xDiff === 0) {
+            this.slope = undefined;
+        } else {
+            this.slope = this.yDiff / this.xDiff;
+        }
+        if(this.xDiff < 0) {
+            this.backward = true;
+        }
+        if(this.yDiff < 0) {
+            this.upward = true;
+        }
+        if(this.backward && this.upward) {
+            this.slope = -1 * this.slope;
+        } else if (this.backward) {
+            this.slope = -1 * this.slope;
+        }
     } else {
-        this.slope = this.yDiff / this.xDiff;
-    }
-    if(this.xDiff < 0) {
-        this.backward = true;
-    }
-    if(this.yDiff < 0) {
-        this.upward = true;
-    }
-    if(this.backward && this.upward) {
-        this.slope = -1 * this.slope;
-    } else if (this.backward) {
-        this.slope = -1 * this.slope;
+        this.destinationX = destinationX;
+        this.destinationY = destinationY;
+        this.backward = false;
+        this.upward = false;
+        this.yDiff = destinationY - startY;
+        this.xDiff = destinationX - startX;
+        if(this.xDiff === 0) {
+            this.slope = undefined;
+        } else {
+            this.slope = this.yDiff / this.xDiff;
+        }
+        if(this.xDiff < 0) {
+            this.backward = true;
+        }
+        if(this.yDiff < 0) {
+            this.upward = true;
+        }
+        if(this.backward && this.upward) {
+            this.slope = -1 * this.slope;
+        } else if (this.backward) {
+            this.slope = -1 * this.slope;
+        }
     }
     this.width = 28;
     this.height = 28;
@@ -73,6 +102,33 @@ boba.prototype.draw = function () {
 
 boba.prototype.update = function () {
     if(this.game.running) {
+        if (this.homing) {
+            if (this.target.hp < 1) {
+                this.removeFromWorld = true;
+            }
+            this.destinationX = this.target.centerX - 10;
+            this.destinationY = this.target.centerY - 13;
+            this.backward = false;
+            this.upward = false;
+            this.yDiff = this.destinationY - this.y;
+            this.xDiff = this.destinationX - this.x;
+            if(this.xDiff === 0) {
+                this.slope = undefined;
+            } else {
+                this.slope = this.yDiff / this.xDiff;
+            }
+            if(this.xDiff < 0) {
+                this.backward = true;
+            }
+            if(this.yDiff < 0) {
+                this.upward = true;
+            }
+            if(this.backward && this.upward) {
+                this.slope = -1 * this.slope;
+            } else if (this.backward) {
+                this.slope = -1 * this.slope;
+            }
+        }
         // Remove Boba if It Goes Out of Range
         // if(this.backward && this.x < this.destinationX) {
         //     this.removeFromWorld = true;
