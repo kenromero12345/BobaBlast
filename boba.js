@@ -16,6 +16,11 @@ function boba(game, startX, startY, destinationX, destinationY, name) {
     if(name ==='red') {
         this.isExplosive = true;
     }
+    /*
+        this.isFire = false;
+    if(name ==='poop') {
+        this.isFire = true;
+    }*/
     this.animation = new Animation(AM.getAsset("./img/boba.png"), 0, 0, 20, 20, 1, 0.1, 1, true, 1);
     this.x = startX;
     this.y = startY;

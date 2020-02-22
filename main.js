@@ -178,14 +178,14 @@ AM.downloadAll(function () {
     towerArray = generateStoreTowers(gameEngine);
 
     //TEST here: comment ount some update of the enemy to be tested
-    // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+    // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
     // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cola(gameEngine, 450, 250, .85, false));
     // gameEngine.addEntity(new iceGolem(gameEngine, 450, 250, .7));
     // gameEngine.addEntity(new miniCake(gameEngine, 450, 250, .75));
-    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75)); 
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 10));
     // gameEngine.addEntity(new watermelon(gameEngine, 450, 250, .75));
@@ -226,7 +226,7 @@ function generateStoreTowers(game) {
 //450//250
 //-50//350
 
-// gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));    
+// gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
 // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
 // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
 // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
