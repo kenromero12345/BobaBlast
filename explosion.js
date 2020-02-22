@@ -4,8 +4,8 @@ function Explosion(game, x, y) {
     this.ctx = game.ctx;
     this.isExplosion = true;
     this.speed = 200;
-    this.x = x ;
-    this.y = y - 25;
+    this.x = x - 10;
+    this.y = y - 20;
     this.width = this.animation.frameWidth;
     this.height = this.animation.frameHeight;
     this.boxes = true;

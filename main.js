@@ -25,7 +25,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
-    // if(this.currentFrame() != 2){
+    // if(this.currentFrame() != 1){
         this.elapsedTime += tick;
     // }
     if (!(this.isDone() && !this.loop)) {
