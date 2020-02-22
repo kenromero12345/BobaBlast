@@ -245,7 +245,7 @@ display.prototype.generateTowerBoard = function () {
     ctx.fillRect(x,y,w,h);
     ctx.fillStyle = "black";
     ctx.font = '20px Bahnschrift Light';
-    ctx.fillText("Boba Tower Store", this.towerStartX + 40, this.towerStartY + 25);
+    ctx.fillText("Boba Shooter Store", this.towerStartX + 40, this.towerStartY + 25);
 }
 
 display.prototype.generateStartButton = function() {
