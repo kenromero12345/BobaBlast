@@ -83,10 +83,18 @@ boba.prototype.update = function () {
             this.removeFromWorld = true;
         }
         if(!this.backward && this.slope !== undefined) {
-            this.x += this.game.clockTick * this.speed;
+            if(Math.abs(this.slope) <= 10) {
+                this.x += this.game.clockTick * this.speed;
+            } else {
+                this.x += this.game.clockTick * this.speed / 10;
+            }
             // this.boundingbox.x += this.game.clockTick * this.speed;
         } else if (this.slope !== undefined)  {
-            this.x -= this.game.clockTick * this.speed;
+            if(Math.abs(this.slope) <= 10) {
+                this.x -= this.game.clockTick * this.speed;
+            } else {
+                this.x -= this.game.clockTick * this.speed / 10;
+            }
             // this.boundingbox.x -= this.game.clockTick * this.speed;
         }
         if(this.slope === undefined)  {
@@ -94,7 +102,11 @@ boba.prototype.update = function () {
             // this.boundingbox.y += this.game.clockTick * this.speed;
         }
         else {
-            this.y += this.slope * this.game.clockTick * this.speed;
+            if(Math.abs(this.slope) <= 10) {
+                this.y += this.slope * this.game.clockTick * this.speed;
+            } else {
+                this.y += this.slope / 10 * this.game.clockTick * this.speed;
+            }
             // this.boundingbox.y += this.slope * this.game.clockTick * this.speed;
         }
         this.boundingbox = new BoundingBox(this.x + 6, this.y + 13, this.width -21, this.height - 23);
