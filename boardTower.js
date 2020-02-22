@@ -40,8 +40,8 @@ function boardTower(game, gridX, gridY, type) {
     this.target = null;
     this.shootBobaEveryMS = this.towerType.frequency;      
     this.directions = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
-    this.shootOutXOffset = [15, 45, 55, 45, 10, -20, -30, -25 ];
-    this.shootOutYOffset = [50,40, 5, -5, -20, -5, 10, 40];
+    this.shootOutXOffset = [15, 45, 65, 45, 17, -15, -30, -25 ];
+    this.shootOutYOffset = [50,40, 15, -5, -15, -5, 10, 40];
 }
 
 boardTower.prototype.draw = function () {
