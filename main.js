@@ -22,11 +22,14 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
     } else {
         this.reverse = false;
     }
+    this.stop = false;
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
     // if(this.currentFrame() != 1){
-        this.elapsedTime += tick;
+        if (!this.stop) { 
+            this.elapsedTime += tick;
+        }
     // }
     if (!(this.isDone() && !this.loop)) {
     if (this.isDone()) {
