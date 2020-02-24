@@ -143,7 +143,10 @@ AM.queueDownload("./img/pumpkinEvilFlip.png");
 AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
 AM.queueDownload("./img/explosion.png");
-    
+
+var audio = new Audio('./mp3/Your Sunset.mp3');
+
+
 function Background(game, spritesheet) {
     this.isEnemy = false;
     this.x = 0;
@@ -151,37 +154,14 @@ function Background(game, spritesheet) {
     this.spritesheet = spritesheet;
     this.game = game;
     this.ctx = game.ctx;
-    
 }
 
 Background.prototype.draw = function() {
     this.ctx.drawImage(this.spritesheet, this.x, this.y);
-    
 }
 
-//Music
-var audio = new Audio('./mp3/KSquare.mp3');
-audio.loop = true;
-audio.volume = 0.5;
-
-// var audio2 = new Audio('./mp3/Your Sunset.mp3');
-// audio2.loop = false;
-// audio2.volume = 0.5;
-
 Background.prototype.update = function() {
-    var playPromise = audio.play();
-    // if(gameOverLose == true){
-    //     audio.pause();
-    //     audio2.play();
-    // }
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            audio.play();
-        })
-        .catch(error => {
-            
-        });
-    }
+    audio.play();
 }
 
 // var GAMEBOARD = [];
@@ -236,7 +216,7 @@ function generateStoreTowers(game) {
     //explosive tower
     var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000, 250,"Burns enemies. \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes enemies \nrun faster. Does damage over time",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
     //super tower
-    var fourthTower = new storeTower(game, "Golden Boba", 2000, 50, 500, "Super tower. \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "gold");
+    var fourthTower = new storeTower(game, "Golden Boba", 2000, 50, 500, "Super tower. \nShooting Speed: Very Fast \nRange: Large",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "gold");
     //wall
     var fifthTower = new storeTower(game, "Pot of Boba", 20, 1, 1, "A wall that stops the \nenemies from progressing.",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1, "none");
     //slow tower
