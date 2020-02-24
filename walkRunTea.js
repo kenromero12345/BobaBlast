@@ -139,16 +139,16 @@ var walkRunTeaDraw = function (tea) {
 
 var walkRunTeaUpdate = function (tea) {
     //use center gap
-    var runMin = 43;
-    var runMax = 57;
+    var runMin = 40;
+    var runMax = 60;
     var walkMin = 48;
     var walkMax = 52;
-    if (tea.isBurned) {
-        runMin = 36;
-        runMax = 64;
-        walkMin = 46;
-        walkMax = 54;
-    }
+    // if (tea.isBurned) {
+    //     runMin = 36;
+    //     runMax = 64;
+    //     walkMin = 46;
+    //     walkMax = 54;
+    // }
     if (((tea.centerX +  100) % 100 > runMin && (tea.centerX + 100) % 100 < runMax
         && tea.centerY % 100 > runMin && tea.centerY % 100 < runMax) && !tea.paceWalk
         || ((tea.centerX +  100) % 100 > walkMin && (tea.centerX + 100) % 100 < walkMax
