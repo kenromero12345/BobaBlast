@@ -13,7 +13,7 @@ function cake(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/cakeFlip.png")
     , 879, 270, -96, 103, 8, .2, 8, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
         //         this.moveDirection = 3;
         // this.lookDirectionRight = false;
 }
@@ -155,17 +155,7 @@ var cakeRight = function(enemy) {
 cake.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
-        var min = 48;
-        var max = 52;
-        if (this.isBurned) {
-            min = 46;
-            max = 54;
-        }
-        if (((this.centerX +  100) % 100 > min && (this.centerX + 100) % 100 < max
-            && this.centerY % 100 > min && this.centerY % 100 < max)) {
-            this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            enemyUpdateLookHelper(this);
-        }
+        enemyChooseDir(this);
 
         // //enemyUpdateHelper(this);
         cakeUpdate(this);

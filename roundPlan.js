@@ -135,8 +135,8 @@ roundPlan.prototype.update = function () {
     }
     round = this.round;
     if (!this.isRoundStart && !this.isEnding && !this.spawningFinish) {
-        if (this.round == 1) {
-            this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
+        if (round == 1) {
+            this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));

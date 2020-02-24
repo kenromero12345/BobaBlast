@@ -14,7 +14,7 @@ function biscuit(game, spawnX, spawnY, scale) {
     , 803-15, 221, -91, 94, 7, .25, 7, false, scale, false);
     this.boxes = true;
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
         // this.moveDirection = 3;
         // this.lookDirectionRight = false;
 }
@@ -115,17 +115,7 @@ var biscuitRight = function(bisc) {
 biscuit.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
-        var min = 48;
-        var max = 52;
-        if (this.isBurned) {
-            min = 46;
-            max = 54;
-        }
-        if (((this.centerX +  100) % 100 > min && (this.centerX + 100) % 100 < max
-            && this.centerY % 100 > min && this.centerY % 100 < max)) {
-            this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            enemyUpdateLookHelper(this);
-        }
+        enemyChooseDir(this);
 
         enemyUpdateHelper(this);
 

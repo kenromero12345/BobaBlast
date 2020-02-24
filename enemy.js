@@ -266,7 +266,7 @@ var enemyFreezeUpdate = function(enemy) {
     }
 }
 
-var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, game, speed, frameDuration) {
+var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, game, speed, frameDuration, gap) {
     enemy.spawnX = spawnX;
     enemy.spawnY = spawnY;
     enemy.scale = scale;
@@ -297,4 +297,26 @@ var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, gam
     enemy.poisonResistance = .25;
     enemy.paralysisResistance = .25;
     enemy.freezeResistance = .25;
+
+    enemy.centerGap = gap;
 }
+
+var enemyChooseDir = function(enemy) {
+    var min = 50 - enemy.centerGap;
+    var max = 50 + enemy.centerGap;
+    // if (enemy.isBurned) {
+    //     min = 50 - enemy.centerGap * 2;
+    //     max = 50 + enemy.centerGap * 2;
+    // }
+    if (((enemy.centerX +  100) % 100 > min && (enemy.centerX + 100) % 100 < max
+        && enemy.centerY % 100 > min && enemy.centerY % 100 < max)) {
+        enemy.moveDirection = getShortestPath(enemy.centerX, enemy.centerY);
+        enemyUpdateLookHelper(enemy);
+        // if (enemy.name == "cola" && str != enemy.centerGap + " " + min + " " + max) {
+        //     console.log(enemy.centerGap + " " + min + " " + max + " " + enemy.moveDirection);
+        //     str = enemy.centerGap + " " + min + " " + max;
+        // }
+    }
+}
+
+// var str = ""; 
