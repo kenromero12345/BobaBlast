@@ -136,10 +136,20 @@ var walkRunTeaDraw = function (tea) {
 }
 
 var walkRunTeaUpdate = function (tea) {
-    if (((tea.centerX +  100) % 100 > 43 && (tea.centerX + 100) % 100 < 57
-        && tea.centerY % 100 > 43 && tea.centerY % 100 < 57) && !tea.paceWalk
-        || ((tea.centerX +  100) % 100 > 49 && (tea.centerX + 100) % 100 < 51
-        && tea.centerY % 100 > 48 && tea.centerY % 100 < 52) && tea.paceWalk) {
+    var runMin = 43;
+    var runMax = 57;
+    var walkMin = 48;
+    var walkMax = 52;
+    if (tea.isBurned) {
+        runMin = 36;
+        runMax = 64;
+        walkMin = 46;
+        walkMax = 54;
+    }
+    if (((tea.centerX +  100) % 100 > runMin && (tea.centerX + 100) % 100 < runMax
+        && tea.centerY % 100 > runMin && tea.centerY % 100 < runMax) && !tea.paceWalk
+        || ((tea.centerX +  100) % 100 > walkMin && (tea.centerX + 100) % 100 < walkMax
+        && tea.centerY % 100 > walkMin && tea.centerY % 100 < walkMax) && tea.paceWalk) {
             // console.log(tea.centerX + " " + tea.centerY)
         tea.moveDirection = getShortestPath(tea.centerX, tea.centerY);
         if (tea.moveDirection == 1) {
