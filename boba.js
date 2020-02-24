@@ -82,7 +82,7 @@ function boba(game, startX, startY, destinationX, destinationY, name, target) {
     this.game = game;
     this.ctx = game.ctx;
     this.noCollision = true;
-    this.boxes = true;
+    this.boxes = false;
     this.boundingbox = new BoundingBox(this.x + 6, this.y + 13, this.width -21, this.height - 23);
 }
 
