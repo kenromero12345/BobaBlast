@@ -49,6 +49,8 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.freezeResistance = .25;
     // tea.moveDirection = 3;
     // tea.lookDirectionRight = false;
+    tea.walkCenterGap = 2;
+    tea.runCenterGap = 7;
 }
 
 teaSetBoundingBox = function(tea) {
@@ -136,6 +138,7 @@ var walkRunTeaDraw = function (tea) {
 }
 
 var walkRunTeaUpdate = function (tea) {
+    //use center gap
     var runMin = 43;
     var runMax = 57;
     var walkMin = 48;
