@@ -36,9 +36,14 @@ iceGolem.prototype.draw = function () {
 iceGolem.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
-        var xy = getXY(this.centerX, this.centerY);
-        if (((this.centerX +  100) % 100 > 49 && (this.centerX + 100) % 100 < 51
-            && this.centerY % 100 > 49 && this.centerY % 100 < 51)) {
+        var min = 49;
+        var max = 51;
+        if (this.isBurned) {
+            min = 48;
+            max = 52;
+        }
+        if (((this.centerX +  100) % 100 > min && (this.centerX + 100) % 100 < max
+            && this.centerY % 100 > min && this.centerY % 100 < max)) {
             this.moveDirection = getShortestPath(this.centerX, this.centerY);
             enemyUpdateLookHelper(this);
         }

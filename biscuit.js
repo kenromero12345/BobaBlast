@@ -115,9 +115,14 @@ var biscuitRight = function(bisc) {
 biscuit.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
-        var xy = getXY(this.centerX, this.centerY);
-        if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
-            && this.centerY % 100 > 48 && this.centerY % 100 < 52)) {
+        var min = 48;
+        var max = 52;
+        if (this.isBurned) {
+            min = 46;
+            max = 54;
+        }
+        if (((this.centerX +  100) % 100 > min && (this.centerX + 100) % 100 < max
+            && this.centerY % 100 > min && this.centerY % 100 < max)) {
             this.moveDirection = getShortestPath(this.centerX, this.centerY);
             enemyUpdateLookHelper(this);
         }
