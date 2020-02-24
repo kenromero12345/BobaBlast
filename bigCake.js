@@ -15,7 +15,7 @@ function bigCake(game, spawnX, spawnY, scale) {
     this.animationWalkRight.offsetX = -150;
     this.animationDisappearRight.offsetX = -150;
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
     // this.moveDirection = 3;
     // this.lookDirectionRight = false;
 }
@@ -78,12 +78,7 @@ var bigCakeRight = function(enemy) {
 
 bigCake.prototype.update = function () {
     if(this.game.running) {
-        var xy = getXY(this.centerX, this.centerY);
-        if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
-            && this.centerY % 100 > 48 && this.centerY % 100 < 52)) {
-            this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            enemyUpdateLookHelper(this);
-        }
+        enemyChooseDir(this);
 
         enemyUpdateHelper(this);
         // bigCakeUpdate(this);

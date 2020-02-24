@@ -13,7 +13,7 @@ function pumpkinEvil(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinEvilFlip.png")
     , 1320, 286, -110, 172, 10, .2, 10, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
     this.animationDisappearLeft.offsetY -= 50;
     this.animationDisappearRight.offsetY -= 50;
         //                                   this.moveDirection = 3;
@@ -78,12 +78,8 @@ var pumpkinEvilRight = function(enemy) {
 pumpkinEvil.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
-        var xy = getXY(this.centerX, this.centerY);
-        if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
-            && this.centerY % 100 > 48 && this.centerY % 100 < 52)) {
-            this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            enemyUpdateLookHelper(this);
-        }
+        enemyChooseDir(this);
+        
         //enemyUpdateHelper(this);
         pumpkinEvilUpdate(this);
         

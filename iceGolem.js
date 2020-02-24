@@ -13,7 +13,7 @@ function iceGolem(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/icegFlip.png")
     , 0, 745, 238, 180, 7, 0.25, 7, false, scale, true);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 1);
         //                               this.moveDirection = 3;
         // this.lookDirectionRight = false;
 }
@@ -36,12 +36,7 @@ iceGolem.prototype.draw = function () {
 iceGolem.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
-        var xy = getXY(this.centerX, this.centerY);
-        if (((this.centerX +  100) % 100 > 49 && (this.centerX + 100) % 100 < 51
-            && this.centerY % 100 > 49 && this.centerY % 100 < 51)) {
-            this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            enemyUpdateLookHelper(this);
-        }
+        enemyChooseDir(this);
 
         enemyUpdateHelper(this);
 

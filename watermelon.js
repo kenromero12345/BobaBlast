@@ -13,7 +13,7 @@ function watermelon(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/watermelonFlip.png")
     , 1394, 245, -62, 74, 14, .25, 14, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed);
+        , this.animationWalkLeft.frameHeight, game, this.speed,  this.animationWalkLeft.frameDuration, 2);
         //                                           this.moveDirection = 3;
         // this.lookDirectionRight = false;
 }
@@ -173,12 +173,7 @@ watermelon.prototype.draw = function () {
 watermelon.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
-        var xy = getXY(this.centerX, this.centerY);
-        if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
-            && this.centerY % 100 > 48 && this.centerY % 100 < 52)) {
-            this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            enemyUpdateLookHelper(this);
-        }
+        enemyChooseDir(this);
 
         enemyUpdateHelper(this);
 
