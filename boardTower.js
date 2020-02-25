@@ -42,8 +42,6 @@ function boardTower(game, gridX, gridY, type) {
     this.directions = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
     this.shootOutXOffset = [15, 45, 65, 45, 17, -15, -30, -25 ];
     this.shootOutYOffset = [50,40, 15, -5, -15, -5, 10, 40];
-    this.shootOutXOffsetDir = [0, 50, 50, 50, 0, -50, -50, -50 ];
-    this.shootOutYOffsetDir = [50, 50, 0, -50, -50, -50, 0, 50];
 }
 
 boardTower.prototype.draw = function () {
@@ -92,7 +90,7 @@ boardTower.prototype.draw = function () {
 
     if(this.shootBoba) {
         if(this.shootTimer < Date.now()) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target));
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY, this.name, this.target));
             this.shootBoba = false;
             this.shootTimer = Date.now() + this.shootBobaEveryMS;
         }
@@ -100,33 +98,6 @@ boardTower.prototype.draw = function () {
 }
 
 boardTower.prototype.update = function () {
-    // This shooting method always shoots the enemy that is closest to the end.
-    var withinRange = [];
-    for (var i = 0; i < this.game.entities.length; i++) {
-        var ent = this.game.entities[i];
-        if (ent !== this && ent.isEnemy) {
-            var temp = this.enemyInRange(ent);
-            if(temp && ent.hp >= 1) {
-                var dist = distanceToEndPoint(ent.centerX, ent.centerY);
-                withinRange.push({enemy: ent, distToEnd: dist});
-            }
-        }
-    }
-
-    if(withinRange.length >= 1) {
-        var selectedEnemy = withinRange[0];
-        for(var i = 1; i < withinRange.length; i++) {
-            if(selectedEnemy.distToEnd >= withinRange[i].distToEnd) {
-                selectedEnemy = withinRange[i]
-            }
-        }
-        this.shootDestinationX = selectedEnemy.enemy.centerX;
-        this.shootDestinationY = selectedEnemy.enemy.centerY;
-        this.target = selectedEnemy.enemy;
-        this.calculateDirection(this.target);
-        this.shootBoba = true;
-    }
-    
     if(this.spin && this.pointDirection === this.intendedDirection) {
         this.pointDirectionIndex = this.intendedDirectionIndex;
         this.spin = false;
@@ -229,6 +200,34 @@ boardTower.prototype.update = function () {
             }
         }
     } */
+    
+
+    // This shooting method always shoots the enemy that is closest to the end.
+    var withinRange = [];
+    for (var i = 0; i < this.game.entities.length; i++) {
+        var ent = this.game.entities[i];
+        if (ent !== this && ent.isEnemy) {
+            var temp = this.enemyInRange(ent);
+            if(temp && ent.hp >= 1) {
+                var dist = distanceToEndPoint(ent.centerX, ent.centerY);
+                withinRange.push({enemy: ent, distToEnd: dist});
+            }
+        }
+    }
+
+    if(withinRange.length >= 1) {
+        var selectedEnemy = withinRange[0];
+        for(var i = 1; i < withinRange.length; i++) {
+            if(selectedEnemy.distToEnd >= withinRange[i].distToEnd) {
+                selectedEnemy = withinRange[i]
+            }
+        }
+        this.shootDestinationX = selectedEnemy.enemy.centerX - 10;
+        this.shootDestinationY = selectedEnemy.enemy.centerY - 13;
+        this.target = selectedEnemy.enemy;
+        this.calculateDirection(selectedEnemy.enemy);
+        this.shootBoba = true;
+    }
 }
 
 // Determines if an Enemy is within Range of Tower
@@ -258,14 +257,14 @@ boardTower.prototype.enemyInRange = function (rect) {
 }
 
 boardTower.prototype.calculateDirection = function (target) {
-   // if(this.shootTimer >= Date.now())  return; // POSSIBLE ERROR
+    if(this.shootTimer >= Date.now())  return;
     var tempDirection = null;
     var tempShortestDistance = Infinity;
     var bestIndex = null;
     for(var i = 0; i < this.directions.length; i++) {
-        var tempX = this.centerX + this.shootOutXOffsetDir[i]; // Change this to represent corners of the boxes instead of shoototu offest
-        var tempY = this.centerY + this.shootOutYOffsetDir[i]; // Change this to represetn corners ofthe boxes intead of shoot out offset
-        var tempDistance = getDistance(target.centerX - 10, target.centerY - 13, tempX, tempY);
+        var tempX = this.x + this.shootOutXOffset[i];
+        var tempY = this.y + this.shootOutYOffset[i];
+        var tempDistance = getDistance(target.centerX, target.centerY, tempX, tempY);
         if(tempDistance < tempShortestDistance) {
             tempDirection = this.directions[i];
             tempShortestDistance = tempDistance;

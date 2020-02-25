@@ -368,16 +368,3 @@ function helperToGetDirection(node) {
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
-
-function distance(a, b) {
-    var dx = a.x - b.x;
-    var dy = a.y - b.y;
-    return Math.sqrt(dx * dx + dy * dy);
-}
-
-function direction(a, b) {
-    var dx = a.x - b.x;
-    var dy = a.y - b.y;
-    var dist = Math.sqrt(dx * dx + dy * dy);
-    if(dist > 0) return { x: dx / dist, y: dy / dist }; else return {x:0,y:0};
-}
