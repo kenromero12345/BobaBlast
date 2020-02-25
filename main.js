@@ -166,6 +166,8 @@ Background.prototype.update = function() {
 
 // var GAMEBOARD = [];
 AM.downloadAll(function () {
+    var div = document.querySelector('div');
+    divOffset = offset(div);
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
     var gameEngine = new GameEngine();
@@ -207,6 +209,8 @@ AM.downloadAll(function () {
 
     gameEngine.running = false;
 });
+
+var divOffset;
 
 function generateStoreTowers(game) {
     //basic tower

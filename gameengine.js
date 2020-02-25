@@ -70,8 +70,8 @@ GameEngine.prototype.startInput = function () {
     var that = this;
 
     var getXandY = function (e) {
-        var a = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
-        var b = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+        var a = e.clientX - divOffset.left - that.ctx.canvas.getBoundingClientRect().left;
+        var b = e.clientY - divOffset.top - that.ctx.canvas.getBoundingClientRect().top;
 
         var i = Math.floor(a/100) + 1;
         var j = Math.floor(b/100);
@@ -93,7 +93,7 @@ GameEngine.prototype.startInput = function () {
 
     this.ctx.canvas.addEventListener("click", function (e) {
         //that.click = getXandY(e);
-        that.click = { x: e.clientX, y: e.clientY };
+        that.click = { x: e.clientX - divOffset.left, y: e.clientY - divOffset.top};
         // console.log(e);
         // console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
         // console.log(getXY(e.clientX, e.clientY));
@@ -103,21 +103,21 @@ GameEngine.prototype.startInput = function () {
 
     this.ctx.canvas.addEventListener("mouseup", function (e) {
         // that.click = { x: e.clientX, y: e.clientY };
-        that.mouseUp = { x: e.clientX, y: e.clientY };
+        that.mouseUp = { x: e.clientX - divOffset.left, y: e.clientY - divOffset.top };
     }, false);
 
     this.ctx.canvas.addEventListener("contextmenu", function (e) {
         // that.click = { x: e.clientX, y: e.clientY };
-        that.rClick = { x: e.clientX, y: e.clientY };
+        that.rClick = { x: e.clientX - divOffset.left, y: e.clientY - divOffset.top };
     }, false);
 
     this.ctx.canvas.addEventListener("mousedown", function (e) {
         // that.click = { x: e.clientX, y: e.clientY };
-        that.mouseDown = { x: e.clientX, y: e.clientY };
+        that.mouseDown = { x: e.clientX - divOffset.left, y: e.clientY - divOffset.top };
     }, false);
 
     this.ctx.canvas.addEventListener("mousemove", function (e) {
-        that.mouse = { x: e.clientX, y: e.clientY };
+        that.mouse = { x: e.clientX - divOffset.left, y: e.clientY - divOffset.top };
     }, false);
 
     console.log('Input started');
@@ -463,4 +463,11 @@ function direction(a, b) {
     var dy = a.y - b.y;
     var dist = Math.sqrt(dx * dx + dy * dy);
     if(dist > 0) return { x: dx / dist, y: dy / dist }; else return {x:0,y:0};
+}
+
+function offset(el) {
+    var rect = el.getBoundingClientRect(),
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { top: rect.top + scrollTop, left: rect.left + scrollLeft}
 }
