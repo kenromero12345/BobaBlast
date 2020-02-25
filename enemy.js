@@ -142,20 +142,28 @@ var collideUpdate = function(enemy) {
         var ent = enemy.game.entities[i];
         if (ent !== enemy && enemy.isEnemy && enemy.hp > 0) {
             if (ent.isFreeze && enemy.boundingbox.collide(ent.boundingbox)) {
-                if (Math.random() < enemy.freezeResistance ? false : true) {
+                if (Math.random() > enemy.freezeResistance - ent.freezeProbAdder) {
                     enemy.isFrozen = true;
+                    if (enemy.freezeLvl < ent.freezeLvl) {
+                        enemy.freezeLvl = ent.freezeLvl;
+                    }
                     if (enemy.type && enemy.type == "tea") {
                         enemy.walkSpeed = enemy.tempWalkSpeed / 4;
                         enemy.runSpeed = enemy.tempRunSpeed / 4;
                     } else {
                         enemy.speed = enemy.tempSpeed / 4;
                     }
-                    enemy.freezeDate = Date.now() + 10000;
+                    if (enemy.freezeDate < Date.now() + 10000 + ent.freezeTimeAdder) {
+                        enemy.freezeDate = Date.now() + 10000 + ent.freezeTimeAdder;
+                    }
                 }
             }
             if (ent.isParalyze && enemy.boundingbox.collide(ent.boundingbox)) {
-               if (Math.random() < enemy.paralysisResistance ? false : true) {
+               if (Math.random() > enemy.paralysisResistance - ent.paralysisProbAdder) {
                     enemy.isParalyzed = true;
+                    if (enemy.paralysisLvl < ent.paralysisLvl) {
+                        enemy.paralysisLvl = ent.paralysisLvl;
+                    }
                     enemy.animationWalkLeft.stop = true;
                     enemy.animationWalkRight.stop = true;
                     if (enemy.type && enemy.type == "tea") {
@@ -164,25 +172,37 @@ var collideUpdate = function(enemy) {
                     } else {
                         enemy.speed = 0;
                     }
-                    enemy.paralyzeDate = Date.now() + 1500;
+                    if (enemy.paralyzeDate < Date.now() + 1500 + ent.paralysisTimeAdder) {
+                        enemy.paralyzeDate = Date.now() + 1500 + ent.paralysisTimeAdder;
+                    }
                }
             }
             if (ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
-                if (Math.random() < enemy.poisonResistance ? false : true) {
+                if (Math.random() > enemy.poisonResistance - ent.poisonProbAdder) {
                     enemy.isPoisoned = true;
-                    enemy.poisonDate = Date.now() + 5000;
+                    if (enemy.poisonLvl < ent.poisonLvl) {
+                        enemy.poisonLvl = ent.poisonLvl;
+                    }
+                    if (enemy.poisonDate < Date.now() + 5000 + ent.poisonTimeAdder) {
+                        enemy.poisonDate = Date.now() + 5000 + ent.poisonTimeAdder;
+                    }
                 }
             } 
             if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
-                if (Math.random() < enemy.burnResistance ? false : true) {
+                if (Math.random() > enemy.burnResistance - ent.burnProbAdder) {
                     enemy.isBurned = true;
+                    if (enemy.burnLvl < ent.burnLvl) {
+                        enemy.burnLvl = ent.burnLvl;
+                    }
                     if (enemy.type && enemy.type == "tea") {
                         enemy.walkSpeed = 2 * enemy.tempWalkSpeed;
                         enemy.runSpeed = 2 * enemy.tempRunSpeed;
                     } else {
                         enemy.speed = 2 * enemy.tempSpeed;
                     }
-                    enemy.burnDate = Date.now() + 2000;
+                    if (enemy.burnDate < Date.now() + 2000 + ent.burnTimeAdder) {
+                        enemy.burnDate = Date.now() + 2000 + ent.burnTimeAdder;
+                    }
                 }
             } 
             if (ent.isBoba && ent.isExplosive && enemy.boundingbox.collide(ent.boundingbox)) {
@@ -213,8 +233,14 @@ var enemyStatusEffectUpdate = function(enemy) {
 var enemyPoisonUpdate = function(enemy) {
     if (enemy.isPoisoned) {
         enemy.hp -= 0.05;
+        if (enemy.poisonLvl == 2) {
+            enemy.hp -= 0.01;
+        } else if (enemy.poisonLvl == 3) {
+            enemy.hp -= 0.02;
+        }
         if (Date.now() >= enemy.poisonDate) {
             enemy.isPoisoned = false;
+            enemy.poisonLvl = 0;
         }
     }
 }
@@ -222,8 +248,14 @@ var enemyPoisonUpdate = function(enemy) {
 var enemyBurnUpdate = function(enemy) {
     if (enemy.isBurned) {
         enemy.hp -= 0.075;
+        if (enemy.burnLvl == 2) {
+            enemy.hp -= 0.005;
+        } else if (enemy.burnLvl == 3) {
+            enemy.hp -= 0.010;
+        }
         if (Date.now() >= enemy.burnDate) {
             enemy.isBurned = false;
+            enemy.burnLvl = 0;
             if (enemy.type && enemy.type == "tea") {
                 enemy.walkSpeed = enemy.tempWalkSpeed;
                 enemy.runSpeed = enemy.tempRunSpeed;
@@ -237,10 +269,16 @@ var enemyBurnUpdate = function(enemy) {
 var enemyParalyzeUpdate = function(enemy) {
     if (enemy.isParalyzed) {
         enemy.hp -= 0.025;
+        if (enemy.paralysisLvl == 2) {
+            enemy.hp -= 0.005;
+        } else if (enemy.paralysisLvl == 3) {
+            enemy.hp -= 0.010;
+        }
         if (Date.now() >= enemy.paralyzeDate) {
             enemy.animationWalkLeft.stop = false;
             enemy.animationWalkRight.stop = false;
             enemy.isParalyzed = false;
+            enemy.paralysisLvl = 0;
             if (enemy.type && enemy.type == "tea") {
                 enemy.walkSpeed = enemy.tempWalkSpeed;
                 enemy.runSpeed = enemy.tempRunSpeed;
@@ -254,8 +292,14 @@ var enemyParalyzeUpdate = function(enemy) {
 var enemyFreezeUpdate = function(enemy) {
     if (enemy.isFrozen) {
         enemy.hp -= 0.025;
+        if (enemy.freezeLvl == 2) {
+            enemy.hp -= 0.005;
+        } else if (enemy.freezeLvl == 3) {
+            enemy.hp -= 0.010;
+        }
         if (Date.now() >= enemy.freezeDate) {
             enemy.isFrozen = false;
+            enemy.freezeLvl = 0;
             if (enemy.type && enemy.type == "tea") {
                 enemy.walkSpeed = enemy.tempWalkSpeed;
                 enemy.runSpeed = enemy.tempRunSpeed;
@@ -297,6 +341,13 @@ var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, gam
     enemy.poisonResistance = .25;
     enemy.paralysisResistance = .25;
     enemy.freezeResistance = .25;
+    enemy.poisonLvl = 0;
+    enemy.paralysisLvl = 0;
+    enemy.burnLvl = 0;
+    enemy.freezeLvl = 0;
+    enemy.isBurned = false;
+    enemy.isFrozen = false;
+    enemy.isParalyzed = false;
 
     enemy.centerGap = gap;
 }

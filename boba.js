@@ -1,25 +1,70 @@
 function boba(game, startX, startY, name, target) {
     this.target = target;
     this.name = "BOBA";
+    this.freezeLvl = 0;
+    this.poisonLvl = 0;
+    this.paralysisLvl = 0;
+    this.burnLvl = 0;
+    this.freezeProbAdder = 0;
+    this.poisonProbAdder = 0;
+    this.burnProbAdder = 0;
+    this.paralysisProbAdder = 0;
+    this.freezeTimeAdder = 0;
+    this.poisonTimeAdder = 0;
+    this.paralysisTimeAdder = 0;
+    this.burnTimeAdder = 0;
     this.isFreeze = false;
     if(name ==='blue') {
         this.isFreeze = true;
+        this.freezeLvl = 1;
     }
     this.isPoison = false;
     if(name ==='green') {
         this.isPoison = true;
+        this.poisonLvl = 1;
     }
     this.isParalyze = false;
     if(name ==='purple') {
         this.isParalyze = true;
+        this.paralysisLvl = 1;
     }
     this.isExplosive = false;
     if(name ==='red') {
         this.isExplosive = true;
+        this.burnLvl = 1;
     }
+    this.isHoming = false;
     if(name ==='gold') {
-        this.homing = true;
+        this.isHoming = true;
     }
+    if (this.freezeLvl == 2) {
+        this.freezeProbAdder = 5;
+        this.freezeTimeAdder = 3000;
+    } else if (this.freezeLvl == 3) {
+        this.freezeProbAdder = 8;
+        this.freezeTimeAdder = 5000;
+    }
+    if (this.poisonLvl == 2) {
+        this.poisonProbAdder = 5;
+        this.poisonTimeAdder = 3000;
+    } else if (this.poisonLvl == 3) {
+        this.poisonProbAdder = 8;
+        this.poisonTimeAdder = 5000;
+    } 
+    if (this.burnLvl == 2) {
+        this.burnProbAdder = 5;
+        this.burnTimeAdder - 500;
+    } else if (this.burnLvl == 3) {
+        this.burnProbAdder = 8;
+        this.burnTimeAdder = 1000;
+    } 
+    if (this.paralysisLvl == 2) {
+        this.paralysisProbAdder = 5;
+        this.paralysisTimeAdder = 500;
+    } else if (this.paralysisLvl == 3) {
+        this.paralysisProbAdder = 8;
+        this.paralysisTimeAdder = 1000;
+    } 
     /*
         this.isFire = false;
     if(name ==='poop') {
@@ -29,7 +74,7 @@ function boba(game, startX, startY, name, target) {
     this.x = startX;
     this.y = startY;
     this.isBoba = true;
-    // if (this.homing) {
+    // if (this.isHoming) {
     //     this.destinationX = target.centerX;
     //     this.destinationY = target.centerY;
     //     this.backward = false;
@@ -118,7 +163,7 @@ boba.prototype.draw = function () {
 
 boba.prototype.update = function () {
     if(this.game.running) {
-        if (this.homing) {
+        if (this.isHoming) {
             if (this.target.hp < 1) {
                 this.removeFromWorld = true;
             }

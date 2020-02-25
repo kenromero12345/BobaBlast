@@ -42,6 +42,15 @@ function boardTower(game, gridX, gridY, type) {
     this.directions = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
     this.shootOutXOffset = [15, 45, 65, 45, 17, -15, -30, -25 ];
     this.shootOutYOffset = [50,40, 15, -5, -15, -5, 10, 40];
+    //0 = closest to end by dist
+    //1 = farthest to end by dist
+    //2 =  closest to end by path
+    //3 = farthest to end by path
+    //4 = closest to tower
+    //5 = farthest to tower
+    //6 = biggest hp
+    //7 = smallest hp
+    this.shootPriorityType = 0; 
 }
 
 boardTower.prototype.draw = function () {
@@ -209,19 +218,75 @@ boardTower.prototype.update = function () {
         if (ent !== this && ent.isEnemy) {
             var temp = this.enemyInRange(ent);
             if(temp && ent.hp >= 1) {
-                var dist = distanceToEndPoint(ent.centerX, ent.centerY);
-                withinRange.push({enemy: ent, distToEnd: dist});
+                var distToEnd = distanceToEndPoint(ent.centerX, ent.centerY);
+                var distToTower = getDistance(ent.centerX, ent.centerY, this.centerX, this.centerY);
+                var distToEndByPath = getDistanceToEndByPath(ent.centerX, ent.centerY);
+                withinRange.push({enemy: ent, distToEnd: distToEnd, distToTower: distToTower
+                    , distToEndByPath: distToEndByPath});
             }
         }
     }
 
     if(withinRange.length >= 1) {
         var selectedEnemy = withinRange[0];
-        for(var i = 1; i < withinRange.length; i++) {
-            if(selectedEnemy.distToEnd >= withinRange[i].distToEnd) {
-                selectedEnemy = withinRange[i]
+    //0 = closest to end by dist
+    //1 = farthest to end by dist
+    //2 =  closest to end by path
+    //3 = farthest to end by path
+    //4 = closest to tower
+    //5 = farthest to tower
+    //6 = biggest hp
+    //7 = smallest hp
+        if (this.shootPriorityType == 0) {
+            for(var i = 1; i < withinRange.length; i++) {
+                if(selectedEnemy.distToEnd >= withinRange[i].distToEnd) {
+                    selectedEnemy = withinRange[i]
+                }
+            }
+        } else if(shootPriorityType == 1) {
+            for(var i = 1; i < withinRange.length; i++) {
+                if(selectedEnemy.distToEnd <= withinRange[i].distToEnd) {
+                    selectedEnemy = withinRange[i]
+                }
+            }
+        } else if (this.shootPriorityType == 2) {
+            for(var i = 1; i < withinRange.length; i++) {
+                if(selectedEnemy.distToEndByPath >= withinRange[i].distToEndByPath) {
+                    selectedEnemy = withinRange[i]
+                }
+            }
+        } else if(shootPriorityType == 3) {
+            for(var i = 1; i < withinRange.length; i++) {
+                if(selectedEnemy.distToEndByPath <= withinRange[i].distToEndByPath) {
+                    selectedEnemy = withinRange[i]
+                }
+            }
+        } else if (this.shootPriorityType == 4) {
+            for(var i = 1; i < withinRange.length; i++) {
+                if(selectedEnemy.distToTower >= withinRange[i].distToTower) {
+                    selectedEnemy = withinRange[i]
+                }
+            }
+        } else if(shootPriorityType == 5) {
+            for(var i = 1; i < withinRange.length; i++) {
+                if(selectedEnemy.distToTower <= withinRange[i].distToTower) {
+                    selectedEnemy = withinRange[i]
+                }
+            }
+        } else if (shootPriorityType == 6) {
+            for(var i = 1; i < withinRange.length; i++) {
+                if(selectedEnemy.enemy.hp <= withinRange[i].enemy.hp) {
+                    selectedEnemy = withinRange[i]
+                }
+            }
+        } else if (shootPriorityType == 7) {
+            for(var i = 1; i < withinRange.length; i++) {
+                if(selectedEnemy.enemy.hp >= withinRange[i].enemy.hp) {
+                    selectedEnemy = withinRange[i]
+                }
             }
         }
+
         this.shootDestinationX = selectedEnemy.enemy.centerX;
         this.shootDestinationY = selectedEnemy.enemy.centerY;
         this.target = selectedEnemy.enemy;
