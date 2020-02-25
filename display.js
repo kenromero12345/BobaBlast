@@ -181,7 +181,7 @@ display.prototype.draw = function () {
         }
         // Start Round Button Click
         if(click.x < this.buttonStartX + this.buttonWidth + 10 && click.x >= this.buttonStartX 
-            && click.y < this.buttonStartY + this.buttonHeight && click.y >= this.buttonStartY && gameOverLose == false) {
+            && click.y < this.buttonStartY + this.buttonHeight && click.y >= this.buttonStartY) {
                 if(!this.game.running && !paused) {
                     this.game.running = true;
                 } else if(this.game.running && !paused) {
@@ -327,9 +327,9 @@ display.prototype.generateDescriptionBox = function() {
     ctx.fillStyle = "black";
     ctx.font = '14px Bahnschrift SemiBold';
     ctx.fillText("Name: " + currentTower.name, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
-    ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 160, this.descriptionBoxStartY + 20);
+    ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 140, this.descriptionBoxStartY + 20);
 
-    var txt = 'Description: ' + currentTower.description;
+    var txt = currentTower.description;
     var lineX = this.descriptionBoxStartX + 15;
     var lineY = this.descriptionBoxStartY + 40;
     var lineheight = 15;
