@@ -90,7 +90,7 @@ boardTower.prototype.draw = function () {
 
     if(this.shootBoba) {
         if(this.shootTimer < Date.now()) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.shootDestinationX, this.shootDestinationY, this.name, this.target));
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target));
             this.shootBoba = false;
             this.shootTimer = Date.now() + this.shootBobaEveryMS;
         }
@@ -222,8 +222,8 @@ boardTower.prototype.update = function () {
                 selectedEnemy = withinRange[i]
             }
         }
-        this.shootDestinationX = selectedEnemy.enemy.centerX - 10;
-        this.shootDestinationY = selectedEnemy.enemy.centerY - 13;
+        this.shootDestinationX = selectedEnemy.enemy.centerX;
+        this.shootDestinationY = selectedEnemy.enemy.centerY;
         this.target = selectedEnemy.enemy;
         this.calculateDirection(selectedEnemy.enemy);
         this.shootBoba = true;
