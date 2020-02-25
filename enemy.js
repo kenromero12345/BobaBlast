@@ -153,8 +153,8 @@ var collideUpdate = function(enemy) {
                     } else {
                         enemy.speed = enemy.tempSpeed / 4;
                     }
-                    if (enemy.freezeDate < Date.now() + 10000 + ent.freezeTimeAdder) {
-                        enemy.freezeDate = Date.now() + 10000 + ent.freezeTimeAdder;
+                    if (enemy.freezeDate < enemy.game.timer.time + 10000/1000 + ent.freezeTimeAdder) {
+                        enemy.freezeDate = enemy.game.timer.time + 10000/1000 + ent.freezeTimeAdder;
                     }
                 }
             }
@@ -172,8 +172,8 @@ var collideUpdate = function(enemy) {
                     } else {
                         enemy.speed = 0;
                     }
-                    if (enemy.paralyzeDate < Date.now() + 1500 + ent.paralysisTimeAdder) {
-                        enemy.paralyzeDate = Date.now() + 1500 + ent.paralysisTimeAdder;
+                    if (enemy.paralyzeDate < enemy.game.timer.time + 1500/1000 + ent.paralysisTimeAdder) {
+                        enemy.paralyzeDate = enemy.game.timer.time + 1500/1000 + ent.paralysisTimeAdder;
                     }
                }
             }
@@ -183,8 +183,8 @@ var collideUpdate = function(enemy) {
                     if (enemy.poisonLvl < ent.poisonLvl) {
                         enemy.poisonLvl = ent.poisonLvl;
                     }
-                    if (enemy.poisonDate < Date.now() + 5000 + ent.poisonTimeAdder) {
-                        enemy.poisonDate = Date.now() + 5000 + ent.poisonTimeAdder;
+                    if (enemy.poisonDate < enemy.game.timer.time + 5000/1000 + ent.poisonTimeAdder) {
+                        enemy.poisonDate = enemy.game.timer.time + 5000/1000 + ent.poisonTimeAdder;
                     }
                 }
             } 
@@ -200,8 +200,8 @@ var collideUpdate = function(enemy) {
                     } else {
                         enemy.speed = 2 * enemy.tempSpeed;
                     }
-                    if (enemy.burnDate < Date.now() + 2000 + ent.burnTimeAdder) {
-                        enemy.burnDate = Date.now() + 2000 + ent.burnTimeAdder;
+                    if (enemy.burnDate < enemy.game.timer.time + 2000/1000 + ent.burnTimeAdder) {
+                        enemy.burnDate = enemy.game.timer.time + 2000/1000 + ent.burnTimeAdder;
                     }
                 }
             } 
@@ -232,13 +232,13 @@ var enemyStatusEffectUpdate = function(enemy) {
 
 var enemyPoisonUpdate = function(enemy) {
     if (enemy.isPoisoned) {
-        enemy.hp -= 0.05;
+        enemy.hp -= 0.05 * enemy.game.speed;
         if (enemy.poisonLvl == 2) {
-            enemy.hp -= 0.01;
+            enemy.hp -= 0.01 * enemy.game.speed;
         } else if (enemy.poisonLvl == 3) {
-            enemy.hp -= 0.02;
+            enemy.hp -= 0.02 * enemy.game.speed;
         }
-        if (Date.now() >= enemy.poisonDate) {
+        if (enemy.game.timer.time >= enemy.poisonDate) {
             enemy.isPoisoned = false;
             enemy.poisonLvl = 0;
         }
@@ -247,13 +247,13 @@ var enemyPoisonUpdate = function(enemy) {
 
 var enemyBurnUpdate = function(enemy) {
     if (enemy.isBurned) {
-        enemy.hp -= 0.075;
+        enemy.hp -= 0.075 * enemy.game.speed;
         if (enemy.burnLvl == 2) {
-            enemy.hp -= 0.005;
+            enemy.hp -= 0.005 * enemy.game.speed;
         } else if (enemy.burnLvl == 3) {
-            enemy.hp -= 0.010;
+            enemy.hp -= 0.010 * enemy.game.speed;
         }
-        if (Date.now() >= enemy.burnDate) {
+        if (enemy.game.timer.time >= enemy.burnDate) {
             enemy.isBurned = false;
             enemy.burnLvl = 0;
             if (enemy.type && enemy.type == "tea") {
@@ -268,13 +268,14 @@ var enemyBurnUpdate = function(enemy) {
 
 var enemyParalyzeUpdate = function(enemy) {
     if (enemy.isParalyzed) {
-        enemy.hp -= 0.025;
+        enemy.hp -= 0.025 * enemy.game.speed;
         if (enemy.paralysisLvl == 2) {
-            enemy.hp -= 0.005;
+            enemy.hp -= 0.005 * enemy.game.speed;
         } else if (enemy.paralysisLvl == 3) {
-            enemy.hp -= 0.010;
+            enemy.hp -= 0.010 * enemy.game.speed;
         }
-        if (Date.now() >= enemy.paralyzeDate) {
+        console.log(enemy.game.timer.time + " " + enemy.paralyzeDate)
+        if (enemy.game.timer.time >= enemy.paralyzeDate) {
             enemy.animationWalkLeft.stop = false;
             enemy.animationWalkRight.stop = false;
             enemy.isParalyzed = false;
@@ -291,13 +292,13 @@ var enemyParalyzeUpdate = function(enemy) {
 
 var enemyFreezeUpdate = function(enemy) {
     if (enemy.isFrozen) {
-        enemy.hp -= 0.025;
+        enemy.hp -= 0.025 * enemy.game.speed;
         if (enemy.freezeLvl == 2) {
-            enemy.hp -= 0.005;
+            enemy.hp -= 0.005 * enemy.game.speed;
         } else if (enemy.freezeLvl == 3) {
-            enemy.hp -= 0.010;
+            enemy.hp -= 0.010 * enemy.game.speed;
         }
-        if (Date.now() >= enemy.freezeDate) {
+        if (enemy.game.timer.time >= enemy.freezeDate) {
             enemy.isFrozen = false;
             enemy.freezeLvl = 0;
             if (enemy.type && enemy.type == "tea") {
@@ -333,10 +334,10 @@ var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, gam
     enemy.isBurned = false;
     enemy.isFrozen = false;
     enemy.isParalyzed = false;
-    enemy.poisonDate = Date.now();
-    enemy.burnDate = Date.now();
-    enemy.freezeDate = Date.now();
-    enemy.paralyzeDate = Date.now();
+    enemy.poisonDate = enemy.game.timer.time;
+    enemy.burnDate = enemy.game.timer.time;
+    enemy.freezeDate = enemy.game.timer.time;
+    enemy.paralyzeDate = enemy.game.timer.time;
     enemy.burnResistance = .25;
     enemy.poisonResistance = .25;
     enemy.paralysisResistance = .25;

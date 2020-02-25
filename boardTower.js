@@ -3,7 +3,7 @@ function boardTower(game, gridX, gridY, type) {
     this.isTower = true;
     this.spin = false;
     this.counterclockwise = true;
-    this.shootTimer = Date.now();
+    this.shootTimer = game.timer.time;
     this.pointDirectionIndex = 0;
     this.pointDirection = 'S';
     this.intendedDirection = 'S';
@@ -100,10 +100,10 @@ boardTower.prototype.draw = function () {
     }
 
     if(this.shootBoba) {
-        if(this.shootTimer < Date.now()) {
+        if(this.shootTimer < this.game.timer.time) {
             this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target));
             this.shootBoba = false;
-            this.shootTimer = Date.now() + this.shootBobaEveryMS;
+            this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
         }
     }
 }
@@ -351,7 +351,7 @@ boardTower.prototype.enemyInRange = function (rect) {
 }
 
 boardTower.prototype.calculateDirection = function (target) {
-   // if(this.shootTimer >= Date.now())  return; // POSSIBLE ERROR
+   // if(this.shootTimer >= this.game.timer.time)  return; // POSSIBLE ERROR
     var tempDirection = null;
     var tempShortestDistance = Infinity;
     var bestIndex = null;

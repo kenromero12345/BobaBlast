@@ -16,10 +16,11 @@ function Timer() {
     this.gameTime = 0;
     this.maxStep = 0.05;
     this.wallLastTimestamp = 0;
+    this.time = Date.now();
 }
 
 Timer.prototype.tick = function () {
-    var wallCurrent = Date.now();
+    var wallCurrent =  Date.now();
     var wallDelta = (wallCurrent - this.wallLastTimestamp) / 1000;
     this.wallLastTimestamp = wallCurrent;
 
@@ -33,13 +34,17 @@ function GameEngine() {
     this.showOutlines = false;
     this.ctx = null;
     this.click = null;
-    this.mouse = null;
+    this.rClick = null;
+    this.drag = null;
+    this.mouseDown = null;
+    this.mouseUp = null;
     this.wheel = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
     this.towers = null;
     this.display = null;
     this.activeTowers = [];
+    this.speed = 1;
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -92,8 +97,23 @@ GameEngine.prototype.startInput = function () {
         // console.log(e);
         // console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
         // console.log(getXY(e.clientX, e.clientY));
-        var xy = getXY(e.clientX, e.clientY);
+        // var xy = getXY(e.clientX, e.clientY);
       //  GAMEBOARD[xy.x][xy.y].occupied = !GAMEBOARD[xy.x][xy.y].occupied;
+    }, false);
+
+    this.ctx.canvas.addEventListener("mouseup", function (e) {
+        // that.click = { x: e.clientX, y: e.clientY };
+        that.mouseUp = { x: e.clientX, y: e.clientY };
+    }, false);
+
+    this.ctx.canvas.addEventListener("contextmenu", function (e) {
+        // that.click = { x: e.clientX, y: e.clientY };
+        that.rClick = { x: e.clientX, y: e.clientY };
+    }, false);
+
+    this.ctx.canvas.addEventListener("mousedown", function (e) {
+        // that.click = { x: e.clientX, y: e.clientY };
+        that.mouseDown = { x: e.clientX, y: e.clientY };
     }, false);
 
     this.ctx.canvas.addEventListener("mousemove", function (e) {
@@ -166,7 +186,8 @@ GameEngine.prototype.update = function () {
 }
 
 GameEngine.prototype.loop = function () {
-    this.clockTick = this.timer.tick();
+    this.clockTick = this.timer.tick() * this.speed;
+    this.timer.time += this.clockTick;
     this.update();
     this.draw();
     // this.space = null;

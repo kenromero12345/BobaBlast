@@ -238,8 +238,7 @@ board.prototype.update = function () {
       }
       // console.log(ACTIVETOWERS[0][0]);
     }
-  }
-  
+  }  
 }
 
 //make it bidirection ?
