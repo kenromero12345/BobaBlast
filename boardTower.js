@@ -42,6 +42,8 @@ function boardTower(game, gridX, gridY, type) {
     this.directions = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
     this.shootOutXOffset = [15, 45, 65, 45, 17, -15, -30, -25 ];
     this.shootOutYOffset = [50,40, 15, -5, -15, -5, 10, 40];
+    this.shootOutXOffsetDir = [0, 50, 50, 50, 0, -50, -50, -50 ];
+    this.shootOutYOffsetDir = [50, 50, 0, -50, -50, -50, 0, 50];
 }
 
 boardTower.prototype.draw = function () {
@@ -121,7 +123,7 @@ boardTower.prototype.update = function () {
         this.shootDestinationX = selectedEnemy.enemy.centerX;
         this.shootDestinationY = selectedEnemy.enemy.centerY;
         this.target = selectedEnemy.enemy;
-        this.calculateDirection(selectedEnemy.enemy);
+        this.calculateDirection(this.target);
         this.shootBoba = true;
     }
     
@@ -256,13 +258,13 @@ boardTower.prototype.enemyInRange = function (rect) {
 }
 
 boardTower.prototype.calculateDirection = function (target) {
-    if(this.shootTimer >= Date.now())  return;
+   // if(this.shootTimer >= Date.now())  return; // POSSIBLE ERROR
     var tempDirection = null;
     var tempShortestDistance = Infinity;
     var bestIndex = null;
     for(var i = 0; i < this.directions.length; i++) {
-        var tempX = this.x + this.shootOutXOffset[i];
-        var tempY = this.y + this.shootOutYOffset[i];
+        var tempX = this.centerX + this.shootOutXOffsetDir[i]; // Change this to represent corners of the boxes instead of shoototu offest
+        var tempY = this.centerY + this.shootOutYOffsetDir[i]; // Change this to represetn corners ofthe boxes intead of shoot out offset
         var tempDistance = getDistance(target.centerX - 10, target.centerY - 13, tempX, tempY);
         if(tempDistance < tempShortestDistance) {
             tempDirection = this.directions[i];
