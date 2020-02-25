@@ -27,7 +27,7 @@ function roundPlan(game) {
 
 roundPlan.prototype.roundEntity = function(time, game, entity, isRoundEnding) {
     this.index++;
-    sleep(time).then(() => {
+    sleep(time / this.game.speed).then(() => {
         game.addEntity(entity);
         if (isRoundEnding) {
             this.isEnding = true;
