@@ -18,8 +18,8 @@ function boardTower(game, gridX, gridY, type) {
     this.cost = this.towerType.cost;
     this.spritesheet = type.spritesheet;
     this.animationSouthEast = new Animation(this.spritesheet, 580, 90, 350, 350, 1, 0.1, 1, true, 0.2);
-    this.animationSouth = new Animation(this.spritesheet, 105, 90, 350, 350, 1, 0.1 , 1, true, 0.2); 
-    this.animationEast = new Animation(this.spritesheet, 1000, 60, 440, 420, 1, 0.1 , 1, true, 0.2); 
+    this.animationSouth = new Animation(this.spritesheet, 105, 90, 350, 350, 1, 0.1 , 1, true, 0.2);
+    this.animationEast = new Animation(this.spritesheet, 1000, 60, 440, 420, 1, 0.1 , 1, true, 0.2);
     this.animationNorthEast = new Animation(this.spritesheet, 1480, 80, 350, 350, 1, 0.1, 1, true, 0.2);
     this.animationNorth = new Animation(this.spritesheet, 60, 540, 350, 360, 1, 0.1, 1, true, 0.2);
     this.animationNorthWest = new Animation(this.spritesheet, 540, 540, 350, 360, 1, 0.1, 1, true, 0.2);
@@ -31,14 +31,14 @@ function boardTower(game, gridX, gridY, type) {
     this.centerY = this.y + 40;// used to be+25, now plus +40 to make it ottal +40
     this.shootOutX = this.x;
     this.shootOutY = this.y;
-    this.shootBoba = false; 
+    this.shootBoba = false;
     this.upgradeMode = false;
     this.shootBobaSpeed = null; // TODO
-    this.radius = this.towerType.radius; 
-    this.shootDestinationX = 0; 
-    this.shootDestinationY = 0; 
+    this.radius = this.towerType.radius;
+    this.shootDestinationX = 0;
+    this.shootDestinationY = 0;
     this.target = null;
-    this.shootBobaEveryMS = this.towerType.frequency;      
+    this.shootBobaEveryMS = this.towerType.frequency;
     this.directions = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
     this.shootOutXOffset = [15, 45, 65, 45, 17, -15, -30, -25 ];
     this.shootOutYOffset = [50,40, 15, -5, -15, -5, 10, 40];
@@ -50,7 +50,9 @@ function boardTower(game, gridX, gridY, type) {
     //5 = farthest to tower
     //6 = biggest hp
     //7 = smallest hp
-    this.shootPriorityType = 0; 
+    this.shootPriorityType = 0;
+    this.shootOutXOffsetDir = [0, 50, 50, 50, 0, -50, -50, -50 ];
+    this.shootOutYOffsetDir = [50, 50, 0, -50, -50, -50, 0, 50];
 }
 
 boardTower.prototype.draw = function () {
@@ -107,6 +109,33 @@ boardTower.prototype.draw = function () {
 }
 
 boardTower.prototype.update = function () {
+    // This shooting method always shoots the enemy that is closest to the end.
+    var withinRange = [];
+    for (var i = 0; i < this.game.entities.length; i++) {
+        var ent = this.game.entities[i];
+        if (ent !== this && ent.isEnemy) {
+            var temp = this.enemyInRange(ent);
+            if(temp && ent.hp >= 1) {
+                var dist = distanceToEndPoint(ent.centerX, ent.centerY);
+                withinRange.push({enemy: ent, distToEnd: dist});
+            }
+        }
+    }
+
+    if(withinRange.length >= 1) {
+        var selectedEnemy = withinRange[0];
+        for(var i = 1; i < withinRange.length; i++) {
+            if(selectedEnemy.distToEnd >= withinRange[i].distToEnd) {
+                selectedEnemy = withinRange[i]
+            }
+        }
+        this.shootDestinationX = selectedEnemy.enemy.centerX;
+        this.shootDestinationY = selectedEnemy.enemy.centerY;
+        this.target = selectedEnemy.enemy;
+        this.calculateDirection(this.target);
+        this.shootBoba = true;
+    }
+
     if(this.spin && this.pointDirection === this.intendedDirection) {
         this.pointDirectionIndex = this.intendedDirectionIndex;
         this.spin = false;
@@ -153,7 +182,7 @@ boardTower.prototype.update = function () {
         }
     }
 
- 
+
 
     if(this.game.click) {
         var click = this.game.click;
@@ -164,7 +193,7 @@ boardTower.prototype.update = function () {
         if(click.x >= upperLeftX && click.x < upperLeftX + width && click.y >= upperLeftY && click.y < upperLeftY + height) {
             this.upgradeMode = !this.upgradeMode;
         // UNCOMMENT BELOW TO TEST CLICK TO SPIN FUNCTIONALITY
-             /* 
+             /*
             if(this.pointDirection === 'S') {
                 this.pointDirection = 'SW';
             } else if (this.pointDirection === 'SW') {
@@ -209,7 +238,7 @@ boardTower.prototype.update = function () {
             }
         }
     } */
-    
+
 
     // This shooting method always shoots the enemy that is closest to the end.
     var withinRange = [];
@@ -311,8 +340,8 @@ boardTower.prototype.enemyInRange = function (rect) {
         return true;
     }
 
-    var cornerDistance_sq = Math.pow(circleDistanceX - rect.boundingbox.width / 2, 2) + 
-                            Math.pow(circleDistanceY - rect.boundingbox.height /2, 2); 
+    var cornerDistance_sq = Math.pow(circleDistanceX - rect.boundingbox.width / 2, 2) +
+                            Math.pow(circleDistanceY - rect.boundingbox.height /2, 2);
 
     if(cornerDistance_sq <= Math.pow(this.radius, 2)) {
         return true;
@@ -322,14 +351,14 @@ boardTower.prototype.enemyInRange = function (rect) {
 }
 
 boardTower.prototype.calculateDirection = function (target) {
-    if(this.shootTimer >= Date.now())  return;
+   // if(this.shootTimer >= Date.now())  return; // POSSIBLE ERROR
     var tempDirection = null;
     var tempShortestDistance = Infinity;
     var bestIndex = null;
     for(var i = 0; i < this.directions.length; i++) {
-        var tempX = this.x + this.shootOutXOffset[i];
-        var tempY = this.y + this.shootOutYOffset[i];
-        var tempDistance = getDistance(target.centerX, target.centerY, tempX, tempY);
+        var tempX = this.centerX + this.shootOutXOffsetDir[i]; // Change this to represent corners of the boxes instead of shoototu offest
+        var tempY = this.centerY + this.shootOutYOffsetDir[i]; // Change this to represetn corners ofthe boxes intead of shoot out offset
+        var tempDistance = getDistance(target.centerX - 10, target.centerY - 13, tempX, tempY);
         if(tempDistance < tempShortestDistance) {
             tempDirection = this.directions[i];
             tempShortestDistance = tempDistance;
@@ -353,20 +382,20 @@ boardTower.prototype.calculateDirection = function (target) {
 
 function getDistance(x1, y1, x2, y2) {
 	var xs = x2 - x1;
-    var ys = y2 - y1;		
-      
+    var ys = y2 - y1;
+
     xs *= xs;
     ys *= ys;
-         
+
     return Math.sqrt( xs + ys );
 }
 
 function distanceToEndPoint(x1, y1) {
 	var xs = 900 - x1;
-    var ys = 300 - y1;		
-      
+    var ys = 300 - y1;
+
     xs *= xs;
     ys *= ys;
-         
+
     return Math.sqrt( xs + ys );
 }

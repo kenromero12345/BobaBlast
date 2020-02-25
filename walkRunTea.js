@@ -32,7 +32,7 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
         tea.height = tea.runHeight;
         tea.tempFrameDuration = tea.animationRunLeft.frameDuration;
     }
-    tea.boxes = true;
+    tea.boxes = false;
     teaSetBoundingBox(tea);
     enemyCenterUpdate(tea);
     tea.isPoisoned = false;
@@ -139,8 +139,8 @@ var walkRunTeaDraw = function (tea) {
 
 var walkRunTeaUpdate = function (tea) {
     //use center gap
-    var runMin = 43;
-    var runMax = 57;
+    var runMin = 40;
+    var runMax = 60;
     var walkMin = 48;
     var walkMax = 52;
     // if (tea.isBurned) {
