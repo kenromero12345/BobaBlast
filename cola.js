@@ -26,7 +26,7 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
         , 0, 341, 70, 65, 5, 0.2, 5, false, scale, true);
     }
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 4);
         //                       this.moveDirection = 3;
         // this.lookDirectionRight = false;
 }
@@ -49,13 +49,8 @@ cola.prototype.draw = function () {
 cola.prototype.update = function () {
     // console.log(this.centerX + " " + this.centerY)
     if(this.game.running) {
-        var xy = getXY(this.centerX, this.centerY);
-        if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
-            && this.centerY % 100 > 48 && this.centerY % 100 < 52)) {
-            this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            enemyUpdateLookHelper(this);
-        }
-        
+        enemyChooseDir(this);
+        // console.log(this.centerGap);
         enemyUpdateHelper(this);
         
         this.setBoundingBox();
