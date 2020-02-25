@@ -13,9 +13,9 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinGoodFlip.png")
     , 720, 260, -84, 76, 7, .2, 7, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration);
-                                                  this.moveDirection = 3;
-        this.lookDirectionRight = false;
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
+        //                                           this.moveDirection = 3;
+        // this.lookDirectionRight = false;
 }
 
 pumpkinGood.prototype.setBoundingBox = function() {
@@ -75,12 +75,7 @@ var pumpkinGoodRight = function(enemy) {
 
 pumpkinGood.prototype.update = function () {
     if(this.game.running) {
-        var xy = getXY(this.centerX, this.centerY);
-        if (((this.centerX +  100) % 100 > 48 && (this.centerX + 100) % 100 < 52
-            && this.centerY % 100 > 48 && this.centerY % 100 < 52)) {
-            this.moveDirection = getShortestPath(this.centerX, this.centerY);
-            enemyUpdateLookHelper(this);
-        }
+        enemyChooseDir(this);
         
         //enemyUpdateHelper(this);
         pumpkinGoodUpdate(this);
