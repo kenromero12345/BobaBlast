@@ -98,6 +98,33 @@ boardTower.prototype.draw = function () {
 }
 
 boardTower.prototype.update = function () {
+    // This shooting method always shoots the enemy that is closest to the end.
+    var withinRange = [];
+    for (var i = 0; i < this.game.entities.length; i++) {
+        var ent = this.game.entities[i];
+        if (ent !== this && ent.isEnemy) {
+            var temp = this.enemyInRange(ent);
+            if(temp && ent.hp >= 1) {
+                var dist = distanceToEndPoint(ent.centerX, ent.centerY);
+                withinRange.push({enemy: ent, distToEnd: dist});
+            }
+        }
+    }
+
+    if(withinRange.length >= 1) {
+        var selectedEnemy = withinRange[0];
+        for(var i = 1; i < withinRange.length; i++) {
+            if(selectedEnemy.distToEnd >= withinRange[i].distToEnd) {
+                selectedEnemy = withinRange[i]
+            }
+        }
+        this.shootDestinationX = selectedEnemy.enemy.centerX;
+        this.shootDestinationY = selectedEnemy.enemy.centerY;
+        this.target = selectedEnemy.enemy;
+        this.calculateDirection(selectedEnemy.enemy);
+        this.shootBoba = true;
+    }
+    
     if(this.spin && this.pointDirection === this.intendedDirection) {
         this.pointDirectionIndex = this.intendedDirectionIndex;
         this.spin = false;
@@ -200,34 +227,6 @@ boardTower.prototype.update = function () {
             }
         }
     } */
-    
-
-    // This shooting method always shoots the enemy that is closest to the end.
-    var withinRange = [];
-    for (var i = 0; i < this.game.entities.length; i++) {
-        var ent = this.game.entities[i];
-        if (ent !== this && ent.isEnemy) {
-            var temp = this.enemyInRange(ent);
-            if(temp && ent.hp >= 1) {
-                var dist = distanceToEndPoint(ent.centerX, ent.centerY);
-                withinRange.push({enemy: ent, distToEnd: dist});
-            }
-        }
-    }
-
-    if(withinRange.length >= 1) {
-        var selectedEnemy = withinRange[0];
-        for(var i = 1; i < withinRange.length; i++) {
-            if(selectedEnemy.distToEnd >= withinRange[i].distToEnd) {
-                selectedEnemy = withinRange[i]
-            }
-        }
-        this.shootDestinationX = selectedEnemy.enemy.centerX;
-        this.shootDestinationY = selectedEnemy.enemy.centerY;
-        this.target = selectedEnemy.enemy;
-        this.calculateDirection(selectedEnemy.enemy);
-        this.shootBoba = true;
-    }
 }
 
 // Determines if an Enemy is within Range of Tower
@@ -264,7 +263,7 @@ boardTower.prototype.calculateDirection = function (target) {
     for(var i = 0; i < this.directions.length; i++) {
         var tempX = this.x + this.shootOutXOffset[i];
         var tempY = this.y + this.shootOutYOffset[i];
-        var tempDistance = getDistance(target.centerX, target.centerY, tempX, tempY);
+        var tempDistance = getDistance(target.centerX - 10, target.centerY - 13, tempX, tempY);
         if(tempDistance < tempShortestDistance) {
             tempDirection = this.directions[i];
             tempShortestDistance = tempDistance;
