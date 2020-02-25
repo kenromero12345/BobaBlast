@@ -78,7 +78,7 @@ function boba(game, startX, startY, destinationX, destinationY, name, target) {
     // }
     this.destinationX = destinationX;
     this.destinationY = destinationY;
-    var dir = direction({'x':this.target.centerX, 'y':this.target.centerY}, this);
+    var dir = direction({'x':this.target.centerX - 10, 'y':this.target.centerY - 13}, this);
     // console.log(dir)
     this.velocity = dir;
     // console.log(dir)
@@ -122,9 +122,9 @@ boba.prototype.update = function () {
             if (this.target.hp < 1) {
                 this.removeFromWorld = true;
             }
-            this.destinationX = this.target.centerX;
-            this.destinationY = this.target.centerY;
-            this.velocity = direction({'x':this.target.centerX, 'y':this.target.centerY}, this);
+            // this.destinationX = this.target.centerX;
+            // this.destinationY = this.target.centerY;
+            this.velocity = direction({'x':this.target.centerX -10, 'y':this.target.centerY - 13}, this);
             // this.velocity.x = dir.x;
             // this.velocity.y = dir.y;
         
