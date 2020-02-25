@@ -221,8 +221,8 @@ boardTower.prototype.update = function () {
                 var distToEnd = distanceToEndPoint(ent.centerX, ent.centerY);
                 var distToTower = getDistance(ent.centerX, ent.centerY, this.centerX, this.centerY);
                 var distToEndByPath = getDistanceToEndByPath(ent.centerX, ent.centerY);
-                withinRange.push({enemy: ent, distToEnd: distToEnd, distToTower: distToTower
-                    , distToEndByPath: distToEndByPath});
+                withinRange.push({"enemy": ent, "distToEnd": distToEnd, "distToTower": distToTower
+                    , "distToEndByPath": distToEndByPath});
             }
         }
     }
