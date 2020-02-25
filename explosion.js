@@ -8,7 +8,7 @@ function Explosion(game, x, y) {
     this.y = y - 20;
     this.width = this.animation.frameWidth;
     this.height = this.animation.frameHeight;
-    this.boxes = false;
+    this.boxes = true;
     this.boundingbox = new BoundingBox(this.x + 25, this.y + 22, this.width - 50, this.height - 50);
 }
 

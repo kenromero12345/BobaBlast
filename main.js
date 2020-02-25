@@ -174,7 +174,7 @@ Background.prototype.update = function() {
     
     if (playPromise !== undefined) {
         playPromise.then(_ => {
-            if(gameOverLose == false){
+            if(gameOverLose == false && gameOverWin == false){
                 audio.play();
             }else{
                 audio.pause();
@@ -241,13 +241,13 @@ function generateStoreTowers(game) {
     //explosive tower
     var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000, 250,"Burns enemies. \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes enemies \nrun faster & does damage over time",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
     //super tower
-    var fourthTower = new storeTower(game, "Golden Boba", 2000, 50, 500, "Super tower \nShooting Speed: Very fast \nRange: Large",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "gold");
+    var fourthTower = new storeTower(game, "Golden Boba", 2500, 50, 500, "Super tower. \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "gold");
     //wall
     var fifthTower = new storeTower(game, "Pot of Boba", 20, 1, 1, "A wall that \nstops the enemies \nfrom progressing",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1, "none");
     //slow tower
     var sixthTower = new storeTower(game, "Iced Boba", 200, 1000, 250, "Ices enemies \nShooting Speed: Slow \nMedium range \n-Ice makes enemies move slowly",AM.getAsset("./img/towerB.png"), 1085, 270, 70,70,2,1, "blue");
     //stun tower
-    var seventhTower = new storeTower(game, "Taro Boba", 350, 600, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \n-Stun briefly stops enemies in place ",AM.getAsset("./img/towerP.png"), 945, 340,70,70,0,2, "purple");
+    var seventhTower = new storeTower(game, "Taro Boba", 300, 600, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \nSpecial Ability: Stun briefly stops \nenemies in place ",AM.getAsset("./img/towerP.png"), 945, 340,70,70,0,2, "purple");
 
     var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \n(WIP) DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2, "none");
     var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \n(WIP) DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2, "none");
