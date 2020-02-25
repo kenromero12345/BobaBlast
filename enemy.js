@@ -189,7 +189,9 @@ var collideUpdate = function(enemy) {
                 }
             } 
             if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
+                console.log(enemy.burnResistance + " " + ent.burnProbAdder);
                 if (Math.random() > enemy.burnResistance - ent.burnProbAdder) {
+                    // console.log("EXPLOSION");
                     enemy.isBurned = true;
                     if (enemy.burnLvl < ent.burnLvl) {
                         enemy.burnLvl = ent.burnLvl;
@@ -206,8 +208,8 @@ var collideUpdate = function(enemy) {
                 }
             } 
             if (ent.isBoba && ent.isExplosive && enemy.boundingbox.collide(ent.boundingbox)) {
-               // console.log("EXPLOSION");
-                enemy.game.addEntity(new Explosion(enemy.game, enemy.x, enemy.y));
+            //    console.log("EXPLOSION");
+                enemy.game.addEntity(new Explosion(enemy.game, enemy.x, enemy.y, ent.burnLvl));
             }
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
                 ent.removeFromWorld = true;
@@ -327,7 +329,7 @@ var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, gam
     enemy.moveDirection = 1; //1 is right, down, left, up
     enemy.lookDirectionRight = true;
 
-    enemy.boxes = false;
+    enemy.boxes = true;
     enemy.setBoundingBox();
     enemyCenterUpdate(enemy);
     enemy.isPoisoned = false;

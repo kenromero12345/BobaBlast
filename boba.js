@@ -51,13 +51,13 @@ function boba(game, startX, startY, name, target) {
         this.poisonProbAdder = 8;
         this.poisonTimeAdder = 5000;
     } 
-    if (this.burnLvl == 2) {
-        this.burnProbAdder = 5;
-        this.burnTimeAdder - 500;
-    } else if (this.burnLvl == 3) {
-        this.burnProbAdder = 8;
-        this.burnTimeAdder = 1000;
-    } 
+    // if (this.burnLvl == 2) {
+    //     this.burnProbAdder = 5;
+    //     this.burnTimeAdder - 500;
+    // } else if (this.burnLvl == 3) {
+    //     this.burnProbAdder = 8;
+    //     this.burnTimeAdder = 1000;
+    // } 
     if (this.paralysisLvl == 2) {
         this.paralysisProbAdder = 5;
         this.paralysisTimeAdder = 500;
@@ -143,7 +143,7 @@ function boba(game, startX, startY, name, target) {
     this.game = game;
     this.ctx = game.ctx;
     this.noCollision = true;
-    this.boxes = false;
+    this.boxes = true;
     this.boundingbox = new BoundingBox(this.x + 6, this.y + 13, this.width -21, this.height - 23);
 }
 
