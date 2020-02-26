@@ -356,6 +356,8 @@ var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, gam
 }
 
 var enemyChooseDir = function(enemy) {
+    // var min = 49;
+    // var max = 51;
     var min = 50 - enemy.centerGap;
     var max = 50 + enemy.centerGap;
     // if (enemy.isBurned) {
@@ -363,7 +365,11 @@ var enemyChooseDir = function(enemy) {
     //     max = 50 + enemy.centerGap * 2;
     // }
     if (((enemy.centerX +  100) % 100 > min && (enemy.centerX + 100) % 100 < max
-        && enemy.centerY % 100 > min && enemy.centerY % 100 < max)) {
+        && enemy.centerY % 100 > min && enemy.centerY % 100 < max)
+        || enemy.moveDirection == 0 && max < (enemy.centerX +  100) % 100
+        || enemy.moveDirection == 1 && max < (enemy.centerY) % 100
+        || enemy.moveDirection == 2 && min > (enemy.centerX +  100) % 100
+        || enemy.moveDirection == 3 && min > (enemy.centerY) % 100) {
         enemy.moveDirection = getShortestPath(enemy.centerX, enemy.centerY);
         enemyUpdateLookHelper(enemy);
         // if (enemy.name == "cola" && str != enemy.centerGap + " " + min + " " + max) {
@@ -371,6 +377,21 @@ var enemyChooseDir = function(enemy) {
         //     str = enemy.centerGap + " " + min + " " + max;
         // }
     }
+    // } else {
+    //     if (enemy.moveDirection == 0 && max < (enemy.centerX +  100) % 100) {
+    //         enemy.moveDirection = getShortestPath(enemy.centerX, enemy.centerY);
+    //         enemyUpdateLookHelper(enemy);
+    //     } else if (enemy.moveDirection == 1 && max < (enemy.centerY) % 100) {
+    //         enemy.moveDirection = getShortestPath(enemy.centerX, enemy.centerY);
+    //         enemyUpdateLookHelper(enemy);
+    //     } else if (enemy.moveDirection == 2 && min > (enemy.centerX +  100) % 100) {
+    //         enemy.moveDirection = getShortestPath(enemy.centerX, enemy.centerY);
+    //         enemyUpdateLookHelper(enemy);
+    //     } else if (enemy.moveDirection == 3 && min > (enemy.centerY) % 100){
+    //         enemy.moveDirection = getShortestPath(enemy.centerX, enemy.centerY);
+    //         enemyUpdateLookHelper(enemy);
+    //     }
+    // }
 }
 
 // var str = ""; 

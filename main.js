@@ -1,7 +1,8 @@
 var AM = new AssetManager();
 var gameStarted = false;
 
-function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, flip) {
+function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWidth
+    , frameDuration, frames, loop, scale, flip) {
     this.spriteSheet = spriteSheet;
 	this.startX = startX;
 	this.startY = startY;
@@ -202,7 +203,24 @@ AM.downloadAll(function () {
     // gameEngine.addEntity(new redTea(gameEngine, 450, 250, false, .75));
     // gameEngine.addEntity(new yellowTea(gameEngine, 450, 250, true, .75));
 
-    monsters.push();
+    // gameEngine.addEntity(new bigCake(gameEngine, 450, 550, .25));
+    // gameEngine.addEntity(new biscuit(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new cake(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new cola(gameEngine, 450, 550, .85, false));
+    // gameEngine.addEntity(new iceGolem(gameEngine, 450, 550, .7));
+    // gameEngine.addEntity(new miniCake(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new slime(gameEngine, 450, 550, .75, 10));
+    // gameEngine.addEntity(new watermelon(gameEngine, 450, 550, .75));
+
+    // gameEngine.addEntity(new greenTea(gameEngine, 450, 550, false, .75));
+    // gameEngine.addEntity(new redTea(gameEngine, 450, 550, false, .75));
+    // gameEngine.addEntity(new yellowTea(gameEngine, 450, 550, true, .75));
+
+    // monsters.push();
+    
         // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
     // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
