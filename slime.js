@@ -41,7 +41,7 @@ function slime(game, spawnX, spawnY, scale, num) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeFlip.png")
     , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 4);
         //                                           this.moveDirection = 3;
         // this.lookDirectionRight = false;
 }

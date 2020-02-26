@@ -191,6 +191,7 @@ board.prototype.update = function () {
     var ent = this.game.entities[i];
     if (ent !== this && ent.isEnemy) {//&& !isTower
         var xy = getXY(ent.centerX, ent.centerY);
+        // var xy = getXY(ent.centerX - divOffset.left, ent.centerY - divOffset.top);
         // console.log(xy)
         if (xy.x && xy.y) {
           GAMEBOARD[xy.x][xy.y].hasEnemyRadius = true;  

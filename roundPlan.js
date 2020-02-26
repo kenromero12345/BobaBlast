@@ -16,7 +16,7 @@ function roundPlan(game) {
     this.index = 1;
     this.game = game;
     this.ctx = game.ctx;
-    this.timeGap = 1500;
+    this.timeGap = 1500; 
     this.isRoundStart = true;
     this.isEnding = false;
     this.game.running = false;
@@ -33,6 +33,7 @@ roundPlan.prototype.roundEntity = function(time, game, entity, isRoundEnding) {
             this.isEnding = true;
         }
     })
+    //make an object that has date (timer.time)
 }
 
 roundPlan.prototype.isNoEnemy = function() {
