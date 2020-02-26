@@ -44,17 +44,6 @@ function boardTower(game, gridX, gridY, type) {
     this.shootOutYOffset = [50,40, 15, -5, -15, -5, 10, 40];
     this.shootOutXOffsetDir = [0, 50, 50, 50, 0, -50, -50, -50 ];
     this.shootOutYOffsetDir = [50, 50, 0, -50, -50, -50, 0, 50];
-    //0 = closest to end by dist
-    //1 = farthest to end by dist
-    //2 =  closest to end by path
-    //3 = farthest to end by path
-    //4 = closest to tower
-    //5 = farthest to tower
-    //6 = biggest hp
-    //7 = smallest hp
-    this.shootPriorityType = 0;
-    this.shootOutXOffsetDir = [0, 50, 50, 50, 0, -50, -50, -50 ];
-    this.shootOutYOffsetDir = [50, 50, 0, -50, -50, -50, 0, 50];
 }
 
 boardTower.prototype.draw = function () {
@@ -137,7 +126,6 @@ boardTower.prototype.update = function () {
         this.calculateDirection(this.target);
         this.shootBoba = true;
     }
-
     
     if(this.spin && this.pointDirection === this.intendedDirection) {
         this.pointDirectionIndex = this.intendedDirectionIndex;
