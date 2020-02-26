@@ -111,7 +111,7 @@ display.prototype.draw = function () {
             }
         }
         // Hover Over Feature for Starting Round
-        if(mouse.x < this.buttonStartX + this.buttonWidth + 10 - 55 && mouse.x >= this.buttonStartX
+        if(mouse.x < this.buttonStartX + this.buttonWidth - 55 && mouse.x >= this.buttonStartX
             && mouse.y < this.buttonStartY + this.buttonHeight && mouse.y >= this.buttonStartY) {
             if(!this.game.running && !paused) {
                 var x = this.buttonStartX;
@@ -159,14 +159,14 @@ display.prototype.draw = function () {
                 ctx.font = '30px Bahnschrift Light';
                 ctx.fillText("R", this.buttonStartX + 35 - 25, this.buttonStartY + 40  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("ESUME", this.buttonStartX + 55 - 25, this.buttonStartY + 40  );
+                ctx.fillText("ESUME", this.buttonStartX + 55 -25, this.buttonStartY + 40  );
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("G", this.buttonStartX + 150 - 25, this.buttonStartY + 40  );
+                ctx.fillText("G", this.buttonStartX + 150 - 30, this.buttonStartY + 40  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("AME", this.buttonStartX + 170 - 25, this.buttonStartY + 40  );
+                ctx.fillText("AME", this.buttonStartX + 170 - 30, this.buttonStartY + 40  );
             }
 
-            if(mouse.x < this.buttonStartX + this.buttonWidth + 10 - 55 && mouse.x >= this.buttonStartX
+            if(mouse.x < this.buttonStartX + this.buttonWidth - 55 && mouse.x >= this.buttonStartX
             && mouse.y < this.buttonStartY + this.buttonHeight && mouse.y >= this.buttonStartY) {
             if(!this.game.running && !paused) {
                 var x = this.buttonStartX;
@@ -202,7 +202,7 @@ display.prototype.draw = function () {
             var h = this.buttonHeight;
             ctx.fillStyle = "green";
             ctx.fillRect(x,y,w ,h);
-            ctx.fillStyle = "black";
+            ctx.fillStyle = "white";
             ctx.font = '30px Bahnschrift Light';
             if (this.game.speed == 1) {
             ctx.fillText("x2", x + 8, this.buttonStartY + 40  );
