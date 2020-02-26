@@ -2,7 +2,7 @@ function cake(game, spawnX, spawnY, scale) {
     this.lifeDeduction = 8;
     this.name = "cake";
     this.speed = 100;
-    this.hp = 100;//
+    this.hp = 200;//
     this.money = 50;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/cake.png")
     , 0, 85, 96, 90, 5, .135, 5, true, scale, false);
@@ -120,6 +120,7 @@ cake.prototype.draw = function () {
             }
             // this.drawBoundingBox();
             drawBoundingBox(this);
+            drawHP(this, 0, 0);
         }
     }
 }
