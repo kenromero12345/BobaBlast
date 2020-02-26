@@ -1,5 +1,12 @@
 function boardTower(game, gridX, gridY, type) {
     this.name = type.towerType;
+    this.rangeLevel = 1;
+    this.damageLevel = 1;
+    this.speedLevel = 1;
+    this.rangeUpgradeCost = 100;
+    this.damageUpgradeCost = 200;
+    this.speedUpgradeCost = 300;
+    this.sellingCost = type.cost / 4;
     this.isTower = true;
     this.spin = false;
     this.counterclockwise = true;
@@ -32,7 +39,6 @@ function boardTower(game, gridX, gridY, type) {
     this.shootOutX = this.x;
     this.shootOutY = this.y;
     this.shootBoba = false;
-    this.upgradeMode = false;
     this.shootBobaSpeed = null; // TODO
     this.radius = this.towerType.radius;
     this.shootDestinationX = 0;
@@ -50,13 +56,15 @@ function boardTower(game, gridX, gridY, type) {
     //5 = farthest to tower
     //6 = biggest hp
     //7 = smallest hp
+    this.shootingPriorityList = ["Closest To End (Distance)", "Farthest from End (Distance)", "Closest to End (Path)", 
+                                "Closest to End (Path)", "Closest to Tower", "Farthest from Tower", "Largest HP", "Smallest HP"];
     this.shootPriorityType = 0;
     this.shootOutXOffsetDir = [0, 50, 50, 50, 0, -50, -50, -50 ];
     this.shootOutYOffsetDir = [50, 50, 0, -50, -50, -50, 0, 50];
 }
 
 boardTower.prototype.draw = function () {
-    if(this.upgradeMode) {
+    if(upgradeMode && selectedUpgradableTower === this) {
         this.ctx.save();
         this.ctx.globalAlpha = 0.25;
         this.ctx.fillStyle = "white";
@@ -191,7 +199,13 @@ boardTower.prototype.update = function () {
         var width = 100;
         var height = 100;
         if(click.x >= upperLeftX && click.x < upperLeftX + width && click.y >= upperLeftY && click.y < upperLeftY + height) {
-            this.upgradeMode = !this.upgradeMode;
+            if(upgradeMode && selectedUpgradableTower === this) {
+                upgradeMode = false;
+                selectedUpgradableTower = null;
+            } else {
+                upgradeMode = true;
+                selectedUpgradableTower = this;
+            }
         // UNCOMMENT BELOW TO TEST CLICK TO SPIN FUNCTIONALITY
              /*
             if(this.pointDirection === 'S') {
