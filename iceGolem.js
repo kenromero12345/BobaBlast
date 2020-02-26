@@ -32,7 +32,7 @@ iceGolem.prototype.setBoundingBox = function() {
 iceGolem.prototype.draw = function () {
     // console.log(this.centerX)
     enemyDraw(this);
-    drawHP(this, 0, 0);
+    drawHP(this, 0, -5);
 }
 
 iceGolem.prototype.update = function () {

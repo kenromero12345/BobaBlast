@@ -64,7 +64,7 @@ bigCake.prototype.draw = function () {
             }
             // this.drawBoundingBox();
             drawBoundingBox(this);
-            drawHP(this, oX, oY);
+            drawHP(this, 0, 0);
             // drawHP(this, oX, oY);
         }
     }

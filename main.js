@@ -161,7 +161,7 @@ Background.prototype.draw = function() {
 }
 
 Background.prototype.update = function() {
-    audio.play();
+    // audio.play();
 }
 
 // var GAMEBOARD = [];

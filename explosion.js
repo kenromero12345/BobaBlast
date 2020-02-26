@@ -8,7 +8,7 @@ function Explosion(game, x, y, lvl) {
     this.y = y - 20;
     this.width = this.animation.frameWidth;
     this.height = this.animation.frameHeight;
-    this.boxes = true;
+    this.boxes = false;
     this.burnLvl = lvl;
     this.burnProbAdder = 0;
     this.burnTimeAdder = 0;

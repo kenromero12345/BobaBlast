@@ -329,7 +329,7 @@ var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, gam
     enemy.moveDirection = 1; //1 is right, down, left, up
     enemy.lookDirectionRight = true;
     enemy.maxHp = enemy.hp;
-    enemy.boxes = true;
+    enemy.boxes = false;
     enemy.setBoundingBox();
     enemyCenterUpdate(enemy);
     enemy.isPoisoned = false;

@@ -116,7 +116,7 @@ slime.prototype.draw = function () {
             }
         }
         drawBoundingBox(this);
-        drawHP(this, 0, 0);
+        drawHP(this, 0, -10);
         // if (this.boxes) {
         //     if (this.moveDirection == 1 || this.lookDirectionRight) {
         //         this.ctx.strokeStyle = "red";

@@ -101,7 +101,7 @@ miniCake.prototype.draw = function () {
             }
         }
         drawBoundingBox(this);
-        drawHP(this, 0, 0);
+        drawHP(this, 0, - 10);
     }
 }
 
