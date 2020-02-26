@@ -6,6 +6,7 @@ function boardTower(game, gridX, gridY, type) {
     this.rangeUpgradeCost = 100;
     this.damageUpgradeCost = 200;
     this.speedUpgradeCost = 300;
+    this.bobaDamage = 1;
     this.sellingCost = type.cost / 4;
     this.isTower = true;
     this.spin = false;
@@ -109,7 +110,7 @@ boardTower.prototype.draw = function () {
 
     if(this.shootBoba) {
         if(this.shootTimer < this.game.timer.time) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target));
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target, this.bobaDamage));
             this.shootBoba = false;
             this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
         }
