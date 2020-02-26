@@ -1,6 +1,8 @@
 var currentMoney = 1000;
 var currentLifes = 100;
 
+var upgradeMode = false;
+var selectedUpgradableTower = null;
 var purchaseMode = false;
 var paused = false;
 var selectedTowerRow = -1;
@@ -115,6 +117,82 @@ display.prototype.draw = function () {
                 ctx.fillText("Cancel Purchase", purchaseX + 60, purchaseY + 25  ); 
             }
         }
+        // Hover Over Feature for Selling Tower
+        if(mouse.x < this.descriptionBoxStartX + 270 + 10 && mouse.x >= this.descriptionBoxStartX + 10
+            && mouse.y < this.descriptionBoxStartY + 175 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 175 + 2) {
+            if (upgradeMode && !purchaseMode) {
+                var x = this.descriptionBoxStartX + 10;
+                var y = this.descriptionBoxStartY + 175;
+                var w = 270;
+                var h = 20;
+                ctx.fillStyle = "red";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '16px Bahnschrift Light';
+                ctx.fillText("Sell Tower for $" + selectedUpgradableTower.sellingCost, x + 60, y + 15);
+            }
+        }
+        // Hover Over Feature for Priority Mode
+        if(mouse.x < this.descriptionBoxStartX + 270 + 10 && mouse.x >= this.descriptionBoxStartX + 10
+            && mouse.y < this.descriptionBoxStartY + 150 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 150 + 2) {
+            if (upgradeMode && !purchaseMode) {
+                var x = this.descriptionBoxStartX + 10;
+                var y = this.descriptionBoxStartY + 150;
+                var w = 270;
+                var h = 20;
+                ctx.fillStyle = "red";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '12px Bahnschrift Light';
+                ctx.fillText("Shooting Priority: " + selectedUpgradableTower.shootingPriorityList[selectedUpgradableTower.shootPriorityType], x + 15, y + 15);
+            
+            }
+        }
+        // Hover Over Feature for Upgrade Tower Range
+        if(mouse.x < this.descriptionBoxStartX + 200+ 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 30 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 30 + 2) {
+            if (upgradeMode && !purchaseMode) {
+                var x = this.descriptionBoxStartX + 200;
+                var y = this.descriptionBoxStartY + 30;
+                var w = 80;
+                var h = 20;
+                ctx.fillStyle = "red";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '16px Bahnschrift Light';
+                ctx.fillText("↑ $" + selectedUpgradableTower.rangeUpgradeCost, x + 15, y + 15);
+            }
+        }
+        // Hover Over Feature for Upgrade Boba Damage
+        if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 55 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 55 + 2) {
+            if (upgradeMode && !purchaseMode) {
+                var x = this.descriptionBoxStartX + 200;
+                var y = this.descriptionBoxStartY + 55;
+                var w = 80;
+                var h = 20;
+                ctx.fillStyle = "red";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '16px Bahnschrift Light';
+                ctx.fillText("↑ $" + selectedUpgradableTower.damageUpgradeCost, x + 15, y + 15);
+            }
+        }
+        // Hover Over Feature for Upgrade Boba Speed
+        if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 80 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 80 + 2) {
+            if (upgradeMode && !purchaseMode) {
+                var x = this.descriptionBoxStartX + 200;
+                var y = this.descriptionBoxStartY + 80;
+                var w = 80;
+                var h = 20;
+                ctx.fillStyle = "red";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '16px Bahnschrift Light';
+                ctx.fillText("↑ $" + selectedUpgradableTower.speedUpgradeCost, x + 15, y + 15);
+            }
+        }
         // Hover Over Feature for Starting Round
         if(mouse.x < this.buttonStartX + this.buttonWidth - 55 && mouse.x >= this.buttonStartX
             && mouse.y < this.buttonStartY + this.buttonHeight && mouse.y >= this.buttonStartY) {
@@ -227,6 +305,23 @@ display.prototype.draw = function () {
                 purchaseMode = false;
                 selectedTowerColumn = -1;
                 selectedTowerRow = -1;
+            }
+        }
+        // Selling Tower Button Sells the Current Tower Selection and Gets Rid of It
+        // And Removes it from the board
+        if(mouse.x < this.descriptionBoxStartX + 270 + 10 && mouse.x >= this.descriptionBoxStartX + 10
+            && mouse.y < this.descriptionBoxStartY + 175 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 175 + 2) {
+            if (upgradeMode && !purchaseMode) {
+                upgradeMode = false;
+                for(var i = 0; i < this.game.activeTowers.length; i++) {
+                    if(this.game.activeTowers[i] === selectedUpgradableTower) {
+                        currentMoney += selectedUpgradableTower.sellingCost;
+                        GAMEBOARD[this.game.activeTowers[i].gridX ][this.game.activeTowers[i].gridY].occupied = false;
+                        this.game.activeTowers[i].removeFromWorld = true;
+                    }
+
+                }
+                selectedUpgradableTower = null;
             }
         }
         // Start Round Button Click
@@ -374,13 +469,13 @@ display.prototype.generateResumeButton = function() {
     ctx.fillRect(x,y,w - 55,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("R", this.buttonStartX + 35 - 25, this.buttonStartY + 40  );
+    ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("ESUME", this.buttonStartX + 55 -25, this.buttonStartY + 40  );
+    ctx.fillText("ESUME", this.buttonStartX + 55, this.buttonStartY + 40  );
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("G", this.buttonStartX + 150 - 30, this.buttonStartY + 40  );
+    ctx.fillText("G", this.buttonStartX + 150, this.buttonStartY + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("AME", this.buttonStartX + 170 - 30, this.buttonStartY + 40  );
+    ctx.fillText("AME", this.buttonStartX + 170, this.buttonStartY + 40  );
 }
 
 display.prototype.generatePauseButton = function() {
@@ -418,8 +513,23 @@ display.prototype.generateDescriptionBox = function() {
         yGrid = selectedTowerRow;
     }
     if(xGrid === -1 && yGrid === -1) {
+        if(upgradeMode) {
+            ctx.fillStyle = "black";
+            ctx.font = '20px Bahnschrift SemiBold';
+            ctx.fillText("Upgrade " + selectedUpgradableTower.towerType.name + " Tower", this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
+            ctx.font = '16px Bahnschrift SemiBold';
+            ctx.fillText("Tower Range: Level " + selectedUpgradableTower.rangeLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 45);
+            ctx.fillText("Boba Damage: Level " + selectedUpgradableTower.damageLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 70);
+            ctx.fillText("Boba Speed: Level " + selectedUpgradableTower.speedLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 95);
+            this.generateUpgradeAttributeButton(selectedUpgradableTower.rangeUpgradeCost, 200, 30);
+            this.generateUpgradeAttributeButton(selectedUpgradableTower.damageUpgradeCost, 200, 55);
+            this.generateUpgradeAttributeButton(selectedUpgradableTower.speedUpgradeCost, 200, 80);
+            this.generateSellTowerButton();
+            this.generateShootingPriorityButton();
+        }
         return;
     }
+
     var currentTower = towerArray[yGrid][xGrid];
     ctx.fillStyle = "black";
     ctx.font = '14px Bahnschrift SemiBold';
@@ -454,4 +564,43 @@ display.prototype.update = function () {
     if(!this.game.running) return;
     // currentMoney--;
     // currentLifes--;
+}
+
+display.prototype.generateUpgradeAttributeButton = function(cost, xOffset, yOffset) {
+    var ctx = this.ctx;
+    var x = this.descriptionBoxStartX + xOffset;
+    var y = this.descriptionBoxStartY + yOffset;
+    var w = 80;
+    var h = 20;
+    ctx.fillStyle = "green";
+    ctx.fillRect(x,y,w,h);
+    ctx.fillStyle = "white";
+    ctx.font = '16px Bahnschrift Light';
+    ctx.fillText("↑ $" + cost, x + 15, y + 15);
+}
+
+display.prototype.generateShootingPriorityButton = function() {
+    var ctx = this.ctx;
+    var x = this.descriptionBoxStartX + 10;
+    var y = this.descriptionBoxStartY + 150;
+    var w = 270;
+    var h = 20;
+    ctx.fillStyle = "green";
+    ctx.fillRect(x,y,w,h);
+    ctx.fillStyle = "white";
+    ctx.font = '12px Bahnschrift Light';
+    ctx.fillText("Shooting Priority: " + selectedUpgradableTower.shootingPriorityList[selectedUpgradableTower.shootPriorityType], x + 15, y + 15);
+}
+
+display.prototype.generateSellTowerButton = function() {
+    var ctx = this.ctx;
+    var x = this.descriptionBoxStartX + 10;
+    var y = this.descriptionBoxStartY + 175;
+    var w = 270;
+    var h = 20;
+    ctx.fillStyle = "green";
+    ctx.fillRect(x,y,w,h);
+    ctx.fillStyle = "white";
+    ctx.font = '16px Bahnschrift Light';
+    ctx.fillText("Sell Tower for $" + selectedUpgradableTower.sellingCost, x + 60, y + 15);
 }
