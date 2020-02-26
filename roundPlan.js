@@ -80,6 +80,7 @@ roundPlan.prototype.generateGameOverLose = function() {
     ctx.fillText("VER", x + 140, y + 40  );
     ctx.font = '26px Bahnschrift Light';
     ctx.fillText("YOU LOSE!", x + 35, y + 70  );
+    gameOverLose = true;
 }
 
 roundPlan.prototype.generateGameOverWin = function() {
@@ -116,6 +117,7 @@ roundPlan.prototype.update = function () {
         this.game.running = false;
         this.index = 1;
         this.displayRoundDone = true;
+        currentMoney += 100;
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
             if (ent.isBoba) {
@@ -130,6 +132,7 @@ roundPlan.prototype.update = function () {
 
     if (!this.isRoundStart && !this.isEnding && !this.spawningFinish) {
         if (round == 1) {
+            this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
