@@ -164,7 +164,7 @@ boba.prototype.draw = function () {
 boba.prototype.update = function () {
     if(this.game.running) {
         if (this.isHoming) {
-            if (this.target.hp < 1) {
+            if (this.target.hp <= 0) {
                 this.removeFromWorld = true;
             }
             // this.destinationX = this.target.centerX;

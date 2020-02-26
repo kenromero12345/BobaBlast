@@ -260,7 +260,7 @@ boardTower.prototype.update = function () {
         var ent = this.game.entities[i];
         if (ent !== this && ent.isEnemy) {
             var temp = this.enemyInRange(ent);
-            if(temp && ent.hp >= 1) {
+            if(temp && ent.hp > 0) {
                 var distToEnd = distanceToEndPoint(ent.centerX, ent.centerY);
                 var distToTower = getDistance(ent.centerX, ent.centerY, this.centerX, this.centerY);
                 var distToEndByPath = getDistanceToEndByPath(ent.centerX, ent.centerY);
