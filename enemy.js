@@ -376,12 +376,14 @@ var enemyChooseDir = function(enemy) {
 // var str = ""; 
 
 var drawHP = function (enemy, x, y) {
-    enemy.game.ctx.fillStyle = "red";
-    enemy.game.ctx.fillRect(enemy.centerX - 25 + x, enemy.y + y, 50, 2);
-    enemy.game.ctx.fillStyle = "green";
-    var hp = enemy.hp;
-    if (hp < 0) {
-        hp = 0;
+    if (enemy.hp > 0) {
+        enemy.game.ctx.fillStyle = "red";
+        enemy.game.ctx.fillRect(enemy.centerX - 25 + x, enemy.y + y, 50, 2);
+        enemy.game.ctx.fillStyle = "green";
+        var hp = enemy.hp;
+        // if (hp < 0) {
+        //     hp = 0;
+        // }
+        enemy.game.ctx.fillRect(enemy.centerX - 25 + x, enemy.y + y, 50 * hp / enemy.maxHp, 2);
     }
-    enemy.game.ctx.fillRect(enemy.centerX - 25 + x, enemy.y + y, 50 * hp / enemy.maxHp, 2);
 }
