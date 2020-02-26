@@ -20,6 +20,7 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
     tea.hp = 20;
+    tea.maxHp = tea.hp;
     tea.tempWalkSpeed = tea.walkSpeed;
     tea.tempRunSpeed = tea.runSpeed;
     if (tea.paceWalk) {
@@ -39,10 +40,10 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.isBurned = false;
     tea.isFrozen = false;
     tea.isParalyzed = false;
-    tea.poisonDate = Date.now();
-    tea.burnDate = Date.now();
-    tea.freezeDate = Date.now();
-    tea.paralyzeDate = Date.now();
+    tea.poisonDate = tea.game.timer.time;
+    tea.burnDate = tea.game.timer.time;
+    tea.freezeDate = tea.game.timer.time;
+    tea.paralyzeDate = tea.game.timer.time
     tea.burnResistance = .25;
     tea.poisonResistance = .25;
     tea.paralysisResistance = .25;
@@ -135,14 +136,15 @@ var walkRunTeaDraw = function (tea) {
         }
     }
     drawBoundingBox(tea);
+    drawHP(tea, 0, 0);
 }
 
 var walkRunTeaUpdate = function (tea) {
     //use center gap
-    var runMin = 40;
-    var runMax = 60;
-    var walkMin = 48;
-    var walkMax = 52;
+    var runMin = 35;
+    var runMax = 65;
+    var walkMin = 46;
+    var walkMax = 54;
     // if (tea.isBurned) {
     //     runMin = 36;
     //     runMax = 64;

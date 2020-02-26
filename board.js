@@ -33,6 +33,8 @@ board.prototype.buildGameboard = function () {
 
   GAMEBOARD[0][2].start = true;
   GAMEBOARD[0][3].start = true;
+  GAMEBOARD[10][2].noTower = true;
+  GAMEBOARD[10][3].noTower = true;
   GAMEBOARD[11][2].end = true;
   GAMEBOARD[11][3].end = true;
 
@@ -149,8 +151,8 @@ board.prototype.draw = function () {
       var mouse = this.game.mouse;
       this.ctx.save();
       this.ctx.globalAlpha = 0.5;
-      var upperLeftX = Math.floor(mouse.x/100) * 100;
-      var upperLeftY = Math.floor(mouse.y/100) * 100;
+      // var upperLeftX = Math.floor(mouse.x/100) * 100;
+      // var upperLeftY = Math.floor(mouse.y/100) * 100;
       var gridX = Math.floor(mouse.x/100) + 1;
       var gridY = Math.floor(mouse.y/100);
       // console.log(gridX + " " + gridY);
@@ -161,7 +163,7 @@ board.prototype.draw = function () {
       // console.log(GAMEBOARD[gridX][gridY].hasEnemyRadius);
       if (gridX >= 0 && gridX < GAMEBOARD.length && gridY >= 0 && gridY < GAMEBOARD[0].length
         && !GAMEBOARD[gridX][gridY].end && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
-        && isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].occupied) {
+        && isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].occupied && !GAMEBOARD[gridX][gridY].noTower) {
        this.drawRect(Math.floor(mouse.x/100) + 1, Math.floor(mouse.y/100));
        this.ctx.globalAlpha = 0.25;
        this.ctx.fillStyle = "white";
@@ -189,6 +191,7 @@ board.prototype.update = function () {
     var ent = this.game.entities[i];
     if (ent !== this && ent.isEnemy) {//&& !isTower
         var xy = getXY(ent.centerX, ent.centerY);
+        // var xy = getXY(ent.centerX - divOffset.left, ent.centerY - divOffset.top);
         // console.log(xy)
         if (xy.x && xy.y) {
           GAMEBOARD[xy.x][xy.y].hasEnemyRadius = true;  
@@ -219,7 +222,7 @@ board.prototype.update = function () {
       var gridY = Math.floor(click.y/100);
       // console.log("X: " + click.x + "Y" + click.y);
       if (isPath(-50, 250, gridX, gridY) && !GAMEBOARD[gridX][gridY].hasEnemyRadius 
-        && !GAMEBOARD[gridX][gridY].occupied) {
+        && !GAMEBOARD[gridX][gridY].occupied && !GAMEBOARD[gridX][gridY].noTower) {
         if(currentMoney - towerArray[selectedTowerRow][selectedTowerColumn].cost >= 0) {
           GAMEBOARD[gridX][gridY].occupied = true;
           var tempTower = new boardTower(this.game, gridX, gridY, towerArray[selectedTowerRow][selectedTowerColumn]);
@@ -236,8 +239,7 @@ board.prototype.update = function () {
       }
       // console.log(ACTIVETOWERS[0][0]);
     }
-  }
-  
+  }  
 }
 
 //make it bidirection ?

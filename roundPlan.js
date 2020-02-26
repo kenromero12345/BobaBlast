@@ -11,14 +11,14 @@ Yellow bubble tea x10, ice golem x1, pumpkin evil x1, pumpkin good x1, bigCake x
 Round 4
 All 11 slimes x9 => 99 slimes
 */
-var round;
+var round = 0;
 var gameOverLose = false;
 var gameOverWin = false;
 function roundPlan(game) {
     this.index = 1;
     this.game = game;
     this.ctx = game.ctx;
-    this.timeGap = 1500;
+    this.timeGap = 1500; 
     this.isRoundStart = true;
     this.isEnding = false;
     this.game.running = false;
@@ -29,12 +29,13 @@ function roundPlan(game) {
 
 roundPlan.prototype.roundEntity = function(time, game, entity, isRoundEnding) {
     this.index++;
-    sleep(time).then(() => {
+    sleep(time / this.game.speed).then(() => {
         game.addEntity(entity);
         if (isRoundEnding) {
             this.isEnding = true;
         }
     })
+    //make an object that has date (timer.time)
 }
 
 roundPlan.prototype.isNoEnemy = function() {
@@ -129,7 +130,6 @@ roundPlan.prototype.update = function () {
 
     if (!this.isRoundStart && !this.isEnding && !this.spawningFinish) {
         if (round == 1) {
-            this.roundEntity(this.index * this.timeGap, this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap, this.game, new greenTea(this.game, -50, 350, false, .75));
