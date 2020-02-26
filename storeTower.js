@@ -34,7 +34,7 @@ storeTower.prototype.draw = function () {
 }
 
 storeTower.prototype.update = function () {
-    // // Click Mode: If you click a tower, set global variable for selected tower row/column
+    // Click Mode: If you click a tower, set global variable for selected tower row/column
     if (this.game.click && gameStarted && !paused) {
         // console.log("CLICK");
         var click = this.game.click;
@@ -55,27 +55,4 @@ storeTower.prototype.update = function () {
             hoverTowerColumn = this.storeGridX;
         } 
     } 
-    // if (this.game.mouseDown && gameStarted && !paused) {
-    //     // console.log("CLICK");
-    //     var mouseDown = this.game.mouseDown;
-    //     if(mouseDown.x >= this.x && mouseDown.x < this.x + 70 && mouseDown.y >= this.y && mouseDown.y < this.y + 70) {
-    //         if (currentMoney - this.cost < 0) {
-    //             return;
-    //         }
-    //         purchaseMode = true;
-    //         selectedTowerColumn = this.storeGridX;
-    //         selectedTowerRow =this.storeGridY;
-    //     }
-    // } else {
-    //     purchaseMode = false;
-    // }
-
-    // if (this.game.mouseUp && gameStarted && !paused) {
-    //     // console.log("u")
-    //     var mouseUp = this.game.mouseUp;
-    //     if (purchaseMode && mouseUp.x < 0 && mouseUp.x > 900 && mouseUp.y > 600 && mouseUp.y < 0 ) {
-    //         // console.log("u")
-    //         purchaseMode = false;
-    //     }
-    // }
 }

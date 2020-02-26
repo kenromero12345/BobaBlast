@@ -16,7 +16,6 @@ function iceGolem(game, spawnX, spawnY, scale) {
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 1);
         //                               this.moveDirection = 3;
         // this.lookDirectionRight = false;
-    this.freezeResistance = .99;
 }
 
 iceGolem.prototype.setBoundingBox = function() {
@@ -32,7 +31,6 @@ iceGolem.prototype.setBoundingBox = function() {
 iceGolem.prototype.draw = function () {
     // console.log(this.centerX)
     enemyDraw(this);
-    drawHP(this, 0, -5);
 }
 
 iceGolem.prototype.update = function () {

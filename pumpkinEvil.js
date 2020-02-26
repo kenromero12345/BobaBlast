@@ -64,7 +64,6 @@ pumpkinEvil.prototype.draw = function () {
             }
         }
         drawBoundingBox(this);
-        drawHP(this, 0, 0);
     }
 }
 
