@@ -284,7 +284,7 @@ function generateStoreTowers(game) {
     //super tower
     var fourthTower = new storeTower(game, "Golden Boba", 2500, 50/1000, 500, "Super tower. \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies",AM.getAsset("./img/towerY.png"), 945, 190, 70,70,0,1, "gold");
     //wall
-    var fifthTower = new storeTower(game, "Pot of Boba", 20, 1/1000, 1, "A wall that stops the \nenemies from progressing.",AM.getAsset("./img/pot.png"), 1015, 190, 70,70,1,1, "none");
+    var fifthTower = new storeTower(game, "Pot of Boba", 20, 0, 0, "A wall that stops the \nenemies from progressing.",AM.getAsset("./img/pot.png"), 1015, 190, 70,70,1,1, "none");
     //slow tower
     var sixthTower = new storeTower(game, "Iced Boba", 200, 1000/1000, 250, "Ices enemies \nShooting Speed: Slow \nRange: Medium \nSpecial Ability: Ice makes enemies \nmove slowly",AM.getAsset("./img/towerB.png"), 1085, 190, 70,70,2,1, "blue");
     //stun tower
