@@ -16,10 +16,11 @@ function Timer() {
     this.gameTime = 0;
     this.maxStep = 0.05;
     this.wallLastTimestamp = 0;
+    this.time = Date.now();
 }
 
 Timer.prototype.tick = function () {
-    var wallCurrent = Date.now();
+    var wallCurrent =  Date.now();
     var wallDelta = (wallCurrent - this.wallLastTimestamp) / 1000;
     this.wallLastTimestamp = wallCurrent;
 
@@ -33,13 +34,17 @@ function GameEngine() {
     this.showOutlines = false;
     this.ctx = null;
     this.click = null;
-    this.mouse = null;
+    this.rClick = null;
+    this.drag = null;
+    this.mouseDown = null;
+    this.mouseUp = null;
     this.wheel = null;
     this.surfaceWidth = null;
     this.surfaceHeight = null;
     this.towers = null;
     this.display = null;
     this.activeTowers = [];
+    this.speed = 1;
 }
 
 GameEngine.prototype.init = function (ctx) {
@@ -64,15 +69,15 @@ GameEngine.prototype.startInput = function () {
     console.log('Starting input');
     var that = this;
 
-    var getXandY = function (e) {
-        var a = e.clientX - that.ctx.canvas.getBoundingClientRect().left;
-        var b = e.clientY - that.ctx.canvas.getBoundingClientRect().top;
+    // var getXandY = function (e) {
+    //     var a = e.clientX - divOffset.left - that.ctx.canvas.getBoundingClientRect().left;
+    //     var b = e.clientY - divOffset.top - that.ctx.canvas.getBoundingClientRect().top;
 
-        var i = Math.floor(a/100) + 1;
-        var j = Math.floor(b/100);
+    //     var i = Math.floor(a/100) + 1;
+    //     var j = Math.floor(b/100);
         
-        return {x: i, y: j}
-    }
+    //     return {x: i, y: j}
+    // }
 
     this.ctx.canvas.addEventListener("keydown", function (e) {
         // if (String.fromCharCode(e.which) === ' ') that.space = true;
@@ -88,16 +93,31 @@ GameEngine.prototype.startInput = function () {
 
     this.ctx.canvas.addEventListener("click", function (e) {
         //that.click = getXandY(e);
-        that.click = { x: e.clientX, y: e.clientY };
+        that.click = { x: e.clientX - divOffset.left, y: e.clientY - divOffset.top};
         // console.log(e);
         // console.log("Left Click Event - X,Y " + e.clientX + ", " + e.clientY);
         // console.log(getXY(e.clientX, e.clientY));
-        var xy = getXY(e.clientX, e.clientY);
+        // var xy = getXY(e.clientX, e.clientY);
       //  GAMEBOARD[xy.x][xy.y].occupied = !GAMEBOARD[xy.x][xy.y].occupied;
     }, false);
 
+    this.ctx.canvas.addEventListener("mouseup", function (e) {
+        // that.click = { x: e.clientX, y: e.clientY };
+        that.mouseUp = { x: e.clientX - divOffset.left, y: e.clientY - divOffset.top };
+    }, false);
+
+    this.ctx.canvas.addEventListener("contextmenu", function (e) {
+        // that.click = { x: e.clientX, y: e.clientY };
+        that.rClick = { x: e.clientX - divOffset.left, y: e.clientY - divOffset.top };
+    }, false);
+
+    this.ctx.canvas.addEventListener("mousedown", function (e) {
+        // that.click = { x: e.clientX, y: e.clientY };
+        that.mouseDown = { x: e.clientX - divOffset.left, y: e.clientY - divOffset.top };
+    }, false);
+
     this.ctx.canvas.addEventListener("mousemove", function (e) {
-        that.mouse = { x: e.clientX, y: e.clientY };
+        that.mouse = { x: e.clientX - divOffset.left, y: e.clientY - divOffset.top };
     }, false);
 
     console.log('Input started');
@@ -166,7 +186,8 @@ GameEngine.prototype.update = function () {
 }
 
 GameEngine.prototype.loop = function () {
-    this.clockTick = this.timer.tick();
+    this.clockTick = this.timer.tick() * this.speed;
+    this.timer.time += this.clockTick;
     this.update();
     this.draw();
     // this.space = null;
@@ -364,7 +385,89 @@ function helperToGetDirection(node) {
 	}
 };
 
+function getDistanceToEndByPath(x, y) {
+    var queue = [];
+
+	for(var i = 0; i < GAMEBOARD.length; i++) {
+	  	for(var j = 0; j < GAMEBOARD[i].length; j++) {
+            GAMEBOARD[i][j].distToXY = -1;
+            GAMEBOARD[i][j].dir = -1;
+	  	}
+	}
+
+    var xy = getXY(x, y);
+    GAMEBOARD[xy.x][xy.y].distToXY = 0;
+    GAMEBOARD[xy.x][xy.y].dir = 0;
+    queue.push(xy);
+
+    while (queue.length !== 0) {
+        for (let i = 0; i < queue.length; i++) {
+            var node = queue.shift();
+            // if (node.x == 2 && node.y > 0) {
+            //     console.log("problem")
+            // }
+            if (GAMEBOARD[node.x][node.y].end) {
+				return GAMEBOARD[node.x][node.y].distToXY;
+            }
+
+            if (node.x + 1 < GAMEBOARD.length && node.x + 1 >= 0 && !GAMEBOARD[node.x + 1][node.y].occupied 
+                && GAMEBOARD[node.x + 1][node.y].dir < 0) {
+                var newNode = Object.assign({}, node);
+                newNode.x++;
+                queue.push(newNode);
+				GAMEBOARD[node.x + 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+				GAMEBOARD[node.x + 1][node.y].dir = 1;
+            }
+            if (node.y + 1 < GAMEBOARD[0].length && node.y + 1 >= 0 && !GAMEBOARD[node.x][node.y + 1].occupied 
+                && GAMEBOARD[node.x][node.y + 1].dir < 0) {
+                var newNode = Object.assign({}, node);
+                newNode.y++;
+                queue.push(newNode);
+				GAMEBOARD[node.x][node.y + 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+				GAMEBOARD[node.x][node.y + 1].dir = 2;
+            }
+            if (node.x - 1 < GAMEBOARD.length && node.x - 1 >= 0 && !GAMEBOARD[node.x - 1][node.y].occupied 
+                && GAMEBOARD[node.x - 1][node.y].dir < 0) {
+                var newNode = Object.assign({}, node);
+                newNode.x--;
+                queue.push(newNode);
+				GAMEBOARD[node.x - 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+				GAMEBOARD[node.x - 1][node.y].dir = 3;
+            }
+            if (node.y - 1 < GAMEBOARD[0].length && node.y - 1 >= 0 && !GAMEBOARD[node.x][node.y - 1].occupied 
+                && GAMEBOARD[node.x][node.y - 1].dir < 0) {
+                var newNode = Object.assign({}, node);
+                newNode.y--;
+                queue.push(newNode);
+				GAMEBOARD[node.x][node.y - 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+				GAMEBOARD[node.x][node.y - 1].dir = 4;
+            }
+        }
+    }
+    return 0; // no shortest path
+};
+
 //sleep in some milliseconds
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+function distance(a, b) {
+    var dx = a.x - b.x;
+    var dy = a.y - b.y;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+function direction(a, b) {
+    var dx = a.x - b.x;
+    var dy = a.y - b.y;
+    var dist = Math.sqrt(dx * dx + dy * dy);
+    if(dist > 0) return { x: dx / dist, y: dy / dist }; else return {x:0,y:0};
+}
+
+function offset(el) {
+    var rect = el.getBoundingClientRect(),
+    scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+    scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    return { top: rect.top + scrollTop, left: rect.left + scrollLeft}
 }

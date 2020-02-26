@@ -14,7 +14,7 @@ function biscuit(game, spawnX, spawnY, scale) {
     , 803-15, 221, -91, 94, 7, .25, 7, false, scale, false);
     this.boxes = true;
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 4);
         // this.moveDirection = 3;
         // this.lookDirectionRight = false;
 }
@@ -81,6 +81,7 @@ biscuit.prototype.draw = function () {
             }
         }
         drawBoundingBox(this);
+        drawHP(this, 0, 0);
     }
 }
 
