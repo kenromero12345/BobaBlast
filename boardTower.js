@@ -287,7 +287,7 @@ boardTower.prototype.update = function () {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if(shootPriorityType == 1) {
+        } else if(this.shootPriorityType == 1) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.distToEnd <= withinRange[i].distToEnd) {
                     selectedEnemy = withinRange[i]
@@ -299,7 +299,7 @@ boardTower.prototype.update = function () {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if(shootPriorityType == 3) {
+        } else if(this.shootPriorityType == 3) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.distToEndByPath <= withinRange[i].distToEndByPath) {
                     selectedEnemy = withinRange[i]
@@ -311,19 +311,19 @@ boardTower.prototype.update = function () {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if(shootPriorityType == 5) {
+        } else if(this.shootPriorityType == 5) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.distToTower <= withinRange[i].distToTower) {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if (shootPriorityType == 6) {
+        } else if (this.shootPriorityType == 6) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.enemy.hp <= withinRange[i].enemy.hp) {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if (shootPriorityType == 7) {
+        } else if (this.shootPriorityType == 7) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.enemy.hp >= withinRange[i].enemy.hp) {
                     selectedEnemy = withinRange[i]
