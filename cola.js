@@ -44,6 +44,7 @@ cola.prototype.setBoundingBox = function() {
 cola.prototype.draw = function () {
     // console.log(this.centerX)
     enemyDraw(this);
+    drawHP(this, 0, 0);
 }
 
 cola.prototype.update = function () {

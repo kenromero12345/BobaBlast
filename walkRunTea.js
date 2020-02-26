@@ -20,6 +20,7 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
     tea.hp = 20;
+    tea.maxHp = tea.hp;
     tea.tempWalkSpeed = tea.walkSpeed;
     tea.tempRunSpeed = tea.runSpeed;
     if (tea.paceWalk) {
@@ -135,6 +136,7 @@ var walkRunTeaDraw = function (tea) {
         }
     }
     drawBoundingBox(tea);
+    drawHP(tea, 0, 0);
 }
 
 var walkRunTeaUpdate = function (tea) {

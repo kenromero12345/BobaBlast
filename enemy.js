@@ -328,7 +328,7 @@ var enemyConstructor = function(enemy, scale, spawnX, spawnY, width, height, gam
     enemy.ctx = game.ctx;
     enemy.moveDirection = 1; //1 is right, down, left, up
     enemy.lookDirectionRight = true;
-
+    enemy.maxHp = enemy.hp;
     enemy.boxes = true;
     enemy.setBoundingBox();
     enemyCenterUpdate(enemy);
@@ -374,3 +374,14 @@ var enemyChooseDir = function(enemy) {
 }
 
 // var str = ""; 
+
+var drawHP = function (enemy, x, y) {
+    enemy.game.ctx.fillStyle = "red";
+    enemy.game.ctx.fillRect(enemy.centerX - 25 + x, enemy.y + y, 50, 2);
+    enemy.game.ctx.fillStyle = "green";
+    var hp = enemy.hp;
+    if (hp < 0) {
+        hp = 0;
+    }
+    enemy.game.ctx.fillRect(enemy.centerX - 25 + x, enemy.y + y, 50 * hp / enemy.maxHp, 2);
+}
