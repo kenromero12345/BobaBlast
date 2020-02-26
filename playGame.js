@@ -64,6 +64,7 @@ PlayGame.prototype.update = function () {
             if(click.x < this.buttonStartX + this.buttonWidth + 10 && click.x >= this.buttonStartX 
                 && click.y < this.buttonStartY + this.buttonHeight && click.y >= this.buttonStartY) {
                     gameStarted = true;
+                    gameOverLose = false;
                 }
         }
     }
