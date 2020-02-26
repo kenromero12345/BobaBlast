@@ -44,7 +44,7 @@ function GameEngine() {
     this.towers = null;
     this.display = null;
     this.activeTowers = [];
-    this.speed = 2;
+    this.speed = 1;
 }
 
 GameEngine.prototype.init = function (ctx) {

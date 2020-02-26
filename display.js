@@ -85,6 +85,7 @@ display.prototype.draw = function () {
         this.generatePauseButton();
     }
     this.generateDescriptionBox();
+    this.generateFastForwardButton();
 
     if (this.game.mouse) {
         var mouse = this.game.mouse;
@@ -110,7 +111,7 @@ display.prototype.draw = function () {
             }
         }
         // Hover Over Feature for Starting Round
-        if(mouse.x < this.buttonStartX + this.buttonWidth + 10 && mouse.x >= this.buttonStartX 
+        if(mouse.x < this.buttonStartX + this.buttonWidth + 10 - 55 && mouse.x >= this.buttonStartX
             && mouse.y < this.buttonStartY + this.buttonHeight && mouse.y >= this.buttonStartY) {
             if(!this.game.running && !paused) {
                 var x = this.buttonStartX;
@@ -118,16 +119,16 @@ display.prototype.draw = function () {
                 var w = this.buttonWidth;
                 var h = this.buttonHeight;
                 ctx.fillStyle = "green";
-                ctx.fillRect(x,y,w,h);
+                ctx.fillRect(x,y,w - 55,h);
                 ctx.fillStyle = "white";
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("S", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.fillText("S", this.buttonStartX + 35 - 25, this.buttonStartY + 40  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("TART", this.buttonStartX + 55, this.buttonStartY + 40  );
+                ctx.fillText("TART", this.buttonStartX + 55 - 25, this.buttonStartY + 40  );
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("R", this.buttonStartX + 120, this.buttonStartY + 40  );
+                ctx.fillText("R", this.buttonStartX + 120 - 25, this.buttonStartY + 40  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 40  );
+                ctx.fillText("OUND", this.buttonStartX + 140 - 25, this.buttonStartY + 40  );
             }
             if(this.game.running && !paused) {
                 var x = this.buttonStartX;
@@ -135,16 +136,16 @@ display.prototype.draw = function () {
                 var w = this.buttonWidth;
                 var h = this.buttonHeight;
                 ctx.fillStyle = "green";
-                ctx.fillRect(x,y,w,h);
+                ctx.fillRect(x,y,w - 55,h);
                 ctx.fillStyle = "white";
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("P", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.fillText("P", this.buttonStartX + 35 - 25, this.buttonStartY + 40  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("AUSE", this.buttonStartX + 50, this.buttonStartY + 40  );
+                ctx.fillText("AUSE", this.buttonStartX + 50 - 25, this.buttonStartY + 40  );
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("G", this.buttonStartX + 120, this.buttonStartY + 40  );
+                ctx.fillText("G", this.buttonStartX + 120 - 25, this.buttonStartY + 40  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("AME", this.buttonStartX + 140, this.buttonStartY + 40  );
+                ctx.fillText("AME", this.buttonStartX + 140 - 25, this.buttonStartY + 40  );
             }
             if(!this.game.running && paused) {
                 var ctx = this.ctx;
@@ -153,18 +154,62 @@ display.prototype.draw = function () {
                 var w = this.buttonWidth;
                 var h = this.buttonHeight;
                 ctx.fillStyle = "green";
-                ctx.fillRect(x,y,w,h);
+                ctx.fillRect(x,y,w - 55,h);
                 ctx.fillStyle = "white";
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.fillText("R", this.buttonStartX + 35 - 25, this.buttonStartY + 40  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("ESUME", this.buttonStartX + 55, this.buttonStartY + 40  );
+                ctx.fillText("ESUME", this.buttonStartX + 55 - 25, this.buttonStartY + 40  );
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("G", this.buttonStartX + 150, this.buttonStartY + 40  );
+                ctx.fillText("G", this.buttonStartX + 150 - 25, this.buttonStartY + 40  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("AME", this.buttonStartX + 170, this.buttonStartY + 40  );
+                ctx.fillText("AME", this.buttonStartX + 170 - 25, this.buttonStartY + 40  );
+            }
+
+            if(mouse.x < this.buttonStartX + this.buttonWidth + 10 - 55 && mouse.x >= this.buttonStartX
+            && mouse.y < this.buttonStartY + this.buttonHeight && mouse.y >= this.buttonStartY) {
+            if(!this.game.running && !paused) {
+                var x = this.buttonStartX;
+                var y = this.buttonStartY;
+                var w = this.buttonWidth;
+                var h = this.buttonHeight;
+                ctx.fillStyle = "green";
+                ctx.fillRect(x,y,w - 55,h);
+                ctx.fillStyle = "white";
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("S", this.buttonStartX + 35 - 25, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("TART", this.buttonStartX + 55 - 25, this.buttonStartY + 40  );
+                ctx.font = '30px Bahnschrift Light';
+                ctx.fillText("R", this.buttonStartX + 120 - 25, this.buttonStartY + 40  );
+                ctx.font = '26px Bahnschrift Light';
+                ctx.fillText("OUND", this.buttonStartX + 140 - 25, this.buttonStartY + 40  );
             }
         }
+    }
+
+    var x = this.buttonStartX + 230 - 25 - 5;
+    var y = this.buttonStartY;
+    var w = this.buttonHeight;
+    var h = this.buttonHeight;
+    if(mouse.x < x + w  && mouse.x >= x
+        && mouse.y < y + h && mouse.y >= y) {
+        // if(!this.game.running && !paused) {
+            // var ctx = this.ctx;
+            var x = this.buttonStartX + 230 - 25 - 5;
+            var y = this.buttonStartY;
+            var w = this.buttonHeight;
+            var h = this.buttonHeight;
+            ctx.fillStyle = "green";
+            ctx.fillRect(x,y,w ,h);
+            ctx.fillStyle = "black";
+            ctx.font = '30px Bahnschrift Light';
+            if (this.game.speed == 1) {
+            ctx.fillText("x2", x + 8, this.buttonStartY + 40  );
+            } else {
+                ctx.fillText("x1", x + 8, this.buttonStartY + 40  );
+            }
+        // }
     }
 
     if (this.game.click) {
@@ -180,7 +225,7 @@ display.prototype.draw = function () {
             }
         }
         // Start Round Button Click
-        if(click.x < this.buttonStartX + this.buttonWidth + 10 && click.x >= this.buttonStartX 
+        if(click.x < this.buttonStartX + this.buttonWidth + 10 - 55 && click.x >= this.buttonStartX 
             && click.y < this.buttonStartY + this.buttonHeight && click.y >= this.buttonStartY) {
                 if(!this.game.running && !paused) {
                     this.game.running = true;
@@ -192,8 +237,34 @@ display.prototype.draw = function () {
                     paused = false;
                 }
         }
+
+        var x = this.buttonStartX + 230 - 25 - 5;
+        var y = this.buttonStartY;
+        var w = this.buttonHeight;
+        var h = this.buttonHeight;
+        if(click.x < x + w  && click.x >= x
+            && click.y < y + h && click.y >= y) {
+                if (this.game.speed == 1) {
+                    this.game.speed = 2;
+                } else {
+                    this.game.speed = 1;
+                }
+            // // if(!this.game.running && !paused) {
+            //     // var ctx = this.ctx;
+            //     var x = this.buttonStartX + 230 - 25 - 5;
+            //     var y = this.buttonStartY;
+            //     var w = this.buttonHeight;
+            //     var h = this.buttonHeight;
+            //     ctx.fillStyle = "green";
+            //     ctx.fillRect(x,y,w ,h);
+            //     ctx.fillStyle = "black";
+            //     ctx.font = '30px Bahnschrift Light';
+            //     ctx.fillText("x2", x + 8, this.buttonStartY + 40  );
+            // // }
+        }
         this.game.click = false;
     }
+}
 }
 
 display.prototype.generateRoundBoard = function () {
@@ -255,16 +326,33 @@ display.prototype.generateStartButton = function() {
     var w = this.buttonWidth;
     var h = this.buttonHeight;
     ctx.fillStyle = "#ff4747";
-    ctx.fillRect(x,y,w,h);
+    ctx.fillRect(x,y,w - 55,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("S", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.fillText("S", this.buttonStartX + 35 - 25, this.buttonStartY + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("TART", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.fillText("TART", this.buttonStartX + 55 - 25, this.buttonStartY + 40  );
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("R", this.buttonStartX + 120, this.buttonStartY + 40  );
+    ctx.fillText("R", this.buttonStartX + 120 - 25, this.buttonStartY + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 40  );
+    ctx.fillText("OUND", this.buttonStartX + 140 - 25, this.buttonStartY + 40  );
+}
+
+display.prototype.generateFastForwardButton = function() {
+    var ctx = this.ctx;
+    var x = this.buttonStartX + 230 - 25 - 5;
+    var y = this.buttonStartY;
+    var w = this.buttonHeight;
+    var h = this.buttonHeight;
+    ctx.fillStyle = "#ff4747";
+    ctx.fillRect(x,y,w ,h);
+    ctx.fillStyle = "black";
+    ctx.font = '30px Bahnschrift Light';
+    if (this.game.speed == 1) {
+        ctx.fillText("x2", x + 8, this.buttonStartY + 40  );
+    } else {
+        ctx.fillText("x1", x + 8, this.buttonStartY + 40  );
+    }
 }
 
 display.prototype.generateResumeButton = function() {
@@ -274,16 +362,16 @@ display.prototype.generateResumeButton = function() {
     var w = this.buttonWidth;
     var h = this.buttonHeight;
     ctx.fillStyle = "#ff4747";
-    ctx.fillRect(x,y,w,h);
+    ctx.fillRect(x,y,w - 55,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.fillText("R", this.buttonStartX + 35 - 25, this.buttonStartY + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("ESUME", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.fillText("ESUME", this.buttonStartX + 55 -25, this.buttonStartY + 40  );
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("G", this.buttonStartX + 150, this.buttonStartY + 40  );
+    ctx.fillText("G", this.buttonStartX + 150 - 30, this.buttonStartY + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("AME", this.buttonStartX + 170, this.buttonStartY + 40  );
+    ctx.fillText("AME", this.buttonStartX + 170 - 30, this.buttonStartY + 40  );
 }
 
 display.prototype.generatePauseButton = function() {
@@ -293,16 +381,16 @@ display.prototype.generatePauseButton = function() {
     var w = this.buttonWidth;
     var h = this.buttonHeight;
     ctx.fillStyle = "#ff4747";
-    ctx.fillRect(x,y,w,h);
+    ctx.fillRect(x,y,w - 55,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("P", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.fillText("P", this.buttonStartX + 35 - 25, this.buttonStartY + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("AUSE", this.buttonStartX + 50, this.buttonStartY + 40  );
+    ctx.fillText("AUSE", this.buttonStartX + 50 - 25, this.buttonStartY + 40  );
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("G", this.buttonStartX + 120, this.buttonStartY + 40  );
+    ctx.fillText("G", this.buttonStartX + 120 - 25, this.buttonStartY + 40  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("AME", this.buttonStartX + 140, this.buttonStartY + 40  );
+    ctx.fillText("AME", this.buttonStartX + 140 - 25, this.buttonStartY + 40  );
 }
 
 display.prototype.generateDescriptionBox = function() {
