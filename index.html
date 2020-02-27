@@ -2,6 +2,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+        /* #transformed {
+            width: 100px;
+            height: 100px;
+            background-color: #c00;
+            -webkit-transform: translate3d(15px,20px,10px);
+        } */
+    </style>
     <meta charset="utf-8">
     <title>BobaBlast</title>
     <script type="text/javascript" src="./redTea.js"></script>
@@ -32,7 +48,31 @@
     <script type="text/javascript" src="./roundPlan.js"></script>
     <script type="text/javascript" src="./main.js"></script>
 </head>
-<body>
-    <canvas id="gameWorld" tabindex="1" width="1200" height="600" style="border: 1px solid brown; background: lightskyblue"></canvas>
+<body style="background-color:#ff4747;">
+    <div class = "container">
+        <canvas id="gameWorld" tabindex="1" width="1200" height="600" 
+        style="border: 1px solid brown; background: lightskyblue"></canvas>
+    </div>
+    <!-- <script>
+        // window.addEventListener('load', function(){
+        //     var node = document.getElementById("gameWorld");
+        //     var curTransform = new   WebKitCSSMatrix(window.getComputedStyle(node).webkitTransform);
+        //     console.log(node.offsetLeft + " " + curTransform.m41); //real offset left 8
+        //     console.log(node.offsetTop + " " + curTransform.m42); //real offset top 8
+        // });
+
+        // function offset(el) {
+        //     var rect = el.getBoundingClientRect(),
+        //     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+        //     scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        //     return { top: rect.top + scrollTop, left: rect.left + scrollLeft}
+        // }
+        // window.addEventListener('load', function(){
+        //     var div = document.querySelector('div');
+        //     var divOffset = offset(div);
+        //     // console.log(divOffset.left, divOffset.top);
+        // });
+
+      </script> -->
 </body>
 </html>

@@ -1,7 +1,8 @@
 var AM = new AssetManager();
 var gameStarted = false;
 
-function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWidth, frameDuration, frames, loop, scale, flip) {
+function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWidth
+    , frameDuration, frames, loop, scale, flip) {
     this.spriteSheet = spriteSheet;
 	this.startX = startX;
 	this.startY = startY;
@@ -190,6 +191,8 @@ Background.prototype.update = function() {
 
 // var GAMEBOARD = [];
 AM.downloadAll(function () {
+    var div = document.querySelector('div');
+    divOffset = offset(div);
     var canvas = document.getElementById("gameWorld");
     var ctx = canvas.getContext("2d");
     var gameEngine = new GameEngine();
@@ -224,6 +227,40 @@ AM.downloadAll(function () {
     // gameEngine.addEntity(new redTea(gameEngine, 450, 250, false, .75));
     // gameEngine.addEntity(new yellowTea(gameEngine, 450, 250, true, .75));
 
+    // gameEngine.addEntity(new bigCake(gameEngine, 450, 550, .25));
+    // gameEngine.addEntity(new biscuit(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new cake(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new cola(gameEngine, 450, 550, .85, false));
+    // gameEngine.addEntity(new iceGolem(gameEngine, 450, 550, .7));
+    // gameEngine.addEntity(new miniCake(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 550, .75));
+    // gameEngine.addEntity(new slime(gameEngine, 450, 550, .75, 10));
+    // gameEngine.addEntity(new watermelon(gameEngine, 450, 550, .75));
+
+    // gameEngine.addEntity(new greenTea(gameEngine, 450, 550, false, .75));
+    // gameEngine.addEntity(new redTea(gameEngine, 450, 550, false, .75));
+    // gameEngine.addEntity(new yellowTea(gameEngine, 450, 550, true, .75));
+
+    // monsters.push();
+    
+        // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
+    // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new cola(gameEngine, 450, 250, .85, false));
+    // gameEngine.addEntity(new iceGolem(gameEngine, 450, 250, .7));
+    // gameEngine.addEntity(new miniCake(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 250, .75));
+    // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 10));
+    // gameEngine.addEntity(new watermelon(gameEngine, 450, 250, .75));
+
+    // gameEngine.addEntity(new greenTea(gameEngine, 450, 250, false, .75));
+    // gameEngine.addEntity(new redTea(gameEngine, 450, 250, false, .75));
+    // gameEngine.addEntity(new yellowTea(gameEngine, 450, 250, true, .75));
+
     console.log("All Done!");
 
     var pg = new PlayGame(gameEngine);
@@ -232,24 +269,25 @@ AM.downloadAll(function () {
     gameEngine.running = false;
 });
 
+var monsters = [];
+
+var divOffset;
+
 function generateStoreTowers(game) {
     //basic tower
-    var firstTower = new storeTower(game, "Boba", 100, 1000, 150, "Basic boba shooter.\nShooting Speed: Slow \nRange: Short",AM.getAsset("./img/tower.png"), 945, 200, 70,70,0,0, "none");
+    var firstTower = new storeTower(game, "Boba", 100, 1000/1000, 150, "Basic boba shooter.\nShooting Speed: Slow \nRange: Short",AM.getAsset("./img/tower.png"), 945, 120, 70,70,0,0, "none");
     //poison tower
-    var secondTower = new storeTower(game, "Matcha Boba", 400, 300, 250, "Poisons enemies. \nShooting Speed: Fast \nRange: Medium \nSpecial Ability: Poison does damage\nover time",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0, "green");
+    var secondTower = new storeTower(game, "Matcha Boba", 400, 300/1000, 250, "Poisons enemies. \nShooting Speed: Fast \nRange: Medium \nSpecial Ability: Poison does damage\nover time",AM.getAsset("./img/towerG.png"), 1015, 120, 70, 70,1,0, "green");
     //explosive tower
-    var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000, 250,"Burns enemies. \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes enemies \nrun faster & does damage over time",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0, "red");
+    var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000/1000, 250,"Burns enemies. \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes enemies \nrun faster & does damage over time",AM.getAsset("./img/towerR.png"), 1085, 120, 70,70,2,0, "red");
     //super tower
-    var fourthTower = new storeTower(game, "Golden Boba", 2500, 50, 500, "Super tower. \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1, "gold");
+    var fourthTower = new storeTower(game, "Golden Boba", 2500, 50/1000, 500, "Super tower. \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies",AM.getAsset("./img/towerY.png"), 945, 190, 70,70,0,1, "gold");
     //wall
-    var fifthTower = new storeTower(game, "Pot of Boba", 20, 1, 1, "A wall that stops the \nenemies from progressing.",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1, "none");
+    var fifthTower = new storeTower(game, "Pot of Boba", 20, 0, 0, "A wall that stops the \nenemies from progressing.",AM.getAsset("./img/pot.png"), 1015, 190, 70,70,1,1, "none");
     //slow tower
-    var sixthTower = new storeTower(game, "Iced Boba", 200, 1000, 250, "Ices enemies \nShooting Speed: Slow \nRange: Medium \nSpecial Ability: Ice makes enemies \nmove slowly",AM.getAsset("./img/towerB.png"), 1085, 270, 70,70,2,1, "blue");
+    var sixthTower = new storeTower(game, "Iced Boba", 200, 1000/1000, 250, "Ices enemies \nShooting Speed: Slow \nRange: Medium \nSpecial Ability: Ice makes enemies \nmove slowly",AM.getAsset("./img/towerB.png"), 1085, 190, 70,70,2,1, "blue");
     //stun tower
-    var seventhTower = new storeTower(game, "Taro Boba", 300, 600, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \nSpecial Ability: Stun briefly stops \nenemies in place ",AM.getAsset("./img/towerP.png"), 945, 340,70,70,0,2, "purple");
-
-    var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \n(WIP) DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2, "none");
-    var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \n(WIP) DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2, "none");
+    var seventhTower = new storeTower(game, "Taro Boba", 300, 600/1000, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \nSpecial Ability: Stun briefly stops \nenemies in place ",AM.getAsset("./img/towerP.png"), 945, 260,70,70,0,2, "purple");
 
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower]];//eightTower,ninthTower
     for(var i = 0; i < 3; i++) {
