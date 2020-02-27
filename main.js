@@ -280,7 +280,7 @@ function generateStoreTowers(game) {
     //poison tower
     var secondTower = new storeTower(game, "Matcha Boba", 400, 300/1000, 250, "Poisons enemies \nShooting Speed: Fast \nRange: Medium \nSpecial Ability: Poison does \ndamage over time",AM.getAsset("./img/towerG.png"), 1015, 120, 70, 70,1,0, "green");
     //explosive tower
-    var thirdTower = new storeTower(game, "Cherry Boba", 800, 2000/1000, 250,"Burns enemies \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes \nenemies run faster and \ndoes damage over time \nShoots an explosion that hits \nmultiple enemies",AM.getAsset("./img/towerR.png"), 1085, 120, 70,70,2,0, "red");
+    var thirdTower = new storeTower(game, "Red Bean Boba", 800, 2000/1000, 250,"Burns enemies \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes \nenemies run faster and \ndoes damage over time \nShoots an explosion that hits \nmultiple enemies",AM.getAsset("./img/towerR.png"), 1085, 120, 70,70,2,0, "red");
     //super tower
     var fourthTower = new storeTower(game, "Golden Boba", 2500, 50/1000, 500, "Super tower \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies",AM.getAsset("./img/towerY.png"), 945, 190, 70,70,0,1, "gold");
     //wall
