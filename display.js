@@ -534,9 +534,9 @@ display.prototype.generateDescriptionBox = function() {
     ctx.fillStyle = "black";
     ctx.font = '14px Bahnschrift SemiBold';
     ctx.fillText("Name: " + currentTower.name, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
-    ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 140, this.descriptionBoxStartY + 20);
+    ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 160, this.descriptionBoxStartY + 20);
 
-    var txt = currentTower.description;
+    var txt = 'Description: ' + currentTower.description;
     var lineX = this.descriptionBoxStartX + 15;
     var lineY = this.descriptionBoxStartY + 40;
     var lineheight = 15;

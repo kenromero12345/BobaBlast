@@ -144,10 +144,7 @@ AM.queueDownload("./img/pumpkinEvilFlip.png");
 AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
 AM.queueDownload("./img/explosion.png");
-
-var audio = new Audio('./mp3/Your Sunset.mp3');
-
-
+    
 function Background(game, spritesheet) {
     this.isEnemy = false;
     this.x = 0;
@@ -155,10 +152,12 @@ function Background(game, spritesheet) {
     this.spritesheet = spritesheet;
     this.game = game;
     this.ctx = game.ctx;
+    
 }
 
 Background.prototype.draw = function() {
     this.ctx.drawImage(this.spritesheet, this.x, this.y);
+    
 }
 
 //Music
