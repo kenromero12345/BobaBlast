@@ -581,7 +581,7 @@ display.prototype.generateDescriptionBox = function() {
             ctx.font = '16px Bahnschrift SemiBold';
             ctx.fillText("Tower Range: Level " + selectedUpgradableTower.rangeLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 45);
             ctx.fillText("Boba Damage: Level " + selectedUpgradableTower.damageLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 70);
-            ctx.fillText("Boba Speed: Level " + selectedUpgradableTower.speedLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 95);
+            ctx.fillText("Boba Velocity: Level " + selectedUpgradableTower.speedLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 95);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.rangeUpgradeCost, 200, 30);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.damageUpgradeCost, 200, 55);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.speedUpgradeCost, 200, 80);
