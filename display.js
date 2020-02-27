@@ -363,8 +363,7 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
             && mouse.y < this.descriptionBoxStartY + 55 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 55 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.damageLevel < 3) {
-                selectedUpgradableTower.bobaDamage ++;
-                console.log(selectedUpgradableTower.bobaDamage);
+                selectedUpgradableTower.bobaDamage +=2;
                 selectedUpgradableTower.damageLevel ++;
                 currentMoney -= selectedUpgradableTower.damageUpgradeCost;
                 selectedUpgradableTower.damageUpgradeCost += (30 * selectedUpgradableTower.damageLevel);
@@ -377,7 +376,7 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
             && mouse.y < this.descriptionBoxStartY + 80 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 80 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.speedLevel < 3) {
-                //selectedUpgradableTower.radius += 100;
+                selectedUpgradableTower.bobaSpeed *= 2;
                 selectedUpgradableTower.speedLevel ++;
                 currentMoney -= selectedUpgradableTower.speedUpgradeCost;
                 selectedUpgradableTower.speedUpgradeCost += (20 * selectedUpgradableTower.speedLevel);

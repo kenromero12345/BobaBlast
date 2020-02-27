@@ -1,4 +1,4 @@
-function boba(game, startX, startY, name, target, damage) {
+function boba(game, startX, startY, name, target, damage, speed) {
     this.target = target;
     this.bobaDamage = damage;
     this.name = "BOBA";
@@ -140,7 +140,7 @@ function boba(game, startX, startY, name, target, damage) {
     // }
     this.width = 28;
     this.height = 28;
-    this.speed = 500;
+    this.speed = speed;
     this.game = game;
     this.ctx = game.ctx;
     this.noCollision = true;
