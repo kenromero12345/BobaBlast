@@ -14,6 +14,7 @@ function cake(game, spawnX, spawnY, scale) {
     , 879, 270, -96, 103, 8, .2, 8, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
+    this.poisonResistance = .1;
         //         this.moveDirection = 3;
         // this.lookDirectionRight = false;
 }

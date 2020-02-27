@@ -17,6 +17,7 @@ function iceGolem(game, spawnX, spawnY, scale) {
         //                               this.moveDirection = 3;
         // this.lookDirectionRight = false;
     this.freezeResistance = .99;
+    this.burnResistance = .2;
 }
 
 iceGolem.prototype.setBoundingBox = function() {

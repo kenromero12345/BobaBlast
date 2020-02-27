@@ -18,6 +18,7 @@ function pumpkinEvil(game, spawnX, spawnY, scale) {
     this.animationDisappearRight.offsetY -= 50;
         //                                   this.moveDirection = 3;
         // this.lookDirectionRight = false;
+    this.burnResistance = .75;
 }
 
 pumpkinEvil.prototype.setBoundingBox = function() {

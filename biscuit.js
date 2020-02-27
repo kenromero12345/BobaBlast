@@ -17,6 +17,8 @@ function biscuit(game, spawnX, spawnY, scale) {
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 4);
         // this.moveDirection = 3;
         // this.lookDirectionRight = false;
+    this.burnResistance = .1;
+    this.freezeResistance = .1;
 }
 
 biscuit.prototype.setBoundingBox = function() {

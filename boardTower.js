@@ -255,7 +255,6 @@ boardTower.prototype.update = function () {
         }
     } */
 
-
     // This shooting method always shoots the enemy that is closest to the end.
     var withinRange = [];
     for (var i = 0; i < this.game.entities.length; i++) {

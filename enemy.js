@@ -212,8 +212,8 @@ var collideUpdate = function(enemy) {
                 enemy.game.addEntity(new Explosion(enemy.game, enemy.x, enemy.y, ent.burnLvl));
             }
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
+                enemy.hp -= ent.bobaDamage;
                 ent.removeFromWorld = true;
-                enemy.hp--;
             } 
             if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
                 enemy.hp-= 0.1;

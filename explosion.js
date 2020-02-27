@@ -14,11 +14,11 @@ function Explosion(game, x, y, lvl) {
     this.burnProbAdder = 0;
     this.burnTimeAdder = 0;
     if (this.burnLvl == 2) {
-        this.burnProbAdder = 5;
-        this.burnTimeAdder - 500;
+        this.burnProbAdder = .5;
+        this.burnTimeAdder = 500/100;
     } else if (this.burnLvl == 3) {
-        this.burnProbAdder = 8;
-        this.burnTimeAdder = 1000;
+        this.burnProbAdder = .8;
+        this.burnTimeAdder = 1000/1000;
     } 
     // console.log(this.burnLvl)
     this.boundingbox = new BoundingBox(this.x + 25, this.y + 22, this.width - 50, this.height - 50);
