@@ -29,6 +29,9 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 4);
         //                       this.moveDirection = 3;
         // this.lookDirectionRight = false;
+    this.poisonResistance = .75;
+    this.freezeResistance = .2;
+    this.paralysisResistance = .1;
 }
 
 cola.prototype.setBoundingBox = function() {

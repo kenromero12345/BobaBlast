@@ -17,6 +17,7 @@ function miniCake(game, spawnX, spawnY, scale) {
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
         //                                   this.moveDirection = 3;
         // this.lookDirectionRight = false;
+    this.poisonResistance = .1;
 }
 
 miniCake.prototype.setBoundingBox = function() {

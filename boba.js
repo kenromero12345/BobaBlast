@@ -37,19 +37,27 @@ function boba(game, startX, startY, name, target) {
     if(name ==='gold') {
         this.isHoming = true;
     }
+    this.isLaser = false;
+    if (name === 'laser') {
+        this.isLaser = true;
+    }
+    this.isRicochet = false;
+    if (name === 'ricochet') {
+        this.isRicochet = true;
+    }
     if (this.freezeLvl == 2) {
-        this.freezeProbAdder = 5;
+        this.freezeProbAdder = .5;
         this.freezeTimeAdder = 3000;
     } else if (this.freezeLvl == 3) {
-        this.freezeProbAdder = 8;
-        this.freezeTimeAdder = 5000;
+        this.freezeProbAdder = .8;
+        this.freezeTimeAdder = 5000/1000;
     }
     if (this.poisonLvl == 2) {
-        this.poisonProbAdder = 5;
-        this.poisonTimeAdder = 3000;
+        this.poisonProbAdder = .5;
+        this.poisonTimeAdder = 3000/1000;
     } else if (this.poisonLvl == 3) {
-        this.poisonProbAdder = 8;
-        this.poisonTimeAdder = 5000;
+        this.poisonProbAdder = .8;
+        this.poisonTimeAdder = 5000/1000;
     } 
     // if (this.burnLvl == 2) {
     //     this.burnProbAdder = 5;
@@ -59,11 +67,11 @@ function boba(game, startX, startY, name, target) {
     //     this.burnTimeAdder = 1000;
     // } 
     if (this.paralysisLvl == 2) {
-        this.paralysisProbAdder = 5;
+        this.paralysisProbAdder = .5;
         this.paralysisTimeAdder = 500;
     } else if (this.paralysisLvl == 3) {
-        this.paralysisProbAdder = 8;
-        this.paralysisTimeAdder = 1000;
+        this.paralysisProbAdder = .8;
+        this.paralysisTimeAdder = 1000/1000;
     } 
     /*
         this.isFire = false;
@@ -164,7 +172,7 @@ boba.prototype.draw = function () {
 boba.prototype.update = function () {
     if(this.game.running) {
         if (this.isHoming) {
-            if (this.target.hp < 1) {
+            if (this.target.hp <= 0) {
                 this.removeFromWorld = true;
             }
             // this.destinationX = this.target.centerX;

@@ -16,6 +16,7 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
         //                                           this.moveDirection = 3;
         // this.lookDirectionRight = false;
+    this.burnResistance = .75;
 }
 
 pumpkinGood.prototype.setBoundingBox = function() {
