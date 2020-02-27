@@ -120,7 +120,7 @@ boardTower.prototype.draw = function () {
 
 boardTower.prototype.update = function () {
     // This shooting method always shoots the enemy that is closest to the end.
-    var withinRange = [];
+  /*  var withinRange = [];
     for (var i = 0; i < this.game.entities.length; i++) {
         var ent = this.game.entities[i];
         if (ent !== this && ent.isEnemy) {
@@ -145,7 +145,7 @@ boardTower.prototype.update = function () {
         this.calculateDirection(this.target);
         this.shootBoba = true;
     }
-
+*/
     if(this.spin && this.pointDirection === this.intendedDirection) {
         this.pointDirectionIndex = this.intendedDirectionIndex;
         this.spin = false;
