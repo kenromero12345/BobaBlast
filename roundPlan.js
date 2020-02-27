@@ -15,7 +15,7 @@ Round 4
 All 11 slimes x9 => 99 slimes
 $510
 */
-var round = 0;
+var round;
 var gameOverLose = true;
 var gameOverWin = false;
 function roundPlan(game) {
@@ -23,7 +23,7 @@ function roundPlan(game) {
     this.index = 1;
     this.game = game;
     this.ctx = game.ctx;
-    this.timeGap = 1500; 
+    this.timeGap = 1500;
     this.isRoundStart = true;
     this.isEnding = false;
     this.game.running = false;
