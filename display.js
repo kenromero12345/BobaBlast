@@ -532,14 +532,14 @@ display.prototype.generateDescriptionBox = function() {
 
     var currentTower = towerArray[yGrid][xGrid];
     ctx.fillStyle = "black";
-    ctx.font = '14px Bahnschrift SemiBold';
-    ctx.fillText("Name: " + currentTower.name, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
-    ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 140, this.descriptionBoxStartY + 20);
+    ctx.font = '20px Bahnschrift SemiBold';
+    ctx.fillText(currentTower.name, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
+    ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 180, this.descriptionBoxStartY + 20);
 
     var txt = currentTower.description;
     var lineX = this.descriptionBoxStartX + 15;
     var lineY = this.descriptionBoxStartY + 40;
-    var lineheight = 15;
+    var lineheight = 22;
     var lines = txt.split('\n');
 
     for (var i = 0; i < lines.length; i++) {
