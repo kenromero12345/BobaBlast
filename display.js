@@ -160,7 +160,11 @@ display.prototype.draw = function () {
                 ctx.fillRect(x,y,w,h);
                 ctx.fillStyle = "white";
                 ctx.font = '16px Bahnschrift Light';
-                ctx.fillText("↑ $" + selectedUpgradableTower.rangeUpgradeCost, x + 15, y + 15);
+                if(selectedUpgradableTower.rangeUpgradeCost === 'Max') {
+                    ctx.fillText("Maximum", x + 10, y + 15);
+                } else {
+                    ctx.fillText("↑ $" + selectedUpgradableTower.rangeUpgradeCost, x + 15, y + 15);
+                }
             }
         }
         // Hover Over Feature for Upgrade Boba Damage
@@ -175,7 +179,11 @@ display.prototype.draw = function () {
                 ctx.fillRect(x,y,w,h);
                 ctx.fillStyle = "white";
                 ctx.font = '16px Bahnschrift Light';
-                ctx.fillText("↑ $" + selectedUpgradableTower.damageUpgradeCost, x + 15, y + 15);
+                if(selectedUpgradableTower.damageUpgradeCost === 'Max') {
+                    ctx.fillText("Maximum", x + 10, y + 15);
+                } else {
+                    ctx.fillText("↑ $" + selectedUpgradableTower.damageUpgradeCost, x + 15, y + 15);
+                }
             }
         }
         // Hover Over Feature for Upgrade Boba Speed
@@ -190,7 +198,11 @@ display.prototype.draw = function () {
                 ctx.fillRect(x,y,w,h);
                 ctx.fillStyle = "white";
                 ctx.font = '16px Bahnschrift Light';
-                ctx.fillText("↑ $" + selectedUpgradableTower.speedUpgradeCost, x + 15, y + 15);
+                if(selectedUpgradableTower.speedUpgradeCost === 'Max') {
+                    ctx.fillText("Maximum", x + 10, y + 15);
+                } else {
+                    ctx.fillText("↑ $" + selectedUpgradableTower.speedUpgradeCost, x + 15, y + 15);
+                }
             }
         }
         // Hover Over Feature for Starting Round
@@ -322,6 +334,55 @@ display.prototype.draw = function () {
 
                 }
                 selectedUpgradableTower = null;
+            }
+        }
+        // Priority Mode Toggles through the different priority modes in the tower
+        if(mouse.x < this.descriptionBoxStartX + 270 + 10 && mouse.x >= this.descriptionBoxStartX + 10
+            && mouse.y < this.descriptionBoxStartY + 150 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 150 + 2) {
+            if (upgradeMode && !purchaseMode) {
+               selectedUpgradableTower.shootPriorityType++;
+               if(selectedUpgradableTower.shootPriorityType > 7) {
+                selectedUpgradableTower.shootPriorityType = 0;
+               }   
+            }
+        }
+        // Upgrade Tower Range
+        if(mouse.x < this.descriptionBoxStartX + 200+ 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 30 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 30 + 2) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.rangeLevel < 3) {
+                selectedUpgradableTower.radius += 100;
+                selectedUpgradableTower.rangeLevel ++;
+                currentMoney -= selectedUpgradableTower.rangeUpgradeCost;
+                selectedUpgradableTower.rangeUpgradeCost += (25 * selectedUpgradableTower.rangeLevel);
+            }
+            if(selectedUpgradableTower.rangeLevel === 3) {
+                selectedUpgradableTower.rangeUpgradeCost = "Max";
+            }
+        }
+        // Hover Over Feature for Upgrade Boba Damage
+        if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 55 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 55 + 2) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.damageLevel < 3) {
+                selectedUpgradableTower.bobaDamage +=2;
+                selectedUpgradableTower.damageLevel ++;
+                currentMoney -= selectedUpgradableTower.damageUpgradeCost;
+                selectedUpgradableTower.damageUpgradeCost += (30 * selectedUpgradableTower.damageLevel);
+            }
+            if(selectedUpgradableTower.damageLevel === 3) {
+                selectedUpgradableTower.damageUpgradeCost = "Max";
+            }
+        }
+        // Hover Over Feature for Upgrade Boba Speed
+        if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 80 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 80 + 2) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.speedLevel < 3) {
+                selectedUpgradableTower.bobaSpeed *= 2;
+                selectedUpgradableTower.speedLevel ++;
+                currentMoney -= selectedUpgradableTower.speedUpgradeCost;
+                selectedUpgradableTower.speedUpgradeCost += (20 * selectedUpgradableTower.speedLevel);
+            }
+            if(selectedUpgradableTower.speedLevel === 3) {
+                selectedUpgradableTower.speedUpgradeCost = "Max";
             }
         }
         // Start Round Button Click
@@ -572,11 +633,15 @@ display.prototype.generateUpgradeAttributeButton = function(cost, xOffset, yOffs
     var y = this.descriptionBoxStartY + yOffset;
     var w = 80;
     var h = 20;
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "#56fc53";
     ctx.fillRect(x,y,w,h);
-    ctx.fillStyle = "white";
-    ctx.font = '16px Bahnschrift Light';
-    ctx.fillText("↑ $" + cost, x + 15, y + 15);
+    ctx.fillStyle = "black";
+    ctx.font = '16px Bahnschrift';
+    if(cost === 'Max') {
+        ctx.fillText("Maximum", x + 10, y + 15);
+    } else {
+        ctx.fillText("↑ $" + cost, x + 15, y + 15);
+    }
 }
 
 display.prototype.generateShootingPriorityButton = function() {
@@ -585,10 +650,10 @@ display.prototype.generateShootingPriorityButton = function() {
     var y = this.descriptionBoxStartY + 150;
     var w = 270;
     var h = 20;
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "#56fc53";
     ctx.fillRect(x,y,w,h);
-    ctx.fillStyle = "white";
-    ctx.font = '12px Bahnschrift Light';
+    ctx.fillStyle = "black";
+    ctx.font = '12px Bahnschrift';
     ctx.fillText("Shooting Priority: " + selectedUpgradableTower.shootingPriorityList[selectedUpgradableTower.shootPriorityType], x + 15, y + 15);
 }
 
@@ -598,9 +663,9 @@ display.prototype.generateSellTowerButton = function() {
     var y = this.descriptionBoxStartY + 175;
     var w = 270;
     var h = 20;
-    ctx.fillStyle = "green";
+    ctx.fillStyle = "#56fc53";
     ctx.fillRect(x,y,w,h);
-    ctx.fillStyle = "white";
-    ctx.font = '16px Bahnschrift Light';
+    ctx.fillStyle = "black";
+    ctx.font = '16px Bahnschrift';
     ctx.fillText("Sell Tower for $" + selectedUpgradableTower.sellingCost, x + 60, y + 15);
 }

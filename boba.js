@@ -1,5 +1,6 @@
-function boba(game, startX, startY, name, target) {
+function boba(game, startX, startY, name, target, damage, speed) {
     this.target = target;
+    this.bobaDamage = damage;
     this.name = "BOBA";
     this.freezeLvl = 0;
     this.poisonLvl = 0;
@@ -130,7 +131,7 @@ function boba(game, startX, startY, name, target) {
     // this.velocity.x = dir.x;
     // this.velocity.y = dir.y;
 
-    var speed = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
+    //var speed = Math.sqrt(this.velocity.x * this.velocity.x + this.velocity.y * this.velocity.y);
     // console.log(speed)
     // if (speed > this.speed) {
         // var ratio = this.speed / speed;
@@ -139,7 +140,7 @@ function boba(game, startX, startY, name, target) {
     // }
     this.width = 28;
     this.height = 28;
-    this.speed = 500;
+    this.speed = speed;
     this.game = game;
     this.ctx = game.ctx;
     this.noCollision = true;

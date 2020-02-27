@@ -6,6 +6,8 @@ function boardTower(game, gridX, gridY, type) {
     this.rangeUpgradeCost = 100;
     this.damageUpgradeCost = 200;
     this.speedUpgradeCost = 300;
+    this.bobaDamage = 1;
+    this.bobaSpeed = 500;
     this.sellingCost = type.cost / 4;
     this.isTower = true;
     this.spin = false;
@@ -109,7 +111,7 @@ boardTower.prototype.draw = function () {
 
     if(this.shootBoba) {
         if(this.shootTimer < this.game.timer.time) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target));
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target, this.bobaDamage, this.bobaSpeed));
             this.shootBoba = false;
             this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
         }
@@ -118,7 +120,7 @@ boardTower.prototype.draw = function () {
 
 boardTower.prototype.update = function () {
     // This shooting method always shoots the enemy that is closest to the end.
-    var withinRange = [];
+  /*  var withinRange = [];
     for (var i = 0; i < this.game.entities.length; i++) {
         var ent = this.game.entities[i];
         if (ent !== this && ent.isEnemy) {
@@ -143,7 +145,7 @@ boardTower.prototype.update = function () {
         this.calculateDirection(this.target);
         this.shootBoba = true;
     }
-
+*/
     if(this.spin && this.pointDirection === this.intendedDirection) {
         this.pointDirectionIndex = this.intendedDirectionIndex;
         this.spin = false;
@@ -286,7 +288,7 @@ boardTower.prototype.update = function () {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if(shootPriorityType == 1) {
+        } else if(this.shootPriorityType == 1) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.distToEnd <= withinRange[i].distToEnd) {
                     selectedEnemy = withinRange[i]
@@ -298,7 +300,7 @@ boardTower.prototype.update = function () {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if(shootPriorityType == 3) {
+        } else if(this.shootPriorityType == 3) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.distToEndByPath <= withinRange[i].distToEndByPath) {
                     selectedEnemy = withinRange[i]
@@ -310,19 +312,19 @@ boardTower.prototype.update = function () {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if(shootPriorityType == 5) {
+        } else if(this.shootPriorityType == 5) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.distToTower <= withinRange[i].distToTower) {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if (shootPriorityType == 6) {
+        } else if (this.shootPriorityType == 6) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.enemy.hp <= withinRange[i].enemy.hp) {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if (shootPriorityType == 7) {
+        } else if (this.shootPriorityType == 7) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.enemy.hp >= withinRange[i].enemy.hp) {
                     selectedEnemy = withinRange[i]
