@@ -253,6 +253,7 @@ boardTower.prototype.update = function () {
         }
     } */
 
+
     // This shooting method always shoots the enemy that is closest to the end.
     var withinRange = [];
     for (var i = 0; i < this.game.entities.length; i++) {
@@ -369,9 +370,9 @@ boardTower.prototype.calculateDirection = function (target) {
     var tempShortestDistance = Infinity;
     var bestIndex = null;
     for(var i = 0; i < this.directions.length; i++) {
-        var tempX = this.x + this.shootOutXOffset[i];
-        var tempY = this.y + this.shootOutYOffset[i];
-        var tempDistance = getDistance(target.centerX, target.centerY, tempX, tempY);
+        var tempX = this.centerX + this.shootOutXOffsetDir[i]; // Change this to represent corners of the boxes instead of shoototu offest
+        var tempY = this.centerY + this.shootOutYOffsetDir[i]; // Change this to represetn corners ofthe boxes intead of shoot out offset
+        var tempDistance = getDistance(target.centerX - 10, target.centerY - 13, tempX, tempY);
         if(tempDistance < tempShortestDistance) {
             tempDirection = this.directions[i];
             tempShortestDistance = tempDistance;
