@@ -12,7 +12,7 @@ Round 4
 All 11 slimes x9 => 99 slimes
 */
 var round = 0;
-var gameOverLose = false;
+var gameOverLose = true;
 var gameOverWin = false;
 function roundPlan(game) {
     this.index = 1;

@@ -1,5 +1,14 @@
 function boardTower(game, gridX, gridY, type) {
     this.name = type.towerType;
+    this.rangeLevel = 1;
+    this.damageLevel = 1;
+    this.speedLevel = 1;
+    this.rangeUpgradeCost = 100;
+    this.damageUpgradeCost = 200;
+    this.speedUpgradeCost = 300;
+    this.bobaDamage = 1;
+    this.bobaSpeed = 500;
+    this.sellingCost = type.cost / 4;
     this.isTower = true;
     this.spin = false;
     this.counterclockwise = true;
@@ -32,7 +41,6 @@ function boardTower(game, gridX, gridY, type) {
     this.shootOutX = this.x;
     this.shootOutY = this.y;
     this.shootBoba = false;
-    this.upgradeMode = false;
     this.shootBobaSpeed = null; // TODO
     this.radius = this.towerType.radius;
     this.shootDestinationX = 0;
@@ -50,13 +58,15 @@ function boardTower(game, gridX, gridY, type) {
     //5 = farthest to tower
     //6 = biggest hp
     //7 = smallest hp
+    this.shootingPriorityList = ["Closest To End (Distance)", "Farthest from End (Distance)", "Closest to End (Path)", 
+                                "Closest to End (Path)", "Closest to Tower", "Farthest from Tower", "Largest HP", "Smallest HP"];
     this.shootPriorityType = 0;
     this.shootOutXOffsetDir = [0, 50, 50, 50, 0, -50, -50, -50 ];
     this.shootOutYOffsetDir = [50, 50, 0, -50, -50, -50, 0, 50];
 }
 
 boardTower.prototype.draw = function () {
-    if(this.upgradeMode) {
+    if(upgradeMode && selectedUpgradableTower === this) {
         this.ctx.save();
         this.ctx.globalAlpha = 0.25;
         this.ctx.fillStyle = "white";
@@ -101,7 +111,7 @@ boardTower.prototype.draw = function () {
 
     if(this.shootBoba) {
         if(this.shootTimer < this.game.timer.time) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target));
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target, this.bobaDamage, this.bobaSpeed));
             this.shootBoba = false;
             this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
         }
@@ -110,7 +120,7 @@ boardTower.prototype.draw = function () {
 
 boardTower.prototype.update = function () {
     // This shooting method always shoots the enemy that is closest to the end.
-    var withinRange = [];
+  /*  var withinRange = [];
     for (var i = 0; i < this.game.entities.length; i++) {
         var ent = this.game.entities[i];
         if (ent !== this && ent.isEnemy) {
@@ -135,7 +145,7 @@ boardTower.prototype.update = function () {
         this.calculateDirection(this.target);
         this.shootBoba = true;
     }
-
+*/
     if(this.spin && this.pointDirection === this.intendedDirection) {
         this.pointDirectionIndex = this.intendedDirectionIndex;
         this.spin = false;
@@ -191,7 +201,13 @@ boardTower.prototype.update = function () {
         var width = 100;
         var height = 100;
         if(click.x >= upperLeftX && click.x < upperLeftX + width && click.y >= upperLeftY && click.y < upperLeftY + height) {
-            this.upgradeMode = !this.upgradeMode;
+            if(upgradeMode && selectedUpgradableTower === this) {
+                upgradeMode = false;
+                selectedUpgradableTower = null;
+            } else {
+                upgradeMode = true;
+                selectedUpgradableTower = this;
+            }
         // UNCOMMENT BELOW TO TEST CLICK TO SPIN FUNCTIONALITY
              /*
             if(this.pointDirection === 'S') {
@@ -245,7 +261,7 @@ boardTower.prototype.update = function () {
         var ent = this.game.entities[i];
         if (ent !== this && ent.isEnemy) {
             var temp = this.enemyInRange(ent);
-            if(temp && ent.hp >= 1) {
+            if(temp && ent.hp > 0) {
                 var distToEnd = distanceToEndPoint(ent.centerX, ent.centerY);
                 var distToTower = getDistance(ent.centerX, ent.centerY, this.centerX, this.centerY);
                 var distToEndByPath = getDistanceToEndByPath(ent.centerX, ent.centerY);
@@ -271,7 +287,7 @@ boardTower.prototype.update = function () {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if(shootPriorityType == 1) {
+        } else if(this.shootPriorityType == 1) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.distToEnd <= withinRange[i].distToEnd) {
                     selectedEnemy = withinRange[i]
@@ -283,7 +299,7 @@ boardTower.prototype.update = function () {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if(shootPriorityType == 3) {
+        } else if(this.shootPriorityType == 3) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.distToEndByPath <= withinRange[i].distToEndByPath) {
                     selectedEnemy = withinRange[i]
@@ -295,19 +311,19 @@ boardTower.prototype.update = function () {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if(shootPriorityType == 5) {
+        } else if(this.shootPriorityType == 5) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.distToTower <= withinRange[i].distToTower) {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if (shootPriorityType == 6) {
+        } else if (this.shootPriorityType == 6) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.enemy.hp <= withinRange[i].enemy.hp) {
                     selectedEnemy = withinRange[i]
                 }
             }
-        } else if (shootPriorityType == 7) {
+        } else if (this.shootPriorityType == 7) {
             for(var i = 1; i < withinRange.length; i++) {
                 if(selectedEnemy.enemy.hp >= withinRange[i].enemy.hp) {
                     selectedEnemy = withinRange[i]
