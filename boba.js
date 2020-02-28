@@ -186,8 +186,8 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
 }
 
 boba.prototype.collidedBefore = function(enemy) {
-    for (var i = 0; i < collidedBeforeList.length; i++) {
-        if (enemy == collidedBeforeList[i]) {
+    for (var i = 0; i < this.collidedBeforeList.length; i++) {
+        if (enemy == this.collidedBeforeList[i]) {
             return true;
         }
     }
