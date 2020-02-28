@@ -692,11 +692,11 @@ display.prototype.generateDescriptionBox = function() {
 
     var currentTower = towerArray[yGrid][xGrid];
     ctx.fillStyle = "black";
-    ctx.font = '16px Bahnschrift SemiBold';
+    ctx.font = '20px Bahnschrift SemiBold';
     ctx.fillText(currentTower.name, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
     ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 180, this.descriptionBoxStartY + 20);
 
-    var txt = 'Description: ' + currentTower.description;
+    var txt = currentTower.description;
     var lineX = this.descriptionBoxStartX + 15;
     var lineY = this.descriptionBoxStartY + 40;
     var lineheight = 22;
