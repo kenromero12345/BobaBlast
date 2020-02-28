@@ -99,8 +99,10 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
         this.paralysisTimeAdder = 1000/1000;
     } 
     if (this.ricochetLvl == 2) {
+        this.isRicochet = true;
         this.ricochetCount = 3;
     } else if (this.ricochetLvl == 3) {
+        this.isRicochet = true;
         this.ricochetCount = 5;
     } 
     /*
