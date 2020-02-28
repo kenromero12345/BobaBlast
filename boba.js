@@ -1,4 +1,4 @@
-function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, pierceLevel) {
+function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, pierceLevel, homingLevel) {
     this.collidedBeforeList = [];
     this.target = target;
     this.bobaDamage = damage;
@@ -43,6 +43,11 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
     if(name ==='gold') {
         this.isHoming = true;
     }
+    // ADDED THIS FOR UPGRADES
+    if(homingLevel == 1) {
+        this.isHoming = true;
+    }
+    // END
     this.isLaser = false;
     if (name === 'laser') {
         this.isLaser = true;
