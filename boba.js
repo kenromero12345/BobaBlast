@@ -1,4 +1,4 @@
-function boba(game, startX, startY, name, target, damage, speed, ricochetCount) {
+function boba(game, startX, startY, name, target, damage, speed) {
     this.collidedBeforeList = [];
     this.target = target;
     this.bobaDamage = damage;
