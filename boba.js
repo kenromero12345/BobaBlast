@@ -51,12 +51,25 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
         this.isPierce = true;
         this.pierceCount = 1;
     }
+    // ADDED THIS FOR UPGRADES
+    if (this.pierceLvl === 1) {
+        this.isPierce = true;
+        this.pierceCount = 1;
+    }
+    // END
     this.isRicochet = false;
     if (name === 'ricochet') {
         this.isRicochet = true;
         this.ricochetLvl = 1;
         this.ricochetCount = 1;
     }
+    // ADDED THIS FOR UPGRADES
+    if (this.ricochetLvl === 1) {
+        this.isRicochet = true;
+        this.ricochetLvl = 1;
+        this.ricochetCount = 1;
+    }
+    // END
     if (this.freezeLvl == 2) {
         this.freezeProbAdder = .5;
         this.freezeTimeAdder = 3000;
