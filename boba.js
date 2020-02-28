@@ -105,6 +105,14 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
         this.isRicochet = true;
         this.ricochetCount = 5;
     } 
+
+    if (this.pierceLvl == 2) {
+        this.isPierce = true;
+        this.pierceCount = 3;
+    } else if (this.pierceLvl == 3) {
+        this.isPierce = true;
+        this.pierceCount = 5;
+    } 
     /*
         this.isFire = false;
     if(name ==='poop') {
