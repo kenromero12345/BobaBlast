@@ -141,6 +141,9 @@ var collideUpdate = function(enemy) {
     for (var i = 0; i < enemy.game.entities.length; i++) {
         var ent = enemy.game.entities[i];
         if (ent !== enemy && enemy.isEnemy && enemy.hp > 0) {
+            if (ent.pierceCount == 0 && ent.ricochetCount == 0 && (ent.isPierce || ent.isRicochet)) {
+                ent.removeFromWorld = true;
+            }
             if (ent.isFreeze && enemy.boundingbox.collide(ent.boundingbox)) {
                 if (Math.random() > enemy.freezeResistance - ent.freezeProbAdder) {
                     enemy.isFrozen = true;
@@ -211,9 +214,41 @@ var collideUpdate = function(enemy) {
             //    console.log("EXPLOSION");
                 enemy.game.addEntity(new Explosion(enemy.game, enemy.x, enemy.y, ent.burnLvl));
             }
+
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
-                enemy.hp -= ent.bobaDamage;
-                ent.removeFromWorld = true;
+                if (ent.isPierce && !ent.collidedBefore(enemy) && enemy.boundingbox.collide(ent.boundingbox)) {
+                    ent.collidedBeforeList.push(enemy);
+                    ent.pierceCount--;
+                    enemy.hp -= ent.bobaDamage;
+                } else if (ent.isRicochet && !ent.collidedBefore(enemy) && enemy.boundingbox.collide(ent.boundingbox)) {
+                    ent.collidedBeforeList.push(enemy);
+                    ent.ricochetCount--;
+                    enemy.hp -= ent.bobaDamage;
+                    var dist = Number.MAX_VALUE;
+                    var newTarget;
+                    for (var k = 0; k < enemy.game.entities.length; k++) {
+                        var temp = enemy.game.entities[k];
+                        if (temp !== enemy && temp.isEnemy) {
+                            if(temp.hp > 0) {
+                                var tempDist = distance(enemy, temp);
+                                if (tempDist < dist) {
+                                    newTarget = temp;
+                                    dist = tempDist;
+                                }
+                            }
+                        }
+                    }
+                    if (newTarget) {
+                        ent.target = newTarget;
+                        ent.velocity = direction({'x':ent.target.centerX - 10, 'y':ent.target.centerY - 13}, ent);
+                    } else {
+                        ent.removeFromWorld = true;
+                    }
+                    
+                } else {
+                    enemy.hp -= ent.bobaDamage;
+                    ent.removeFromWorld = true;
+                }
             } 
             if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
                 enemy.hp-= 0.1;
