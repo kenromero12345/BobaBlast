@@ -205,6 +205,25 @@ display.prototype.draw = function () {
                 }
             }
         }
+        // Hover Over Feature for Upgrade Boba Ricochet
+        if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 105 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 105 + 2) {
+            if (upgradeMode && !purchaseMode) {
+                var x = this.descriptionBoxStartX + 200;
+                var y = this.descriptionBoxStartY + 105;
+                var w = 80;
+                var h = 20;
+                ctx.fillStyle = "red";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '16px Bahnschrift Light';
+                if(selectedUpgradableTower.ricochetUpgradeCost === 'Max') {
+                    ctx.fillText("Maximum", x + 10, y + 15);
+                } else {
+                    ctx.fillText("↑ $" + selectedUpgradableTower.ricochetUpgradeCost, x + 15, y + 15);
+                }
+            }
+        }
         // Hover Over Feature for Starting Round
         if(mouse.x < this.buttonStartX + this.buttonWidth - 55 && mouse.x >= this.buttonStartX
             && mouse.y < this.buttonStartY + this.buttonHeight && mouse.y >= this.buttonStartY) {
@@ -359,7 +378,7 @@ display.prototype.draw = function () {
                 selectedUpgradableTower.rangeUpgradeCost = "Max";
             }
         }
-        // Hover Over Feature for Upgrade Boba Damage
+        // Upgrade Boba Damage
         if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
             && mouse.y < this.descriptionBoxStartY + 55 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 55 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.damageLevel < 3) {
@@ -372,7 +391,7 @@ display.prototype.draw = function () {
                 selectedUpgradableTower.damageUpgradeCost = "Max";
             }
         }
-        // Hover Over Feature for Upgrade Boba Speed
+        // Upgrade Boba Speed
         if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
             && mouse.y < this.descriptionBoxStartY + 80 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 80 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.speedLevel < 3) {
@@ -383,6 +402,19 @@ display.prototype.draw = function () {
             }
             if(selectedUpgradableTower.speedLevel === 3) {
                 selectedUpgradableTower.speedUpgradeCost = "Max";
+            }
+        }
+        // Upgrade Boba Ricochet
+        if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 105 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 105 + 2) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.ricochetLevel < 3) {
+              //  selectedUpgradableTower.bobaSpeed *= 2;
+                selectedUpgradableTower.ricochetLevel ++;
+                currentMoney -= selectedUpgradableTower.ricochetUpgradeCost;
+                selectedUpgradableTower.ricochetUpgradeCost += (20 * selectedUpgradableTower.ricochetLevel);
+            }
+            if(selectedUpgradableTower.ricochetLevel === 3) {
+                selectedUpgradableTower.ricochetUpgradeCost = "Max";
             }
         }
         // Start Round Button Click
@@ -582,9 +614,11 @@ display.prototype.generateDescriptionBox = function() {
             ctx.fillText("Tower Range: Level " + selectedUpgradableTower.rangeLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 45);
             ctx.fillText("Boba Damage: Level " + selectedUpgradableTower.damageLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 70);
             ctx.fillText("Boba Speed: Level " + selectedUpgradableTower.speedLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 95);
+            ctx.fillText("Boba Ricochet: Level " + selectedUpgradableTower.ricochetLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 120);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.rangeUpgradeCost, 200, 30);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.damageUpgradeCost, 200, 55);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.speedUpgradeCost, 200, 80);
+            this.generateUpgradeAttributeButton(selectedUpgradableTower.ricochetUpgradeCost, 200, 105);
             this.generateSellTowerButton();
             this.generateShootingPriorityButton();
         }
