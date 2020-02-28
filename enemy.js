@@ -141,7 +141,7 @@ var collideUpdate = function(enemy) {
     for (var i = 0; i < enemy.game.entities.length; i++) {
         var ent = enemy.game.entities[i];
         if (ent !== enemy && enemy.isEnemy && enemy.hp > 0) {
-            if (ent.pierceCount == 0 && ent.ricochetCount == 0 && (ent.isPierce || ent.isRicochet)) {
+            if (ent.pierceCount == -1 && ent.ricochetCount == -1) {
                 ent.removeFromWorld = true;
             }
             if (ent.isFreeze && enemy.boundingbox.collide(ent.boundingbox)) {
@@ -216,11 +216,7 @@ var collideUpdate = function(enemy) {
             }
 
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
-                if (ent.isPierce && !ent.collidedBefore(enemy) && enemy.boundingbox.collide(ent.boundingbox)) {
-                    ent.collidedBeforeList.push(enemy);
-                    ent.pierceCount--;
-                    enemy.hp -= ent.bobaDamage;
-                } else if (ent.isRicochet && !ent.collidedBefore(enemy) && enemy.boundingbox.collide(ent.boundingbox)) {
+                if (ent.isRicochet && !ent.collidedBefore(enemy)) {
                     ent.collidedBeforeList.push(enemy);
                     ent.ricochetCount--;
                     enemy.hp -= ent.bobaDamage;
@@ -245,7 +241,11 @@ var collideUpdate = function(enemy) {
                         ent.removeFromWorld = true;
                     }
                     
-                } else {
+                } else if (ent.isPierce && !ent.collidedBefore(enemy)) {
+                    ent.collidedBeforeList.push(enemy);
+                    ent.pierceCount--;
+                    enemy.hp -= ent.bobaDamage;
+                } else if (!ent.isPierce && !ent.isRicochet){
                     enemy.hp -= ent.bobaDamage;
                     ent.removeFromWorld = true;
                 }

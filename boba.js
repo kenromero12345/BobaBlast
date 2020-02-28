@@ -18,6 +18,7 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
     this.paralysisTimeAdder = 0;
     this.burnTimeAdder = 0;
     this.ricochetCount = 0;
+    this.pierceCount = 0;
     this.isFreeze = false;
     if(name ==='blue') {
         this.isFreeze = true;
