@@ -5,11 +5,13 @@ function boardTower(game, gridX, gridY, type) {
     this.speedLevel = 1;
     this.ricochetLevel = 0;
     this.pierceLevel = 0;
+    this.homingLevel = 0;
     this.rangeUpgradeCost = 100;
     this.damageUpgradeCost = 200;
     this.speedUpgradeCost = 300;
     this.ricochetUpgradeCost = 400;
     this.pierceUpgradeCost = 500;
+    this.homingUpgradeCost = 250;
     this.bobaDamage = 1;
     this.bobaSpeed = 500;
     this.sellingCost = type.cost / 4;
@@ -115,7 +117,7 @@ boardTower.prototype.draw = function () {
 
     if(this.shootBoba) {
         if(this.shootTimer < this.game.timer.time) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target, this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel));
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target, this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel));
             this.shootBoba = false;
             this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
         }

@@ -42,18 +42,18 @@ function display(game, towerArr) {
     this.towerStartY = 90;
 
     this.buttonWidth = 290;
-    this.buttonHeight = 50;
+    this.buttonHeight = 40;
     this.buttonStartX = 905;
-    this.buttonStartY = 540;
+    this.buttonStartY = 555;
 
     this.descriptionBoxWidth = 290;
-    this.descriptionBoxHeight = 200;
+    this.descriptionBoxHeight = 221;
     this.descriptionBoxStartX = 905;
-    this.descriptionBoxStartY = 335;
+    this.descriptionBoxStartY = 332;
 
     this.fastForwardStartX = 1145;
-    this.fastForwardStartY = 540;
-    this.fastForwardHeight = 50;
+    this.fastForwardStartY = 555;
+    this.fastForwardHeight = 40;
     this.fastForwardWidth = 50;
 
     this.game = game;
@@ -119,10 +119,10 @@ display.prototype.draw = function () {
         }
         // Hover Over Feature for Selling Tower
         if(mouse.x < this.descriptionBoxStartX + 270 + 10 && mouse.x >= this.descriptionBoxStartX + 10
-            && mouse.y < this.descriptionBoxStartY + 175 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 175 + 2) {
+            && mouse.y < this.descriptionBoxStartY + 199 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 199 + 2) {
             if (upgradeMode && !purchaseMode) {
                 var x = this.descriptionBoxStartX + 10;
-                var y = this.descriptionBoxStartY + 175;
+                var y = this.descriptionBoxStartY + 199;
                 var w = 270;
                 var h = 20;
                 ctx.fillStyle = "red";
@@ -134,10 +134,10 @@ display.prototype.draw = function () {
         }
         // Hover Over Feature for Priority Mode
         if(mouse.x < this.descriptionBoxStartX + 270 + 10 && mouse.x >= this.descriptionBoxStartX + 10
-            && mouse.y < this.descriptionBoxStartY + 150 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 150 + 2) {
+            && mouse.y < this.descriptionBoxStartY + 177 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 177 + 2) {
             if (upgradeMode && !purchaseMode) {
                 var x = this.descriptionBoxStartX + 10;
-                var y = this.descriptionBoxStartY + 150;
+                var y = this.descriptionBoxStartY + 177;
                 var w = 270;
                 var h = 20;
                 ctx.fillStyle = "red";
@@ -243,6 +243,25 @@ display.prototype.draw = function () {
                 }
             }
         }
+        // Hover Over Feature for Upgrade Boba Homing
+        if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 155 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 155 + 2) {
+                if (upgradeMode && !purchaseMode) {
+                    var x = this.descriptionBoxStartX + 200;
+                    var y = this.descriptionBoxStartY + 155;
+                    var w = 80;
+                    var h = 20;
+                    ctx.fillStyle = "red";
+                    ctx.fillRect(x,y,w,h);
+                    ctx.fillStyle = "white";
+                    ctx.font = '16px Bahnschrift Light';
+                    if(selectedUpgradableTower.homingUpgradeCost === 'Max') {
+                        ctx.fillText("Maximum", x + 10, y + 15);
+                    } else {
+                        ctx.fillText("↑ $" + selectedUpgradableTower.homingUpgradeCost, x + 15, y + 15);
+                    }
+                }
+        }
         // Hover Over Feature for Starting Round
         if(mouse.x < this.buttonStartX + this.buttonWidth - 55 && mouse.x >= this.buttonStartX
             && mouse.y < this.buttonStartY + this.buttonHeight && mouse.y >= this.buttonStartY) {
@@ -255,13 +274,13 @@ display.prototype.draw = function () {
                 ctx.fillRect(x,y,w - 55,h);
                 ctx.fillStyle = "white";
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("S", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.fillText("S", this.buttonStartX + 35, this.buttonStartY + 30  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("TART", this.buttonStartX + 55, this.buttonStartY + 40  );
+                ctx.fillText("TART", this.buttonStartX + 55, this.buttonStartY + 30  );
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("R", this.buttonStartX + 120, this.buttonStartY + 40  );
+                ctx.fillText("R", this.buttonStartX + 120, this.buttonStartY + 30  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 40  );
+                ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 30  );
             }
             if(this.game.running && !paused) {
                 var x = this.buttonStartX;
@@ -272,13 +291,13 @@ display.prototype.draw = function () {
                 ctx.fillRect(x,y,w - 55,h);
                 ctx.fillStyle = "white";
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("P", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.fillText("P", this.buttonStartX + 35, this.buttonStartY + 30  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("AUSE", this.buttonStartX + 50, this.buttonStartY + 40  );
+                ctx.fillText("AUSE", this.buttonStartX + 50, this.buttonStartY + 30  );
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("G", this.buttonStartX + 120, this.buttonStartY + 40  );
+                ctx.fillText("G", this.buttonStartX + 120, this.buttonStartY + 30  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("AME", this.buttonStartX + 140, this.buttonStartY + 40  );
+                ctx.fillText("AME", this.buttonStartX + 140, this.buttonStartY + 30  );
             }
             if(!this.game.running && paused) {
                 var ctx = this.ctx;
@@ -290,13 +309,13 @@ display.prototype.draw = function () {
                 ctx.fillRect(x,y,w - 55,h);
                 ctx.fillStyle = "white";
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 30  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("ESUME", this.buttonStartX + 55, this.buttonStartY + 40  );
+                ctx.fillText("ESUME", this.buttonStartX + 55, this.buttonStartY + 30  );
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("G", this.buttonStartX + 150, this.buttonStartY + 40  );
+                ctx.fillText("G", this.buttonStartX + 150, this.buttonStartY + 30  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("AME", this.buttonStartX + 170, this.buttonStartY + 40  );
+                ctx.fillText("AME", this.buttonStartX + 170, this.buttonStartY + 30  );
             }
 
             if(mouse.x < this.buttonStartX + this.buttonWidth - 55 && mouse.x >= this.buttonStartX
@@ -310,13 +329,13 @@ display.prototype.draw = function () {
                 ctx.fillRect(x,y,w - 55,h);
                 ctx.fillStyle = "white";
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("S", this.buttonStartX + 35, this.buttonStartY + 40  );
+                ctx.fillText("S", this.buttonStartX + 35, this.buttonStartY + 30  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("TART", this.buttonStartX + 55, this.buttonStartY + 40  );
+                ctx.fillText("TART", this.buttonStartX + 55, this.buttonStartY + 30  );
                 ctx.font = '30px Bahnschrift Light';
-                ctx.fillText("R", this.buttonStartX + 120, this.buttonStartY + 40  );
+                ctx.fillText("R", this.buttonStartX + 120, this.buttonStartY + 30  );
                 ctx.font = '26px Bahnschrift Light';
-                ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 40  );
+                ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 30  );
             }
         }
     }
@@ -338,9 +357,9 @@ display.prototype.draw = function () {
             ctx.fillStyle = "white";
             ctx.font = '30px Bahnschrift Light';
             if (this.game.speed == 1) {
-                ctx.fillText("x2", this.fastForwardStartX + 8, this.fastForwardStartY + 40  );
+                ctx.fillText("x2", this.fastForwardStartX + 8, this.fastForwardStartY + 30  );
             } else {
-                ctx.fillText("x1", this.fastForwardStartX + 8, this.fastForwardStartY + 40  );
+                ctx.fillText("x1", this.fastForwardStartX + 8, this.fastForwardStartY + 30  );
             }
         // }
     }
@@ -360,7 +379,7 @@ display.prototype.draw = function () {
         // Selling Tower Button Sells the Current Tower Selection and Gets Rid of It
         // And Removes it from the board
         if(mouse.x < this.descriptionBoxStartX + 270 + 10 && mouse.x >= this.descriptionBoxStartX + 10
-            && mouse.y < this.descriptionBoxStartY + 175 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 175 + 2) {
+            && mouse.y < this.descriptionBoxStartY + 199 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 199 + 2) {
             if (upgradeMode && !purchaseMode) {
                 upgradeMode = false;
                 for(var i = 0; i < this.game.activeTowers.length; i++) {
@@ -376,7 +395,7 @@ display.prototype.draw = function () {
         }
         // Priority Mode Toggles through the different priority modes in the tower
         if(mouse.x < this.descriptionBoxStartX + 270 + 10 && mouse.x >= this.descriptionBoxStartX + 10
-            && mouse.y < this.descriptionBoxStartY + 150 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 150 + 2) {
+            && mouse.y < this.descriptionBoxStartY + 177 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 177 + 2) {
             if (upgradeMode && !purchaseMode) {
                selectedUpgradableTower.shootPriorityType++;
                if(selectedUpgradableTower.shootPriorityType > 7) {
@@ -445,6 +464,18 @@ display.prototype.draw = function () {
             }
             if(selectedUpgradableTower.pierceLevel === 3) {
                 selectedUpgradableTower.pierceUpgradeCost = "Max";
+            }
+        }
+        // Upgrade Boba Homing
+        if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 155 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 155 + 2) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.homingLevel < 1) {
+                selectedUpgradableTower.homingLevel ++;
+                currentMoney -= selectedUpgradableTower.homingUpgradeCost;
+                selectedUpgradableTower.homingUpgradeCost += (20 * selectedUpgradableTower.homingLevel);
+            }
+            if(selectedUpgradableTower.homingLevel === 1) {
+                selectedUpgradableTower.homingUpgradeCost = "Max";
             }
         }
         // Start Round Button Click
@@ -556,13 +587,13 @@ display.prototype.generateStartButton = function() {
     ctx.fillRect(x,y,w - 55,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("S", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.fillText("S", this.buttonStartX + 35, this.buttonStartY + 30  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("TART", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.fillText("TART", this.buttonStartX + 55, this.buttonStartY + 30  );
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("R", this.buttonStartX + 120, this.buttonStartY + 40  );
+    ctx.fillText("R", this.buttonStartX + 120, this.buttonStartY + 30  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 40  );
+    ctx.fillText("OUND", this.buttonStartX + 140, this.buttonStartY + 30  );
 }
 
 display.prototype.generateFastForwardButton = function() {
@@ -576,9 +607,9 @@ display.prototype.generateFastForwardButton = function() {
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
     if (this.game.speed == 1) {
-        ctx.fillText("x2", this.fastForwardStartX + 8, this.fastForwardStartY + 40  );
+        ctx.fillText("x2", this.fastForwardStartX + 8, this.fastForwardStartY + 30  );
     } else {
-        ctx.fillText("x1", this.fastForwardStartX + 8, this.fastForwardStartY + 40  );
+        ctx.fillText("x1", this.fastForwardStartX + 8, this.fastForwardStartY + 30  );
     }
 }
 
@@ -592,13 +623,13 @@ display.prototype.generateResumeButton = function() {
     ctx.fillRect(x,y,w - 55,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.fillText("R", this.buttonStartX + 35, this.buttonStartY + 30  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("ESUME", this.buttonStartX + 55, this.buttonStartY + 40  );
+    ctx.fillText("ESUME", this.buttonStartX + 55, this.buttonStartY + 30  );
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("G", this.buttonStartX + 150, this.buttonStartY + 40  );
+    ctx.fillText("G", this.buttonStartX + 150, this.buttonStartY + 30  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("AME", this.buttonStartX + 170, this.buttonStartY + 40  );
+    ctx.fillText("AME", this.buttonStartX + 170, this.buttonStartY + 30  );
 }
 
 display.prototype.generatePauseButton = function() {
@@ -611,13 +642,13 @@ display.prototype.generatePauseButton = function() {
     ctx.fillRect(x,y,w - 55,h);
     ctx.fillStyle = "black";
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("P", this.buttonStartX + 35, this.buttonStartY + 40  );
+    ctx.fillText("P", this.buttonStartX + 35, this.buttonStartY + 30  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("AUSE", this.buttonStartX + 50, this.buttonStartY + 40  );
+    ctx.fillText("AUSE", this.buttonStartX + 50, this.buttonStartY + 30  );
     ctx.font = '30px Bahnschrift Light';
-    ctx.fillText("G", this.buttonStartX + 120, this.buttonStartY + 40  );
+    ctx.fillText("G", this.buttonStartX + 120, this.buttonStartY + 30  );
     ctx.font = '26px Bahnschrift Light';
-    ctx.fillText("AME", this.buttonStartX + 140, this.buttonStartY + 40  );
+    ctx.fillText("AME", this.buttonStartX + 140, this.buttonStartY + 30  );
 }
 
 display.prototype.generateDescriptionBox = function() {
@@ -646,11 +677,13 @@ display.prototype.generateDescriptionBox = function() {
             ctx.fillText("Boba Speed: Level " + selectedUpgradableTower.speedLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 95);
             ctx.fillText("Boba Ricochet: Level " + selectedUpgradableTower.ricochetLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 120);
             ctx.fillText("Piercing Boba: Level " + selectedUpgradableTower.pierceLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 145);
+            ctx.fillText("Homing Boba: Level " + selectedUpgradableTower.homingLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 170);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.rangeUpgradeCost, 200, 30);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.damageUpgradeCost, 200, 55);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.speedUpgradeCost, 200, 80);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.ricochetUpgradeCost, 200, 105);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.pierceUpgradeCost, 200, 130);
+            this.generateUpgradeAttributeButton(selectedUpgradableTower.homingUpgradeCost, 200, 155);
             this.generateSellTowerButton();
             this.generateShootingPriorityButton();
         }
@@ -713,7 +746,7 @@ display.prototype.generateUpgradeAttributeButton = function(cost, xOffset, yOffs
 display.prototype.generateShootingPriorityButton = function() {
     var ctx = this.ctx;
     var x = this.descriptionBoxStartX + 10;
-    var y = this.descriptionBoxStartY + 150;
+    var y = this.descriptionBoxStartY + 177;
     var w = 270;
     var h = 20;
     ctx.fillStyle = "#56fc53";
@@ -726,7 +759,7 @@ display.prototype.generateShootingPriorityButton = function() {
 display.prototype.generateSellTowerButton = function() {
     var ctx = this.ctx;
     var x = this.descriptionBoxStartX + 10;
-    var y = this.descriptionBoxStartY + 175;
+    var y = this.descriptionBoxStartY + 199;
     var w = 270;
     var h = 20;
     ctx.fillStyle = "#56fc53";
