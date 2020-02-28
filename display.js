@@ -674,7 +674,7 @@ display.prototype.generateDescriptionBox = function() {
             ctx.font = '16px Bahnschrift SemiBold';
             ctx.fillText("Tower Range: Level " + selectedUpgradableTower.rangeLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 45);
             ctx.fillText("Boba Damage: Level " + selectedUpgradableTower.damageLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 70);
-            ctx.fillText("Boba Speed: Level " + selectedUpgradableTower.speedLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 95);
+            ctx.fillText("Boba Velocity: Level " + selectedUpgradableTower.speedLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 95);
             ctx.fillText("Boba Ricochet: Level " + selectedUpgradableTower.ricochetLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 120);
             ctx.fillText("Piercing Boba: Level " + selectedUpgradableTower.pierceLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 145);
             ctx.fillText("Homing Boba: Level " + selectedUpgradableTower.homingLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 170);
@@ -692,11 +692,11 @@ display.prototype.generateDescriptionBox = function() {
 
     var currentTower = towerArray[yGrid][xGrid];
     ctx.fillStyle = "black";
-    ctx.font = '20px Bahnschrift SemiBold';
+    ctx.font = '16px Bahnschrift SemiBold';
     ctx.fillText(currentTower.name, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 20);
     ctx.fillText("Cost: " + currentTower.cost, this.descriptionBoxStartX + 180, this.descriptionBoxStartY + 20);
 
-    var txt = currentTower.description;
+    var txt = 'Description: ' + currentTower.description;
     var lineX = this.descriptionBoxStartX + 15;
     var lineY = this.descriptionBoxStartY + 40;
     var lineheight = 22;
