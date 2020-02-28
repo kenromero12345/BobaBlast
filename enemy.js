@@ -244,6 +244,7 @@ var collideUpdate = function(enemy) {
                 } else if (ent.isPierce && !ent.collidedBefore(enemy)) {
                     ent.collidedBeforeList.push(enemy);
                     ent.pierceCount--;
+                    ent.isHoming = false;
                     enemy.hp -= ent.bobaDamage;
                 } else if (!ent.isPierce && !ent.isRicochet){
                     enemy.hp -= ent.bobaDamage;
