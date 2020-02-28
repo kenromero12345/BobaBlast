@@ -1,4 +1,5 @@
-function boba(game, startX, startY, name, target, damage, speed) {
+function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, pierceLevel) {
+    this.collidedBeforeList = [];
     this.target = target;
     this.bobaDamage = damage;
     this.name = "BOBA";
@@ -6,6 +7,8 @@ function boba(game, startX, startY, name, target, damage, speed) {
     this.poisonLvl = 0;
     this.paralysisLvl = 0;
     this.burnLvl = 0;
+    this.ricochetLvl = ricochetLevel;
+    this.pierceLvl = pierceLevel;
     this.freezeProbAdder = 0;
     this.poisonProbAdder = 0;
     this.burnProbAdder = 0;
@@ -14,6 +17,8 @@ function boba(game, startX, startY, name, target, damage, speed) {
     this.poisonTimeAdder = 0;
     this.paralysisTimeAdder = 0;
     this.burnTimeAdder = 0;
+    this.ricochetCount = 0;
+    this.pierceCount = 0;
     this.isFreeze = false;
     if(name ==='blue') {
         this.isFreeze = true;
@@ -42,10 +47,30 @@ function boba(game, startX, startY, name, target, damage, speed) {
     if (name === 'laser') {
         this.isLaser = true;
     }
+    this.isPierce = false;
+    if (name === 'pierce') {
+        this.isPierce = true;
+        this.pierceCount = 1;
+    }
+    // ADDED THIS FOR UPGRADES
+    if (this.pierceLvl === 1) {
+        this.isPierce = true;
+        this.pierceCount = 1;
+    }
+    // END
     this.isRicochet = false;
     if (name === 'ricochet') {
         this.isRicochet = true;
+        this.ricochetLvl = 1;
+        this.ricochetCount = 1;
     }
+    // ADDED THIS FOR UPGRADES
+    if (this.ricochetLvl === 1) {
+        this.isRicochet = true;
+        this.ricochetLvl = 1;
+        this.ricochetCount = 1;
+    }
+    // END
     if (this.freezeLvl == 2) {
         this.freezeProbAdder = .5;
         this.freezeTimeAdder = 3000;
@@ -73,6 +98,21 @@ function boba(game, startX, startY, name, target, damage, speed) {
     } else if (this.paralysisLvl == 3) {
         this.paralysisProbAdder = .8;
         this.paralysisTimeAdder = 1000/1000;
+    } 
+    if (this.ricochetLvl == 2) {
+        this.isRicochet = true;
+        this.ricochetCount = 3;
+    } else if (this.ricochetLvl == 3) {
+        this.isRicochet = true;
+        this.ricochetCount = 5;
+    } 
+
+    if (this.pierceLvl == 2) {
+        this.isPierce = true;
+        this.pierceCount = 3;
+    } else if (this.pierceLvl == 3) {
+        this.isPierce = true;
+        this.pierceCount = 5;
     } 
     /*
         this.isFire = false;
@@ -154,6 +194,15 @@ function boba(game, startX, startY, name, target, damage, speed) {
     this.noCollision = true;
     this.boxes = false;
     this.boundingbox = new BoundingBox(this.x + 6, this.y + 13, this.width -21, this.height - 23);
+}
+
+boba.prototype.collidedBefore = function(enemy) {
+    for (var i = 0; i < this.collidedBeforeList.length; i++) {
+        if (enemy == this.collidedBeforeList[i]) {
+            return true;
+        }
+    }
+    return false;
 }
 
 boba.prototype.draw = function () {
