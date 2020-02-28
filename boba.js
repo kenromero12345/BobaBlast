@@ -1,4 +1,4 @@
-function boba(game, startX, startY, name, target, damage, speed, ricochetLevel) {
+function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, pierceLevel) {
     this.collidedBeforeList = [];
     this.target = target;
     this.bobaDamage = damage;
@@ -8,6 +8,7 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel) 
     this.paralysisLvl = 0;
     this.burnLvl = 0;
     this.ricochetLvl = ricochetLevel;
+    this.pierceLvl = pierceLevel;
     this.freezeProbAdder = 0;
     this.poisonProbAdder = 0;
     this.burnProbAdder = 0;

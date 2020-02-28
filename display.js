@@ -224,6 +224,25 @@ display.prototype.draw = function () {
                 }
             }
         }
+        // Hover Over Feature for Upgrade Boba Piercing
+        if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 130 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 130 + 2) {
+            if (upgradeMode && !purchaseMode) {
+                var x = this.descriptionBoxStartX + 200;
+                var y = this.descriptionBoxStartY + 130;
+                var w = 80;
+                var h = 20;
+                ctx.fillStyle = "red";
+                ctx.fillRect(x,y,w,h);
+                ctx.fillStyle = "white";
+                ctx.font = '16px Bahnschrift Light';
+                if(selectedUpgradableTower.pierceUpgradeCost === 'Max') {
+                    ctx.fillText("Maximum", x + 10, y + 15);
+                } else {
+                    ctx.fillText("↑ $" + selectedUpgradableTower.pierceUpgradeCost, x + 15, y + 15);
+                }
+            }
+        }
         // Hover Over Feature for Starting Round
         if(mouse.x < this.buttonStartX + this.buttonWidth - 55 && mouse.x >= this.buttonStartX
             && mouse.y < this.buttonStartY + this.buttonHeight && mouse.y >= this.buttonStartY) {
@@ -408,13 +427,24 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
             && mouse.y < this.descriptionBoxStartY + 105 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 105 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.ricochetLevel < 3) {
-              //  selectedUpgradableTower.bobaSpeed *= 2;
                 selectedUpgradableTower.ricochetLevel ++;
                 currentMoney -= selectedUpgradableTower.ricochetUpgradeCost;
                 selectedUpgradableTower.ricochetUpgradeCost += (20 * selectedUpgradableTower.ricochetLevel);
             }
             if(selectedUpgradableTower.ricochetLevel === 3) {
                 selectedUpgradableTower.ricochetUpgradeCost = "Max";
+            }
+        }
+        // Upgrade Boba Piercing
+        if(mouse.x < this.descriptionBoxStartX + 200 + 80 && mouse.x >= this.descriptionBoxStartX + 200
+            && mouse.y < this.descriptionBoxStartY + 130 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 130 + 2) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.pierceLevel < 3) {
+                selectedUpgradableTower.pierceLevel ++;
+                currentMoney -= selectedUpgradableTower.pierceUpgradeCost;
+                selectedUpgradableTower.pierceUpgradeCost += (20 * selectedUpgradableTower.pierceLevel);
+            }
+            if(selectedUpgradableTower.pierceLevel === 3) {
+                selectedUpgradableTower.pierceUpgradeCost = "Max";
             }
         }
         // Start Round Button Click
@@ -615,10 +645,12 @@ display.prototype.generateDescriptionBox = function() {
             ctx.fillText("Boba Damage: Level " + selectedUpgradableTower.damageLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 70);
             ctx.fillText("Boba Speed: Level " + selectedUpgradableTower.speedLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 95);
             ctx.fillText("Boba Ricochet: Level " + selectedUpgradableTower.ricochetLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 120);
+            ctx.fillText("Piercing Boba: Level " + selectedUpgradableTower.pierceLevel, this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 145);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.rangeUpgradeCost, 200, 30);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.damageUpgradeCost, 200, 55);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.speedUpgradeCost, 200, 80);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.ricochetUpgradeCost, 200, 105);
+            this.generateUpgradeAttributeButton(selectedUpgradableTower.pierceUpgradeCost, 200, 130);
             this.generateSellTowerButton();
             this.generateShootingPriorityButton();
         }
