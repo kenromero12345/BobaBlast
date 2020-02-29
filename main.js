@@ -107,8 +107,6 @@ AM.queueDownload("./img/greenTea.png");
 AM.queueDownload("./img/greenTeaFlip.png");
 AM.queueDownload("./img/yellowTea.png");
 AM.queueDownload("./img/yellowTeaFlip.png");
-// AM.queueDownload("./img/origTea.png");
-// AM.queueDownload("./img/origTeaFlip.png");
 AM.queueDownload("./img/background.png");
 AM.queueDownload("./img/holder.png");
 AM.queueDownload("./img/tower.png");
@@ -145,9 +143,6 @@ AM.queueDownload("./img/pumpkinEvilFlip.png");
 AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
 AM.queueDownload("./img/explosion.png");
-
-var audio = new Audio('./mp3/Your Sunset.mp3');
-
 
 function Background(game, spritesheet) {
     this.isEnemy = false;
@@ -292,12 +287,8 @@ function generateStoreTowers(game) {
     var seventhTower = new storeTower(game, "Taro Boba", 300, 600/1000, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \nSpecial Ability: Stun briefly \nstops enemies in place ",AM.getAsset("./img/towerP.png"), 945, 260,70,70,0,2, "purple");
     // laser tower
     var eighthTower = new storeTower(game, "Laser Boba", 300, 0.01, 250,"Fires laser boba \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Laser boba \nperforms more damage ",AM.getAsset("./img/lasertower.png"), 1015, 260,70,70,1,2, "laser");
+    
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower, eighthTower]];//eightTower,ninthTower
-    // for(var i = 0; i < 3; i++) {
-    //     for(var j = 0; j < 3; j++) {
-    //         // game.addEntity(temp[i][j]);
-    //     }
-    // }
     game.towers = temp;
     return temp;
 }
