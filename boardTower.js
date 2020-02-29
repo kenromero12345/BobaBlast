@@ -3,12 +3,24 @@ function boardTower(game, gridX, gridY, type) {
     this.rangeLevel = 1;
     this.damageLevel = 1;
     this.speedLevel = 1;
+    this.poisonLevel = 0;
+    this.laserLevel = 0;
+    this.freezeLevel = 0;
+    this.frequencyLevel = 1;
+    this.paralyzeLevel = 0;
+    this.explosiveLevel = 0;
     this.ricochetLevel = 0;
     this.pierceLevel = 0;
     this.homingLevel = 0;
     this.rangeUpgradeCost = 100;
     this.damageUpgradeCost = 200;
     this.speedUpgradeCost = 300;
+    this.poisonUpgradeCost = 125;
+    this.laserUpgradeCost = 600;
+    this.freezeUpgradeCost= 175;
+    this.frequencyUpgradeCost = 225;
+    this.paralyzeUpgradeCost = 220;
+    this.explosiveUpgradeCost = 280;
     this.ricochetUpgradeCost = 400;
     this.pierceUpgradeCost = 500;
     this.homingUpgradeCost = 250;
@@ -117,7 +129,7 @@ boardTower.prototype.draw = function () {
 
     if(this.shootBoba) {
         if(this.shootTimer < this.game.timer.time) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target, this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel));
+            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target, this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel, this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
             this.shootBoba = false;
             this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
         }
