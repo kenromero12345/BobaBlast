@@ -42,9 +42,15 @@ storeTower.prototype.update = function () {
             if (currentMoney - this.cost < 0) {
                 return;
             }
-            purchaseMode = true;
-            selectedTowerColumn = this.storeGridX;
-            selectedTowerRow =this.storeGridY;
+            if(purchaseMode && selectedTowerColumn == this.storeGridX && selectedTowerRow == this.storeGridY) {
+                purchaseMode = false;
+                selectedTowerColumn = -1;
+                selectedTowerRow = -1;
+            } else {
+                purchaseMode = true;
+                selectedTowerColumn = this.storeGridX;
+                selectedTowerRow =this.storeGridY;
+            }
         }
     }
     // Hover Mode: If hover over a tower, set global variable for hover tower row/column
