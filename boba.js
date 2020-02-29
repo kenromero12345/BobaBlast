@@ -1,12 +1,12 @@
-function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, pierceLevel, homingLevel) {
+function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, pierceLevel, homingLevel, poisonLevel, laserLevel, freezeLevel, paralyzeLevel, explosiveLevel) {
     this.collidedBeforeList = [];
     this.target = target;
     this.bobaDamage = damage;
     this.name = "BOBA";
-    this.freezeLvl = 0;
-    this.poisonLvl = 0;
-    this.paralysisLvl = 0;
-    this.burnLvl = 0;
+    this.freezeLvl = freezeLevel; // ADDRESSED UPGRADES
+    this.poisonLvl = poisonLevel; // ADDRESSED UPGRADES
+    this.paralysisLvl = paralyzeLevel; // ADDRESSED UPGRADES
+    this.burnLvl = explosiveLevel; // KINDA
     this.ricochetLvl = ricochetLevel;
     this.pierceLvl = pierceLevel;
     this.freezeProbAdder = 0;
@@ -24,21 +24,41 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
         this.isFreeze = true;
         this.freezeLvl = 1;
     }
+    // ADDED THIS FOR UPGRADES
+    if(freezeLevel == 1) {
+        this.isFreeze = true;
+    }
+    // END
     this.isPoison = false;
     if(name ==='green') {
         this.isPoison = true;
         this.poisonLvl = 1;
     }
+    // ADDED THIS FOR UPGRADES
+    if(poisonLevel == 1) {
+        this.isPoison = true;
+    }
+    // END
     this.isParalyze = false;
     if(name ==='purple') {
         this.isParalyze = true;
         this.paralysisLvl = 1;
     }
+    // ADDED THIS FOR UGPRADES
+    if (paralyzeLevel == 1) {
+        this.isParalyze = true;
+    }
+    // END
     this.isExplosive = false;
     if(name ==='red') {
         this.isExplosive = true;
         this.burnLvl = 1;
     }
+    // ADDED THIS FOR UPGRADES
+    if(explosiveLevel == 1) {
+        this.isExplosive = true;
+    }
+    // END
     this.isHoming = false;
     if(name ==='gold') {
         this.isHoming = true;
@@ -52,6 +72,11 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
     if (name === 'laser') {
         this.isLaser = true;
     }
+    // ADDED THIS FOR UPGRADES
+    if (laserLevel == 1) {
+        this.isLaser = true;
+    }
+    // END
     this.isPierce = false;
     if (name === 'pierce') {
         this.isPierce = true;
@@ -77,20 +102,25 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
     }
     // END
     if (this.freezeLvl == 2) {
+        this.isFreeze = true;
         this.freezeProbAdder = .5;
         this.freezeTimeAdder = 3000;
     } else if (this.freezeLvl == 3) {
+        this.isFreeze = true;
         this.freezeProbAdder = .8;
         this.freezeTimeAdder = 5000/1000;
     }
     if (this.poisonLvl == 2) {
+        this.isPoison = true;
         this.poisonProbAdder = .5;
         this.poisonTimeAdder = 3000/1000;
     } else if (this.poisonLvl == 3) {
+        this.isPoison = true;
         this.poisonProbAdder = .8;
         this.poisonTimeAdder = 5000/1000;
     } 
     // if (this.burnLvl == 2) {
+
     //     this.burnProbAdder = 5;
     //     this.burnTimeAdder - 500;
     // } else if (this.burnLvl == 3) {
@@ -98,9 +128,11 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
     //     this.burnTimeAdder = 1000;
     // } 
     if (this.paralysisLvl == 2) {
+        this.isParalyze = true;
         this.paralysisProbAdder = .5;
         this.paralysisTimeAdder = 500;
     } else if (this.paralysisLvl == 3) {
+        this.isParalyze = true;
         this.paralysisProbAdder = .8;
         this.paralysisTimeAdder = 1000/1000;
     } 
