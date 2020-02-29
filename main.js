@@ -165,31 +165,33 @@ Background.prototype.draw = function() {
 
 //Music
 var audio = new Audio('./mp3/KSquare.mp3');
-audio.loop = true;
 audio.volume = 0.5;
 
 var audio2 = new Audio('./mp3/Your Sunset.mp3');
+// var audio2 = new Audio('./mp3/failed.mp3');
 audio2.loop = false;
 audio2.volume = 0.5;
 
 Background.prototype.update = function() {
-    var playPromise = audio.play();
+    // var playPromise = audio.play();
     
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            if(gameOverLose == false && gameOverWin == false){
-                audio.play();
-            }else{
-                audio.pause();
-                audio2.play();
-            }
+    // if (playPromise !== undefined) {
+    //     playPromise.then(_ => {
+    //         if(gameOverLose == false && gameOverWin == false){
+    //             audio.play();
+    //             audio2.pause();
+    //         }else{
+    //             audio.pause();
+    //             audio2.play();
+    //         }
             
             
-        })
-        .catch(error => {
-            
-        });
-    }
+    //     })
+    //     .catch(error => {
+    //         audio.pause();
+    //         audio2.pause();
+    //     });
+    // }
 }
 
 // var GAMEBOARD = [];
