@@ -544,7 +544,7 @@ display.prototype.generateScoreBoard = function () {
     ctx.fillRect(x,y,w,h);
     ctx.fillStyle = "black";
     ctx.font = '18px Bahnschrift';
-    ctx.fillText("Money: " + currentMoney, this.scoreStartX + 3, this.scoreStartY + 30  );
+    ctx.fillText("Money: $" + currentMoney, this.scoreStartX + 3, this.scoreStartY + 30  );
 }
 
 display.prototype.generateLifeBoard = function () {
