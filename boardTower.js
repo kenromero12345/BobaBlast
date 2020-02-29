@@ -34,11 +34,12 @@ function boardTower(game, gridX, gridY, type) {
     this.pointDirectionIndex = 0;
     this.pointDirection = 'S';
     this.intendedDirection = 'S';
-    if(this.name = 'all') {
-        this.pointDirection = 'N';
-        this.pointDirection = 'N';
-    }
     this.intendedDirectionIndex = 0;
+    if(this.name == 'all') {
+        this.pointDirection = 'N';
+        this.intendedDirection = 'N';
+        this.intendedDirectionIndex = 4;
+    }
     this.game = game;
     this.ctx = game.ctx;
     this.gridX = gridX;
