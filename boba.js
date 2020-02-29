@@ -1,4 +1,5 @@
-function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, pierceLevel, homingLevel, poisonLevel, laserLevel, freezeLevel, paralyzeLevel, explosiveLevel) {
+function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
+    , pierceLevel, homingLevel, poisonLevel, laserLevel, freezeLevel, paralyzeLevel, explosiveLevel) {
     this.collidedBeforeList = [];
     this.target = target;
     this.bobaDamage = damage;
@@ -54,9 +55,13 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel, 
         this.isExplosive = true;
         this.burnLvl = 1;
     }
-    // ADDED THIS FOR UPGRADES
-    if(explosiveLevel == 1) {
+    // // ADDED THIS FOR UPGRADES
+    // if(explosiveLevel == 1) {
+    //     this.isExplosive = true;
+    // }
+    if (explosiveLevel > 0) {
         this.isExplosive = true;
+        this.burnLvl = explosiveLevel;
     }
     // END
     this.isHoming = false;
