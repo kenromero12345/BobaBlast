@@ -291,7 +291,7 @@ function generateStoreTowers(game) {
     //stun tower
     var seventhTower = new storeTower(game, "Taro Boba", 300, 600/1000, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \nSpecial Ability: Stun briefly \nstops enemies in place ",AM.getAsset("./img/towerP.png"), 945, 260,70,70,0,2, "purple");
     // laser tower
-    var eighthTower = new storeTower(game, "Laser Boba", 300, 600/1000, 250,"Fires laser boba \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Laser boba \nperforms more damage ",AM.getAsset("./img/lasertower.png"), 1015, 260,70,70,1,2, "none");
+    var eighthTower = new storeTower(game, "Laser Boba", 300, 0.01, 250,"Fires laser boba \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Laser boba \nperforms more damage ",AM.getAsset("./img/lasertower.png"), 1015, 260,70,70,1,2, "laser");
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower, eighthTower]];//eightTower,ninthTower
     for(var i = 0; i < 3; i++) {
         for(var j = 0; j < 3; j++) {

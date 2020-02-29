@@ -129,7 +129,15 @@ boardTower.prototype.draw = function () {
 
     if(this.shootBoba) {
         if(this.shootTimer < this.game.timer.time) {
-            this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target, this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel, this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+            if (this.name == "laser") {
+                this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
+                    , .01, this.bobaSpeed, this.ricochetLevel, -1, this.homingLevel
+                    , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+            } else {
+                this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
+                    , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
+                    , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+            }
             this.shootBoba = false;
             this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
         }
