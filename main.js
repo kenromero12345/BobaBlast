@@ -172,23 +172,23 @@ audio2.loop = false;
 audio2.volume = 0.5;
 
 Background.prototype.update = function() {
-    var playPromise = audio.play();
+    // var playPromise = audio.play();
     
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            if(gameOverLose == false && gameOverWin == false){
-                audio.play();
-            }else{
-                audio.pause();
-                audio2.play();
-            }
+    // if (playPromise !== undefined) {
+    //     playPromise.then(_ => {
+    //         if(gameOverLose == false && gameOverWin == false){
+    //             audio.play();
+    //         }else{
+    //             audio.pause();
+    //             audio2.play();
+    //         }
             
             
-        })
-        .catch(error => {
+    //     })
+    //     .catch(error => {
             
-        });
-    }
+    //     });
+    // }
 }
 
 // var GAMEBOARD = [];
@@ -293,11 +293,11 @@ function generateStoreTowers(game) {
     // laser tower
     var eighthTower = new storeTower(game, "Laser Boba", 300, 0.01, 250,"Fires laser boba \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Laser boba \nperforms more damage ",AM.getAsset("./img/lasertower.png"), 1015, 260,70,70,1,2, "laser");
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower, eighthTower]];//eightTower,ninthTower
-    for(var i = 0; i < 3; i++) {
-        for(var j = 0; j < 3; j++) {
-            // game.addEntity(temp[i][j]);
-        }
-    }
+    // for(var i = 0; i < 3; i++) {
+    //     for(var j = 0; j < 3; j++) {
+    //         // game.addEntity(temp[i][j]);
+    //     }
+    // }
     game.towers = temp;
     return temp;
 }
