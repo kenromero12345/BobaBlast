@@ -65,6 +65,7 @@ PlayGame.prototype.update = function () {
                 && click.y < this.buttonStartY + this.buttonHeight && click.y >= this.buttonStartY) {
                     gameStarted = true;
                     gameOverLose = false;
+                    var playPromise = audio.play();
                 }
         }
     }

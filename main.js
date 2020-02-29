@@ -169,24 +169,25 @@ var audio2 = new Audio('./mp3/Your Sunset.mp3');
 audio2.volume = 0.5;
 
 Background.prototype.update = function() {
-    var playPromise = audio.play();
+    // var playPromise = audio.play();
     
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            if(gameOverLose == false && gameOverWin == false){
-                audio.play();
-                audio2.pause();
-            }else{
-                audio.pause();
-                audio2.play();
-            }
+    // if (playPromise !== undefined) {
+    //     playPromise.then(_ => {
+    //         if(gameOverLose == false && gameOverWin == false){
+    //             audio.play();
+    //             audio2.pause();
+    //         }else{
+    //             audio.pause();
+    //             audio2.play();
+    //         }
             
             
-        })
-        .catch(error => {
-            
-        });
-    }
+    //     })
+    //     .catch(error => {
+    //         audio.pause();
+    //         audio2.pause();
+    //     });
+    // }
 }
 
 // var GAMEBOARD = [];

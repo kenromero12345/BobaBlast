@@ -81,6 +81,8 @@ roundPlan.prototype.generateGameOverLose = function() {
     ctx.font = '26px Bahnschrift Light';
     ctx.fillText("YOU LOSE!", x + 35, y + 70  );
     gameOverLose = true;
+    audio.pause();
+    audio2.play();
 }
 
 roundPlan.prototype.generateGameOverWin = function() {
