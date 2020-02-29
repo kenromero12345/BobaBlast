@@ -97,7 +97,7 @@ display.prototype.draw = function () {
     if (this.game.mouse) {
         var mouse = this.game.mouse;
         // Disable Hover Mode if Not Within Bounds of Boba Tower Store
-        if(mouse.x < 945 || mouse.x >= 1155 || mouse.y < 200 && mouse.y >= 410) {
+        if(mouse.x < 945 || mouse.x >= 1155 || mouse.y < 120 || mouse.y >= 340) {
             hoverTowerColumn = -1;
             hoverTowerRow = -1;
         }
