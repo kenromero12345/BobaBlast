@@ -571,7 +571,7 @@ display.prototype.draw = function () {
         // Upgrade Laser Boba
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 130 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 130 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.laserLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.laserLevel < 1) {
                 selectedUpgradableTower.laserLevel ++;
                 currentMoney -= selectedUpgradableTower.laserUpgradeCost;
                 selectedUpgradableTower.laserUpgradeCost += (20 * selectedUpgradableTower.laserLevel);
