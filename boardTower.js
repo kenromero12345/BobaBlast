@@ -131,7 +131,7 @@ boardTower.prototype.draw = function () {
         if(this.shootTimer < this.game.timer.time) {
             if (this.name == "laser") {
                 this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
-                    , .01, this.bobaSpeed, this.ricochetLevel, -1, this.homingLevel
+                    , .05, this.bobaSpeed, this.ricochetLevel, -1, this.homingLevel
                     , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
             } else {
                 this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
