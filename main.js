@@ -118,6 +118,7 @@ AM.queueDownload("./img/towerY.png");
 AM.queueDownload("./img/towerB.png");
 AM.queueDownload("./img/towerP.png");
 AM.queueDownload("./img/lasertower.png");
+AM.queueDownload("./img/mixtower.png");
 AM.queueDownload("./img/iceg.png");
 AM.queueDownload("./img/icegFlip.png");
 AM.queueDownload("./img/cola.png");
@@ -292,7 +293,9 @@ function generateStoreTowers(game) {
     var seventhTower = new storeTower(game, "Taro Boba", 300, 600/1000, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \nSpecial Ability: Stun briefly \nstops enemies in place ",AM.getAsset("./img/towerP.png"), 945, 260,70,70,0,2, "purple");
     // laser tower
     var eighthTower = new storeTower(game, "Laser Boba", 300, 0.01, 250,"Fires laser boba \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Laser boba \nperforms more damage ",AM.getAsset("./img/lasertower.png"), 1015, 260,70,70,1,2, "laser");
-    var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower, eighthTower]];//eightTower,ninthTower
+     // mix tower
+     var ninthTower = new storeTower(game, "Multi-Directional Boba", 300, 1000/1000, 250,"Fires boba in all directions \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Boba is fired \nin all directions ",AM.getAsset("./img/mixtower.png"), 1085, 260,70,70,2,2, "all");
+    var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower, eighthTower, ninthTower]];//eightTower,ninthTower
     for(var i = 0; i < 3; i++) {
         for(var j = 0; j < 3; j++) {
             // game.addEntity(temp[i][j]);

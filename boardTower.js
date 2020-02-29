@@ -34,6 +34,10 @@ function boardTower(game, gridX, gridY, type) {
     this.pointDirectionIndex = 0;
     this.pointDirection = 'S';
     this.intendedDirection = 'S';
+    if(this.name = 'all') {
+        this.pointDirection = 'N';
+        this.pointDirection = 'N';
+    }
     this.intendedDirectionIndex = 0;
     this.game = game;
     this.ctx = game.ctx;
@@ -133,6 +137,12 @@ boardTower.prototype.draw = function () {
                 this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
                     , .01, this.bobaSpeed, this.ricochetLevel, -1, this.homingLevel
                     , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+            } else if (this.name == "all") {
+                for(var i = 0; i < this.shootOutXOffset.length; i++) {
+                    this.game.addEntity(new boba(this.game,this.x + this.shootOutXOffset[i], this.y + this.shootOutYOffset[i], this.name, {centerX: this.x + this.shootOutXOffsetDir[i] * 100, centerY: this.y + this.shootOutYOffsetDir[i] * 100}
+                        , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
+                        , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+                    }         
             } else {
                 this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
                     , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
@@ -172,12 +182,12 @@ boardTower.prototype.update = function () {
         this.shootBoba = true;
     }
 */
-    if(this.spin && this.pointDirection === this.intendedDirection) {
+    if(this.spin && this.pointDirection === this.intendedDirection && this.name != 'all') {
         this.pointDirectionIndex = this.intendedDirectionIndex;
         this.spin = false;
     }
 
-    if(this.spin) {
+    if(this.spin && this.name != 'all') {
         if(this.counterclockwise) {
             if(this.pointDirection === 'S') {
                 this.pointDirection = 'SE';
