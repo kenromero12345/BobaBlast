@@ -144,7 +144,7 @@ var collideUpdate = function(enemy) {
             if (ent.pierceCount == -1 && ent.ricochetCount == -1) {
                 ent.removeFromWorld = true;
             }
-            if (ent.isFreeze && enemy.boundingbox.collide(ent.boundingbox)) {
+            if (ent.freezeLvl > 0 && enemy.boundingbox.collide(ent.boundingbox)) {
                 if (Math.random() > enemy.freezeResistance - ent.freezeProbAdder) {
                     enemy.isFrozen = true;
                     if (enemy.freezeLvl < ent.freezeLvl) {
@@ -161,7 +161,7 @@ var collideUpdate = function(enemy) {
                     }
                 }
             }
-            if (ent.isParalyze && enemy.boundingbox.collide(ent.boundingbox)) {
+            if ((ent.isElectricity || ent.paralysisLvl > 0) && enemy.boundingbox.collide(ent.boundingbox)) {
                if (Math.random() > enemy.paralysisResistance - ent.paralysisProbAdder) {
                     enemy.isParalyzed = true;
                     if (enemy.paralysisLvl < ent.paralysisLvl) {
@@ -180,7 +180,7 @@ var collideUpdate = function(enemy) {
                     }
                }
             }
-            if (ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
+            if (ent.poisonLvl > 0 && enemy.boundingbox.collide(ent.boundingbox)) {
                 if (Math.random() > enemy.poisonResistance - ent.poisonProbAdder) {
                     enemy.isPoisoned = true;
                     if (enemy.poisonLvl < ent.poisonLvl) {
@@ -191,7 +191,7 @@ var collideUpdate = function(enemy) {
                     }
                 }
             } 
-            if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
+            if ((ent.isExplosion || ent.burnLvl > 0)  && enemy.boundingbox.collide(ent.boundingbox)) {
                 console.log(enemy.burnResistance + " " + ent.burnProbAdder);
                 if (Math.random() > enemy.burnResistance - ent.burnProbAdder) {
                     // console.log("EXPLOSION");
@@ -215,8 +215,12 @@ var collideUpdate = function(enemy) {
                 enemy.game.addEntity(new Explosion(enemy.game, enemy.x, enemy.y, ent.burnLvl));
             }
 
+            if (ent.isBoba && ent.isElectric && enemy.boundingbox.collide(ent.boundingbox)) {
+                enemy.game.addEntity(new Electric(enemy.game, enemy.x, enemy.y, ent.paralysisLvl));
+            }
+
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
-                if (ent.isRicochet && !ent.collidedBefore(enemy)) {
+                if (ent.ricochetLvl > 0 && !ent.collidedBefore(enemy)) {
                     ent.collidedBeforeList.push(enemy);
                     ent.ricochetCount--;
                     enemy.hp -= ent.bobaDamage;
@@ -241,17 +245,17 @@ var collideUpdate = function(enemy) {
                         ent.removeFromWorld = true;
                     }
                     
-                } else if (ent.isPierce && !ent.collidedBefore(enemy)) {
+                } else if (ent.pierceLvl != 0 && !ent.collidedBefore(enemy)) {
                     ent.collidedBeforeList.push(enemy);
                     ent.pierceCount--;
                     ent.isHoming = false;
                     enemy.hp -= ent.bobaDamage;
-                } else if (!ent.isPierce && !ent.isRicochet){
+                } else if (!ent.pierceLvl != 0 && !ent.ricochetLvl > 0){
                     enemy.hp -= ent.bobaDamage;
                     ent.removeFromWorld = true;
                 }
             } 
-            if ((ent.isExplosion || ent.isFire) && enemy.boundingbox.collide(ent.boundingbox)) {
+            if ((ent.isExplosion) && enemy.boundingbox.collide(ent.boundingbox)) {
                 enemy.hp-= 0.1;
             }
 

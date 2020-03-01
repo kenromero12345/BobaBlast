@@ -20,107 +20,120 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
     this.burnTimeAdder = 0;
     this.ricochetCount = 0;
     this.pierceCount = 0;
-    this.isFreeze = false;
-    if(name ==='blue') {
-        this.isFreeze = true;
-        this.freezeLvl = 1;
-    }
+    // this.isFreeze = false;
+    // if(name ==='blue') {
+    //     this.isFreeze = true;
+    //     this.freezeLvl = 1;
+    // }
     // ADDED THIS FOR UPGRADES
-    if(freezeLevel == 1) {
-        this.isFreeze = true;
-    }
+    // if (freezeLevel > 0) {
+    //     this.isFreeze = true;
+    // }
     // END
-    this.isPoison = false;
-    if(name ==='green') {
-        this.isPoison = true;
-        this.poisonLvl = 1;
-    }
+    // this.isPoison = false;
+    // if(name ==='green') {
+    //     this.isPoison = true;
+    //     this.poisonLvl = 1;
+    // }
     // ADDED THIS FOR UPGRADES
-    if(poisonLevel == 1) {
-        this.isPoison = true;
-    }
+    // if(poisonLevel == 1) {
+    //     // this.isPoison = true;
+    // }
     // END
-    this.isParalyze = false;
+    // this.isParalyze = false;
+    this.isElectric = false;
     if(name ==='purple') {
-        this.isParalyze = true;
-        this.paralysisLvl = 1;
+        this.isElectric = true;
+        // this.isParalyze = true;
+        // this.paralysisLvl = 1;
     }
     // ADDED THIS FOR UGPRADES
-    if (paralyzeLevel == 1) {
-        this.isParalyze = true;
-    }
+    // if (paralyzeLevel == 1) {
+    //     this.isParalyze = true;
+    // }
     // END
-    this.isExplosive = false;
+    // this.isExplosive = false;
     if(name ==='red') {
         this.isExplosive = true;
-        this.burnLvl = 1;
+        // this.burnLvl = 1;
     }
     // // ADDED THIS FOR UPGRADES
     // if(explosiveLevel == 1) {
     //     this.isExplosive = true;
     // }
     if (explosiveLevel > 0) {
-        this.isExplosive = true;
+        // this.isExplosive = true;
         this.burnLvl = explosiveLevel;
+    }
+    if (paralyzeLevel > 0) {
+        // this.isExplosive = true;
+        this.paralysisLvl = paralyzeLevel;
+    }
+    if (freezeLevel > 0) {
+        // this.isExplosive = true;
+        this.freezeLvl = freezeLevel;
+    }
+    if (poisonLevel > 0) {
+        this.poisonLvl = poisonLevel;
     }
     // END
     this.isHoming = false;
-    if(name ==='gold') {
-        this.isHoming = true;
-    }
+    // if(name ==='gold') {
+    //     this.isHoming = true;
+    // }
     // ADDED THIS FOR UPGRADES
     if(homingLevel == 1) {
         this.isHoming = true;
     }
     // END
     this.isLaser = false;
-    if (name === 'laser') {
-        this.isLaser = true;
-    }
+    // if (name === 'laser') {
+    //     this.isLaser = true;
+    // }
     // ADDED THIS FOR UPGRADES
     if (laserLevel == 1) {
         this.isLaser = true;
     }
     // END
-    this.isPierce = false;
-    if (name === 'pierce') {
-        this.isPierce = true;
-        this.pierceCount = 1;
-    }
-    // ADDED THIS FOR UPGRADES
-    if (this.pierceLvl === 1) {
-        this.isPierce = true;
-        this.pierceCount = 1;
-    }
-    // END
-    this.isRicochet = false;
-    if (name === 'ricochet') {
-        this.isRicochet = true;
-        this.ricochetLvl = 1;
-        this.ricochetCount = 1;
-    }
-    // ADDED THIS FOR UPGRADES
-    if (this.ricochetLvl === 1) {
-        this.isRicochet = true;
-        this.ricochetLvl = 1;
-        this.ricochetCount = 1;
-    }
+    // this.isPierce = false;
+    // if (name === 'pierce') {
+    //     this.isPierce = true;
+    //     this.pierceCount = 1;
+    // }
+    // // ADDED THIS FOR UPGRADES
+    // if (this.pierceLvl === 1) {
+    //     this.isPierce = true;
+    //     this.pierceCount = 1;
+    // }
+    // // END
+    // this.isRicochet = false;
+    // if (name === 'ricochet') {
+    //     this.isRicochet = true;
+    //     this.ricochetLvl = 1;
+    //     this.ricochetCount = 1;
+    // }
+    // // ADDED THIS FOR UPGRADES
+    // if (this.ricochetLvl === 1) {
+    //     this.isRicochet = true;
+    //     this.ricochetLvl = 1;
+    //     this.ricochetCount = 1;
+    // }
     // END
     if (this.freezeLvl == 2) {
-        this.isFreeze = true;
+        // this.isFreeze = true;
         this.freezeProbAdder = .5;
         this.freezeTimeAdder = 3000;
     } else if (this.freezeLvl == 3) {
-        this.isFreeze = true;
+        // this.isFreeze = true;
         this.freezeProbAdder = .8;
         this.freezeTimeAdder = 5000/1000;
     }
     if (this.poisonLvl == 2) {
-        this.isPoison = true;
+        // this.isPoison = true;
         this.poisonProbAdder = .5;
         this.poisonTimeAdder = 3000/1000;
     } else if (this.poisonLvl == 3) {
-        this.isPoison = true;
+        // this.isPoison = true;
         this.poisonProbAdder = .8;
         this.poisonTimeAdder = 5000/1000;
     } 
@@ -132,35 +145,33 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
     //     this.burnProbAdder = 8;
     //     this.burnTimeAdder = 1000;
     // } 
+
     if (this.paralysisLvl == 2) {
-        this.isParalyze = true;
+        // this.isParalyze = true;
         this.paralysisProbAdder = .5;
         this.paralysisTimeAdder = 500;
     } else if (this.paralysisLvl == 3) {
-        this.isParalyze = true;
+        // this.isParalyze = true;
         this.paralysisProbAdder = .8;
         this.paralysisTimeAdder = 1000/1000;
     } 
+
     if (this.ricochetLvl == 2) {
-        this.isRicochet = true;
+        // this.isRicochet = true;
         this.ricochetCount = 3;
     } else if (this.ricochetLvl == 3) {
-        this.isRicochet = true;
+        // this.isRicochet = true;
         this.ricochetCount = 5;
     } 
 
-    if (this.pierceLvl == 2) {
-        this.isPierce = true;
+    if (this.pierceLvl == -1) {
+        this.pierceCount = Number.MAX_VALUE;
+    } else if (this.pierceLvl == 2) {
         this.pierceCount = 3;
     } else if (this.pierceLvl == 3) {
-        this.isPierce = true;
         this.pierceCount = 5;
     } 
 
-    if (this.pierceLvl == -1) {
-        this.isPierce = true;
-        this.pierceCount = Number.MAX_VALUE;
-    }
     /*
         this.isFire = false;
     if(name ==='poop') {
