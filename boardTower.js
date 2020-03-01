@@ -131,7 +131,9 @@ boardTower.prototype.draw = function () {
         this.yOffset = -1;
         this.animationSouthWest.drawFrame(this.game.clockTick, this.ctx, this.x + this.xOffset, this.y + this.yOffset);
     }
+}
 
+boardTower.prototype.update = function () {
     if(this.shootBoba) {
         if(this.shootTimer < this.game.timer.time) {
             if (this.name == "laser") {
@@ -153,9 +155,6 @@ boardTower.prototype.draw = function () {
             this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
         }
     }
-}
-
-boardTower.prototype.update = function () {
     // This shooting method always shoots the enemy that is closest to the end.
   /*  var withinRange = [];
     for (var i = 0; i < this.game.entities.length; i++) {
@@ -373,6 +372,28 @@ boardTower.prototype.update = function () {
         this.target = selectedEnemy.enemy;
         this.calculateDirection(selectedEnemy.enemy);
         this.shootBoba = true;
+
+    }
+
+    if(this.shootBoba) {
+        if(this.shootTimer < this.game.timer.time) {
+            if (this.name == "laser") {
+                this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
+                    , .05, 200, this.ricochetLevel, -1, this.homingLevel
+                    , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+                    if (this.game.speed == 2) {
+                        this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
+                            , .05, 100, this.ricochetLevel, -1, this.homingLevel
+                            , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+                    }
+            } else {
+                this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
+                    , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
+                    , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+                this.shootBoba = false;
+                this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
+            }
+        }
     }
 }
 

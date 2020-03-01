@@ -107,8 +107,6 @@ AM.queueDownload("./img/greenTea.png");
 AM.queueDownload("./img/greenTeaFlip.png");
 AM.queueDownload("./img/yellowTea.png");
 AM.queueDownload("./img/yellowTeaFlip.png");
-// AM.queueDownload("./img/origTea.png");
-// AM.queueDownload("./img/origTeaFlip.png");
 AM.queueDownload("./img/background.png");
 AM.queueDownload("./img/holder.png");
 AM.queueDownload("./img/tower.png");
@@ -146,9 +144,6 @@ AM.queueDownload("./img/pumpkinEvilFlip.png");
 AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
 AM.queueDownload("./img/explosion.png");
-
-var audio = new Audio('./mp3/Your Sunset.mp3');
-
 
 function Background(game, spritesheet) {
     this.isEnemy = false;
@@ -298,11 +293,6 @@ function generateStoreTowers(game) {
      // mix tower
      var ninthTower = new storeTower(game, "Multi-Directional Boba", 300, 1000/1000, 250,"Fires boba in all directions \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Boba is fired \nin all directions ",AM.getAsset("./img/mixtower.png"), 1085, 260,70,70,2,2, "all");
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower, eighthTower, ninthTower]];//eightTower,ninthTower
-    for(var i = 0; i < 3; i++) {
-        for(var j = 0; j < 3; j++) {
-            // game.addEntity(temp[i][j]);
-        }
-    }
     game.towers = temp;
     return temp;
 }
