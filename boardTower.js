@@ -35,6 +35,11 @@ function boardTower(game, gridX, gridY, type) {
     this.pointDirection = 'S';
     this.intendedDirection = 'S';
     this.intendedDirectionIndex = 0;
+    if(this.name == 'all') {
+        this.pointDirection = 'N';
+        this.intendedDirection = 'N';
+        this.intendedDirectionIndex = 4;
+    }
     this.game = game;
     this.ctx = game.ctx;
     this.gridX = gridX;
@@ -129,6 +134,27 @@ boardTower.prototype.draw = function () {
 }
 
 boardTower.prototype.update = function () {
+    if(this.shootBoba) {
+        if(this.shootTimer < this.game.timer.time) {
+            if (this.name == "laser") {
+                this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
+                    , .01, this.bobaSpeed, this.ricochetLevel, -1, this.homingLevel
+                    , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+            } else if (this.name == "all") {
+                for(var i = 0; i < this.shootOutXOffset.length; i++) {
+                    this.game.addEntity(new boba(this.game,this.x + this.shootOutXOffset[i], this.y + this.shootOutYOffset[i], this.name, {centerX: this.x + this.shootOutXOffsetDir[i] * 100, centerY: this.y + this.shootOutYOffsetDir[i] * 100}
+                        , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
+                        , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+                    }         
+            } else {
+                this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
+                    , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
+                    , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+            }
+            this.shootBoba = false;
+            this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
+        }
+    }
     // This shooting method always shoots the enemy that is closest to the end.
   /*  var withinRange = [];
     for (var i = 0; i < this.game.entities.length; i++) {
@@ -156,12 +182,12 @@ boardTower.prototype.update = function () {
         this.shootBoba = true;
     }
 */
-    if(this.spin && this.pointDirection === this.intendedDirection) {
+    if(this.spin && this.pointDirection === this.intendedDirection && this.name != 'all') {
         this.pointDirectionIndex = this.intendedDirectionIndex;
         this.spin = false;
     }
 
-    if(this.spin) {
+    if(this.spin && this.name != 'all') {
         if(this.counterclockwise) {
             if(this.pointDirection === 'S') {
                 this.pointDirection = 'SE';
