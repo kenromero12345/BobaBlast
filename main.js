@@ -145,6 +145,8 @@ AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
 AM.queueDownload("./img/explosion.png");
 AM.queueDownload("./img/electric.png");
+AM.queueDownload("./img/freeze.png");
+AM.queueDownload("./img/poison.png");
 
 function Background(game, spritesheet) {
     this.isEnemy = false;

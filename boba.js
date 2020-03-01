@@ -21,27 +21,27 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
     this.ricochetCount = 0;
     this.pierceCount = 0;
     // this.isFreeze = false;
-    // if(name ==='blue') {
-    //     this.isFreeze = true;
-    //     this.freezeLvl = 1;
-    // }
+    if(name ==='blue') {
+        this.isFreeze = true;
+        // this.freezeLvl = 1;
+    }
     // ADDED THIS FOR UPGRADES
     // if (freezeLevel > 0) {
     //     this.isFreeze = true;
     // }
     // END
     // this.isPoison = false;
-    // if(name ==='green') {
-    //     this.isPoison = true;
-    //     this.poisonLvl = 1;
-    // }
+    if(name ==='green') {
+        this.isPoison = true;
+        // this.poisonLvl = 1;
+    }
     // ADDED THIS FOR UPGRADES
     // if(poisonLevel == 1) {
     //     // this.isPoison = true;
     // }
     // END
     // this.isParalyze = false;
-    this.isElectric = false;
+    // this.isElectric = false;
     if(name ==='purple') {
         this.isElectric = true;
         // this.isParalyze = true;

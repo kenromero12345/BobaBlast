@@ -3,7 +3,7 @@ function Explosion(game, x, y, lvl) {
         ,20, 28, 100, 100, 8, 0.03, 28, false, 1);
     this.game = game;
     this.ctx = game.ctx;
-    this.isExplosion = true;
+    // this.isExplosion = true;
     this.speed = 200;
     this.x = x - 10;
     this.y = y - 20;

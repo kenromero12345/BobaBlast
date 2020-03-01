@@ -161,7 +161,7 @@ var collideUpdate = function(enemy) {
                     }
                 }
             }
-            if ((ent.isElectricity || ent.paralysisLvl > 0) && enemy.boundingbox.collide(ent.boundingbox)) {
+            if (ent.paralysisLvl > 0 && enemy.boundingbox.collide(ent.boundingbox)) {
                if (Math.random() > enemy.paralysisResistance - ent.paralysisProbAdder) {
                     enemy.isParalyzed = true;
                     if (enemy.paralysisLvl < ent.paralysisLvl) {
@@ -191,7 +191,7 @@ var collideUpdate = function(enemy) {
                     }
                 }
             } 
-            if ((ent.isExplosion || ent.burnLvl > 0)  && enemy.boundingbox.collide(ent.boundingbox)) {
+            if (ent.burnLvl > 0  && enemy.boundingbox.collide(ent.boundingbox)) {
                 console.log(enemy.burnResistance + " " + ent.burnProbAdder);
                 if (Math.random() > enemy.burnResistance - ent.burnProbAdder) {
                     // console.log("EXPLOSION");
@@ -217,6 +217,14 @@ var collideUpdate = function(enemy) {
 
             if (ent.isBoba && ent.isElectric && enemy.boundingbox.collide(ent.boundingbox)) {
                 enemy.game.addEntity(new Electric(enemy.game, enemy.x, enemy.y, ent.paralysisLvl));
+            }
+
+            if (ent.isBoba && ent.isFreeze && enemy.boundingbox.collide(ent.boundingbox)) {
+                enemy.game.addEntity(new Freeze(enemy.game, enemy.x, enemy.y, ent.freezeLvl));
+            }
+
+            if (ent.isBoba && ent.isPoison && enemy.boundingbox.collide(ent.boundingbox)) {
+                enemy.game.addEntity(new Poison(enemy.game, enemy.x, enemy.y, ent.poisonLvl));
             }
 
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
