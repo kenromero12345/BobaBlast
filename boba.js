@@ -249,7 +249,7 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
     this.speed = speed;
     this.game = game;
     this.ctx = game.ctx;
-    this.noCollision = true;
+    // this.noCollision = true;
     this.boxes = false;
     this.boundingbox = new BoundingBox(this.x + 6, this.y + 13, this.width -21, this.height - 23);
 }
@@ -265,7 +265,8 @@ boba.prototype.collidedBefore = function(enemy) {
 
 boba.prototype.draw = function () {
     if(this.game.running) {
-        if(this.noCollision) {
+        // if(this.noCollision) {
+            // console.log("a")
             if (this.boxes) {
                 this.ctx.strokeStyle = "red";
                 this.ctx.strokeRect(this.x, this.y, this.animation.frameWidth, this.animation.frameHeight);
@@ -273,7 +274,7 @@ boba.prototype.draw = function () {
                 this.ctx.strokeRect(this.boundingbox.x, this.boundingbox.y, this.boundingbox.width, this.boundingbox.height);
             }
             this.animation.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
-        }
+        // }
     }
 }
 
