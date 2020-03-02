@@ -156,6 +156,8 @@ roundPlan.prototype.update = function () {
         if (round == 1) {
             // console.log("a")
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 1));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new greenTea(this.game, -50, 350, false, .75));

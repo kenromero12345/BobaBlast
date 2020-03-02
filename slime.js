@@ -30,15 +30,23 @@ function slime(game, spawnX, spawnY, scale, num) {
     this.name = "slime";
     this.speed = 100;
     this.hp = 10;//
-    this.animationWalkLeft = new Animation(AM.getAsset("./img/slime.png")
-    , 5, 70 + this.slimeOffsetY, 79, 80, 7, .135, 7, true, scale, false);
-    this.animationDisappearLeft = new Animation(AM.getAsset("./img/slime.png")
-    , 7, 225 + this.slimeOffsetY, 69, 70, 5, .2, 5, false, scale, false);
+    // this.animationWalkLeft = new Animation(AM.getAsset("./img/slime.png")
+    // , 5, 70 + this.slimeOffsetY, 79, 80, 7, .135, 7, true, scale, false);
+    // this.animationDisappearLeft = new Animation(AM.getAsset("./img/slime.png")
+    // , 7, 225 + this.slimeOffsetY, 69, 70, 5, .2, 5, false, scale, false);
+    // // this.animationWalkRight = new Animation(AM.getAsset("./img/slimeFlip.png")
+    // // , 296, 70 + this.slimeOffsetY, 79, 80, 7, 1, 7, true, scale, true);//.135
     // this.animationWalkRight = new Animation(AM.getAsset("./img/slimeFlip.png")
-    // , 296, 70 + this.slimeOffsetY, 79, 80, 7, 1, 7, true, scale, true);//.135
-    this.animationWalkRight = new Animation(AM.getAsset("./img/slimeFlip.png")
-    , 769, 70 + this.slimeOffsetY + this.slimeDisappearOffsetY, -79, 80, 7, .135, 7, true, scale, false);
-    this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeFlip.png")
+    // , 769, 70 + this.slimeOffsetY + this.slimeDisappearOffsetY, -79, 80, 7, .135, 7, true, scale, false);
+    // this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeFlip.png")
+    // , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
+    this.animationWalkLeft = new Animation(AM.getAsset("./img/slimeWalk.png")
+    , 0, 70 + this.slimeOffsetY, 70, 80, 7, .135, 7, true, scale, false);
+    this.animationDisappearLeft = new Animation(AM.getAsset("./img/slimeDie.png")
+    , 7, 225 + this.slimeOffsetY, 69, 70, 5, .2, 5, false, scale, false);
+    this.animationWalkRight = new Animation(AM.getAsset("./img/slimeWalkFlip.png")
+    , 774, 70 + this.slimeOffsetY + this.slimeDisappearOffsetY, -70, 80, 7, .135, 7, true, scale, false);
+    this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeDieFlip.png")
     , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 4);
@@ -62,37 +70,37 @@ slime.prototype.draw = function () {
     if(this.game.running) {
         if (this.hp <= 0) {
             if (this.lookDirectionRight) {
-                if (this.animationDisappearRight.currentFrame() == 3) {
-                    // this.animationDisappearRight.offsetX = 10;
-                    this.animationDisappearRight.startX = 432;
-                    this.animationDisappearRight.frameWidth = 67;
-                } else if (this.animationDisappearRight.currentFrame() == 4) {
-                    this.animationDisappearRight.offsetX = -20;
-                    this.animationDisappearRight.startX = 422;
-                    this.animationDisappearRight.frameWidth = 80;
-                } else {
-                    this.animationDisappearRight.offsetX = 0;
-                    this.animationDisappearRight.startX = 422;
-                    this.animationDisappearRight.frameWidth = 69;
-                }
+                // if (this.animationDisappearRight.currentFrame() == 3) {
+                //     // this.animationDisappearRight.offsetX = 10;
+                //     this.animationDisappearRight.startX = 432;
+                //     this.animationDisappearRight.frameWidth = 67;
+                // } else if (this.animationDisappearRight.currentFrame() == 4) {
+                //     this.animationDisappearRight.offsetX = -20;
+                //     this.animationDisappearRight.startX = 422;
+                //     this.animationDisappearRight.frameWidth = 80;
+                // } else {
+                //     this.animationDisappearRight.offsetX = 0;
+                //     this.animationDisappearRight.startX = 422;
+                //     this.animationDisappearRight.frameWidth = 69;
+                // }
                 this.animationDisappearRight.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
                 if (this.animationDisappearRight.isDone()) {
                     this.removeFromWorld = true;
                 }
             } else {
-                if (this.animationDisappearLeft.currentFrame() == 3) {
-                    this.animationDisappearLeft.offsetX = 6;
-                    this.animationDisappearLeft.startX = 7;
-                    this.animationDisappearLeft.frameWidth = 67;
-                } else if (this.animationDisappearLeft.currentFrame() == 4) {
-                    this.animationDisappearLeft.offsetX = 35;
-                    this.animationDisappearLeft.startX = 5;
-                    this.animationDisappearLeft.frameWidth = 69;
-                } else {
-                    this.animationDisappearLeft.offsetX = 0;
-                    this.animationDisappearLeft.startX = 7;
-                    this.animationDisappearLeft.frameWidth = 69;
-                }
+                // if (this.animationDisappearLeft.currentFrame() == 3) {
+                //     this.animationDisappearLeft.offsetX = 6;
+                //     this.animationDisappearLeft.startX = 7;
+                //     this.animationDisappearLeft.frameWidth = 67;
+                // } else if (this.animationDisappearLeft.currentFrame() == 4) {
+                //     this.animationDisappearLeft.offsetX = 35;
+                //     this.animationDisappearLeft.startX = 5;
+                //     this.animationDisappearLeft.frameWidth = 69;
+                // } else {
+                //     this.animationDisappearLeft.offsetX = 0;
+                //     this.animationDisappearLeft.startX = 7;
+                //     this.animationDisappearLeft.frameWidth = 69;
+                // }
                 this.animationDisappearLeft.drawFrame(this.game.clockTick, this.ctx, this.x, this.y);
                 if (this.animationDisappearLeft.isDone()) {
                     this.removeFromWorld = true;
@@ -196,72 +204,72 @@ var rightAnim = function(slime) {
     //     slime.animationWalkRight.frameWidth = 79;
     // }
 
-    if (slime.animationWalkRight.currentFrame() == 4) {
-        slime.animationWalkRight.startY = 58 + slime.slimeOffsetY;
-        slime.animationWalkRight.offsetY = -12;
-        slime.animationWalkRight.frameWidth = -72;
-    } else if (slime.animationWalkRight.currentFrame() >= 2 && slime.animationWalkRight.currentFrame() <= 3) {
-        slime.animationWalkRight.offsetX = 4+1;
-        slime.animationWalkRight.startX = 774-9-1;
-        slime.animationWalkRight.frameHeight = 87;
-        slime.animationWalkRight.frameWidth = -71;
-    } else if (slime.animationWalkRight.currentFrame() == 6) {
-        slime.animationWalkRight.offsetX = 5;
-        slime.animationWalkRight.startX = 774-10;
-        slime.animationWalkRight.frameHeight = 89;
-        slime.animationWalkRight.frameWidth = -72;
-        slime.animationWalkRight.startY = 70 + slime.slimeOffsetY;
-        slime.animationWalkRight.offsetY = 0;
-    } else if (slime.animationWalkRight.currentFrame() == 5) {
-        slime.animationWalkRight.offsetX = 5;
-        slime.animationWalkRight.startX = 774-11;
-        slime.animationWalkRight.frameHeight = 87;
-        slime.animationWalkRight.frameWidth = -71;
-        slime.animationWalkRight.startY = 70 + slime.slimeOffsetY;
-        slime.animationWalkRight.offsetY = 0;
-    } else {
-        slime.animationWalkRight.startY = 70 + slime.slimeOffsetY;
-        slime.animationWalkRight.offsetY = 0;
-        slime.animationWalkRight.offsetX = 0;
-        slime.animationWalkRight.startX = 774-5;
-        slime.animationWalkRight.frameHeight = 80;
-        slime.animationWalkRight.frameWidth = -78;
-    }
+    // if (slime.animationWalkRight.currentFrame() == 4) {
+    //     slime.animationWalkRight.startY = 58 + slime.slimeOffsetY;
+    //     slime.animationWalkRight.offsetY = -12;
+    //     slime.animationWalkRight.frameWidth = -72;
+    // } else if (slime.animationWalkRight.currentFrame() >= 2 && slime.animationWalkRight.currentFrame() <= 3) {
+    //     slime.animationWalkRight.offsetX = 4+1;
+    //     slime.animationWalkRight.startX = 774-9-1;
+    //     slime.animationWalkRight.frameHeight = 87;
+    //     slime.animationWalkRight.frameWidth = -71;
+    // } else if (slime.animationWalkRight.currentFrame() == 6) {
+    //     slime.animationWalkRight.offsetX = 5;
+    //     slime.animationWalkRight.startX = 774-10;
+    //     slime.animationWalkRight.frameHeight = 89;
+    //     slime.animationWalkRight.frameWidth = -72;
+    //     slime.animationWalkRight.startY = 70 + slime.slimeOffsetY;
+    //     slime.animationWalkRight.offsetY = 0;
+    // } else if (slime.animationWalkRight.currentFrame() == 5) {
+    //     slime.animationWalkRight.offsetX = 5;
+    //     slime.animationWalkRight.startX = 774-11;
+    //     slime.animationWalkRight.frameHeight = 87;
+    //     slime.animationWalkRight.frameWidth = -71;
+    //     slime.animationWalkRight.startY = 70 + slime.slimeOffsetY;
+    //     slime.animationWalkRight.offsetY = 0;
+    // } else {
+    //     slime.animationWalkRight.startY = 70 + slime.slimeOffsetY;
+    //     slime.animationWalkRight.offsetY = 0;
+    //     slime.animationWalkRight.offsetX = 0;
+    //     slime.animationWalkRight.startX = 774-5;
+    //     slime.animationWalkRight.frameHeight = 80;
+    //     slime.animationWalkRight.frameWidth = -78;
+    // }
     slime.animationWalkRight.drawFrame(slime.game.clockTick, slime.ctx, slime.x, slime.y);
 }
 
 var leftAnim = function(slime) {
-    if (slime.animationWalkLeft.currentFrame() == 4) {
-        slime.animationWalkLeft.startY = 58 + slime.slimeOffsetY;
-        slime.animationWalkLeft.offsetY = -12;
-        slime.animationWalkLeft.frameWidth = 72;
-    } else if (slime.animationWalkLeft.currentFrame() >= 2 && slime.animationWalkLeft.currentFrame() <= 3) {
-        slime.animationWalkLeft.offsetX = -4;
-        slime.animationWalkLeft.startX = 9;
-        slime.animationWalkLeft.frameHeight = 87;
-        slime.animationWalkLeft.frameWidth = 71;
-    } else if (slime.animationWalkLeft.currentFrame() == 6) {
-        slime.animationWalkLeft.offsetX = -5;
-        slime.animationWalkLeft.startX = 10;
-        slime.animationWalkLeft.frameHeight = 89;
-        slime.animationWalkLeft.frameWidth = 72;
-        slime.animationWalkLeft.startY = 70 + slime.slimeOffsetY;
-        slime.animationWalkLeft.offsetY = 0;
-    } else if (slime.animationWalkLeft.currentFrame() == 5) {
-        slime.animationWalkLeft.offsetX = -5;
-        slime.animationWalkLeft.startX = 11;
-        slime.animationWalkLeft.frameHeight = 87;
-        slime.animationWalkLeft.frameWidth = 71;
-        slime.animationWalkLeft.startY = 70 + slime.slimeOffsetY;
-        slime.animationWalkLeft.offsetY = 0;
-    } else {
-        slime.animationWalkLeft.startY = 70 + slime.slimeOffsetY;
-        slime.animationWalkLeft.offsetY = 0;
-        slime.animationWalkLeft.offsetX = 0;
-        slime.animationWalkLeft.startX = 5;
-        slime.animationWalkLeft.frameHeight = 80;
-        slime.animationWalkLeft.frameWidth = 79;
-    }
+    // if (slime.animationWalkLeft.currentFrame() == 4) {
+    //     slime.animationWalkLeft.startY = 58 + slime.slimeOffsetY;
+    //     slime.animationWalkLeft.offsetY = -12;
+    //     slime.animationWalkLeft.frameWidth = 72;
+    // } else if (slime.animationWalkLeft.currentFrame() >= 2 && slime.animationWalkLeft.currentFrame() <= 3) {
+    //     slime.animationWalkLeft.offsetX = -4;
+    //     slime.animationWalkLeft.startX = 9;
+    //     slime.animationWalkLeft.frameHeight = 87;
+    //     slime.animationWalkLeft.frameWidth = 71;
+    // } else if (slime.animationWalkLeft.currentFrame() == 6) {
+    //     slime.animationWalkLeft.offsetX = -5;
+    //     slime.animationWalkLeft.startX = 10;
+    //     slime.animationWalkLeft.frameHeight = 89;
+    //     slime.animationWalkLeft.frameWidth = 72;
+    //     slime.animationWalkLeft.startY = 70 + slime.slimeOffsetY;
+    //     slime.animationWalkLeft.offsetY = 0;
+    // } else if (slime.animationWalkLeft.currentFrame() == 5) {
+    //     slime.animationWalkLeft.offsetX = -5;
+    //     slime.animationWalkLeft.startX = 11;
+    //     slime.animationWalkLeft.frameHeight = 87;
+    //     slime.animationWalkLeft.frameWidth = 71;
+    //     slime.animationWalkLeft.startY = 70 + slime.slimeOffsetY;
+    //     slime.animationWalkLeft.offsetY = 0;
+    // } else {
+    //     slime.animationWalkLeft.startY = 70 + slime.slimeOffsetY;
+    //     slime.animationWalkLeft.offsetY = 0;
+    //     slime.animationWalkLeft.offsetX = 0;
+    //     slime.animationWalkLeft.startX = 5;
+    //     slime.animationWalkLeft.frameHeight = 80;
+    //     slime.animationWalkLeft.frameWidth = 79;
+    // }
     slime.animationWalkLeft.drawFrame(slime.game.clockTick, slime.ctx, slime.x, slime.y);
 }
 
