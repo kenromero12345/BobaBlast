@@ -465,6 +465,13 @@ function direction(a, b) {
     if(dist > 0) return { x: dx / dist, y: dy / dist }; else return {x:0,y:0};
 }
 
+function directionCenter(a, b) {
+    var dx = a.centerX - b.centerX;
+    var dy = a.centerY - b.centerY;
+    var dist = Math.sqrt(dx * dx + dy * dy);
+    if(dist > 0) return { x: dx / dist, y: dy / dist }; else return {x:0,y:0};
+}
+
 function offset(el) {
     var rect = el.getBoundingClientRect(),
     scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,

@@ -201,7 +201,7 @@ AM.downloadAll(function () {
     var gameEngine = new GameEngine();
     gameEngine.init(ctx);
     gameEngine.start();
-
+    
     gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
 
     gameEngine.addEntity(new board(gameEngine));
@@ -263,6 +263,9 @@ AM.downloadAll(function () {
     // gameEngine.addEntity(new greenTea(gameEngine, 450, 250, false, .75));
     // gameEngine.addEntity(new redTea(gameEngine, 450, 250, false, .75));
     // gameEngine.addEntity(new yellowTea(gameEngine, 450, 250, true, .75));
+    // var a = {x: 0, y: 0}
+    // var b = {x: 2, y: 1}
+    // console.log(direction(b, a))
 
     console.log("All Done!");
 

@@ -468,23 +468,50 @@ boardTower.prototype.enemyInRange = function (rect) {
 
 boardTower.prototype.calculateDirection = function (target) {
    // if(this.shootTimer >= this.game.timer.time)  return; // POSSIBLE ERROR
-    var tempDirection = null;
-    var tempShortestDistance = Infinity;
-    var bestIndex = null;
-    for(var i = 0; i < this.directions.length; i++) {
-        var tempX = this.centerX + this.shootOutXOffsetDir[i]; // Change this to represent corners of the boxes instead of shoototu offest
-        var tempY = this.centerY + this.shootOutYOffsetDir[i]; // Change this to represetn corners ofthe boxes intead of shoot out offset
-        var tempDistance = getDistance(target.centerX - 10, target.centerY - 13, tempX, tempY);
-        if(tempDistance < tempShortestDistance) {
-            tempDirection = this.directions[i];
-            tempShortestDistance = tempDistance;
-            bestIndex = i;
-        }
+    // var tempDirection = null;
+    // var tempShortestDistance = Infinity;
+    // var bestIndex = null;
+    // for(var i = 0; i < this.directions.length; i++) {
+    //     var tempX = this.centerX + this.shootOutXOffsetDir[i]; // Change this to represent corners of the boxes instead of shoototu offest
+    //     var tempY = this.centerY + this.shootOutYOffsetDir[i]; // Change this to represetn corners ofthe boxes intead of shoot out offset
+    //     var tempDistance = getDistance(target.centerX - 10, target.centerY - 13, tempX, tempY);
+    //     if(tempDistance < tempShortestDistance) {
+    //         tempDirection = this.directions[i];
+    //         tempShortestDistance = tempDistance;
+    //         bestIndex = i;
+    //     }
+    // }
+    var dir = directionCenter(target, this);
+    if (dir.y >= 2/Math.sqrt(5)) {
+        this.intendedDirectionIndex = 0;
+        this.intendedDirection = 'S';
+    } else if (dir.y <= 2/Math.sqrt(5) && dir.y >= 1/Math.sqrt(5) && dir.x > 0) {
+        this.intendedDirectionIndex = 1;
+        this.intendedDirection = 'SE';
+    } else if (dir.x >= 2/Math.sqrt(5)) {
+        this.intendedDirectionIndex = 2;
+        this.intendedDirection = 'E';
+    } else if (dir.x <= 2/Math.sqrt(5) && dir.x >= 1/Math.sqrt(5) && dir.y < 0) {
+        this.intendedDirectionIndex = 3;
+        this.intendedDirection = 'NE';
+    } else if (dir.y <= -2/Math.sqrt(5)) {
+        this.intendedDirectionIndex = 4;
+        this.intendedDirection = 'N';
+    } else if (dir.y >= -2/Math.sqrt(5) && dir.y <= -1/Math.sqrt(5) && dir.x < 0) {
+        this.intendedDirectionIndex = 5;
+        this.intendedDirection = 'NW';
+    } else if (dir.x <= -2/Math.sqrt(5)) {
+        this.intendedDirectionIndex = 6;
+        this.intendedDirection = 'W';
+    } else {
+        this.intendedDirectionIndex = 7;
+        this.intendedDirection = 'SW';
     }
-    this.intendedDirectionIndex = bestIndex;
-    this.intendedDirection = tempDirection;
-    this.shootOutX = this.x + this.shootOutXOffset[bestIndex];
-    this.shootOutY = this.y + this.shootOutYOffset[bestIndex];
+
+    // this.intendedDirectionIndex = bestIndex;
+    // this.intendedDirection = tempDirection;
+    this.shootOutX = this.x + this.shootOutXOffset[this.intendedDirectionIndex];
+    this.shootOutY = this.y + this.shootOutYOffset[this.intendedDirectionIndex];
     if(this.pointDirection != this.intendedDirection) {
         this.spin = true;
         var temp = this.intendedDirectionIndex - this.pointDirectionIndex;
