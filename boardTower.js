@@ -417,7 +417,7 @@ boardTower.prototype.update = function () {
 
     }
 
-    if(this.shootBoba) {
+    if(this.shootBoba && this.game.running) {
         if(this.shootTimer < this.game.timer.time) {
             if (this.name == "laser") {
                 // console.log("a")
@@ -429,6 +429,14 @@ boardTower.prototype.update = function () {
                             , this.photonDamage, this.bobaSpeed, this.ricochetLevel, -1, this.homingLevel
                             , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel, 50));
                     }
+            } else if (this.name == "all") {
+                for (var i = 0; i < this.shootOutXOffset.length; i++) {
+                    this.game.addEntity(new photon(this.game,this.x + this.shootOutXOffset[i], this.y + this.shootOutYOffset[i], this.name, {centerX: this.x + this.shootOutXOffsetDir[i] * 100, centerY: this.y + this.shootOutYOffsetDir[i] * 100}
+                        , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
+                        , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+                }  
+                this.shootBoba = false;
+                this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;       
             } else {
                 this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
                     , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
