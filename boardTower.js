@@ -431,7 +431,7 @@ boardTower.prototype.update = function () {
                     }
             } else if (this.name == "all") {
                 for (var i = 0; i < this.shootOutXOffset.length; i++) {
-                    this.game.addEntity(new photon(this.game,this.x + this.shootOutXOffset[i], this.y + this.shootOutYOffset[i], this.name, {centerX: this.x + this.shootOutXOffsetDir[i] * 100, centerY: this.y + this.shootOutYOffsetDir[i] * 100}
+                    this.game.addEntity(new boba(this.game,this.x + this.shootOutXOffset[i], this.y + this.shootOutYOffset[i], this.name, {centerX: this.x + this.shootOutXOffsetDir[i] * 100, centerY: this.y + this.shootOutYOffsetDir[i] * 100}
                         , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
                         , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
                 }  
