@@ -5,8 +5,8 @@ function Electric(game, x, y, lvl) {
     this.ctx = game.ctx;
     // this.isElectricity = true;
     this.speed = 100;
-    this.x = x - 10;
-    this.y = y - 20;
+    this.x = x - 15;
+    this.y = y - 25;
     this.width = this.animation.frameWidth * this.animation.scale;
     this.height = this.animation.frameHeight * this.animation.scale;
     this.boxes = false;
