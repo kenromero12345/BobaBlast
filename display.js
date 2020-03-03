@@ -520,148 +520,148 @@ display.prototype.draw = function () {
         // Upgrade Tower Range
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 30 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 30 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.rangeLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.rangeLevel < selectedUpgradableTower.towerType.maxRangeUpgrade) {
                 selectedUpgradableTower.radius += 100;
                 selectedUpgradableTower.rangeLevel ++;
                 currentMoney -= selectedUpgradableTower.rangeUpgradeCost;
                 selectedUpgradableTower.rangeUpgradeCost += (25 * selectedUpgradableTower.rangeLevel);
             }
-            if(selectedUpgradableTower.rangeLevel === 3) {
+            if(selectedUpgradableTower.rangeLevel === selectedUpgradableTower.towerType.maxRangeUpgrade) {
                 selectedUpgradableTower.rangeUpgradeCost = "Max";
             }
         }
         // Upgrade Boba Damage
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 55 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 55 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.damageLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.damageLevel < selectedUpgradableTower.towerType.maxDamageUpgrade) {
                 selectedUpgradableTower.bobaDamage +=2;
                 selectedUpgradableTower.damageLevel ++;
                 currentMoney -= selectedUpgradableTower.damageUpgradeCost;
                 selectedUpgradableTower.damageUpgradeCost += (30 * selectedUpgradableTower.damageLevel);
             }
-            if(selectedUpgradableTower.damageLevel === 3) {
+            if(selectedUpgradableTower.damageLevel === selectedUpgradableTower.towerType.maxDamageUpgrade) {
                 selectedUpgradableTower.damageUpgradeCost = "Max";
             }
         }
         // Upgrade Boba Speed
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 80 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 80 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.speedLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.speedLevel < selectedUpgradableTower.towerType.maxSpeedUpgrade) {
                 selectedUpgradableTower.bobaSpeed *= 2;
                 selectedUpgradableTower.speedLevel ++;
                 currentMoney -= selectedUpgradableTower.speedUpgradeCost;
                 selectedUpgradableTower.speedUpgradeCost += (20 * selectedUpgradableTower.speedLevel);
             }
-            if(selectedUpgradableTower.speedLevel === 3) {
+            if(selectedUpgradableTower.speedLevel === selectedUpgradableTower.towerType.maxSpeedUpgrade) {
                 selectedUpgradableTower.speedUpgradeCost = "Max";
             }
         }
         // Upgrade Poison Boba
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 105 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 105 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.poisonLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.poisonLevel < selectedUpgradableTower.towerType.maxPoisonUpgrade) {
                 selectedUpgradableTower.poisonLevel ++;
                 currentMoney -= selectedUpgradableTower.poisonUpgradeCost;
                 selectedUpgradableTower.poisonUpgradeCost += (20 * selectedUpgradableTower.poisonLevel);
             }
-            if(selectedUpgradableTower.poisonLevel === 3) {
+            if(selectedUpgradableTower.poisonLevel === selectedUpgradableTower.towerType.maxPoisonUpgrade) {
                 selectedUpgradableTower.poisonUpgradeCost = "Max";
             }
         }
         // Upgrade Laser Boba
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 130 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 130 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.laserLevel < 1) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.laserLevel < selectedUpgradableTower.towerType.maxLaserUpgrade) {
                 selectedUpgradableTower.laserLevel ++;
                 currentMoney -= selectedUpgradableTower.laserUpgradeCost;
                 selectedUpgradableTower.laserUpgradeCost += (20 * selectedUpgradableTower.laserLevel);
             }
-            if(selectedUpgradableTower.laserLevel === 1) {
+            if(selectedUpgradableTower.laserLevel === selectedUpgradableTower.towerType.maxLaserUpgrade) {
                 selectedUpgradableTower.laserUpgradeCost = "Max";
             }
         }
         // Upgrade Freeze Boba
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 155 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 155 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.freezeLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.freezeLevel < selectedUpgradableTower.towerType.maxFreezeUpgrade) {
                 selectedUpgradableTower.freezeLevel ++;
                 currentMoney -= selectedUpgradableTower.freezeUpgradeCost;
                 selectedUpgradableTower.freezeUpgradeCost += (20 * selectedUpgradableTower.freezeLevel);
             }
-            if(selectedUpgradableTower.freezeLevel === 3) {
+            if(selectedUpgradableTower.freezeLevel === selectedUpgradableTower.towerType.maxFreezeUpgrade) {
                 selectedUpgradableTower.freezeUpgradeCost = "Max";
             }
         }
         // Upgrade Boba Frequency
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258 
             && mouse.y < this.descriptionBoxStartY + 30 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 30 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.frequencyLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.frequencyLevel < selectedUpgradableTower.towerType.maxFrequencyUpgrade) {
                 selectedUpgradableTower.shootBobaEveryMS = selectedUpgradableTower.shootBobaEveryMS * 0.75;
                 selectedUpgradableTower.frequencyLevel ++;
                 currentMoney -= selectedUpgradableTower.frequencyUpgradeCost;
                 selectedUpgradableTower.frequencyUpgradeCost += (20 * selectedUpgradableTower.frequencyLevel);
             }
-            if(selectedUpgradableTower.frequencyLevel === 3) {
+            if(selectedUpgradableTower.frequencyLevel === selectedUpgradableTower.towerType.maxFrequencyUpgrade) {
                 selectedUpgradableTower.frequencyUpgradeCost = "Max";
             }
         }
         // Upgrade Paralyze Boba
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258 
             && mouse.y < this.descriptionBoxStartY + 55 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 55 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.paralyzeLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.paralyzeLevel < selectedUpgradableTower.towerType.maxParalyzeUpgrade) {
                 selectedUpgradableTower.paralyzeLevel ++;
                 currentMoney -= selectedUpgradableTower.paralyzeUpgradeCost;
                 selectedUpgradableTower.paralyzeUpgradeCost += (20 * selectedUpgradableTower.paralyzeLevel);
             }
-            if(selectedUpgradableTower.paralyzeLevel === 3) {
+            if(selectedUpgradableTower.paralyzeLevel === selectedUpgradableTower.towerType.maxParalyzeUpgrade) {
                 selectedUpgradableTower.paralyzeUpgradeCost = "Max";
             }
         }
         // Upgrade Explosive Boba
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258 
             && mouse.y < this.descriptionBoxStartY + 80 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 80 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.explosiveLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.explosiveLevel < selectedUpgradableTower.towerType.maxExplosiveUpgrade) {
                 selectedUpgradableTower.explosiveLevel ++;
                 currentMoney -= selectedUpgradableTower.explosiveUpgradeCost;
                 selectedUpgradableTower.explosiveUpgradeCost += (20 * selectedUpgradableTower.explosiveLevel);
             }
-            if(selectedUpgradableTower.explosiveLevel === 3) {
+            if(selectedUpgradableTower.explosiveLevel === selectedUpgradableTower.towerType.maxExplosiveUpgrade) {
                 selectedUpgradableTower.explosiveUpgradeCost = "Max";
             }
         }
         // Upgrade Boba Ricochet
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258 
             && mouse.y < this.descriptionBoxStartY + 105 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 105 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.ricochetLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.ricochetLevel < selectedUpgradableTower.towerType.maxRicochetUpgrade) {
                 selectedUpgradableTower.ricochetLevel ++;
                 currentMoney -= selectedUpgradableTower.ricochetUpgradeCost;
                 selectedUpgradableTower.ricochetUpgradeCost += (20 * selectedUpgradableTower.ricochetLevel);
             }
-            if(selectedUpgradableTower.ricochetLevel === 3) {
+            if(selectedUpgradableTower.ricochetLevel === selectedUpgradableTower.towerType.maxRicochetUpgrade) {
                 selectedUpgradableTower.ricochetUpgradeCost = "Max";
             }
         }
         // Upgrade Boba Piercing
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258
             && mouse.y < this.descriptionBoxStartY + 130 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 130 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.pierceLevel < 3) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.pierceLevel < selectedUpgradableTower.towerType.maxPierceUpgrade) {
                 selectedUpgradableTower.pierceLevel ++;
                 currentMoney -= selectedUpgradableTower.pierceUpgradeCost;
                 selectedUpgradableTower.pierceUpgradeCost += (20 * selectedUpgradableTower.pierceLevel);
             }
-            if(selectedUpgradableTower.pierceLevel === 3) {
+            if(selectedUpgradableTower.pierceLevel === selectedUpgradableTower.towerType.maxPierceUpgrade) {
                 selectedUpgradableTower.pierceUpgradeCost = "Max";
             }
         }
         // Upgrade Boba Homing
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258
             && mouse.y < this.descriptionBoxStartY + 155 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 155 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.homingLevel < 1) {
+            if (upgradeMode && !purchaseMode && selectedUpgradableTower.homingLevel < selectedUpgradableTower.towerType.maxHomingUpgrade) {
                 selectedUpgradableTower.homingLevel ++;
                 currentMoney -= selectedUpgradableTower.homingUpgradeCost;
                 selectedUpgradableTower.homingUpgradeCost += (20 * selectedUpgradableTower.homingLevel);
             }
-            if(selectedUpgradableTower.homingLevel === 1) {
+            if(selectedUpgradableTower.homingLevel === selectedUpgradableTower.towerType.maxHomingUpgrade) {
                 selectedUpgradableTower.homingUpgradeCost = "Max";
             }
         }

@@ -1,29 +1,66 @@
 function boardTower(game, gridX, gridY, type) {
+    this.towerType = type;
     this.name = type.towerType;
-    this.rangeLevel = 1;
-    this.damageLevel = 1;
-    this.speedLevel = 1;
-    this.poisonLevel = 0;
-    this.laserLevel = 0;
-    this.freezeLevel = 0;
-    this.frequencyLevel = 1;
-    this.paralyzeLevel = 0;
-    this.explosiveLevel = 0;
-    this.ricochetLevel = 0;
-    this.pierceLevel = 0;
-    this.homingLevel = 0;
-    this.rangeUpgradeCost = 100;
-    this.damageUpgradeCost = 200;
-    this.speedUpgradeCost = 300;
-    this.poisonUpgradeCost = 125;
-    this.laserUpgradeCost = 600;
-    this.freezeUpgradeCost= 175;
-    this.frequencyUpgradeCost = 225;
-    this.paralyzeUpgradeCost = 220;
-    this.explosiveUpgradeCost = 280;
-    this.ricochetUpgradeCost = 400;
-    this.pierceUpgradeCost = 500;
-    this.homingUpgradeCost = 250;
+    this.rangeLevel = type.initRangeUpgrade;
+    this.damageLevel = type.initDamageUpgrade;
+    this.speedLevel = type.initSpeedUpgrade;
+    this.poisonLevel = type.initPoisonUpgrade;
+    this.laserLevel = type.initLaserUpgrade;
+    this.freezeLevel = type.initFreezeUpgrade;
+    this.frequencyLevel = type.initFrequencyUpgrade;
+    this.paralyzeLevel = type.initParalyzeUpgrade;
+    this.explosiveLevel = type.initExplosiveUpgrade;
+    this.ricochetLevel = type.initRicochetUpgrade;
+    this.pierceLevel = type.initPierceUpgrade;
+    this.homingLevel = type.initHomingUpgrade;
+    this.rangeUpgradeCost = "Max";
+    this.damageUpgradeCost = "Max";
+    this.speedUpgradeCost = "Max";
+    this.poisonUpgradeCost = "Max";
+    this.laserUpgradeCost = "Max";
+    this.freezeUpgradeCost= "Max";
+    this.frequencyUpgradeCost = "Max";
+    this.paralyzeUpgradeCost = "Max";
+    this.explosiveUpgradeCost = "Max";
+    this.ricochetUpgradeCost = "Max";
+    this.pierceUpgradeCost = "Max";
+    this.homingUpgradeCost = "Max";
+    if(this.rangeLevel !== this.towerType.maxRangeUpgrade) {
+        this.rangeUpgradeCost = 100;
+    }
+    if(this.damageLevel !== this.towerType.maxDamageUpgrade) {
+        this.damageUpgradeCost = 200;
+    }
+    if(this.speedLevel !== this.towerType.maxSpeedUpgrade) {
+        this.speedUpgradeCost = 300;
+    }
+    if(this.poisonLevel !== this.towerType.maxPoisonUpgrade) {
+        this.poisonUpgradeCost = 125;
+    }
+    if(this.laserLevel !== this.towerType.maxLaserUpgrade) {
+        this.laserUpgradeCost = 600;
+    }
+    if(this.freezeLevel !== this.towerType.maxFreezeUpgrade) {
+        this.freezeUpgradeCost= 175;
+    }
+    if(this.frequencyLevel !== this.towerType.maxFrequencyUpgrade) {
+        this.frequencyUpgradeCost = 225;
+    }
+    if(this.paralyzeLevel !== this.towerType.maxParalyzeUpgrade) {
+        this.paralyzeUpgradeCost = 220;
+    }
+    if(this.explosiveLevel !== this.towerType.maxExplosiveUpgrade) {
+        this.explosiveUpgradeCost = 280;
+    }
+    if(this.ricochetLevel !== this.towerType.maxRicochetUpgrade) {
+        this.ricochetUpgradeCost = 400;
+    }
+    if(this.pierceLevel !== this.towerType.maxPierceUpgrade) {
+        this.pierceUpgradeCost = 500;
+    }
+    if(this.homingLevel !== this.towerType.maxHomingUpgrade) {
+        this.homingUpgradeCost = 250;
+    }
     this.bobaDamage = 1;
     this.photonDamage = .001;
     this.bobaSpeed = 500;
@@ -47,7 +84,6 @@ function boardTower(game, gridX, gridY, type) {
     this.gridY = gridY;
     this.xOffset = 0;
     this.yOffset = 1;
-    this.towerType = type;
     this.cost = this.towerType.cost;
     this.spritesheet = type.spritesheet;
     this.animationSouthEast = new Animation(this.spritesheet, 580, 90, 350, 350, 1, 0.1, 1, true, 0.2);
@@ -72,8 +108,8 @@ function boardTower(game, gridX, gridY, type) {
     this.target = null;
     this.shootBobaEveryMS = this.towerType.frequency;
     this.directions = ['S', 'SE', 'E', 'NE', 'N', 'NW', 'W', 'SW']
-    this.shootOutXOffset = [15, 45, 65, 45, 17, -15, -30, -25 ];
-    this.shootOutYOffset = [50,40, 15, -5, -15, -5, 10, 40];
+    this.shootOutXOffset = [19, 54, 68, 45, 20, -15, -30, -25 ];
+    this.shootOutYOffset = [53,42, 14, -10, -20, -5, 10, 40];
     //0 = closest to end by dist
     //1 = farthest to end by dist
     //2 =  closest to end by path
@@ -421,11 +457,11 @@ boardTower.prototype.update = function () {
         if(this.shootTimer < this.game.timer.time) {
             if (this.name == "laser") {
                 // console.log("a")
-                this.game.addEntity(new photon(this.game,this.shootOutX, this.shootOutY, this.name, this.target
+                this.game.addEntity(new photon(this.game,this.shootOutX + 15, this.shootOutY + 20, this.name, this.target
                     , this.photonDamage, this.bobaSpeed, this.ricochetLevel, -1, this.homingLevel
                     , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel, 50));
                     if (this.game.speed == 2) {
-                        this.game.addEntity(new photon(this.game,this.shootOutX, this.shootOutY, this.name, this.target
+                        this.game.addEntity(new photon(this.game,this.shootOutX + 15, this.shootOutY + 20, this.name, this.target
                             , this.photonDamage, this.bobaSpeed, this.ricochetLevel, -1, this.homingLevel
                             , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel, 50));
                     }

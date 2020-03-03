@@ -1,4 +1,9 @@
-function storeTower(game, name, cost, frequency, radius, description, spritesheet, xCoordinate, yCoordinate, width, height, storeGridX, storeGridY, towerType) {
+function storeTower(game, name, cost, frequency, radius, description, spritesheet, xCoordinate, yCoordinate, 
+    width, height, storeGridX, storeGridY, towerType, maxRangeUpgrade, maxDamageUpgrade, maxSpeedUpgrade, 
+    maxPoisonUpgrade, maxLaserUpgrade, maxFreezeUpgrade, maxFrequencyUpgrade, maxParalyzeUpgrade, maxExplosiveUpgrade,
+    maxRicochetUpgrade, maxPierceUpgrade, maxHomingUpgrade, initRangeUpgrade, initDamageUpgrade, initSpeedUpgrade, 
+    initPoisonUpgrade, initLaserUpgrade, initFreezeUpgrade, initFrequencyUpgrade, initParalyzeUpgrade, initExplosiveUpgrade,
+    initRicochetUpgrade, initPierceUpgrade, initHomingUpgrade) {
     this.game = game;
     this.name = name;
     this.towerType = towerType;
@@ -16,6 +21,32 @@ function storeTower(game, name, cost, frequency, radius, description, spriteshee
     this.storeGridY = storeGridY;
     this.width = width;
     this.height = height;
+    // Max Levels
+    this.maxRangeUpgrade = maxRangeUpgrade;
+    this.maxDamageUpgrade = maxDamageUpgrade;
+    this.maxSpeedUpgrade = maxSpeedUpgrade;
+    this.maxPoisonUpgrade = maxPoisonUpgrade;
+    this.maxLaserUpgrade = maxLaserUpgrade;
+    this.maxFreezeUpgrade = maxFreezeUpgrade;
+    this.maxFrequencyUpgrade = maxFrequencyUpgrade;
+    this.maxParalyzeUpgrade = maxParalyzeUpgrade;
+    this.maxExplosiveUpgrade = maxExplosiveUpgrade;
+    this.maxRicochetUpgrade = maxRicochetUpgrade;
+    this.maxPierceUpgrade = maxPierceUpgrade;
+    this.maxHomingUpgrade = maxHomingUpgrade;
+    // Initial Levels
+    this.initRangeUpgrade = initRangeUpgrade;
+    this.initDamageUpgrade = initDamageUpgrade;
+    this.initSpeedUpgrade = initSpeedUpgrade;
+    this.initPoisonUpgrade = initPoisonUpgrade;
+    this.initLaserUpgrade = initLaserUpgrade;
+    this.initFreezeUpgrade = initFreezeUpgrade;
+    this.initFrequencyUpgrade = initFrequencyUpgrade;
+    this.initParalyzeUpgrade = initParalyzeUpgrade;
+    this.initExplosiveUpgrade = initExplosiveUpgrade;
+    this.initRicochetUpgrade = initRicochetUpgrade;
+    this.initPierceUpgrade = initPierceUpgrade;
+    this.initHomingUpgrade = initHomingUpgrade;
 }
 
 storeTower.prototype.draw = function () {
