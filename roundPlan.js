@@ -12,6 +12,7 @@ Round 4
 All 11 slimes x9 => 99 slimes
 */
 var round = 0;
+var displayRoundDone = false;
 var gameOverLose = true;
 var gameOverWin = false;
 function roundPlan(game) {
@@ -24,7 +25,7 @@ function roundPlan(game) {
     this.isEnding = false;
     this.game.running = false;
     // this.spawningFinish = false;
-    this.displayRoundDone = false;
+    //this.displayRoundDone = false;
     this.gameOverWin = false;
     this.time = this.game.timer.time;
     this.initialRoundTime;
@@ -136,7 +137,7 @@ roundPlan.prototype.update = function () {
         this.isRoundStart = true;
         this.game.running = false;
         this.index = 1;
-        this.displayRoundDone = true;
+        displayRoundDone = true;
         currentMoney += 100;
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
@@ -481,13 +482,13 @@ roundPlan.prototype.update = function () {
 }
 
 roundPlan.prototype.draw = function () {
-    if (this.displayRoundDone) {
+    if (displayRoundDone) {
         this.generateRoundDone();
         sleep(4000).then(() => {
-            this.displayRoundDone = false;
+            displayRoundDone = false;
         });
         if (this.game.running) {
-            this.displayRoundDone = false;
+            displayRoundDone = false;
         }
     }
 
