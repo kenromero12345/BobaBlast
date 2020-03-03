@@ -71,7 +71,7 @@ storeTower.prototype.update = function () {
         // console.log("CLICK");
         var click = this.game.click;
         if(click.x >= this.x && click.x < this.x + 70 && click.y >= this.y && click.y < this.y + 70) {
-            if(round < this.roundUnlock || (!displayRoundDone && round === this.roundUnlock)) {
+            if(round < this.roundUnlock || (!roundComplete && round === this.roundUnlock)) {
                 return;
             } 
             if (currentMoney - this.cost < 0) {
