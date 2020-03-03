@@ -927,7 +927,7 @@ display.prototype.generateDescriptionBox = function() {
     }
 
     var currentTower = towerArray[yGrid][xGrid];
-    if(round < currentTower.roundUnlock || (!displayRoundDone && round === currentTower.roundUnlock)) {
+    if(round < currentTower.roundUnlock || (!roundComplete && round === currentTower.roundUnlock)) {
         ctx.fillStyle = "black";
         ctx.font = '20px Bahnschrift SemiBold';
         ctx.fillText("Unlock This Tower After", this.descriptionBoxStartX + 15, this.descriptionBoxStartY + 30);

@@ -13,6 +13,7 @@ All 11 slimes x9 => 99 slimes
 */
 var round = 0;
 var displayRoundDone = false;
+var roundComplete = false;
 var gameOverLose = true;
 var gameOverWin = false;
 function roundPlan(game) {
@@ -138,6 +139,7 @@ roundPlan.prototype.update = function () {
         this.game.running = false;
         this.index = 1;
         displayRoundDone = true;
+        roundComplete = true;
         currentMoney += 100;
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
@@ -154,6 +156,7 @@ roundPlan.prototype.update = function () {
     // console.log(!this.isRoundStart + " " + !this.isEnding + " " + !this.spawningFinish)
     if (!this.isRoundStart && !this.isEnding) {// && !this.spawningFinish) {
         this.index = 1;
+        roundComplete = false;
         if (round == 1) {
             // console.log("a")
             // this.roundEntity(this.index * this.timeGap + this.initialRoundTime
