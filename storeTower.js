@@ -3,7 +3,7 @@ function storeTower(game, name, cost, frequency, radius, description, spriteshee
     maxPoisonUpgrade, maxLaserUpgrade, maxFreezeUpgrade, maxFrequencyUpgrade, maxParalyzeUpgrade, maxExplosiveUpgrade,
     maxRicochetUpgrade, maxPierceUpgrade, maxHomingUpgrade, initRangeUpgrade, initDamageUpgrade, initSpeedUpgrade, 
     initPoisonUpgrade, initLaserUpgrade, initFreezeUpgrade, initFrequencyUpgrade, initParalyzeUpgrade, initExplosiveUpgrade,
-    initRicochetUpgrade, initPierceUpgrade, initHomingUpgrade) {
+    initRicochetUpgrade, initPierceUpgrade, initHomingUpgrade, roundUnlock) {
     this.game = game;
     this.name = name;
     this.towerType = towerType;
@@ -47,6 +47,7 @@ function storeTower(game, name, cost, frequency, radius, description, spriteshee
     this.initRicochetUpgrade = initRicochetUpgrade;
     this.initPierceUpgrade = initPierceUpgrade;
     this.initHomingUpgrade = initHomingUpgrade;
+    this.roundUnlock = roundUnlock;
 }
 
 storeTower.prototype.draw = function () {
@@ -70,6 +71,9 @@ storeTower.prototype.update = function () {
         // console.log("CLICK");
         var click = this.game.click;
         if(click.x >= this.x && click.x < this.x + 70 && click.y >= this.y && click.y < this.y + 70) {
+            if(round < this.roundUnlock || (!displayRoundDone && round === this.roundUnlock)) {
+                return;
+            } 
             if (currentMoney - this.cost < 0) {
                 return;
             }

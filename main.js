@@ -290,23 +290,23 @@ var divOffset;
 
 function generateStoreTowers(game) {
     //basic tower
-    var firstTower = new storeTower(game, "Boba Shooter", 100, 1000/1000, 150, "Basic boba shooter\nShooting Speed: Slow \nRange: Short\nSpecial Ability: None",AM.getAsset("./img/tower.png"), 945, 120, 70,70,0,0, "none", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0);
+    var firstTower = new storeTower(game, "Boba Shooter", 100, 1000/1000, 150, "Basic boba shooter\nShooting Speed: Slow \nRange: Short\nSpecial Ability: None",AM.getAsset("./img/tower.png"), 945, 120, 70,70,0,0, "none", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1);
     //poison tower
-    var secondTower = new storeTower(game, "Matcha Boba", 400, 300/1000, 250, "Poisons enemies \nShooting Speed: Fast \nRange: Medium \nSpecial Ability: Poison does \ndamage over time",AM.getAsset("./img/towerG.png"), 1015, 120, 70, 70,1,0, "green", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0);
+    var secondTower = new storeTower(game, "Matcha Boba", 400, 300/1000, 250, "Poisons enemies \nShooting Speed: Fast \nRange: Medium \nSpecial Ability: Poison does \ndamage over time",AM.getAsset("./img/towerG.png"), 1015, 120, 70, 70,1,0, "green", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, -1);
     //explosive tower
-    var thirdTower = new storeTower(game, "Red Bean Boba", 800, 2000/1000, 250,"Burns enemies \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes \nenemies run faster and \ndoes damage over time \nShoots an explosion that hits \nmultiple enemies",AM.getAsset("./img/towerR.png"), 1085, 120, 70,70,2,0, "red", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0);
+    var thirdTower = new storeTower(game, "Red Bean Boba", 800, 2000/1000, 250,"Burns enemies \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes \nenemies run faster and \ndoes damage over time \nShoots an explosion that hits \nmultiple enemies",AM.getAsset("./img/towerR.png"), 1085, 120, 70,70,2,0, "red", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1);
     //super tower
-    var fourthTower = new storeTower(game, "Golden Boba", 2500, 50/1000, 500, "Super boba tower \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies. Boba ricochets off \nenemies and pierces through enemies.",AM.getAsset("./img/towerY.png"), 945, 190, 70,70,0,1, "gold", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 3, 0, 0, 1, 1, 1);
+    var fourthTower = new storeTower(game, "Golden Boba", 2500, 50/1000, 500, "Super boba tower \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies. Boba ricochets off \nenemies and pierces through enemies.",AM.getAsset("./img/towerY.png"), 945, 190, 70,70,0,1, "gold", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 3, 0, 0, 1, 1, 1, 4);
     //wall
-    var fifthTower = new storeTower(game, "Pot of Boba", 20, 0, 0, "A wall that stops the \nenemies from progressing\nShooting Speed: None \nRange: None\nSpecial Ability: None",AM.getAsset("./img/pot.png"), 1015, 190, 70,70,1,1, "none", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    var fifthTower = new storeTower(game, "Pot of Boba", 20, 0, 0, "A wall that stops the \nenemies from progressing\nShooting Speed: None \nRange: None\nSpecial Ability: None",AM.getAsset("./img/pot.png"), 1015, 190, 70,70,1,1, "none", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1);
     //slow tower
-    var sixthTower = new storeTower(game, "Iced Boba", 200, 1000/1000, 250, "Ices enemies \nShooting Speed: Slow \nRange: Medium \nSpecial Ability: Ice makes \nenemies move slowly",AM.getAsset("./img/towerB.png"), 1085, 190, 70,70,2,1, "blue", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0);
+    var sixthTower = new storeTower(game, "Iced Boba", 200, 1000/1000, 250, "Ices enemies \nShooting Speed: Slow \nRange: Medium \nSpecial Ability: Ice makes \nenemies move slowly",AM.getAsset("./img/towerB.png"), 1085, 190, 70,70,2,1, "blue", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 3);
     //stun tower
-    var seventhTower = new storeTower(game, "Taro Boba", 300, 600/1000, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \nSpecial Ability: Stun briefly \nstops enemies in place ",AM.getAsset("./img/towerP.png"), 945, 260,70,70,0,2, "purple", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0);
+    var seventhTower = new storeTower(game, "Taro Boba", 300, 600/1000, 150,"Stuns enemies \nShooting Speed: Moderate \nRange: Short \nSpecial Ability: Stun briefly \nstops enemies in place ",AM.getAsset("./img/towerP.png"), 945, 260,70,70,0,2, "purple", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 3);
     // laser tower
-    var eighthTower = new storeTower(game, "Laser Boba", 300, 0.01, 250,"Fires laser boba \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Laser boba \nperforms more damage ",AM.getAsset("./img/lasertower.png"), 1015, 260,70,70,1,2, "laser", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0);
+    var eighthTower = new storeTower(game, "Laser Boba", 300, 0.01, 250,"Fires laser boba \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Laser boba \nperforms more damage ",AM.getAsset("./img/lasertower.png"), 1015, 260,70,70,1,2, "laser", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 5);
      // mix tower
-     var ninthTower = new storeTower(game, "Multi-Directional Boba", 300, 1000/1000, 250,"Fires boba in all directions \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Boba is fired \nin all directions ",AM.getAsset("./img/mixtower.png"), 1085, 260,70,70,2,2, "all", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0);
+     var ninthTower = new storeTower(game, "Multi-Directional Boba", 300, 1000/1000, 250,"Fires boba in all directions \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Boba is fired \nin all directions ",AM.getAsset("./img/mixtower.png"), 1085, 260,70,70,2,2, "all", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1);
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower, eighthTower, ninthTower]];//eightTower,ninthTower
     game.towers = temp;
     return temp;

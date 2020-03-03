@@ -306,6 +306,14 @@ boardTower.prototype.update = function () {
         var upperLeftY = (this.gridY) * 100;
         var width = 100;
         var height = 100;
+        if(click.x > 0 && click.x <= 900 && click.y > 0 && click.y <= 600) {
+            if(click.x < upperLeftX || click.x > upperLeftX + width || click.y < upperLeftY || click.y > upperLeftY + height) {
+             if(upgradeMode && selectedUpgradableTower === this) {
+                    upgradeMode = false;
+                    selectedUpgradableTower = null;
+                } 
+            }
+        }
         if(click.x >= upperLeftX && click.x < upperLeftX + width && click.y >= upperLeftY && click.y < upperLeftY + height) {
             if(upgradeMode && selectedUpgradableTower === this) {
                 upgradeMode = false;
