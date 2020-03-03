@@ -324,7 +324,7 @@ var enemyParalyzeUpdate = function(enemy) {
         } else if (enemy.paralysisLvl == 3) {
             enemy.hp -= 0.010 * enemy.game.speed;
         }
-        console.log(enemy.game.timer.time + " " + enemy.paralyzeDate)
+        // console.log(enemy.game.timer.time + " " + enemy.paralyzeDate)
         if (enemy.game.timer.time >= enemy.paralyzeDate) {
             enemy.animationWalkLeft.stop = false;
             enemy.animationWalkRight.stop = false;
@@ -445,7 +445,8 @@ var enemyChooseDir = function(enemy) {
 // var str = ""; 
 
 var drawHP = function (enemy, x, y) {
-    if (enemy.hp > 0) {
+    if (enemy.hp > 0 && enemy.game.running) {
+        drawStatusEffect(enemy, x, y);
         enemy.game.ctx.fillStyle = "red";
         enemy.game.ctx.fillRect(enemy.centerX - 25 + x, enemy.y + y, 50, 2);
         enemy.game.ctx.fillStyle = "green";
@@ -455,4 +456,46 @@ var drawHP = function (enemy, x, y) {
         // }
         enemy.game.ctx.fillRect(enemy.centerX - 25 + x, enemy.y + y, 50 * hp / enemy.maxHp, 2);
     }
+}
+
+var drawStatusEffect = function (enemy, x, y) {
+    if (enemy.hp > 0 && enemy.game.running) {
+        var scale = .1;
+        if (enemy.isBurned) {
+            enemy.ctx.drawImage(AM.getAsset("./img/brn.png"),
+            enemy.centerX + x - 2 * (272 * scale) + (272 * scale)/ 2, enemy.y - 15 + y,
+            272 * scale,
+            96 * scale);
+        }
+        if (enemy.isPoisoned) {
+            enemy.ctx.drawImage(AM.getAsset("./img/psn.png"),
+            enemy.centerX + x - (272 * scale) + (272 * scale)/ 2, enemy.y - 15 + y,
+            272 * scale,
+            96 * scale);
+        }
+        if (enemy.isFrozen) {
+            enemy.ctx.drawImage(AM.getAsset("./img/frz.png"),
+            enemy.centerX + x + (272 * scale)/ 2 , enemy.y - 15 + y,
+            272 * scale,
+            96 * scale);
+        }
+        if (enemy.isParalyzed) {
+            enemy.ctx.drawImage(AM.getAsset("./img/par.png"),
+            enemy.centerX + x + 1 * (272 * scale) + (272 * scale)/ 2, enemy.y - 15 + y,
+            272 * scale,
+            96 * scale);
+        }
+        // enemy.ctx.drawImage(AM.getAsset("./img/statuseffect.png"),
+        //     xindex * this.frameWidth + this.startX, yindex * this.frameHeight + this.startY,  // source from sheet
+        //     this.frameWidth, this.frameHeight,
+        //     x + this.offsetX, y + this.offsetY,
+        //     this.frameWidth * this.scale,
+        //     this.frameHeight * this.scale);
+        // enemy.game.ctx.fillStyle = "red";
+        // enemy.game.ctx.fillRect(enemy.centerX - 25 + x, enemy.y + y, 50, 2);
+        // enemy.game.ctx.fillStyle = "green";
+        // var hp = enemy.hp;
+
+        
+    } 
 }

@@ -151,6 +151,11 @@ AM.queueDownload("./img/explosion.png");
 AM.queueDownload("./img/electric.png");
 AM.queueDownload("./img/freeze.png");
 AM.queueDownload("./img/poison.png");
+AM.queueDownload("./img/psn.png");
+AM.queueDownload("./img/brn.png");
+AM.queueDownload("./img/par.png");
+AM.queueDownload("./img/frz.png");
+// AM.queueDownload("./img/statuseffect.png")
 
 function Background(game, spritesheet) {
     this.isEnemy = false;
