@@ -228,18 +228,34 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 130 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 130 + 2) {
             if (upgradeMode && !purchaseMode) {
-                var x = this.descriptionBoxStartX + 103;
-                var y = this.descriptionBoxStartY + 130;
-                var w = 38;
-                var h = 20;
-                ctx.fillStyle = "red";
-                ctx.fillRect(x,y,w,h);
-                ctx.fillStyle = "white";
-                ctx.font = 'Bold 13px Bahnschrift SemiCondensed';
-                if(selectedUpgradableTower.laserUpgradeCost === 'Max') {
-                    ctx.fillText("MAX", x + 7, y + 15);
+                if(selectedUpgradableTower.name === "pot") {
+                    var x = this.descriptionBoxStartX + 103;
+                    var y = this.descriptionBoxStartY + 130;
+                    var w = 38;
+                    var h = 20;
+                    ctx.fillStyle = "red";
+                    ctx.fillRect(x,y,w,h);
+                    ctx.fillStyle = "white";
+                    ctx.font = 'Bold 13px Bahnschrift SemiCondensed';
+                    if(selectedUpgradableTower.depthUpgradeCost === 'Max') {
+                        ctx.fillText("MAX", x + 7, y + 15);
+                    } else {
+                        ctx.fillText("↑ $" + selectedUpgradableTower.depthUpgradeCost, x + 1, y + 15);
+                    }
                 } else {
-                    ctx.fillText("↑ $" + selectedUpgradableTower.laserUpgradeCost, x + 1, y + 15);
+                    var x = this.descriptionBoxStartX + 103;
+                    var y = this.descriptionBoxStartY + 130;
+                    var w = 38;
+                    var h = 20;
+                    ctx.fillStyle = "red";
+                    ctx.fillRect(x,y,w,h);
+                    ctx.fillStyle = "white";
+                    ctx.font = 'Bold 13px Bahnschrift SemiCondensed';
+                    if(selectedUpgradableTower.laserUpgradeCost === 'Max') {
+                        ctx.fillText("MAX", x + 7, y + 15);
+                    } else {
+                        ctx.fillText("↑ $" + selectedUpgradableTower.laserUpgradeCost, x + 1, y + 15);
+                    }
                 }
             }
         }
@@ -583,16 +599,31 @@ display.prototype.draw = function () {
         // Upgrade Laser Boba
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 130 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 130 + 2) {
-            if (upgradeMode && !purchaseMode && selectedUpgradableTower.laserLevel < selectedUpgradableTower.towerType.maxLaserUpgrade) {
-                if (currentMoney - selectedUpgradableTower.laserUpgradeCost < 0) {
-                    return;
+            if(selectedUpgradableTower.name === "pot") {
+                if (upgradeMode && !purchaseMode && selectedUpgradableTower.depthLevel < selectedUpgradableTower.towerType.maxDepthUpgrade) {
+                    if (currentMoney - selectedUpgradableTower.depthUpgradeCost < 0) {
+                        return;
+                    }
+                    selectedUpgradableTower.depthLevel ++;
+                    currentMoney -= selectedUpgradableTower.depthUpgradeCost;
+                    selectedUpgradableTower.depthUpgradeCost += (20 * selectedUpgradableTower.depthLevel);
                 }
-                selectedUpgradableTower.laserLevel ++;
-                currentMoney -= selectedUpgradableTower.laserUpgradeCost;
-                selectedUpgradableTower.laserUpgradeCost += (20 * selectedUpgradableTower.laserLevel);
-            }
-            if(selectedUpgradableTower.laserLevel === selectedUpgradableTower.towerType.maxLaserUpgrade) {
-                selectedUpgradableTower.laserUpgradeCost = "Max";
+                if(selectedUpgradableTower.depthLevel === selectedUpgradableTower.towerType.maxDepthUpgrade) {
+                    selectedUpgradableTower.depthUpgradeCost = "Max";
+                }
+
+            } else {
+                if (upgradeMode && !purchaseMode && selectedUpgradableTower.laserLevel < selectedUpgradableTower.towerType.maxLaserUpgrade) {
+                    if (currentMoney - selectedUpgradableTower.laserUpgradeCost < 0) {
+                        return;
+                    }
+                    selectedUpgradableTower.laserLevel ++;
+                    currentMoney -= selectedUpgradableTower.laserUpgradeCost;
+                    selectedUpgradableTower.laserUpgradeCost += (20 * selectedUpgradableTower.laserLevel);
+                }
+                if(selectedUpgradableTower.laserLevel === selectedUpgradableTower.towerType.maxLaserUpgrade) {
+                    selectedUpgradableTower.laserUpgradeCost = "Max";
+                }
             }
         }
         // Upgrade Freeze Boba
@@ -899,7 +930,12 @@ display.prototype.generateDescriptionBox = function() {
             ctx.fillText("Boba Damage: Lvl " + selectedUpgradableTower.damageLevel, this.descriptionBoxStartX + 3, this.descriptionBoxStartY + 70);
             ctx.fillText("Boba Velocity: Lvl " + selectedUpgradableTower.speedLevel, this.descriptionBoxStartX + 3, this.descriptionBoxStartY + 95);
             ctx.fillText("Poison Boba: Lvl " + selectedUpgradableTower.poisonLevel, this.descriptionBoxStartX + 3, this.descriptionBoxStartY + 120);
-            ctx.fillText("Laser Boba: Lvl " + selectedUpgradableTower.laserLevel, this.descriptionBoxStartX + 3, this.descriptionBoxStartY + 145);
+            if(selectedUpgradableTower.name === "pot") {
+                ctx.fillText("Depth: Lvl " + selectedUpgradableTower.depthLevel, this.descriptionBoxStartX + 3, this.descriptionBoxStartY + 145);
+           
+            } else {
+                ctx.fillText("Laser Boba: Lvl " + selectedUpgradableTower.laserLevel, this.descriptionBoxStartX + 3, this.descriptionBoxStartY + 145);
+            }
             ctx.fillText("Freeze Boba: Lvl " + selectedUpgradableTower.freezeLevel, this.descriptionBoxStartX + 3, this.descriptionBoxStartY + 170);
             ctx.fillText("Boba Frequency: Lvl " + selectedUpgradableTower.frequencyLevel, this.descriptionBoxStartX + 145, this.descriptionBoxStartY + 45);
             ctx.fillText("Paralyze Boba: Lvl " + selectedUpgradableTower.paralyzeLevel, this.descriptionBoxStartX + 145, this.descriptionBoxStartY + 70);
@@ -912,7 +948,11 @@ display.prototype.generateDescriptionBox = function() {
             this.generateUpgradeAttributeButton(selectedUpgradableTower.damageUpgradeCost, 103, 55);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.speedUpgradeCost, 103, 80);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.poisonUpgradeCost, 103, 105);
-            this.generateUpgradeAttributeButton(selectedUpgradableTower.laserUpgradeCost, 103, 130);
+            if(selectedUpgradableTower.name === "pot") {
+                this.generateUpgradeAttributeButton(selectedUpgradableTower.depthUpgradeCost, 103, 130);
+            } else {
+                this.generateUpgradeAttributeButton(selectedUpgradableTower.laserUpgradeCost, 103, 130);
+            }
             this.generateUpgradeAttributeButton(selectedUpgradableTower.freezeUpgradeCost, 103, 155);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.frequencyUpgradeCost, 258, 30);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.paralyzeUpgradeCost, 258, 55);

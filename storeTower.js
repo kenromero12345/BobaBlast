@@ -3,7 +3,7 @@ function storeTower(game, name, cost, frequency, radius, description, spriteshee
     maxPoisonUpgrade, maxLaserUpgrade, maxFreezeUpgrade, maxFrequencyUpgrade, maxParalyzeUpgrade, maxExplosiveUpgrade,
     maxRicochetUpgrade, maxPierceUpgrade, maxHomingUpgrade, initRangeUpgrade, initDamageUpgrade, initSpeedUpgrade, 
     initPoisonUpgrade, initLaserUpgrade, initFreezeUpgrade, initFrequencyUpgrade, initParalyzeUpgrade, initExplosiveUpgrade,
-    initRicochetUpgrade, initPierceUpgrade, initHomingUpgrade, roundUnlock) {
+    initRicochetUpgrade, initPierceUpgrade, initHomingUpgrade, roundUnlock, maxDepthUpgrade, initDepthUpgrade) {
     this.game = game;
     this.name = name;
     this.towerType = towerType;
@@ -22,6 +22,7 @@ function storeTower(game, name, cost, frequency, radius, description, spriteshee
     this.width = width;
     this.height = height;
     // Max Levels
+    this.maxDepthUpgrade = maxDepthUpgrade;
     this.maxRangeUpgrade = maxRangeUpgrade;
     this.maxDamageUpgrade = maxDamageUpgrade;
     this.maxSpeedUpgrade = maxSpeedUpgrade;
@@ -35,6 +36,7 @@ function storeTower(game, name, cost, frequency, radius, description, spriteshee
     this.maxPierceUpgrade = maxPierceUpgrade;
     this.maxHomingUpgrade = maxHomingUpgrade;
     // Initial Levels
+    this.initDepthUpgrade = initDepthUpgrade;
     this.initRangeUpgrade = initRangeUpgrade;
     this.initDamageUpgrade = initDamageUpgrade;
     this.initSpeedUpgrade = initSpeedUpgrade;
