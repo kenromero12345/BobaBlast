@@ -521,6 +521,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 30 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 30 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.rangeLevel < selectedUpgradableTower.towerType.maxRangeUpgrade) {
+                if (currentMoney - selectedUpgradableTower.rangeUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.radius += 100;
                 selectedUpgradableTower.rangeLevel ++;
                 currentMoney -= selectedUpgradableTower.rangeUpgradeCost;
@@ -534,6 +537,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 55 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 55 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.damageLevel < selectedUpgradableTower.towerType.maxDamageUpgrade) {
+                if (currentMoney - selectedUpgradableTower.damageUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.bobaDamage +=2;
                 selectedUpgradableTower.damageLevel ++;
                 currentMoney -= selectedUpgradableTower.damageUpgradeCost;
@@ -547,6 +553,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 80 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 80 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.speedLevel < selectedUpgradableTower.towerType.maxSpeedUpgrade) {
+                if (currentMoney - selectedUpgradableTower.speedUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.bobaSpeed *= 2;
                 selectedUpgradableTower.speedLevel ++;
                 currentMoney -= selectedUpgradableTower.speedUpgradeCost;
@@ -560,6 +569,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 105 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 105 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.poisonLevel < selectedUpgradableTower.towerType.maxPoisonUpgrade) {
+                if (currentMoney - selectedUpgradableTower.poisonUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.poisonLevel ++;
                 currentMoney -= selectedUpgradableTower.poisonUpgradeCost;
                 selectedUpgradableTower.poisonUpgradeCost += (20 * selectedUpgradableTower.poisonLevel);
@@ -572,6 +584,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 130 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 130 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.laserLevel < selectedUpgradableTower.towerType.maxLaserUpgrade) {
+                if (currentMoney - selectedUpgradableTower.laserUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.laserLevel ++;
                 currentMoney -= selectedUpgradableTower.laserUpgradeCost;
                 selectedUpgradableTower.laserUpgradeCost += (20 * selectedUpgradableTower.laserLevel);
@@ -584,6 +599,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 155 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 155 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.freezeLevel < selectedUpgradableTower.towerType.maxFreezeUpgrade) {
+                if (currentMoney - selectedUpgradableTower.freezeUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.freezeLevel ++;
                 currentMoney -= selectedUpgradableTower.freezeUpgradeCost;
                 selectedUpgradableTower.freezeUpgradeCost += (20 * selectedUpgradableTower.freezeLevel);
@@ -596,6 +614,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258 
             && mouse.y < this.descriptionBoxStartY + 30 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 30 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.frequencyLevel < selectedUpgradableTower.towerType.maxFrequencyUpgrade) {
+                if (currentMoney - selectedUpgradableTower.frequencyUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.shootBobaEveryMS = selectedUpgradableTower.shootBobaEveryMS * 0.75;
                 selectedUpgradableTower.frequencyLevel ++;
                 currentMoney -= selectedUpgradableTower.frequencyUpgradeCost;
@@ -609,6 +630,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258 
             && mouse.y < this.descriptionBoxStartY + 55 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 55 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.paralyzeLevel < selectedUpgradableTower.towerType.maxParalyzeUpgrade) {
+                if (currentMoney - selectedUpgradableTower.paralyzeUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.paralyzeLevel ++;
                 currentMoney -= selectedUpgradableTower.paralyzeUpgradeCost;
                 selectedUpgradableTower.paralyzeUpgradeCost += (20 * selectedUpgradableTower.paralyzeLevel);
@@ -621,6 +645,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258 
             && mouse.y < this.descriptionBoxStartY + 80 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 80 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.explosiveLevel < selectedUpgradableTower.towerType.maxExplosiveUpgrade) {
+                if (currentMoney - selectedUpgradableTower.explosiveUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.explosiveLevel ++;
                 currentMoney -= selectedUpgradableTower.explosiveUpgradeCost;
                 selectedUpgradableTower.explosiveUpgradeCost += (20 * selectedUpgradableTower.explosiveLevel);
@@ -633,6 +660,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258 
             && mouse.y < this.descriptionBoxStartY + 105 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 105 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.ricochetLevel < selectedUpgradableTower.towerType.maxRicochetUpgrade) {
+                if (currentMoney - selectedUpgradableTower.ricochetUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.ricochetLevel ++;
                 currentMoney -= selectedUpgradableTower.ricochetUpgradeCost;
                 selectedUpgradableTower.ricochetUpgradeCost += (20 * selectedUpgradableTower.ricochetLevel);
@@ -645,6 +675,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258
             && mouse.y < this.descriptionBoxStartY + 130 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 130 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.pierceLevel < selectedUpgradableTower.towerType.maxPierceUpgrade) {
+                if (currentMoney - selectedUpgradableTower.pierceUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.pierceLevel ++;
                 currentMoney -= selectedUpgradableTower.pierceUpgradeCost;
                 selectedUpgradableTower.pierceUpgradeCost += (20 * selectedUpgradableTower.pierceLevel);
@@ -657,6 +690,9 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258
             && mouse.y < this.descriptionBoxStartY + 155 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 155 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.homingLevel < selectedUpgradableTower.towerType.maxHomingUpgrade) {
+                if (currentMoney - selectedUpgradableTower.homingUpgradeCost < 0) {
+                    return;
+                }
                 selectedUpgradableTower.homingLevel ++;
                 currentMoney -= selectedUpgradableTower.homingUpgradeCost;
                 selectedUpgradableTower.homingUpgradeCost += (20 * selectedUpgradableTower.homingLevel);
