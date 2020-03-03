@@ -14,6 +14,7 @@ function boardTower(game, gridX, gridY, type) {
     this.ricochetLevel = type.initRicochetUpgrade;
     this.pierceLevel = type.initPierceUpgrade;
     this.homingLevel = type.initHomingUpgrade;
+    this.depthLevelCost = "Max";
     this.rangeUpgradeCost = "Max";
     this.damageUpgradeCost = "Max";
     this.speedUpgradeCost = "Max";
@@ -26,6 +27,9 @@ function boardTower(game, gridX, gridY, type) {
     this.ricochetUpgradeCost = "Max";
     this.pierceUpgradeCost = "Max";
     this.homingUpgradeCost = "Max";
+    if(this.depthLevel !== this.towerType.maxDepthUpgrade) {
+        this.depthUpgradeCost = 100;
+    }
     if(this.rangeLevel !== this.towerType.maxRangeUpgrade) {
         this.rangeUpgradeCost = 100;
     }
@@ -251,7 +255,7 @@ boardTower.prototype.update = function () {
             }
         }
     }
-
+/*
     this.rangeLevel = this.towerType.initRangeUpgrade + bestRangeUpgrade;
     this.damageLevel = this.towerType.initDamageUpgrade + bestDamageUpgrade;
     this.speedLevel = this.towerType.initSpeedUpgrade + bestSpeedUpgrade;
@@ -264,7 +268,7 @@ boardTower.prototype.update = function () {
     this.ricochetLevel = this.towerType.initRicochetUpgrade + bestRicochetUpgrade;
     this.pierceLevel = this.towerType.initPierceUpgrade + bestPierceUpgrade;
     this.homingLevel = this.towerType.initHomingUpgrade + bestHomingUpgrade;
-
+*/
     var isThereEnemyInRange = this.isThereEnemyInRange();
     if (this.game.running && isThereEnemyInRange) {
         this.time += this.game.clockTick;
