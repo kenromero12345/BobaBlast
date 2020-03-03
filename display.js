@@ -948,7 +948,11 @@ display.prototype.generateDescriptionBox = function() {
             this.generateUpgradeAttributeButton(selectedUpgradableTower.damageUpgradeCost, 103, 55);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.speedUpgradeCost, 103, 80);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.poisonUpgradeCost, 103, 105);
-            this.generateUpgradeAttributeButton(selectedUpgradableTower.laserUpgradeCost, 103, 130);
+            if(selectedUpgradableTower.name === "pot") {
+                this.generateUpgradeAttributeButton(selectedUpgradableTower.depthUpgradeCost, 103, 130);
+            } else {
+                this.generateUpgradeAttributeButton(selectedUpgradableTower.laserUpgradeCost, 103, 130);
+            }
             this.generateUpgradeAttributeButton(selectedUpgradableTower.freezeUpgradeCost, 103, 155);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.frequencyUpgradeCost, 258, 30);
             this.generateUpgradeAttributeButton(selectedUpgradableTower.paralyzeUpgradeCost, 258, 55);
