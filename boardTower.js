@@ -1,13 +1,7 @@
 function boardTower(game, gridX, gridY, type) {
     this.towerType = type;
-    for (var i = 0; i < game.activeTowers.length; i++) {
-        if (game.activeTowers[i].towerType.name == "powerUp") {
-            //it should have a depth
-            //check if this tower is part of that depth
-            //if true apply buffs on this tower
-        }
-    }
     this.name = type.towerType;
+    this.depthLevel = type.initDepthUpgrade;
     this.rangeLevel = type.initRangeUpgrade;
     this.damageLevel = type.initDamageUpgrade;
     this.speedLevel = type.initSpeedUpgrade;
@@ -193,6 +187,84 @@ boardTower.prototype.isThereEnemyInRange = function() {
 }
 
 boardTower.prototype.update = function () {
+    // console.log(this.gridX + " " + this.gridY);
+
+    var bestRangeUpgrade = 0;
+    var bestDamageUpgrade = 0;
+    var bestSpeedUpgrade = 0;
+    var bestPoisonUpgrade = 0;
+    var bestLaserUpgrade = 0;
+    var bestFreezeUpgrade = 0;
+    var bestFrequencyUpgrade = 0;
+    var bestParalyzeUpgrade = 0;
+    var bestExplosiveUpgrade = 0;
+    var bestRicochetUpgrade = 0;
+    var bestPierceUpgrade = 0;
+    var bestHomingUpgrade = 0;
+
+    for (var i = 0; i < this.game.activeTowers.length; i++) {
+        // console.log(this.game.activeTowers[i].towerType.towerType);
+        if (this.game.activeTowers[i].name == "wall") {
+            // console.log(getTowersDepth(this.game, this.game.activeTowers[i].gridX
+            //     , this.game.activeTowers[i].gridY));
+            var depth = Math.abs(this.gridY - this.game.activeTowers[i].gridY)
+                + Math.abs(this.gridX - this.game.activeTowers[i].gridX)
+
+            if (depth <= this.game.activeTowers[i].depthLevel) {
+                if (bestRangeUpgrade < this.game.activeTowers[i].rangeLevel) {
+                    bestRangeUpgrade = this.game.activeTowers[i].rangeLevel;
+                }
+                
+                if (bestDamageUpgrade < this.game.activeTowers[i].damageLevel) {
+                    bestDamageUpgrade = this.game.activeTowers[i].damageLevel;
+                }
+                if (bestSpeedUpgrade < this.game.activeTowers[i].speedLevel) {
+                    bestSpeedUpgrade = this.game.activeTowers[i].speedLevel;
+                }
+                if (bestPoisonUpgrade < this.game.activeTowers[i].poisonLevel) {
+                    bestPoisonUpgrade = this.game.activeTowers[i].poisonLevel;
+                }
+                if (bestLaserUpgrade < this.game.activeTowers[i].laserLevel) {
+                    bestLaserUpgrade = this.game.activeTowers[i].laserLevel;
+                }
+                if (bestFreezeUpgrade < this.game.activeTowers[i].frequencyLevel) {
+                    bestFreezeUpgrade = this.game.activeTowers[i].freezeLevel;
+                }
+                if (bestFreezeUpgrade < this.game.activeTowers[i].frequencyLevel) {
+                    bestFrequencyUpgrade = this.game.activeTowers[i].frequencyLevel;
+                }
+                if (bestParalyzeUpgrade < this.game.activeTowers[i].paralyzeLevel) {
+                    bestParalyzeUpgrade = this.game.activeTowers[i].paralyzeLevel;
+                }
+                if (bestExplosiveUpgrade < this.game.activeTowers[i].explosiveLevel) {
+                    bestExplosiveUpgrade = this.game.activeTowers[i].explosiveLevel;
+                }
+                if (bestRicochetUpgrade < this.game.activeTowers[i].ricochetLevel) {
+                    bestRicochetUpgrade = this.game.activeTowers[i].ricochetLevel;
+                }
+                if (bestPierceUpgrade < this.game.activeTowers[i].pierceLevel) {
+                    bestPierceUpgrade = this.game.activeTowers[i].pierceLevel;
+                }
+                if (bestHomingUpgrade < this.game.activeTowers[i].homingLevel) {
+                    bestHomingUpgrade = this.game.activeTowers[i].homingLevel;
+                }
+            }
+        }
+    }
+
+    this.rangeLevel = this.towerType.initRangeUpgrade + bestRangeUpgrade;
+    this.damageLevel = this.towerType.initDamageUpgrade + bestDamageUpgrade;
+    this.speedLevel = this.towerType.initSpeedUpgrade + bestSpeedUpgrade;
+    this.poisonLevel = this.towerType.initPoisonUpgrade + bestPoisonUpgrade;
+    this.laserLevel = this.towerType.initLaserUpgrade + bestLaserUpgrade;
+    this.freezeLevel = this.towerType.initFreezeUpgrade + bestFreezeUpgrade;
+    this.frequencyLevel = this.towerType.initFrequencyUpgrade + bestFrequencyUpgrade;
+    this.paralyzeLevel = this.towerType.initParalyzeUpgrade + bestParalyzeUpgrade;
+    this.explosiveLevel = this.towerType.initExplosiveUpgrade + bestExplosiveUpgrade;
+    this.ricochetLevel = this.towerType.initRicochetUpgrade + bestRicochetUpgrade;
+    this.pierceLevel = this.towerType.initPierceUpgrade + bestPierceUpgrade;
+    this.homingLevel = this.towerType.initHomingUpgrade + bestHomingUpgrade;
+
     var isThereEnemyInRange = this.isThereEnemyInRange();
     if (this.game.running && isThereEnemyInRange) {
         this.time += this.game.clockTick;

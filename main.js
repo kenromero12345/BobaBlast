@@ -298,7 +298,7 @@ function generateStoreTowers(game) {
     //super tower
     var fourthTower = new storeTower(game, "Golden Boba", 2500, 50/1000, 500, "Super boba tower \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies. Boba ricochets off \nenemies and pierces through enemies.",AM.getAsset("./img/towerY.png"), 945, 190, 70,70,0,1, "gold", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 3, 0, 0, 1, 0, 1);
     //wall
-    var fifthTower = new storeTower(game, "Pot of Boba", 20, 0, 0, "A wall that stops the \nenemies from progressing\nShooting Speed: None \nRange: None\nSpecial Ability: None",AM.getAsset("./img/pot.png"), 1015, 190, 70,70,1,1, "none", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    var fifthTower = new storeTower(game, "Pot of Boba", 20, 0, 0, "A wall that stops the \nenemies from progressing\nShooting Speed: None \nRange: None\nSpecial Ability: None",AM.getAsset("./img/pot.png"), 1015, 190, 70,70,1,1, "wall", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     //slow tower
     var sixthTower = new storeTower(game, "Iced Boba", 200, 1000/1000, 250, "Ices enemies \nShooting Speed: Slow \nRange: Medium \nSpecial Ability: Ice makes \nenemies move slowly",AM.getAsset("./img/towerB.png"), 1085, 190, 70,70,2,1, "blue", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0);
     //stun tower

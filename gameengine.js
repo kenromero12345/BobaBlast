@@ -479,71 +479,85 @@ function offset(el) {
     return { top: rect.top + scrollTop, left: rect.left + scrollLeft}
 }
 
-function getTowersDepth(x, y) {
-    var queue = [];
+// function getTowersDepth(game, x, y) {
+//     var queue = [];
 
-	for(var i = 0; i < GAMEBOARD.length; i++) {
-	  	for(var j = 0; j < GAMEBOARD[i].length; j++) {
-            GAMEBOARD[i][j].distToXY = -1;
-            GAMEBOARD[i][j].dir = -1;
-	  	}
-	}
+// 	for(var i = 0; i < GAMEBOARD.length; i++) {
+// 	  	for(var j = 0; j < GAMEBOARD[i].length; j++) {
+//             GAMEBOARD[i][j].distToXY = -1;
+//             GAMEBOARD[i][j].dir = -1;
+// 	  	}
+// 	}
 
-    var xy = getXY(x, y);
-    GAMEBOARD[xy.x][xy.y].distToXY = 0;
+//     var xy = getXY(x, y);
+//     GAMEBOARD[xy.x][xy.y].distToXY = 0;
 
-    queue.push(xy);
+//     queue.push(xy);
 
-    while (queue.length !== 0) {
-        for (let i = 0; i < queue.length; i++) {
-            var node = queue.shift();
-            // if (node.x == 2 && node.y > 0) {
-            //     console.log("problem")
-            // }
+//     while (queue.length !== 0) {
+//         for (let i = 0; i < queue.length; i++) {
+//             var node = queue.shift();
+//             // if (node.x == 2 && node.y > 0) {
+//             //     console.log("problem")
+//             // }
 
-            if (node.x + 1 < GAMEBOARD.length && node.x + 1 >= 0 
-                && GAMEBOARD[node.x + 1][node.y].distToXY < 0) {
-                var newNode = Object.assign({}, node);
-                newNode.x++;
-                queue.push(newNode);
-				GAMEBOARD[node.x + 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+//             if (node.x + 1 < GAMEBOARD.length && node.x + 1 >= 0 
+//                 && GAMEBOARD[node.x + 1][node.y].distToXY < 0) {
+//                 var newNode = Object.assign({}, node);
+//                 newNode.x++;
+//                 queue.push(newNode);
+// 				GAMEBOARD[node.x + 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
 	
-            }
-            if (node.y + 1 < GAMEBOARD[0].length && node.y + 1 >= 0  
-                && GAMEBOARD[node.x][node.y + 1].distToXY < 0) {
-                var newNode = Object.assign({}, node);
-                newNode.y++;
-                queue.push(newNode);
-				GAMEBOARD[node.x][node.y + 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+//             }
+//             if (node.y + 1 < GAMEBOARD[0].length && node.y + 1 >= 0  
+//                 && GAMEBOARD[node.x][node.y + 1].distToXY < 0) {
+//                 var newNode = Object.assign({}, node);
+//                 newNode.y++;
+//                 queue.push(newNode);
+// 				GAMEBOARD[node.x][node.y + 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
 
-            }
-            if (node.x - 1 < GAMEBOARD.length && node.x - 1 >= 0  
-                && GAMEBOARD[node.x - 1][node.y].distToXY < 0) {
-                var newNode = Object.assign({}, node);
-                newNode.x--;
-                queue.push(newNode);
-				GAMEBOARD[node.x - 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+//             }
+//             if (node.x - 1 < GAMEBOARD.length && node.x - 1 >= 0  
+//                 && GAMEBOARD[node.x - 1][node.y].distToXY < 0) {
+//                 var newNode = Object.assign({}, node);
+//                 newNode.x--;
+//                 queue.push(newNode);
+// 				GAMEBOARD[node.x - 1][node.y].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
 
-            }
-            if (node.y - 1 < GAMEBOARD[0].length && node.y - 1 >= 0 
-                && GAMEBOARD[node.x][node.y - 1].distToXY < 0) {
-                var newNode = Object.assign({}, node);
-                newNode.y--;
-                queue.push(newNode);
-				GAMEBOARD[node.x][node.y - 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
+//             }
+//             if (node.y - 1 < GAMEBOARD[0].length && node.y - 1 >= 0 
+//                 && GAMEBOARD[node.x][node.y - 1].distToXY < 0) {
+//                 var newNode = Object.assign({}, node);
+//                 newNode.y--;
+//                 queue.push(newNode);
+// 				GAMEBOARD[node.x][node.y - 1].distToXY = GAMEBOARD[node.x][node.y].distToXY + 1;
 
-            }
-        }
-    }
+//             }
+//         }
+//     }
 
-    var xys = [];
-    for(var i = 0; i < GAMEBOARD.length; i++) {
-        for(var j = 0; j < GAMEBOARD[i].length; j++) {
-            if (GAMEBOARD[i][j].occupied) {
-                xys.push({x:i, y:j, depth: GAMEBOARD[x][y].distToXY});
-            }
-        }
-    }
+//     var xys = [];
+//     // for(var i = 0; i < GAMEBOARD.length; i++) {
+//     //     for(var j = 0; j < GAMEBOARD[i].length; j++) {
+//     //         for (var i = 0; i < this.game.activeTowers.length; i++) {
+//     //             // console.log(this.game.activeTowers[i].towerType.towerType);
+//     //             if (game.activeTowers[i].name == "wall") {
+//     //                 if (game.activeTowers) {
+//     //                     xys.push({x:this.game, this.game.activeTowers[i].gridX
+//     //                         , y:this.game.activeTowers[i].gridY, depth: GAMEBOARD[x][y].distToXY});
+//     //                 }
+//     //             }
+//     //         }
+//     //     }
+//     // }
 
-    return xys;
-};
+//     for (var i = 0; i < game.activeTowers.length; i++) {
+//         if (game.activeTowers[i].name != "wall") {
+//             xys.push({x:game.activeTowers[i].gridX
+//                 , y:game.activeTowers[i].gridY
+//                 , depth: GAMEBOARD[game.activeTowers[i].gridX][game.activeTowers[i].gridY].distToXY});
+//         }
+//     }
+
+//     return xys;
+// };
