@@ -296,7 +296,7 @@ function generateStoreTowers(game) {
     //explosive tower
     var thirdTower = new storeTower(game, "Red Bean Boba", 800, 2000/1000, 250,"Burns enemies \nShooting Speed: Very Slow \nRange: Medium \nSpecial Ability: Burn makes \nenemies run faster and \ndoes damage over time \nShoots an explosion that hits \nmultiple enemies",AM.getAsset("./img/towerR.png"), 1085, 120, 70,70,2,0, "red", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0);
     //super tower
-    var fourthTower = new storeTower(game, "Golden Boba", 2500, 50/1000, 500, "Super boba tower \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies. Boba ricochets off \nenemies and pierces through enemies.",AM.getAsset("./img/towerY.png"), 945, 190, 70,70,0,1, "gold", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 3, 0, 0, 1, 0, 1);
+    var fourthTower = new storeTower(game, "Golden Boba", 2500, 50/1000, 500, "Super boba tower \nShooting Speed: Very Fast \nRange: Large\nSpecial Ability: Boba homes in \non enemies. Boba ricochets off \nenemies and pierces through enemies.",AM.getAsset("./img/towerY.png"), 945, 190, 70,70,0,1, "gold", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 3, 0, 0, 1, 1, 1);
     //wall
     var fifthTower = new storeTower(game, "Pot of Boba", 20, 0, 0, "A wall that stops the \nenemies from progressing\nShooting Speed: None \nRange: None\nSpecial Ability: None",AM.getAsset("./img/pot.png"), 1015, 190, 70,70,1,1, "none", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
     //slow tower
