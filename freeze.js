@@ -5,8 +5,8 @@ function Freeze(game, x, y, lvl) {
     this.ctx = game.ctx;
     // this.isFroze = true;
     this.speed = 100;
-    this.x = x;
-    this.y = y;
+    this.x = x - 10;
+    this.y = y - 25;
     this.width = this.animation.frameWidth * this.animation.scale;
     this.height = this.animation.frameHeight * this.animation.scale;
     this.boxes = false;
