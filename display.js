@@ -557,6 +557,7 @@ display.prototype.draw = function () {
                     return;
                 }
                 selectedUpgradableTower.bobaDamage +=2;
+                selectedUpgradableTower.photonDamage += .001;
                 selectedUpgradableTower.damageLevel ++;
                 currentMoney -= selectedUpgradableTower.damageUpgradeCost;
                 selectedUpgradableTower.damageUpgradeCost += (30 * selectedUpgradableTower.damageLevel);
