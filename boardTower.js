@@ -9,6 +9,7 @@ function boardTower(game, gridX, gridY, type) {
     }
     this.statusEffectEnabled = false;
     this.name = type.towerType;
+    this.depthLevel = type.initDepthUpgrade;
     this.rangeLevel = type.initRangeUpgrade;
     this.damageLevel = type.initDamageUpgrade;
     this.speedLevel = type.initSpeedUpgrade;
