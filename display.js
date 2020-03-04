@@ -586,12 +586,21 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 105 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 105 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.poisonLevel < selectedUpgradableTower.towerType.maxPoisonUpgrade) {
-                if (currentMoney - selectedUpgradableTower.poisonUpgradeCost < 0) {
-                    return;
+                if(!selectedUpgradableTower.statusEffectEnabled && selectedUpgradableTower.statusEffect === "none") {
+                    selectedUpgradableTower.statusEffect = "poison";
+                    selectedUpgradableTower.statusEffectEnabled = true;
+                    selectedUpgradableTower.towerType.maxParalyzeLevel = selectedUpgradableTower.paralyzeLevel;
+                    selectedUpgradableTower.towerType.maxExplosiveLevel = selectedUpgradableTower.explosiveLevel;
+                    selectedUpgradableTower.towerType.maxFreezeLevel = selectedUpgradableTower.freezeLevel;
                 }
-                selectedUpgradableTower.poisonLevel ++;
-                currentMoney -= selectedUpgradableTower.poisonUpgradeCost;
-                selectedUpgradableTower.poisonUpgradeCost += (20 * selectedUpgradableTower.poisonLevel);
+                if (selectedUpgradableTower.statusEffect === "poison") {
+                    if (currentMoney - selectedUpgradableTower.poisonUpgradeCost < 0) {
+                        return;
+                    }
+                    selectedUpgradableTower.poisonLevel ++;
+                    currentMoney -= selectedUpgradableTower.poisonUpgradeCost;
+                    selectedUpgradableTower.poisonUpgradeCost += (20 * selectedUpgradableTower.poisonLevel);
+                }
             }
             if(selectedUpgradableTower.poisonLevel === selectedUpgradableTower.towerType.maxPoisonUpgrade) {
                 selectedUpgradableTower.poisonUpgradeCost = "Max";
@@ -631,12 +640,21 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 155 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 155 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.freezeLevel < selectedUpgradableTower.towerType.maxFreezeUpgrade) {
-                if (currentMoney - selectedUpgradableTower.freezeUpgradeCost < 0) {
-                    return;
+                if(!selectedUpgradableTower.statusEffectEnabled && selectedUpgradableTower.statusEffect === "none") {
+                    selectedUpgradableTower.statusEffect = "freeze";
+                    selectedUpgradableTower.statusEffectEnabled = true;
+                    selectedUpgradableTower.towerType.maxParalyzeLevel = selectedUpgradableTower.paralyzeLevel;
+                    selectedUpgradableTower.towerType.maxExplosiveLevel = selectedUpgradableTower.explosiveLevel;
+                    selectedUpgradableTower.towerType.maxPoisonLevel = selectedUpgradableTower.poisonLevel;
                 }
-                selectedUpgradableTower.freezeLevel ++;
-                currentMoney -= selectedUpgradableTower.freezeUpgradeCost;
-                selectedUpgradableTower.freezeUpgradeCost += (20 * selectedUpgradableTower.freezeLevel);
+                if (selectedUpgradableTower.statusEffect === "freeze") {
+                    if (currentMoney - selectedUpgradableTower.freezeUpgradeCost < 0) {
+                        return;
+                    }
+                    selectedUpgradableTower.freezeLevel ++;
+                    currentMoney -= selectedUpgradableTower.freezeUpgradeCost;
+                    selectedUpgradableTower.freezeUpgradeCost += (20 * selectedUpgradableTower.freezeLevel);
+                }
             }
             if(selectedUpgradableTower.freezeLevel === selectedUpgradableTower.towerType.maxFreezeUpgrade) {
                 selectedUpgradableTower.freezeUpgradeCost = "Max";
@@ -662,12 +680,21 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258 
             && mouse.y < this.descriptionBoxStartY + 55 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 55 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.paralyzeLevel < selectedUpgradableTower.towerType.maxParalyzeUpgrade) {
-                if (currentMoney - selectedUpgradableTower.paralyzeUpgradeCost < 0) {
-                    return;
+                if(!selectedUpgradableTower.statusEffectEnabled && selectedUpgradableTower.statusEffect === "none") {
+                    selectedUpgradableTower.statusEffect = "paralyze";
+                    selectedUpgradableTower.statusEffectEnabled = true;
+                    selectedUpgradableTower.towerType.maxPoisonLevel = selectedUpgradableTower.poisonLevel;
+                    selectedUpgradableTower.towerType.maxExplosiveLevel = selectedUpgradableTower.explosiveLevel;
+                    selectedUpgradableTower.towerType.maxFreezeLevel = selectedUpgradableTower.freezeLevel;
+                } 
+                if (selectedUpgradableTower.statusEffect === "paralyze") {
+                    if (currentMoney - selectedUpgradableTower.paralyzeUpgradeCost < 0) {
+                        return;
+                    }
+                    selectedUpgradableTower.paralyzeLevel ++;
+                    currentMoney -= selectedUpgradableTower.paralyzeUpgradeCost;
+                    selectedUpgradableTower.paralyzeUpgradeCost += (20 * selectedUpgradableTower.paralyzeLevel);
                 }
-                selectedUpgradableTower.paralyzeLevel ++;
-                currentMoney -= selectedUpgradableTower.paralyzeUpgradeCost;
-                selectedUpgradableTower.paralyzeUpgradeCost += (20 * selectedUpgradableTower.paralyzeLevel);
             }
             if(selectedUpgradableTower.paralyzeLevel === selectedUpgradableTower.towerType.maxParalyzeUpgrade) {
                 selectedUpgradableTower.paralyzeUpgradeCost = "Max";
@@ -677,12 +704,21 @@ display.prototype.draw = function () {
         if(mouse.x < this.descriptionBoxStartX + 258 + 38 && mouse.x >= this.descriptionBoxStartX + 258 
             && mouse.y < this.descriptionBoxStartY + 80 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 80 + 2) {
             if (upgradeMode && !purchaseMode && selectedUpgradableTower.explosiveLevel < selectedUpgradableTower.towerType.maxExplosiveUpgrade) {
-                if (currentMoney - selectedUpgradableTower.explosiveUpgradeCost < 0) {
-                    return;
+                if(!selectedUpgradableTower.statusEffectEnabled && selectedUpgradableTower.statusEffect === "none") {
+                    selectedUpgradableTower.statusEffect = "burn";
+                    selectedUpgradableTower.statusEffectEnabled = true;
+                    selectedUpgradableTower.towerType.maxPoisonLevel = selectedUpgradableTower.poisonLevel;
+                    selectedUpgradableTower.towerType.maxParalyzeLevel = selectedUpgradableTower.maxParalyzeLevel;
+                    selectedUpgradableTower.towerType.maxFreezeLevel = selectedUpgradableTower.freezeLevel;
+                } 
+                if (selectedUpgradableTower.statusEffect === "burn") {
+                    if (currentMoney - selectedUpgradableTower.explosiveUpgradeCost < 0) {
+                        return;
+                    }
+                    selectedUpgradableTower.explosiveLevel ++;
+                    currentMoney -= selectedUpgradableTower.explosiveUpgradeCost;
+                    selectedUpgradableTower.explosiveUpgradeCost += (20 * selectedUpgradableTower.explosiveLevel);
                 }
-                selectedUpgradableTower.explosiveLevel ++;
-                currentMoney -= selectedUpgradableTower.explosiveUpgradeCost;
-                selectedUpgradableTower.explosiveUpgradeCost += (20 * selectedUpgradableTower.explosiveLevel);
             }
             if(selectedUpgradableTower.explosiveLevel === selectedUpgradableTower.towerType.maxExplosiveUpgrade) {
                 selectedUpgradableTower.explosiveUpgradeCost = "Max";
