@@ -11,6 +11,14 @@
             -webkit-transform: translateX(-50%) translateY(-50%);
             transform: translateX(-50%) translateY(-50%);
         }
+        body{ background:#666; }
+        button{ border:none; cursor:pointer; outline:none; }
+        button#mutebtn{
+            background:url(img/unmute.png) no-repeat;
+            
+            width:64px;
+            height:64px;
+        }
         /* #transformed {
             width: 100px;
             height: 100px;
@@ -51,8 +59,31 @@
     <script type="text/javascript" src="./display.js"></script>
     <script type="text/javascript" src="./roundPlan.js"></script>
     <script type="text/javascript" src="./main.js"></script>
+    <script>
+        var audio, playbtn, mutebtn;
+        function initAudioPlayer(){
+            audio = new Audio("./mp3/KSquare.mp3");
+            audio.loop = true;
+            audio.volume = .5;
+            mutebtn = document.getElementById("mutebtn");
+            mutebtn.addEventListener("click", mute);
+
+            function mute(){
+                if(audio.muted){
+                    audio.muted = false;
+                    mutebtn.style.background = "url(img/unmute.png) no-repeat";
+                } else {
+                    audio.muted = true;
+                    audio.play();
+                    mutebtn.style.background = "url(img/mute.png) no-repeat";
+                }
+            }
+        }
+        window.addEventListener("load", initAudioPlayer);
+        </script>
+
 </head>
-<body style="background-color:#ff4747;">
+<body style="background-color:#71bcd3;">
     <div class = "container">
         <canvas id="gameWorld" tabindex="1" width="1200" height="600" 
         style="border: 1px solid brown; background: lightskyblue"></canvas>
@@ -78,5 +109,8 @@
         // });
 
       </script> -->
+      
+    <button id="playpausebtn"></button>
+    <button id="mutebtn"></button>
 </body>
 </html>

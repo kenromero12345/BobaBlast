@@ -170,14 +170,14 @@ Background.prototype.draw = function() {
     this.ctx.drawImage(this.spritesheet, this.x, this.y);
 }
 
-//Music
-var audio = new Audio('./mp3/KSquare.mp3');
-audio.volume = 0.5;
+// //Music
+// var audio = new Audio('./mp3/KSquare.mp3');
+// audio.volume = 0.5;
 
-var audio2 = new Audio('./mp3/Your Sunset.mp3');
-// var audio2 = new Audio('./mp3/failed.mp3');
-audio2.loop = false;
-audio2.volume = 0.5;
+// var audio2 = new Audio('./mp3/Your Sunset.mp3');
+// // var audio2 = new Audio('./mp3/failed.mp3');
+// audio2.loop = false;
+// audio2.volume = 0.5;
 
 Background.prototype.update = function() {
     // var playPromise = audio.play();
