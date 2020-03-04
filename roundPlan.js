@@ -480,7 +480,42 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new slime(this.game, -50, 350, .75, 10), true);
         } else if (round == 6) {
-            //end
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        } else if (round == 7) {
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        } else if (round == 8) {
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        }else if (round == 9) {
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        }
+        else if (round == 10) {
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        }
+        else if (round == 11) {
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        }else if (round == 12) {
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        }else if (round == 13) {
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        }else if (round == 14) {
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        }else if (round == 15) {
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        }else if (round == 16) {
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new greenTea(this.game, -50, 350, false, .75));
+        } else if (round == 17) {
+                        //end
             //show gameover you win
             this.gameOverWin = true;
         }
