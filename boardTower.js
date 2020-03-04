@@ -269,13 +269,6 @@ boardTower.prototype.update = function () {
         this.tempDamageLevel = this.damageLevel + bestDamageUpgrade;
         this.tempSpeedLevel = this.speedLevel + bestSpeedUpgrade;
         this.tempLaserLevel = this.laserLevel + bestLaserUpgrade;
-<<<<<<< HEAD
-=======
-        this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
-        this.tempFreezeLevel = this.tempFreezeLevel + bestFreezeUpgrade;
-        this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
-        this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
->>>>>>> parent of 4403e12... Update boardTower.js
         this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
         this.tempRicochetLevel = this.ricochetLevel + bestRicochetUpgrade;
         this.tempPierceLevel = this.pierceLevel + bestPierceUpgrade;
