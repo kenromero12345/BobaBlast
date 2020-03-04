@@ -225,7 +225,6 @@ AM.downloadAll(function () {
 
     //TEST here: comment ount some update of the enemy to be tested
     // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
-<<<<<<< HEAD
     // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
@@ -260,8 +259,6 @@ AM.downloadAll(function () {
     // monsters.push();
     
         // gameEngine.addEntity(new bigCake(gameEngine, 450, 250, .25));
-=======
->>>>>>> gordon
     // gameEngine.addEntity(new biscuit(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cake(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new cakeChoco(gameEngine, 450, 250, .75));
@@ -293,7 +290,6 @@ var monsters = [];
 var divOffset;
 
 function generateStoreTowers(game) {
-<<<<<<< HEAD
     //basic tower
     var firstTower = new storeTower(game, "Boba Shooter", 100, 1000/1000, 150, "Basic boba shooter\nShooting Speed: Slow \nRange: Short\nSpecial Ability: None",AM.getAsset("./img/tower.png"), 945, 120, 70,70,0,0, "none", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0);
     //poison tower
@@ -313,24 +309,6 @@ function generateStoreTowers(game) {
      // mix tower
      var ninthTower = new storeTower(game, "Multi-Directional Boba", 300, 1000/1000, 250,"Fires boba in all directions \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Boba is fired \nin all directions ",AM.getAsset("./img/mixtower.png"), 1085, 260,70,70,2,2, "all", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0);
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower, eighthTower, ninthTower]];//eightTower,ninthTower
-=======
-    var firstTower = new storeTower(game, "Seattle", 100, 1000, 150, "Seattle Tower\nShoots slowly \nShort range",AM.getAsset("./img/tower.png"), 945, 200, 70,70,0,0);
-    var secondTower = new storeTower(game, "Portland", 300, 300, 275, "Portland Tower \nShoots moderately \nModerate range",AM.getAsset("./img/towerG.png"), 1015, 200, 70, 70,1,0);
-    var thirdTower = new storeTower(game, "Los Angeles", 500, 300, 300,"Los Angeles Tower \nShoots fast \nModerate range",AM.getAsset("./img/towerR.png"), 1085, 200, 70,70,2,0);
-    var fourthTower = new storeTower(game, "San Diego", 2000, 50, 500, "San Diego Tower \nShoots very fast \nLarge range",AM.getAsset("./img/towerY.png"), 945, 270, 70,70,0,1);
-    var fifthTower = new storeTower(game, "Wall", 20, 1, 1, "A pot of boba \nStops the enemies \nfrom progressing",AM.getAsset("./img/pot.png"), 1015, 270, 70,70,1,1);
-    var sixthTower = new storeTower(game, "Huston", 200, 900, 300, "Huston Tower \nShoots slowly \nModerate range",AM.getAsset("./img/towerB.png"), 1085, 270, 70,70,2,1);
-    var seventhTower = new storeTower(game, "Chicago", 250, 300, 150,"Chicago Tower \nShoots moderately \nShort range",AM.getAsset("./img/towerP.png"), 945, 340,70,70,0,2);
-    var eightTower = new storeTower(game, "Tower 8", 2000, 1000, 150, "Tower 8 \nWIP!! DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1015, 340,70,70,1,2);
-    var ninthTower = new storeTower(game, "Tower 9", 2200, 1000, 150,"Tower 9 \nWIP!! DO NOT CLICK \nWILL CREATE INVISIBLE TOWER",AM.getAsset("./img/holder.png"), 1085, 340,70,70,2,2);
-
-    var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower,eightTower,ninthTower]];
-    for(var i = 0; i < 3; i++) {
-        for(var j = 0; j < 3; j++) {
-            // game.addEntity(temp[i][j]);
-        }
-    }
->>>>>>> gordon
     game.towers = temp;
     return temp;
 }
