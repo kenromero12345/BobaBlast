@@ -10,22 +10,6 @@ function boardTower(game, gridX, gridY, type) {
     this.statusEffectEnabled = false;
     this.statusEffect = "none";
     this.name = type.towerType;
-    if(this.name === "green") {
-        this.statusEffectEnabled = true;
-        this.statusEffect = "poison";
-    }
-    if(this.name === "red") {
-        this.statusEffectEnabled = true;
-        this.statusEffect = "burn";
-    }
-    if(this.name === "blue") {
-        this.statusEffectEnabled = true;
-        this.statusEffect = "freeze";
-    }
-    if(this.name === "purple") {
-        this.statusEffectEnabled = true;
-        this.statusEffect = "paralyze";
-    }
     this.depthLevel = type.initDepthUpgrade;
     this.rangeLevel = type.initRangeUpgrade;
     this.damageLevel = type.initDamageUpgrade;
@@ -155,6 +139,34 @@ function boardTower(game, gridX, gridY, type) {
     this.shootOutYOffsetDir = [50, 50, 0, -50, -50, -50, 0, 50];
     this.time = this.game.timer.time - 1;
     this.timeToMove = this.game.timer.time;
+    if(this.name === "green") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "poison";
+        this.explosiveUpgradeCost = "Max";
+        this.paralyzeUpgradeCost = "Max";
+        this.freezeUpgradeCost = "Max";
+    }
+    if(this.name === "red") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "burn";
+        this.poisonUpgradeCost = "Max";
+        this.paralyzeUpgradeCost = "Max";
+        this.freezeUpgradeCost = "Max";
+    }
+    if(this.name === "blue") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "freeze";
+        this.poisonUpgradeCost = "Max";
+        this.paralyzeUpgradeCost = "Max";
+        this.explosiveUpgradeCost = "Max";
+    }
+    if(this.name === "purple") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "paralyze";
+        this.poisonUpgradeCost = "Max";
+        this.explosiveUpgradeCost = "Max";
+        this.freezeUpgradeCost = "Max";
+    }
 }
 
 boardTower.prototype.draw = function () {
