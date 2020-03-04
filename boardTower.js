@@ -73,7 +73,7 @@ function boardTower(game, gridX, gridY, type) {
         this.homingUpgradeCost = 250;
     }
     this.bobaDamage = 1;
-    this.photonDamage = .001;
+    this.photonDamage = .002;
     this.bobaSpeed = 500;
     this.sellingCost = type.cost / 4;
     this.isTower = true;
@@ -213,18 +213,18 @@ boardTower.prototype.update = function () {
     var bestHomingUpgrade = 0;
 
     for (var i = 0; i < this.game.activeTowers.length; i++) {
-        // console.log(this.game.activeTowers[i].towerType.towerType);
-        if (this.game.activeTowers[i].name == "wall") {
+        // console.log(this.game.activeTowers[i].name);
+        if (this.game.activeTowers[i].name == "pot" && this != this.game.activeTowers[i]) {
             // console.log(getTowersDepth(this.game, this.game.activeTowers[i].gridX
             //     , this.game.activeTowers[i].gridY));
             var depth = Math.abs(this.gridY - this.game.activeTowers[i].gridY)
-                + Math.abs(this.gridX - this.game.activeTowers[i].gridX)
-
+                + Math.abs(this.gridX - this.game.activeTowers[i].gridX);
+            // console.log("a");
             if (depth <= this.game.activeTowers[i].depthLevel) {
+                // console.log("a");
                 if (bestRangeUpgrade < this.game.activeTowers[i].rangeLevel) {
                     bestRangeUpgrade = this.game.activeTowers[i].rangeLevel;
                 }
-                
                 if (bestDamageUpgrade < this.game.activeTowers[i].damageLevel) {
                     bestDamageUpgrade = this.game.activeTowers[i].damageLevel;
                 }
@@ -261,20 +261,41 @@ boardTower.prototype.update = function () {
             }
         }
     }
-/*
-    this.rangeLevel = this.towerType.initRangeUpgrade + bestRangeUpgrade;
-    this.damageLevel = this.towerType.initDamageUpgrade + bestDamageUpgrade;
-    this.speedLevel = this.towerType.initSpeedUpgrade + bestSpeedUpgrade;
-    this.poisonLevel = this.towerType.initPoisonUpgrade + bestPoisonUpgrade;
-    this.laserLevel = this.towerType.initLaserUpgrade + bestLaserUpgrade;
-    this.freezeLevel = this.towerType.initFreezeUpgrade + bestFreezeUpgrade;
-    this.frequencyLevel = this.towerType.initFrequencyUpgrade + bestFrequencyUpgrade;
-    this.paralyzeLevel = this.towerType.initParalyzeUpgrade + bestParalyzeUpgrade;
-    this.explosiveLevel = this.towerType.initExplosiveUpgrade + bestExplosiveUpgrade;
-    this.ricochetLevel = this.towerType.initRicochetUpgrade + bestRicochetUpgrade;
-    this.pierceLevel = this.towerType.initPierceUpgrade + bestPierceUpgrade;
-    this.homingLevel = this.towerType.initHomingUpgrade + bestHomingUpgrade;
-*/
+
+    this.tempRangeLevel = this.rangeLevel + bestRangeUpgrade;
+    this.tempDamageLevel = this.damageLevel + bestDamageUpgrade;
+    this.tempSpeedLevel = this.speedLevel + bestSpeedUpgrade;
+    this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
+    this.tempLaserLevel = this.laserLevel + bestLaserUpgrade;
+    this.tempFreezeLevel = this.tempFreezeLevel + bestFreezeUpgrade;
+    this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
+    this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
+    this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
+    this.tempRicochetLevel = this.ricochetLevel + bestRicochetUpgrade;
+    this.tempPierceLevel = this.pierceLevel + bestPierceUpgrade;
+    this.tempHomingLevel = this.homingLevel + bestHomingUpgrade;
+
+    this.tempBobaSpeed = this.bobaSpeed;
+    this.tempBobaDamage = this.bobaDamage;
+    this.tempPhotonDamage = this.photonDamage;
+    this.tempShootBobaEveryMS = this.shootBobaEveryMS;
+    this.tempRadius = this.radius;
+
+    if (this.tempRangeLevel != this.rangeLevel) {
+        this.tempRadius = this.radius +  100 * (this.tempDamageLevel - this.damageLevel);
+    }
+    if (this.tempDamageLevel != this.damageLevel) {
+        this.tempBobaDamage = this.bobaDamage +  2 * (this.tempDamageLevel - this.damageLevel);
+        this.tempPhotonDamage = this.photonDamage +  .001 * (this.tempDamageLevel - this.damageLevel);
+    }
+    if (this.tempSpeedLevel != this.speedLevel) {
+        this.tempBobaSpeed = this.bobaSpeed * Math.pow(2, (this.tempDamageLevel - this.damageLevel));
+    }
+    if (this.tempFrequencyLevel != this.frequencyLevel) {
+        this.tempShootBobaEveryMS = this.shootBobaEveryMS * Math.pow(0.75, (this.tempDamageLevel - this.damageLevel));
+    }
+    // console.log(this.tempShootBobaEveryMS);
+
     var isThereEnemyInRange = this.isThereEnemyInRange();
     if (this.game.running && isThereEnemyInRange) {
         this.time += this.game.clockTick;
@@ -545,37 +566,46 @@ boardTower.prototype.update = function () {
         }
         this.calculateDirection(selectedEnemy.enemy);
         this.shootBoba = true;
-
     }
 
     }
 
-    if(this.shootBoba && this.game.running) {
+    if (this.shootBoba && this.game.running) {
         if(this.shootTimer < this.game.timer.time) {
             if (this.name == "laser") {
                 // console.log("a")
                 this.game.addEntity(new photon(this.game,this.shootOutX + 15, this.shootOutY + 20, this.name, this.target
-                    , this.photonDamage, this.bobaSpeed, this.ricochetLevel, -1, this.homingLevel
-                    , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel, 50));
+                    , this.tempPhotonDamage, this.tempBobaSpeed, this.tempRicochetLevel, -1
+                    , this.tempHomingLevel
+                    , this.tempPoisonLevel, this.tempLaserLevel, this.tempFreezeLevel
+                    , this.tempParalyzeLevel, this.tempExplosiveLevel, 50));
                     if (this.game.speed == 2) {
-                        this.game.addEntity(new photon(this.game,this.shootOutX + 15, this.shootOutY + 20, this.name, this.target
-                            , this.photonDamage, this.bobaSpeed, this.ricochetLevel, -1, this.homingLevel
-                            , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel, 50));
+                        this.game.addEntity(new photon(this.game,this.shootOutX + 15
+                            , this.shootOutY + 20, this.name, this.target
+                            , this.tempPhotonDamage, this.tempBobaSpeed, this.tempRicochetLevel, -1
+                            , this.tempHomingLevel
+                            , this.tempPoisonLevel, this.tempLaserLevel, this.tempFreezeLevel
+                            , this.tempParalyzeLevel, this.tempExplosiveLevel, 50));
                     }
             } else if (this.name == "all") {
                 for (var i = 0; i < this.shootOutXOffset.length; i++) {
-                    this.game.addEntity(new boba(this.game,this.x + this.shootOutXOffset[i], this.y + this.shootOutYOffset[i], this.name, {centerX: this.x + this.shootOutXOffsetDir[i] * 100, centerY: this.y + this.shootOutYOffsetDir[i] * 100}
-                        , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
-                        , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+                    this.game.addEntity(new boba(this.game,this.x + this.shootOutXOffset[i]
+                        , this.y + this.shootOutYOffset[i], this.name, {centerX: this.x + this.shootOutXOffsetDir[i] * 100, centerY: this.y + this.shootOutYOffsetDir[i] * 100}
+                        , this.tempBobaDamage, this.tempBobaSpeed, this.tempRicochetLevel, this.tempPierceLevel
+                        , this.tempHomingLevel
+                        , this.tempPoisonLevel, this.tempLaserLevel, this.tempFreezeLevel, this.tempParalyzeLevel
+                        , this.tempExplosiveLevel));
                 }  
                 this.shootBoba = false;
-                this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;       
+                this.shootTimer = this.game.timer.time + this.tempShootBobaEveryMS;       
             } else {
                 this.game.addEntity(new boba(this.game,this.shootOutX, this.shootOutY, this.name, this.target
-                    , this.bobaDamage, this.bobaSpeed, this.ricochetLevel, this.pierceLevel, this.homingLevel
-                    , this.poisonLevel, this.laserLevel, this.freezeLevel, this.paralyzeLevel, this.explosiveLevel));
+                    , this.tempBobaDamage, this.tempBobaSpeed, this.tempRicochetLevel, this.tempPierceLevel
+                    , this.tempHomingLevel
+                    , this.tempPoisonLevel, this.tempLaserLevel, this.tempFreezeLevel, this.tempParalyzeLevel
+                    , this.tempExplosiveLevel));
                 this.shootBoba = false;
-                this.shootTimer = this.game.timer.time + this.shootBobaEveryMS;
+                this.shootTimer = this.game.timer.time + this.tempShootBobaEveryMS;
             }
         }
     }
