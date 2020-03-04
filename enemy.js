@@ -318,12 +318,12 @@ var enemyBurnUpdate = function(enemy) {
 
 var enemyParalyzeUpdate = function(enemy) {
     if (enemy.isParalyzed) {
-        enemy.hp -= 0.025 * enemy.game.speed;
-        if (enemy.paralysisLvl == 2) {
-            enemy.hp -= 0.005 * enemy.game.speed;
-        } else if (enemy.paralysisLvl == 3) {
-            enemy.hp -= 0.010 * enemy.game.speed;
-        }
+        // enemy.hp -= 0.025 * enemy.game.speed;
+        // if (enemy.paralysisLvl == 2) {
+        //     enemy.hp -= 0.005 * enemy.game.speed;
+        // } else if (enemy.paralysisLvl == 3) {
+        //     enemy.hp -= 0.010 * enemy.game.speed;
+        // }
         // console.log(enemy.game.timer.time + " " + enemy.paralyzeDate)
         if (enemy.game.timer.time >= enemy.paralyzeDate) {
             enemy.animationWalkLeft.stop = false;
