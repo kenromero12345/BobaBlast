@@ -147,7 +147,7 @@ boardTower.prototype.draw = function () {
         this.ctx.globalAlpha = 0.25;
         this.ctx.fillStyle = "white";
         this.ctx.beginPath();
-        this.ctx.arc(this.centerX, this.centerY, this.radius, 0, 2 * Math.PI);
+        this.ctx.arc(this.centerX, this.centerY, this.tempRadius, 0, 2 * Math.PI);
         this.ctx.fill();
         this.ctx.restore();
     }
@@ -243,7 +243,7 @@ boardTower.prototype.update = function () {
                 if (bestFreezeUpgrade < this.game.activeTowers[i].frequencyLevel) {
                     bestFreezeUpgrade = this.game.activeTowers[i].freezeLevel;
                 }
-                if (bestFreezeUpgrade < this.game.activeTowers[i].frequencyLevel) {
+                if (bestFrequencyUpgrade < this.game.activeTowers[i].frequencyLevel) {
                     bestFrequencyUpgrade = this.game.activeTowers[i].frequencyLevel;
                 }
                 if (bestParalyzeUpgrade < this.game.activeTowers[i].paralyzeLevel) {
@@ -268,12 +268,12 @@ boardTower.prototype.update = function () {
     this.tempRangeLevel = this.rangeLevel + bestRangeUpgrade;
     this.tempDamageLevel = this.damageLevel + bestDamageUpgrade;
     this.tempSpeedLevel = this.speedLevel + bestSpeedUpgrade;
-    this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
     this.tempLaserLevel = this.laserLevel + bestLaserUpgrade;
+    this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
     this.tempFreezeLevel = this.tempFreezeLevel + bestFreezeUpgrade;
-    this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
     this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
     this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
+    this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
     this.tempRicochetLevel = this.ricochetLevel + bestRicochetUpgrade;
     this.tempPierceLevel = this.pierceLevel + bestPierceUpgrade;
     this.tempHomingLevel = this.homingLevel + bestHomingUpgrade;
@@ -285,17 +285,20 @@ boardTower.prototype.update = function () {
     this.tempRadius = this.radius;
 
     if (this.tempRangeLevel != this.rangeLevel) {
-        this.tempRadius = this.radius +  100 * (this.tempDamageLevel - this.damageLevel);
+        this.tempRadius = this.radius +  100 * (this.tempRangeLevel - this.rangeLevel);
     }
     if (this.tempDamageLevel != this.damageLevel) {
         this.tempBobaDamage = this.bobaDamage +  2 * (this.tempDamageLevel - this.damageLevel);
         this.tempPhotonDamage = this.photonDamage +  .001 * (this.tempDamageLevel - this.damageLevel);
     }
     if (this.tempSpeedLevel != this.speedLevel) {
-        this.tempBobaSpeed = this.bobaSpeed * Math.pow(2, (this.tempDamageLevel - this.damageLevel));
+        this.tempBobaSpeed = this.bobaSpeed * Math.pow(2, (this.tempSpeedLevel - this.speedLevel ));
     }
     if (this.tempFrequencyLevel != this.frequencyLevel) {
-        this.tempShootBobaEveryMS = this.shootBobaEveryMS * Math.pow(0.75, (this.tempDamageLevel - this.damageLevel));
+        // console.log(this.tempShootBobaEveryMS + " " + this.shootBobaEveryMS);
+        this.tempShootBobaEveryMS = this.shootBobaEveryMS * Math.pow(0.75, (this.tempFrequencyLevel - this.frequencyLevel));
+        // console.log(this.tempShootBobaEveryMS + " " + this.shootBobaEveryMS);
+        // console.log(Math.pow(0.75, (this.tempDamageLevel - this.damageLevel)))
     }
     // console.log(this.tempShootBobaEveryMS);
 
@@ -620,8 +623,8 @@ boardTower.prototype.enemyInRange = function (rect) {
     var circleDistanceX = Math.abs(this.centerX - rect.centerX);
     var circleDistanceY = Math.abs(this.centerY - rect.centerY);
 
-    if(circleDistanceX > rect.boundingbox.width/2 + this.radius) return false;
-    if(circleDistanceY > rect.boundingbox.height/2 + this.radius) return false;
+    if(circleDistanceX > rect.boundingbox.width/2 + this.tempRangeLevel) return false;
+    if(circleDistanceY > rect.boundingbox.height/2 + this.tempRangeLevel) return false;
 
     if(circleDistanceX <= rect.boundingbox.width/2) {
          return true;
@@ -633,7 +636,7 @@ boardTower.prototype.enemyInRange = function (rect) {
     var cornerDistance_sq = Math.pow(circleDistanceX - rect.boundingbox.width / 2, 2) +
                             Math.pow(circleDistanceY - rect.boundingbox.height /2, 2);
 
-    if(cornerDistance_sq <= Math.pow(this.radius, 2)) {
+    if(cornerDistance_sq <= Math.pow(this.tempRangeLevel, 2)) {
         return true;
     } else {
         return false;
