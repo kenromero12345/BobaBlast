@@ -108,6 +108,8 @@ AM.queueDownload("./img/greenTeaFlip.png");
 AM.queueDownload("./img/yellowTea.png");
 AM.queueDownload("./img/yellowTeaFlip.png");
 AM.queueDownload("./img/background.png");
+AM.queueDownload("./img/background night.png");
+AM.queueDownload("./img/background morning.png");
 AM.queueDownload("./img/holder.png");
 AM.queueDownload("./img/tower.png");
 AM.queueDownload("./img/towerG.png");
