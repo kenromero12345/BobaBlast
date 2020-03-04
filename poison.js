@@ -5,8 +5,8 @@ function Poison(game, x, y, lvl) {
     this.ctx = game.ctx;
     // this.isPoison = true;
     this.speed = 100;
-    this.x = x - 20;
-    this.y = y - 40;
+    this.x = x - 10;
+    this.y = y - 20;
     this.width = this.animation.frameWidth * this.animation.scale;
     this.height = this.animation.frameHeight * this.animation.scale;
     this.boxes = false;

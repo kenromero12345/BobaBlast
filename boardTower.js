@@ -1,7 +1,13 @@
 function boardTower(game, gridX, gridY, type) {
     this.towerType = type;
+    for (var i = 0; i < game.activeTowers.length; i++) {
+        if (game.activeTowers[i].towerType.name == "powerUp") {
+            //it should have a depth
+            //check if this tower is part of that depth
+            //if true apply buffs on this tower
+        }
+    }
     this.name = type.towerType;
-    this.depthLevel = type.initDepthUpgrade;
     this.rangeLevel = type.initRangeUpgrade;
     this.damageLevel = type.initDamageUpgrade;
     this.speedLevel = type.initSpeedUpgrade;
