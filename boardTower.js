@@ -201,7 +201,6 @@ boardTower.prototype.isThereEnemyInRange = function() {
 
 boardTower.prototype.update = function () {
     // console.log(this.gridX + " " + this.gridY);
-
     var bestRangeUpgrade = 0;
     var bestDamageUpgrade = 0;
     var bestSpeedUpgrade = 0;
@@ -265,19 +264,20 @@ boardTower.prototype.update = function () {
         }
     }
 
-    this.tempRangeLevel = this.rangeLevel + bestRangeUpgrade;
-    this.tempDamageLevel = this.damageLevel + bestDamageUpgrade;
-    this.tempSpeedLevel = this.speedLevel + bestSpeedUpgrade;
-    this.tempLaserLevel = this.laserLevel + bestLaserUpgrade;
-    this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
-    this.tempFreezeLevel = this.tempFreezeLevel + bestFreezeUpgrade;
-    this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
-    this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
-    this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
-    this.tempRicochetLevel = this.ricochetLevel + bestRicochetUpgrade;
-    this.tempPierceLevel = this.pierceLevel + bestPierceUpgrade;
-    this.tempHomingLevel = this.homingLevel + bestHomingUpgrade;
-
+    if (this.name != "pot") {
+        this.tempRangeLevel = this.rangeLevel + bestRangeUpgrade;
+        this.tempDamageLevel = this.damageLevel + bestDamageUpgrade;
+        this.tempSpeedLevel = this.speedLevel + bestSpeedUpgrade;
+        this.tempLaserLevel = this.laserLevel + bestLaserUpgrade;
+        this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
+        this.tempFreezeLevel = this.tempFreezeLevel + bestFreezeUpgrade;
+        this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
+        this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
+        this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
+        this.tempRicochetLevel = this.ricochetLevel + bestRicochetUpgrade;
+        this.tempPierceLevel = this.pierceLevel + bestPierceUpgrade;
+        this.tempHomingLevel = this.homingLevel + bestHomingUpgrade;
+    }
     this.tempBobaSpeed = this.bobaSpeed;
     this.tempBobaDamage = this.bobaDamage;
     this.tempPhotonDamage = this.photonDamage;
@@ -623,8 +623,8 @@ boardTower.prototype.enemyInRange = function (rect) {
     var circleDistanceX = Math.abs(this.centerX - rect.centerX);
     var circleDistanceY = Math.abs(this.centerY - rect.centerY);
 
-    if(circleDistanceX > rect.boundingbox.width/2 + this.tempRangeLevel) return false;
-    if(circleDistanceY > rect.boundingbox.height/2 + this.tempRangeLevel) return false;
+    if(circleDistanceX > rect.boundingbox.width/2 + this.tempRadius) return false;
+    if(circleDistanceY > rect.boundingbox.height/2 + this.tempRadius) return false;
 
     if(circleDistanceX <= rect.boundingbox.width/2) {
          return true;
@@ -636,7 +636,7 @@ boardTower.prototype.enemyInRange = function (rect) {
     var cornerDistance_sq = Math.pow(circleDistanceX - rect.boundingbox.width / 2, 2) +
                             Math.pow(circleDistanceY - rect.boundingbox.height /2, 2);
 
-    if(cornerDistance_sq <= Math.pow(this.tempRangeLevel, 2)) {
+    if(cornerDistance_sq <= Math.pow(this.tempRadius, 2)) {
         return true;
     } else {
         return false;
