@@ -239,7 +239,7 @@ boardTower.prototype.update = function () {
                 if (bestLaserUpgrade < this.game.activeTowers[i].laserLevel) {
                     bestLaserUpgrade = this.game.activeTowers[i].laserLevel;
                 }
-                if (bestFreezeUpgrade < this.game.activeTowers[i].frequencyLevel) {
+                if (bestFreezeUpgrade < this.game.activeTowers[i].freezeLevel) {
                     bestFreezeUpgrade = this.game.activeTowers[i].freezeLevel;
                 }
                 if (bestFrequencyUpgrade < this.game.activeTowers[i].frequencyLevel) {
@@ -270,7 +270,7 @@ boardTower.prototype.update = function () {
         this.tempSpeedLevel = this.speedLevel + bestSpeedUpgrade;
         this.tempLaserLevel = this.laserLevel + bestLaserUpgrade;
         this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
-        this.tempFreezeLevel = this.tempFreezeLevel + bestFreezeUpgrade;
+        this.tempFreezeLevel = this.freezeLevel + bestFreezeUpgrade;
         this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
         this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
         this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
@@ -278,6 +278,7 @@ boardTower.prototype.update = function () {
         this.tempPierceLevel = this.pierceLevel + bestPierceUpgrade;
         this.tempHomingLevel = this.homingLevel + bestHomingUpgrade;
     }
+
     this.tempBobaSpeed = this.bobaSpeed;
     this.tempBobaDamage = this.bobaDamage;
     this.tempPhotonDamage = this.photonDamage;
