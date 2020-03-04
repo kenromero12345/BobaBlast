@@ -939,7 +939,7 @@ display.prototype.generateDescriptionBox = function() {
             ctx.fillText("Freeze Boba: Lvl " + selectedUpgradableTower.freezeLevel, this.descriptionBoxStartX + 3, this.descriptionBoxStartY + 170);
             ctx.fillText("Boba Frequency: Lvl " + selectedUpgradableTower.frequencyLevel, this.descriptionBoxStartX + 145, this.descriptionBoxStartY + 45);
             ctx.fillText("Paralyze Boba: Lvl " + selectedUpgradableTower.paralyzeLevel, this.descriptionBoxStartX + 145, this.descriptionBoxStartY + 70);
-            ctx.fillText("Explosive Boba: Lvl " + selectedUpgradableTower.explosiveLevel, this.descriptionBoxStartX + 145, this.descriptionBoxStartY + 95);
+            ctx.fillText("Burning Boba: Lvl " + selectedUpgradableTower.explosiveLevel, this.descriptionBoxStartX + 145, this.descriptionBoxStartY + 95);
             ctx.fillText("Boba Ricochet: Lvl " + selectedUpgradableTower.ricochetLevel, this.descriptionBoxStartX + 145, this.descriptionBoxStartY + 120);
             ctx.fillText("Piercing Boba: Lvl " + selectedUpgradableTower.pierceLevel, this.descriptionBoxStartX + 145, this.descriptionBoxStartY + 145);
             ctx.fillText("Homing Boba: Lvl " + selectedUpgradableTower.homingLevel, this.descriptionBoxStartX + 145, this.descriptionBoxStartY + 170);
