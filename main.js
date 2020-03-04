@@ -27,11 +27,11 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
-    // if(this.currentFrame() != 1){
+    if(this.currentFrame() != 0){
         if (!this.stop) { 
             this.elapsedTime += tick;
         }
-    // }
+    }
     if (!(this.isDone() && !this.loop)) {
     if (this.isDone()) {
         if (this.loop) this.elapsedTime = 0;
@@ -108,6 +108,19 @@ AM.queueDownload("./img/greenTeaFlip.png");
 AM.queueDownload("./img/yellowTea.png");
 AM.queueDownload("./img/yellowTeaFlip.png");
 AM.queueDownload("./img/background.png");
+AM.queueDownload("./img/background night.png");
+AM.queueDownload("./img/background morning.png");
+AM.queueDownload("./img/street.png");
+AM.queueDownload("./img/street night.png");
+AM.queueDownload("./img/street morning.png");
+AM.queueDownload("./img/bg1.png");
+AM.queueDownload("./img/bg2.png");
+AM.queueDownload("./img/bg3.png");
+AM.queueDownload("./img/bg4.png");
+AM.queueDownload("./img/bg5.png");
+AM.queueDownload("./img/bg6.png");
+AM.queueDownload("./img/bg7.png");
+AM.queueDownload("./img/bg8.png");
 AM.queueDownload("./img/holder.png");
 AM.queueDownload("./img/tower.png");
 AM.queueDownload("./img/towerG.png");
@@ -170,14 +183,14 @@ Background.prototype.draw = function() {
     this.ctx.drawImage(this.spritesheet, this.x, this.y);
 }
 
-//Music
-var audio = new Audio('./mp3/KSquare.mp3');
-audio.volume = 0.5;
+// //Music
+// var audio = new Audio('./mp3/KSquare.mp3');
+// audio.volume = 0.5;
 
-var audio2 = new Audio('./mp3/Your Sunset.mp3');
-// var audio2 = new Audio('./mp3/failed.mp3');
-audio2.loop = false;
-audio2.volume = 0.5;
+// var audio2 = new Audio('./mp3/Your Sunset.mp3');
+// // var audio2 = new Audio('./mp3/failed.mp3');
+// audio2.loop = false;
+// audio2.volume = 0.5;
 
 Background.prototype.update = function() {
     // var playPromise = audio.play();
@@ -212,7 +225,7 @@ AM.downloadAll(function () {
     gameEngine.start();
     
     // gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
-    gameEngine.background = new Background(gameEngine, AM.getAsset("./img/background.png"));
+    gameEngine.background = new Background(gameEngine, AM.getAsset("./img/bg4.png"));
 
     gameEngine.addEntity(new board(gameEngine));
 
@@ -233,7 +246,7 @@ AM.downloadAll(function () {
     // gameEngine.addEntity(new miniCake(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 250, .75));
-    // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 10));
+    gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 2));
     // gameEngine.addEntity(new watermelon(gameEngine, 450, 250, .75));
 
     // gameEngine.addEntity(new greenTea(gameEngine, 450, 250, false, .75));

@@ -28,8 +28,8 @@ function slime(game, spawnX, spawnY, scale, num) {
         this.slimeOffsetY = 3236;
     } 
     this.name = "slime";
-    this.speed = 100;
-    this.hp = 10;//
+    this.speed = 00;
+    this.hp = 0;//
     // this.animationWalkLeft = new Animation(AM.getAsset("./img/slime.png")
     // , 5, 70 + this.slimeOffsetY, 79, 80, 7, .135, 7, true, scale, false);
     // this.animationDisappearLeft = new Animation(AM.getAsset("./img/slime.png")
@@ -43,11 +43,11 @@ function slime(game, spawnX, spawnY, scale, num) {
     this.animationWalkLeft = new Animation(AM.getAsset("./img/slimeWalk.png")
     , 0, 72 + this.slimeOffsetY, 70, 86, 7, .135, 7, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/slimeDie.png")
-    , 7, 225 + this.slimeOffsetY, 69, 70, 5, .2, 5, false, scale, false);
+    , 0, 225 + this.slimeOffsetY, 69, 70, 5, .2, 5, false, scale, false);
     this.animationWalkRight = new Animation(AM.getAsset("./img/slimeWalkFlip.png")
-    , 774, 72 + this.slimeOffsetY + this.slimeDisappearOffsetY, -70, 86, 7, .135, 7, true, scale, false);
+    , 774, 72 + this.slimeOffsetY + this.slimeDisappearOffsetY -15, -74, 86, 7, .135, 7, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeDieFlip.png")
-    , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
+    , 429, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
         , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 4);
         //                                           this.moveDirection = 3;

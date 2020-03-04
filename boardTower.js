@@ -8,6 +8,7 @@ function boardTower(game, gridX, gridY, type) {
         }
     }
     this.statusEffectEnabled = false;
+    this.statusEffect = "none";
     this.name = type.towerType;
     this.depthLevel = type.initDepthUpgrade;
     this.rangeLevel = type.initRangeUpgrade;
@@ -131,7 +132,6 @@ function boardTower(game, gridX, gridY, type) {
     //5 = farthest to tower
     //6 = biggest hp
     //7 = smallest hp
-    this.updateStatusEffectEnabled();
     this.shootingPriorityList = ["Closest To End (Distance)", "Farthest from End (Distance)", "Closest to End (Path)", 
                                 "Closest to End (Path)", "Closest to Tower", "Farthest from Tower", "Largest HP", "Smallest HP"];
     this.shootPriorityType = 0;
@@ -139,6 +139,34 @@ function boardTower(game, gridX, gridY, type) {
     this.shootOutYOffsetDir = [50, 50, 0, -50, -50, -50, 0, 50];
     this.time = this.game.timer.time - 1;
     this.timeToMove = this.game.timer.time;
+    if(this.name === "green") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "poison";
+        this.explosiveUpgradeCost = "Max";
+        this.paralyzeUpgradeCost = "Max";
+        this.freezeUpgradeCost = "Max";
+    }
+    if(this.name === "red") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "burn";
+        this.poisonUpgradeCost = "Max";
+        this.paralyzeUpgradeCost = "Max";
+        this.freezeUpgradeCost = "Max";
+    }
+    if(this.name === "blue") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "freeze";
+        this.poisonUpgradeCost = "Max";
+        this.paralyzeUpgradeCost = "Max";
+        this.explosiveUpgradeCost = "Max";
+    }
+    if(this.name === "purple") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "paralyze";
+        this.poisonUpgradeCost = "Max";
+        this.explosiveUpgradeCost = "Max";
+        this.freezeUpgradeCost = "Max";
+    }
 }
 
 boardTower.prototype.draw = function () {
@@ -263,6 +291,7 @@ boardTower.prototype.update = function () {
             }
         }
     }
+    
 
     if (this.name != "pot") {
         this.tempRangeLevel = this.rangeLevel + bestRangeUpgrade;
@@ -649,22 +678,6 @@ boardTower.prototype.enemyInRange = function (rect) {
         return true;
     } else {
         return false;
-    }
-}
-
-boardTower.prototype.updateStatusEffectEnabled = function() {
-    if(this.poisonLevel > 0) {
-        this.statusEffectEnabled = true;
-        return "poison";
-    } else if (this.freezeLevel > 0) {
-        this.statusEffectEnabled = true;
-        return "freeze";
-    } else if (this.paralyzeLevel > 0) {
-        this.statusEffectEnabled = true;
-        return "paralyze";
-    } else if (this.explosiveLevel > 0) {
-        this.statusEffectEnabled = true;
-        return "burn";
     }
 }
 
