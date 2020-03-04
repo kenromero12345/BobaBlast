@@ -113,6 +113,14 @@ AM.queueDownload("./img/background morning.png");
 AM.queueDownload("./img/street.png");
 AM.queueDownload("./img/street night.png");
 AM.queueDownload("./img/street morning.png");
+AM.queueDownload("./img/bg1.png");
+AM.queueDownload("./img/bg2.png");
+AM.queueDownload("./img/bg3.png");
+AM.queueDownload("./img/bg4.png");
+AM.queueDownload("./img/bg5.png");
+AM.queueDownload("./img/bg6.png");
+AM.queueDownload("./img/bg7.png");
+AM.queueDownload("./img/bg8.png");
 AM.queueDownload("./img/holder.png");
 AM.queueDownload("./img/tower.png");
 AM.queueDownload("./img/towerG.png");
@@ -217,7 +225,7 @@ AM.downloadAll(function () {
     gameEngine.start();
     
     // gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
-    gameEngine.background = new Background(gameEngine, AM.getAsset("./img/background.png"));
+    gameEngine.background = new Background(gameEngine, AM.getAsset("./img/bg4.png"));
 
     gameEngine.addEntity(new board(gameEngine));
 
