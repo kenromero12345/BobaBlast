@@ -8,6 +8,7 @@ function boardTower(game, gridX, gridY, type) {
         }
     }
     this.statusEffectEnabled = false;
+    this.statusEffect = "none";
     this.name = type.towerType;
     this.depthLevel = type.initDepthUpgrade;
     this.rangeLevel = type.initRangeUpgrade;
@@ -131,7 +132,6 @@ function boardTower(game, gridX, gridY, type) {
     //5 = farthest to tower
     //6 = biggest hp
     //7 = smallest hp
-    this.updateStatusEffectEnabled();
     this.shootingPriorityList = ["Closest To End (Distance)", "Farthest from End (Distance)", "Closest to End (Path)", 
                                 "Closest to End (Path)", "Closest to Tower", "Farthest from Tower", "Largest HP", "Smallest HP"];
     this.shootPriorityType = 0;
@@ -139,6 +139,34 @@ function boardTower(game, gridX, gridY, type) {
     this.shootOutYOffsetDir = [50, 50, 0, -50, -50, -50, 0, 50];
     this.time = this.game.timer.time - 1;
     this.timeToMove = this.game.timer.time;
+    if(this.name === "green") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "poison";
+        this.explosiveUpgradeCost = "Max";
+        this.paralyzeUpgradeCost = "Max";
+        this.freezeUpgradeCost = "Max";
+    }
+    if(this.name === "red") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "burn";
+        this.poisonUpgradeCost = "Max";
+        this.paralyzeUpgradeCost = "Max";
+        this.freezeUpgradeCost = "Max";
+    }
+    if(this.name === "blue") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "freeze";
+        this.poisonUpgradeCost = "Max";
+        this.paralyzeUpgradeCost = "Max";
+        this.explosiveUpgradeCost = "Max";
+    }
+    if(this.name === "purple") {
+        this.statusEffectEnabled = true;
+        this.statusEffect = "paralyze";
+        this.poisonUpgradeCost = "Max";
+        this.explosiveUpgradeCost = "Max";
+        this.freezeUpgradeCost = "Max";
+    }
 }
 
 boardTower.prototype.draw = function () {
@@ -147,7 +175,7 @@ boardTower.prototype.draw = function () {
         this.ctx.globalAlpha = 0.25;
         this.ctx.fillStyle = "white";
         this.ctx.beginPath();
-        this.ctx.arc(this.centerX, this.centerY, this.radius, 0, 2 * Math.PI);
+        this.ctx.arc(this.centerX, this.centerY, this.tempRadius, 0, 2 * Math.PI);
         this.ctx.fill();
         this.ctx.restore();
     }
@@ -201,7 +229,6 @@ boardTower.prototype.isThereEnemyInRange = function() {
 
 boardTower.prototype.update = function () {
     // console.log(this.gridX + " " + this.gridY);
-
     var bestRangeUpgrade = 0;
     var bestDamageUpgrade = 0;
     var bestSpeedUpgrade = 0;
@@ -240,10 +267,10 @@ boardTower.prototype.update = function () {
                 if (bestLaserUpgrade < this.game.activeTowers[i].laserLevel) {
                     bestLaserUpgrade = this.game.activeTowers[i].laserLevel;
                 }
-                if (bestFreezeUpgrade < this.game.activeTowers[i].frequencyLevel) {
+                if (bestFreezeUpgrade < this.game.activeTowers[i].freezeLevel) {
                     bestFreezeUpgrade = this.game.activeTowers[i].freezeLevel;
                 }
-                if (bestFreezeUpgrade < this.game.activeTowers[i].frequencyLevel) {
+                if (bestFrequencyUpgrade < this.game.activeTowers[i].frequencyLevel) {
                     bestFrequencyUpgrade = this.game.activeTowers[i].frequencyLevel;
                 }
                 if (bestParalyzeUpgrade < this.game.activeTowers[i].paralyzeLevel) {
@@ -264,19 +291,22 @@ boardTower.prototype.update = function () {
             }
         }
     }
+    
 
-    this.tempRangeLevel = this.rangeLevel + bestRangeUpgrade;
-    this.tempDamageLevel = this.damageLevel + bestDamageUpgrade;
-    this.tempSpeedLevel = this.speedLevel + bestSpeedUpgrade;
-    this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
-    this.tempLaserLevel = this.laserLevel + bestLaserUpgrade;
-    this.tempFreezeLevel = this.tempFreezeLevel + bestFreezeUpgrade;
-    this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
-    this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
-    this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
-    this.tempRicochetLevel = this.ricochetLevel + bestRicochetUpgrade;
-    this.tempPierceLevel = this.pierceLevel + bestPierceUpgrade;
-    this.tempHomingLevel = this.homingLevel + bestHomingUpgrade;
+    if (this.name != "pot") {
+        this.tempRangeLevel = this.rangeLevel + bestRangeUpgrade;
+        this.tempDamageLevel = this.damageLevel + bestDamageUpgrade;
+        this.tempSpeedLevel = this.speedLevel + bestSpeedUpgrade;
+        this.tempLaserLevel = this.laserLevel + bestLaserUpgrade;
+        this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
+        this.tempFreezeLevel = this.freezeLevel + bestFreezeUpgrade;
+        this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
+        this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
+        this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
+        this.tempRicochetLevel = this.ricochetLevel + bestRicochetUpgrade;
+        this.tempPierceLevel = this.pierceLevel + bestPierceUpgrade;
+        this.tempHomingLevel = this.homingLevel + bestHomingUpgrade;
+    }
 
     this.tempBobaSpeed = this.bobaSpeed;
     this.tempBobaDamage = this.bobaDamage;
@@ -285,17 +315,20 @@ boardTower.prototype.update = function () {
     this.tempRadius = this.radius;
 
     if (this.tempRangeLevel != this.rangeLevel) {
-        this.tempRadius = this.radius +  100 * (this.tempDamageLevel - this.damageLevel);
+        this.tempRadius = this.radius +  100 * (this.tempRangeLevel - this.rangeLevel);
     }
     if (this.tempDamageLevel != this.damageLevel) {
         this.tempBobaDamage = this.bobaDamage +  2 * (this.tempDamageLevel - this.damageLevel);
         this.tempPhotonDamage = this.photonDamage +  .001 * (this.tempDamageLevel - this.damageLevel);
     }
     if (this.tempSpeedLevel != this.speedLevel) {
-        this.tempBobaSpeed = this.bobaSpeed * Math.pow(2, (this.tempDamageLevel - this.damageLevel));
+        this.tempBobaSpeed = this.bobaSpeed * Math.pow(2, (this.tempSpeedLevel - this.speedLevel ));
     }
     if (this.tempFrequencyLevel != this.frequencyLevel) {
-        this.tempShootBobaEveryMS = this.shootBobaEveryMS * Math.pow(0.75, (this.tempDamageLevel - this.damageLevel));
+        // console.log(this.tempShootBobaEveryMS + " " + this.shootBobaEveryMS);
+        this.tempShootBobaEveryMS = this.shootBobaEveryMS * Math.pow(0.75, (this.tempFrequencyLevel - this.frequencyLevel));
+        // console.log(this.tempShootBobaEveryMS + " " + this.shootBobaEveryMS);
+        // console.log(Math.pow(0.75, (this.tempDamageLevel - this.damageLevel)))
     }
     // console.log(this.tempShootBobaEveryMS);
 
@@ -620,8 +653,8 @@ boardTower.prototype.enemyInRange = function (rect) {
     var circleDistanceX = Math.abs(this.centerX - rect.centerX);
     var circleDistanceY = Math.abs(this.centerY - rect.centerY);
 
-    if(circleDistanceX > rect.boundingbox.width/2 + this.radius) return false;
-    if(circleDistanceY > rect.boundingbox.height/2 + this.radius) return false;
+    if(circleDistanceX > rect.boundingbox.width/2 + this.tempRadius) return false;
+    if(circleDistanceY > rect.boundingbox.height/2 + this.tempRadius) return false;
 
     if(circleDistanceX <= rect.boundingbox.width/2) {
          return true;
@@ -633,26 +666,10 @@ boardTower.prototype.enemyInRange = function (rect) {
     var cornerDistance_sq = Math.pow(circleDistanceX - rect.boundingbox.width / 2, 2) +
                             Math.pow(circleDistanceY - rect.boundingbox.height /2, 2);
 
-    if(cornerDistance_sq <= Math.pow(this.radius, 2)) {
+    if(cornerDistance_sq <= Math.pow(this.tempRadius, 2)) {
         return true;
     } else {
         return false;
-    }
-}
-
-boardTower.prototype.updateStatusEffectEnabled = function() {
-    if(this.poisonLevel > 0) {
-        this.statusEffectEnabled = true;
-        return "poison";
-    } else if (this.freezeLevel > 0) {
-        this.statusEffectEnabled = true;
-        return "freeze";
-    } else if (this.paralyzeLevel > 0) {
-        this.statusEffectEnabled = true;
-        return "paralyze";
-    } else if (this.explosiveLevel > 0) {
-        this.statusEffectEnabled = true;
-        return "burn";
     }
 }
 
