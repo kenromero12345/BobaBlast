@@ -41,11 +41,11 @@ function slime(game, spawnX, spawnY, scale, num) {
     // this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeFlip.png")
     // , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
     this.animationWalkLeft = new Animation(AM.getAsset("./img/slimeWalk.png")
-    , 0, 70 + this.slimeOffsetY, 70, 80, 7, .135, 7, true, scale, false);
+    , 0, 72 + this.slimeOffsetY, 70, 86, 7, .135, 7, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/slimeDie.png")
     , 7, 225 + this.slimeOffsetY, 69, 70, 5, .2, 5, false, scale, false);
     this.animationWalkRight = new Animation(AM.getAsset("./img/slimeWalkFlip.png")
-    , 774, 70 + this.slimeOffsetY + this.slimeDisappearOffsetY, -70, 80, 7, .135, 7, true, scale, false);
+    , 774, 72 + this.slimeOffsetY + this.slimeDisappearOffsetY, -70, 86, 7, .135, 7, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeDieFlip.png")
     , 422, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth

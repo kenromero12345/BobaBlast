@@ -7,15 +7,15 @@ function photon(game, startX, startY, name, target, damage, speed, ricochetLevel
     this.explosiveLvl = explosiveLevel;
     this.laserLvl = laserLevel;
     this.homingLvl = homingLevel;
-    this.left;
-    this.right;
+    // this.left;
+    // this.right;
     this.isPhoton = true;
     this.collidedBeforeList = [];
     this.target = target;
     this.bobaDamage = damage;
     this.name = "photon";
     this.radius = 4;
-    this.color = "Black"
+    this.color = "Black";
     this.centerX = startX;
     this.centerY = startY;
     this.x = startX - this.radius;
@@ -58,6 +58,9 @@ function photon(game, startX, startY, name, target, damage, speed, ricochetLevel
             , this.poisonLvl, this.laserLvl, this.freezeLvl, this.paralyzeLvl, this.explosiveLvll, count - 1));
     } 
     // console.log(this.x + " " + this.y);
+    // if () {
+
+    // }
 }
 
 photon.prototype.collidedBefore = function(enemy) {

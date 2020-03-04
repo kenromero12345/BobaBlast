@@ -2,7 +2,11 @@ function iceGolem(game, spawnX, spawnY, scale) {
     this.lifeDeduction = 10;
     this.name = "ice golem";
     this.speed = 15;
+<<<<<<< HEAD
     this.hp = 600;
+=======
+    this.hp = 1200;
+>>>>>>> gordon
     this.money = 200;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/iceg.png")
     , 0, 180, 194, 180, 4, 0.5, 4, true, scale, false );
