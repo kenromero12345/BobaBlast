@@ -7,6 +7,7 @@ function boardTower(game, gridX, gridY, type) {
             //if true apply buffs on this tower
         }
     }
+    this.statusEffectEnabled = false;
     this.name = type.towerType;
     this.rangeLevel = type.initRangeUpgrade;
     this.damageLevel = type.initDamageUpgrade;
@@ -129,6 +130,7 @@ function boardTower(game, gridX, gridY, type) {
     //5 = farthest to tower
     //6 = biggest hp
     //7 = smallest hp
+    this.updateStatusEffectEnabled();
     this.shootingPriorityList = ["Closest To End (Distance)", "Farthest from End (Distance)", "Closest to End (Path)", 
                                 "Closest to End (Path)", "Closest to Tower", "Farthest from Tower", "Largest HP", "Smallest HP"];
     this.shootPriorityType = 0;
@@ -634,6 +636,22 @@ boardTower.prototype.enemyInRange = function (rect) {
         return true;
     } else {
         return false;
+    }
+}
+
+boardTower.prototype.updateStatusEffectEnabled = function() {
+    if(this.poisonLevel > 0) {
+        this.statusEffectEnabled = true;
+        return "poison";
+    } else if (this.freezeLevel > 0) {
+        this.statusEffectEnabled = true;
+        return "freeze";
+    } else if (this.paralyzeLevel > 0) {
+        this.statusEffectEnabled = true;
+        return "paralyze";
+    } else if (this.explosiveLevel > 0) {
+        this.statusEffectEnabled = true;
+        return "burn";
     }
 }
 
