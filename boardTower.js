@@ -280,6 +280,7 @@ boardTower.prototype.update = function () {
             }
         }
     }
+    
 
     this.tempRangeLevel = this.rangeLevel + bestRangeUpgrade;
     this.tempDamageLevel = this.damageLevel + bestDamageUpgrade;
