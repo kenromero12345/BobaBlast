@@ -182,7 +182,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new miniCake(this.game, -50, 350, .75), true);
         } else if (round == 2) {
-            this.game.background.spritesheet = AM.getAsset("./img/background night.png");
+            this.game.background.spritesheet = AM.getAsset("./img/bg5.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -220,7 +220,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new biscuit(this.game, -50, 350, .75));    
         } else if (round == 3) {
-            this.game.background.spritesheet = AM.getAsset("./img/background morning.png");
+            this.game.background.spritesheet = AM.getAsset("./img/bg3.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -254,7 +254,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new biscuit(this.game, -50, 350, .75), true);
         } else if (round == 4) {
-            this.game.background.spritesheet = AM.getAsset("./img/street.png");
+            this.game.background.spritesheet = AM.getAsset("./img/bg2.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new redTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -284,7 +284,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cakeChoco(this.game, -50, 350, .75));
         } else if (round == 5) {
-            this.game.background.spritesheet = AM.getAsset("./img/street night.png");
+            this.game.background.spritesheet = AM.getAsset("./img/bg1.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new iceGolem(this.game, -50, 350, .70));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
