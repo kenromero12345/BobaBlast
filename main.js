@@ -211,7 +211,8 @@ AM.downloadAll(function () {
     gameEngine.init(ctx);
     gameEngine.start();
     
-    gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
+    // gameEngine.addEntity(new Background(gameEngine, AM.getAsset("./img/background.png")));
+    gameEngine.background = new Background(gameEngine, AM.getAsset("./img/background.png"));
 
     gameEngine.addEntity(new board(gameEngine));
 
