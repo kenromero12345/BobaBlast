@@ -121,6 +121,7 @@ AM.queueDownload("./img/bg5.png");
 AM.queueDownload("./img/bg6.png");
 AM.queueDownload("./img/bg7.png");
 AM.queueDownload("./img/bg8.png");
+AM.queueDownload("./img/win.png");
 AM.queueDownload("./img/holder.png");
 AM.queueDownload("./img/tower.png");
 AM.queueDownload("./img/towerG.png");

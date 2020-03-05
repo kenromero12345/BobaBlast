@@ -182,7 +182,6 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new miniCake(this.game, -50, 350, .75), true);
         } else if (round == 2) {
-            this.game.background.spritesheet = AM.getAsset("./img/bg5.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -220,7 +219,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new biscuit(this.game, -50, 350, .75));    
         } else if (round == 3) {
-            this.game.background.spritesheet = AM.getAsset("./img/bg3.png");
+            this.game.background.spritesheet = AM.getAsset("./img/bg5.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -254,7 +253,6 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new biscuit(this.game, -50, 350, .75), true);
         } else if (round == 4) {
-            this.game.background.spritesheet = AM.getAsset("./img/bg2.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new redTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -284,7 +282,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cakeChoco(this.game, -50, 350, .75));
         } else if (round == 5) {
-            this.game.background.spritesheet = AM.getAsset("./img/bg1.png");
+            this.game.background.spritesheet = AM.getAsset("./img/bg3.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new iceGolem(this.game, -50, 350, .70));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -481,40 +479,46 @@ roundPlan.prototype.update = function () {
                 , this.game, new slime(this.game, -50, 350, .75, 10), true);
         } else if (round == 6) {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         } else if (round == 7) {
+            this.game.background.spritesheet = AM.getAsset("./img/bg2.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         } else if (round == 8) {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         }else if (round == 9) {
+            this.game.background.spritesheet = AM.getAsset("./img/bg6.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         }
         else if (round == 10) {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         }
         else if (round == 11) {
+            this.game.background.spritesheet = AM.getAsset("./img/bg7.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         }else if (round == 12) {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         }else if (round == 13) {
+            this.game.background.spritesheet = AM.getAsset("./img/bg8.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         }else if (round == 14) {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         }else if (round == 15) {
+            this.game.background.spritesheet = AM.getAsset("./img/bg1.png");
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         }else if (round == 16) {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new greenTea(this.game, -50, 350, false, .75));
+                , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         } else if (round == 17) {
+            this.game.background.spritesheet = AM.getAsset("./img/win.png");
                         //end
             //show gameover you win
             this.gameOverWin = true;
