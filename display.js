@@ -545,7 +545,7 @@ display.prototype.draw = function () {
                 currentMoney -= selectedUpgradableTower.rangeUpgradeCost;
                 selectedUpgradableTower.rangeUpgradeCost += (25 * selectedUpgradableTower.rangeLevel);
             }
-            if(selectedUpgradableTower.rangeLevel === selectedUpgradableTower.towerType.maxRangeUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.rangeLevel === selectedUpgradableTower.towerType.maxRangeUpgrade) {
                 selectedUpgradableTower.rangeUpgradeCost = "Max";
             }
         }
@@ -562,7 +562,7 @@ display.prototype.draw = function () {
                 currentMoney -= selectedUpgradableTower.damageUpgradeCost;
                 selectedUpgradableTower.damageUpgradeCost += (30 * selectedUpgradableTower.damageLevel);
             }
-            if(selectedUpgradableTower.damageLevel === selectedUpgradableTower.towerType.maxDamageUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.damageLevel === selectedUpgradableTower.towerType.maxDamageUpgrade) {
                 selectedUpgradableTower.damageUpgradeCost = "Max";
             }
         }
@@ -578,7 +578,7 @@ display.prototype.draw = function () {
                 currentMoney -= selectedUpgradableTower.speedUpgradeCost;
                 selectedUpgradableTower.speedUpgradeCost += (20 * selectedUpgradableTower.speedLevel);
             }
-            if(selectedUpgradableTower.speedLevel === selectedUpgradableTower.towerType.maxSpeedUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.speedLevel === selectedUpgradableTower.towerType.maxSpeedUpgrade) {
                 selectedUpgradableTower.speedUpgradeCost = "Max";
             }
         }
@@ -602,14 +602,14 @@ display.prototype.draw = function () {
                     selectedUpgradableTower.poisonUpgradeCost += (20 * selectedUpgradableTower.poisonLevel);
                 }
             }
-            if(selectedUpgradableTower.poisonLevel === selectedUpgradableTower.towerType.maxPoisonUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.poisonLevel === selectedUpgradableTower.towerType.maxPoisonUpgrade) {
                 selectedUpgradableTower.poisonUpgradeCost = "Max";
             }
         }
         // Upgrade Laser Boba
         if(mouse.x < this.descriptionBoxStartX + 103 + 38 && mouse.x >= this.descriptionBoxStartX + 103
             && mouse.y < this.descriptionBoxStartY + 130 + 20 + 2 && mouse.y >= this.descriptionBoxStartY + 130 + 2) {
-            if(selectedUpgradableTower.name === "pot") {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.name === "pot") {
                 if (upgradeMode && !purchaseMode && selectedUpgradableTower.depthLevel < selectedUpgradableTower.towerType.maxDepthUpgrade) {
                     if (currentMoney - selectedUpgradableTower.depthUpgradeCost < 0) {
                         return;
@@ -631,7 +631,7 @@ display.prototype.draw = function () {
                     currentMoney -= selectedUpgradableTower.laserUpgradeCost;
                     selectedUpgradableTower.laserUpgradeCost += (20 * selectedUpgradableTower.laserLevel);
                 }
-                if(selectedUpgradableTower.laserLevel === selectedUpgradableTower.towerType.maxLaserUpgrade) {
+                if(upgradeMode && !purchaseMode && selectedUpgradableTower.laserLevel === selectedUpgradableTower.towerType.maxLaserUpgrade) {
                     selectedUpgradableTower.laserUpgradeCost = "Max";
                 }
             }
@@ -656,7 +656,7 @@ display.prototype.draw = function () {
                     selectedUpgradableTower.freezeUpgradeCost += (20 * selectedUpgradableTower.freezeLevel);
                 }
             }
-            if(selectedUpgradableTower.freezeLevel === selectedUpgradableTower.towerType.maxFreezeUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.freezeLevel === selectedUpgradableTower.towerType.maxFreezeUpgrade) {
                 selectedUpgradableTower.freezeUpgradeCost = "Max";
             }
         }
@@ -672,7 +672,7 @@ display.prototype.draw = function () {
                 currentMoney -= selectedUpgradableTower.frequencyUpgradeCost;
                 selectedUpgradableTower.frequencyUpgradeCost += (20 * selectedUpgradableTower.frequencyLevel);
             }
-            if(selectedUpgradableTower.frequencyLevel === selectedUpgradableTower.towerType.maxFrequencyUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.frequencyLevel === selectedUpgradableTower.towerType.maxFrequencyUpgrade) {
                 selectedUpgradableTower.frequencyUpgradeCost = "Max";
             }
         }
@@ -696,7 +696,7 @@ display.prototype.draw = function () {
                     selectedUpgradableTower.paralyzeUpgradeCost += (20 * selectedUpgradableTower.paralyzeLevel);
                 }
             }
-            if(selectedUpgradableTower.paralyzeLevel === selectedUpgradableTower.towerType.maxParalyzeUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.paralyzeLevel === selectedUpgradableTower.towerType.maxParalyzeUpgrade) {
                 selectedUpgradableTower.paralyzeUpgradeCost = "Max";
             }
         }
@@ -720,7 +720,7 @@ display.prototype.draw = function () {
                     selectedUpgradableTower.explosiveUpgradeCost += (20 * selectedUpgradableTower.explosiveLevel);
                 }
             }
-            if(selectedUpgradableTower.explosiveLevel === selectedUpgradableTower.towerType.maxExplosiveUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.explosiveLevel === selectedUpgradableTower.towerType.maxExplosiveUpgrade) {
                 selectedUpgradableTower.explosiveUpgradeCost = "Max";
             }
         }
@@ -735,7 +735,7 @@ display.prototype.draw = function () {
                 currentMoney -= selectedUpgradableTower.ricochetUpgradeCost;
                 selectedUpgradableTower.ricochetUpgradeCost += (20 * selectedUpgradableTower.ricochetLevel);
             }
-            if(selectedUpgradableTower.ricochetLevel === selectedUpgradableTower.towerType.maxRicochetUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.ricochetLevel === selectedUpgradableTower.towerType.maxRicochetUpgrade) {
                 selectedUpgradableTower.ricochetUpgradeCost = "Max";
             }
         }
@@ -750,7 +750,7 @@ display.prototype.draw = function () {
                 currentMoney -= selectedUpgradableTower.pierceUpgradeCost;
                 selectedUpgradableTower.pierceUpgradeCost += (20 * selectedUpgradableTower.pierceLevel);
             }
-            if(selectedUpgradableTower.pierceLevel === selectedUpgradableTower.towerType.maxPierceUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.pierceLevel === selectedUpgradableTower.towerType.maxPierceUpgrade) {
                 selectedUpgradableTower.pierceUpgradeCost = "Max";
             }
         }
@@ -765,7 +765,7 @@ display.prototype.draw = function () {
                 currentMoney -= selectedUpgradableTower.homingUpgradeCost;
                 selectedUpgradableTower.homingUpgradeCost += (20 * selectedUpgradableTower.homingLevel);
             }
-            if(selectedUpgradableTower.homingLevel === selectedUpgradableTower.towerType.maxHomingUpgrade) {
+            if(upgradeMode && !purchaseMode && selectedUpgradableTower.homingLevel === selectedUpgradableTower.towerType.maxHomingUpgrade) {
                 selectedUpgradableTower.homingUpgradeCost = "Max";
             }
         }
