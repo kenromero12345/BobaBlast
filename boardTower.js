@@ -267,7 +267,7 @@ boardTower.prototype.update = function () {
                 if (bestLaserUpgrade < this.game.activeTowers[i].laserLevel) {
                     bestLaserUpgrade = this.game.activeTowers[i].laserLevel;
                 }
-                if (bestFreezeUpgrade < this.game.activeTowers[i].freezeLevel) {
+                if (bestFreezeUpgrade < this.game.activeTowers[i].frequencyLevel) {
                     bestFreezeUpgrade = this.game.activeTowers[i].freezeLevel;
                 }
                 if (bestFrequencyUpgrade < this.game.activeTowers[i].frequencyLevel) {
@@ -298,16 +298,24 @@ boardTower.prototype.update = function () {
         this.tempDamageLevel = this.damageLevel + bestDamageUpgrade;
         this.tempSpeedLevel = this.speedLevel + bestSpeedUpgrade;
         this.tempLaserLevel = this.laserLevel + bestLaserUpgrade;
-        this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
-        this.tempFreezeLevel = this.freezeLevel + bestFreezeUpgrade;
-        this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
-        this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
         this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
         this.tempRicochetLevel = this.ricochetLevel + bestRicochetUpgrade;
         this.tempPierceLevel = this.pierceLevel + bestPierceUpgrade;
         this.tempHomingLevel = this.homingLevel + bestHomingUpgrade;
-    }
 
+        if (this.poisonLevel > 0) {
+            this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
+        }
+        if (this.freezeLevel > 0) {
+            this.tempFreezeLevel = this.freezeLevel + bestFreezeUpgrade;
+        }
+        if (this.paralyzeLevel > 0) {
+            this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
+        }
+        if (this.explosiveLevel > 0) {
+            this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
+        }
+    }
     this.tempBobaSpeed = this.bobaSpeed;
     this.tempBobaDamage = this.bobaDamage;
     this.tempPhotonDamage = this.photonDamage;
