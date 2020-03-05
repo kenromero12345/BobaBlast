@@ -178,26 +178,6 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
         this.isFire = true;
     }*/
     this.animation = new Animation(AM.getAsset("./img/boba.png"), 0, 0, 20, 20, 1, 0.1, 1, true, 1);
-    if (this.freezeLvl > 0) {
-        this.animation = new Animation(AM.getAsset("./img/bobaB.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
-        this.animation.offsetX = - 8;
-        this.animation.offsetY = - 8;
-    } 
-    if (this.paralysisLvl > 0) {
-        this.animation = new Animation(AM.getAsset("./img/bobaP.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
-        this.animation.offsetX = - 8;
-        this.animation.offsetY = - 8;
-    } 
-    if (this.burnLvl > 0) {
-        this.animation = new Animation(AM.getAsset("./img/bobaR.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
-        this.animation.offsetX = - 8;
-        this.animation.offsetY = - 8;
-    } 
-    if (this.poisonLvl > 0) {
-        this.animation = new Animation(AM.getAsset("./img/bobaG.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
-        this.animation.offsetX = - 8;
-        this.animation.offsetY = - 8;
-    } 
     this.x = startX;
     this.y = startY;
     this.isBoba = true;
@@ -300,26 +280,6 @@ boba.prototype.draw = function () {
 
 boba.prototype.update = function () {
     if(this.game.running) {
-        if (this.freezeLvl > 0) {
-            this.animation = new Animation(AM.getAsset("./img/bobaB.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
-            this.animation.offsetX = - 8;
-            this.animation.offsetY = - 8;
-        } 
-        if (this.paralysisLvl > 0) {
-            this.animation = new Animation(AM.getAsset("./img/bobaP.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
-            this.animation.offsetX = - 8;
-            this.animation.offsetY = - 8;
-        } 
-        if (this.burnLvl > 0) {
-            this.animation = new Animation(AM.getAsset("./img/bobaR.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
-            this.animation.offsetX = - 8;
-            this.animation.offsetY = - 8;
-        } 
-        if (this.poisonLvl > 0) {
-            this.animation = new Animation(AM.getAsset("./img/bobaG.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
-            this.animation.offsetX = - 8;
-            this.animation.offsetY = - 8;
-        } 
         if (this.isHoming) {
             if (this.target.hp <= 0) {
                 this.removeFromWorld = true;

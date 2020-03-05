@@ -27,7 +27,7 @@ function Animation(spriteSheet, startX, startY, frameWidth, frameHeight, sheetWi
 }
 
 Animation.prototype.drawFrame = function (tick, ctx, x, y) {
-    // if(this.currentFrame() != 0){
+    // if(this.currentFrame() != 1){
         if (!this.stop) { 
             this.elapsedTime += tick;
         }
@@ -161,10 +161,6 @@ AM.queueDownload("./img/pumpkinEvil.png");
 AM.queueDownload("./img/pumpkinEvilFlip.png");
 AM.queueDownload("./img/pot.png");
 AM.queueDownload("./img/boba.png");
-AM.queueDownload("./img/bobaB.png");
-AM.queueDownload("./img/bobaG.png");
-AM.queueDownload("./img/bobaP.png");
-AM.queueDownload("./img/bobaR.png");
 AM.queueDownload("./img/explosion.png");
 AM.queueDownload("./img/electric.png");
 AM.queueDownload("./img/freeze.png");
@@ -251,7 +247,7 @@ AM.downloadAll(function () {
     // gameEngine.addEntity(new miniCake(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new pumpkinEvil(gameEngine, 450, 250, .75));
     // gameEngine.addEntity(new pumpkinGood(gameEngine, 450, 250, .75));
-    // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 2));
+    // gameEngine.addEntity(new slime(gameEngine, 450, 250, .75, 10));
     // gameEngine.addEntity(new watermelon(gameEngine, 450, 250, .75));
 
     // gameEngine.addEntity(new greenTea(gameEngine, 450, 250, false, .75));
