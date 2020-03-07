@@ -267,7 +267,7 @@ boardTower.prototype.update = function () {
                 if (bestLaserUpgrade < this.game.activeTowers[i].laserLevel) {
                     bestLaserUpgrade = this.game.activeTowers[i].laserLevel;
                 }
-                if (bestFreezeUpgrade < this.game.activeTowers[i].frequencyLevel) {
+                if (bestFreezeUpgrade < this.game.activeTowers[i].freezeLevel) {
                     bestFreezeUpgrade = this.game.activeTowers[i].freezeLevel;
                 }
                 if (bestFrequencyUpgrade < this.game.activeTowers[i].frequencyLevel) {
