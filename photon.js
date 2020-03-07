@@ -7,15 +7,27 @@ function photon(game, startX, startY, name, target, damage, speed, ricochetLevel
     this.explosiveLvl = explosiveLevel;
     this.laserLvl = laserLevel;
     this.homingLvl = homingLevel;
-    this.left;
-    this.right;
+    // this.left;
+    // this.right;
     this.isPhoton = true;
     this.collidedBeforeList = [];
     this.target = target;
     this.bobaDamage = damage;
     this.name = "photon";
     this.radius = 4;
-    this.color = "Black"
+    this.color = "Black";
+    if (this.freezeLvl > 0) {
+        this.color = "Blue";
+    } 
+    if (this.paralysisLvl > 0) {
+        this.color = "Purple";
+    } 
+    if (this.burnLvl > 0) {
+        this.color = "Red";
+    } 
+    if (this.poisonLvl > 0) {
+        this.color = "Green";
+    } 
     this.centerX = startX;
     this.centerY = startY;
     this.x = startX - this.radius;
@@ -29,26 +41,27 @@ function photon(game, startX, startY, name, target, damage, speed, ricochetLevel
     this.game = game;
     this.ctx = game.ctx;
     // this.boxes = true;
-    this.ricochetLvl = ricochetLevel;
+    // this.ricochetLvl = ricochetLevel;
     this.pierceLvl = pierceLevel;
-    if (this.ricochetLvl == 2) {
-        this.ricochetCount = 3;
-    } else if (this.ricochetLvl == 3) {
-        this.ricochetCount = 5;
-    } 
-    if(homingLevel == 1) {
-        this.isHoming = true;
-    }
-    if (laserLevel == 1) {
-        this.isLaser = true;
-    }
+    // if (this.ricochetLvl == 2) {
+    //     this.ricochetCount = 3;
+    // } else if (this.ricochetLvl == 3) {
+    //     this.ricochetCount = 5;
+    // } 
+    // if(homingLevel == 1) {
+    //     this.isHoming = true;
+    // }
+    // if (laserLevel == 1) {
+    //     this.isLaser = true;
+    // }
     if (this.pierceLvl == -1) {
         this.pierceCount = Number.MAX_VALUE;
-    } else if (this.pierceLvl == 2) {
-        this.pierceCount = 3;
-    } else if (this.pierceLvl == 3) {
-        this.pierceCount = 5;
     } 
+    // else if (this.pierceLvl == 2) {
+    //     this.pierceCount = 3;
+    // } else if (this.pierceLvl == 3) {
+    //     this.pierceCount = 5;
+    // } 
     this.boundingbox = new BoundingBox(this.x, this.y, this.width , this.height);
 
     if (this.x > 0 && this.x < 900 && this.y > 0 && this.y < 600 && count > 0) {
@@ -58,6 +71,9 @@ function photon(game, startX, startY, name, target, damage, speed, ricochetLevel
             , this.poisonLvl, this.laserLvl, this.freezeLvl, this.paralyzeLvl, this.explosiveLvll, count - 1));
     } 
     // console.log(this.x + " " + this.y);
+    // if () {
+
+    // }
 }
 
 photon.prototype.collidedBefore = function(enemy) {
@@ -105,12 +121,24 @@ photon.prototype.draw = function () {
 
 photon.prototype.update = function () {
     if(this.game.running) {
-        if (this.isHoming) {
-            if (this.target.hp <= 0) {
-                this.removeFromWorld = true;
-            }
-            this.velocity = direction({'x':this.target.centerX -10, 'y':this.target.centerY - 13}, this);
-        }
+        if (this.freezeLvl > 0) {
+            this.color = "Blue";
+        } 
+        if (this.paralysisLvl > 0) {
+            this.color = "Purple";
+        } 
+        if (this.burnLvl > 0) {
+            this.color = "Red";
+        } 
+        if (this.poisonLvl > 0) {
+            this.color = "Green";
+        } 
+        // if (this.isHoming) {
+        //     if (this.target.hp <= 0) {
+        //         this.removeFromWorld = true;
+        //     }
+        //     this.velocity = direction({'x':this.target.centerX -10, 'y':this.target.centerY - 13}, this);
+        // }
         if (this.x < 0 || this.y < 0 || this.x > 900 ||  this.y > 600) {
             this.removeFromWorld = true;
         }
