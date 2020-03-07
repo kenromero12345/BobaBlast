@@ -234,7 +234,7 @@ AM.downloadAll(function () {
 
     gameEngine.addEntity(new board(gameEngine));
 
-    gameEngine.addEntity(new roundPlan(gameEngine));
+    gameEngine.roundPlan = new roundPlan(gameEngine);
 
     // BOBA BULLET TESTING
     // gameEngine.addEntity(new display(gameEngine));
