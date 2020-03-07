@@ -54,6 +54,8 @@ function slime(game, spawnX, spawnY, scale, num) {
         // this.lookDirectionRight = false;
     this.burnResistance = .99;
     this.paralysisResistance = .1;
+    this.animationDisappearLeft.offsetY -= 10;
+    this.animationDisappearRight.offsetY -= 10;
 }
 
 slime.prototype.setBoundingBox = function() {
