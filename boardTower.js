@@ -613,7 +613,7 @@ boardTower.prototype.update = function () {
             this.target = selectedEnemy.enemy;
         }
         this.calculateDirection(selectedEnemy.enemy);
-        if(this.name == "pot") {
+        if(this.name != "pot") {
             this.shootBoba = true;
         }
     }
