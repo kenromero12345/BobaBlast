@@ -58,10 +58,10 @@ function slime(game, spawnX, spawnY, scale, num) {
 
 slime.prototype.setBoundingBox = function() {
     if(this.lookDirectionRight || this.moveDirection == 1 ) {
-        this.boundingbox = new BoundingBox(this.x + 33 * this.scale, this.y + 45 * this.scale
+        this.boundingbox = new BoundingBox(this.x + 40 * this.scale, this.y + 53 * this.scale
             , this.width - 53 * this.scale , this.height -70 * this.scale);
     } else {
-        this.boundingbox = new BoundingBox(this.x + 14 * this.scale, this.y + 45 * this.scale
+        this.boundingbox = new BoundingBox(this.x + 14 * this.scale, this.y + 53 * this.scale
             , this.width - 53 * this.scale , this.height -70 * this.scale);
     }
 }
