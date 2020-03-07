@@ -91,6 +91,10 @@ function boardTower(game, gridX, gridY, type) {
         this.pointDirection = 'N';
         this.intendedDirection = 'N';
         this.intendedDirectionIndex = 4;
+    } else if (this.name == 'pot') {
+        this.pointDirection = 'S';
+        this.intendedDirection = 'S';
+        this.intendedDirectionIndex = 0;
     }
     this.game = game;
     this.ctx = game.ctx;
@@ -395,7 +399,7 @@ boardTower.prototype.update = function () {
         this.shootBoba = true;
     }
 */
-    if(this.spin && this.pointDirection === this.intendedDirection && this.name != 'all') {
+    if(this.spin && this.pointDirection === this.intendedDirection && this.name != 'all' && this.name != 'pot') {
         this.pointDirectionIndex = this.intendedDirectionIndex;
         this.spin = false;
     }
@@ -404,7 +408,7 @@ boardTower.prototype.update = function () {
     //     this.timeToMove = this.time + 5;
     // }
 
-    if(this.spin && this.name != 'all') {
+    if(this.spin && this.name != 'all' && this.name != 'pot') {
         if(this.counterclockwise) {
             if(this.pointDirection === 'S') {
                 this.pointDirection = 'SE';
@@ -609,7 +613,9 @@ boardTower.prototype.update = function () {
             this.target = selectedEnemy.enemy;
         }
         this.calculateDirection(selectedEnemy.enemy);
-        this.shootBoba = true;
+        if(this.name == "pot") {
+            this.shootBoba = true;
+        }
     }
 
     }
