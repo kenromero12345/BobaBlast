@@ -292,6 +292,18 @@ boardTower.prototype.update = function () {
         }
     }
     
+    this.tempRangeLevel = 0;
+    this.tempDamageLevel = 0;
+    this.tempSpeedLevel = 0;
+    this.tempLaserLevel = 0;
+    this.tempFrequencyLevel = 0;
+    this.tempRicochetLevel = 0;
+    this.tempPierceLevel = 0;
+    this.tempHomingLevel = 0;
+    this.tempPoisonLevel = 0;
+    this.tempFreezeLevel = 0;
+    this.tempParalyzeLevel = 0;
+    this.tempExplosiveLevel = 0;
 
     if (this.name != "pot") {
         this.tempRangeLevel = this.rangeLevel + bestRangeUpgrade;

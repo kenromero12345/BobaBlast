@@ -15,7 +15,7 @@ function slime(game, spawnX, spawnY, scale, num) {
         this.slimeOffsetY = 1621;
     } else if (num == 6) { // cola
         this.slimeOffsetY = 1920;
-        // this.slimeDisappearOffsetY = 118;
+        this.slimeDisappearOffsetY = 118;
     } else if (num == 7) {//silver
         this.money = 500;
         this.slimeOffsetY = 2334;
@@ -43,9 +43,9 @@ function slime(game, spawnX, spawnY, scale, num) {
     this.animationWalkLeft = new Animation(AM.getAsset("./img/slimeWalk.png")
     , 0, 72 + this.slimeOffsetY - 14, 80, 91, 7, .135, 7, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/slimeDie.png")
-    , 0, 225 + this.slimeOffsetY, 69, 70, 5, .2, 5, false, scale, false);
+    , 0, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, .2, 5, false, scale, false);
     this.animationWalkRight = new Animation(AM.getAsset("./img/slimeWalkFlip.png")
-    , 774, 72 + this.slimeOffsetY + this.slimeDisappearOffsetY -14, -80, 91, 7, .135, 7, true, scale, false);
+    , 774, 72 + this.slimeOffsetY -14, -80, 91, 7, .135, 7, true, scale, false);
     this.animationDisappearRight = new Animation(AM.getAsset("./img/slimeDieFlip.png")
     , 429, 225 + this.slimeOffsetY + this.slimeDisappearOffsetY, 69, 70, 5, 0.2, 5, false, scale, true);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
@@ -54,8 +54,8 @@ function slime(game, spawnX, spawnY, scale, num) {
         // this.lookDirectionRight = false;
     this.burnResistance = .99;
     this.paralysisResistance = .1;
-    this.animationDisappearLeft.offsetY -= 10;
-    this.animationDisappearRight.offsetY -= 10;
+    this.animationDisappearLeft.offsetY += 10;
+    this.animationDisappearRight.offsetY += 10;
 }
 
 slime.prototype.setBoundingBox = function() {

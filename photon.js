@@ -1,10 +1,18 @@
 function photon(game, startX, startY, name, target, damage, speed, ricochetLevel
     , pierceLevel, homingLevel, poisonLevel, laserLevel, freezeLevel, paralyzeLevel, explosiveLevel, count) {
     this.name = name;
+    this.freezeProbAdder = 0;
+    this.poisonProbAdder = 0;
+    this.burnProbAdder = 0;
+    this.paralysisProbAdder = 0;
+    this.freezeTimeAdder = 0;
+    this.poisonTimeAdder = 0;
+    this.paralysisTimeAdder = 0;
+    this.burnTimeAdder = 0;
     this.poisonLvl = poisonLevel;
     this.freezeLvl = freezeLevel;
     this.paralyzeLvl = paralyzeLevel;
-    this.explosiveLvl = explosiveLevel;
+    this.burnLvl = explosiveLevel;
     this.laserLvl = laserLevel;
     this.homingLvl = homingLevel;
     // this.left;
@@ -62,13 +70,51 @@ function photon(game, startX, startY, name, target, damage, speed, ricochetLevel
     // } else if (this.pierceLvl == 3) {
     //     this.pierceCount = 5;
     // } 
+
+    if (this.freezeLvl == 2) {
+        // this.isFreeze = true;
+        this.freezeProbAdder = .5;
+        this.freezeTimeAdder = 3000/1000;
+    } else if (this.freezeLvl == 3) {
+        // this.isFreeze = true;
+        this.freezeProbAdder = .8;
+        this.freezeTimeAdder = 5000/1000;
+    }
+    if (this.poisonLvl == 2) {
+        // this.isPoison = true;
+        this.poisonProbAdder = .5;
+        this.poisonTimeAdder = 3000/1000;
+    } else if (this.poisonLvl == 3) {
+        // this.isPoison = true;
+        this.poisonProbAdder = .8;
+        this.poisonTimeAdder = 5000/1000;
+    } 
+    if (this.burnLvl == 2) {
+
+        this.burnProbAdder = 5;
+        this.burnTimeAdder = 500/1000;
+    } else if (this.burnLvl == 3) {
+        this.burnProbAdder = 8;
+        this.burnTimeAdder = 1000/1000;
+    } 
+
+    if (this.paralysisLvl == 2) {
+        // this.isParalyze = true;
+        this.paralysisProbAdder = .5;
+        this.paralysisTimeAdder = 500/1000;
+    } else if (this.paralysisLvl == 3) {
+        // this.isParalyze = true;
+        this.paralysisProbAdder = .8;
+        this.paralysisTimeAdder = 1000/1000;
+    } 
+
     this.boundingbox = new BoundingBox(this.x, this.y, this.width , this.height);
 
     if (this.x > 0 && this.x < 900 && this.y > 0 && this.y < 600 && count > 0) {
         this.game.addEntity(new photon(this.game, this.centerX + this.velocity.x * this.game.clockTick * 10
             , this.centerY + this.velocity.y * this.game.clockTick * 10, this.name, this.target
             , this.bobaDamage, this.speed, this.ricochetLvl, this.pierceLvl, this.homingLvl
-            , this.poisonLvl, this.laserLvl, this.freezeLvl, this.paralyzeLvl, this.explosiveLvll, count - 1));
+            , this.poisonLvl, this.laserLvl, this.freezeLvl, this.paralyzeLvl, this.burnLvl, count - 1));
     } 
     // console.log(this.x + " " + this.y);
     // if () {

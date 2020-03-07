@@ -137,14 +137,14 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
         this.poisonProbAdder = .8;
         this.poisonTimeAdder = 5000/1000;
     } 
-    // if (this.burnLvl == 2) {
+    if (this.burnLvl == 2) {
 
-    //     this.burnProbAdder = 5;
-    //     this.burnTimeAdder - 500;
-    // } else if (this.burnLvl == 3) {
-    //     this.burnProbAdder = 8;
-    //     this.burnTimeAdder = 1000;
-    // } 
+        this.burnProbAdder = 5;
+        this.burnTimeAdder = 500/1000;
+    } else if (this.burnLvl == 3) {
+        this.burnProbAdder = 8;
+        this.burnTimeAdder = 1000/1000;
+    } 
 
     if (this.paralysisLvl == 2) {
         // this.isParalyze = true;
