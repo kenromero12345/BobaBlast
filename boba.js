@@ -122,7 +122,7 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
     if (this.freezeLvl == 2) {
         // this.isFreeze = true;
         this.freezeProbAdder = .5;
-        this.freezeTimeAdder = 3000;
+        this.freezeTimeAdder = 3000/1000;
     } else if (this.freezeLvl == 3) {
         // this.isFreeze = true;
         this.freezeProbAdder = .8;
@@ -137,19 +137,19 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
         this.poisonProbAdder = .8;
         this.poisonTimeAdder = 5000/1000;
     } 
-    // if (this.burnLvl == 2) {
+    if (this.burnLvl == 2) {
 
-    //     this.burnProbAdder = 5;
-    //     this.burnTimeAdder - 500;
-    // } else if (this.burnLvl == 3) {
-    //     this.burnProbAdder = 8;
-    //     this.burnTimeAdder = 1000;
-    // } 
+        this.burnProbAdder = 5;
+        this.burnTimeAdder = 500/1000;
+    } else if (this.burnLvl == 3) {
+        this.burnProbAdder = 8;
+        this.burnTimeAdder = 1000/1000;
+    } 
 
     if (this.paralysisLvl == 2) {
         // this.isParalyze = true;
         this.paralysisProbAdder = .5;
-        this.paralysisTimeAdder = 500;
+        this.paralysisTimeAdder = 500/1000;
     } else if (this.paralysisLvl == 3) {
         // this.isParalyze = true;
         this.paralysisProbAdder = .8;

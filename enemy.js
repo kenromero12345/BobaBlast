@@ -144,8 +144,15 @@ var collideUpdate = function(enemy) {
             if (ent.pierceCount == -1 && ent.ricochetCount == -1) {
                 ent.removeFromWorld = true;
             }
+            // if (ent.isPhoton && enemy.boundingbox.collide(ent.boundingbox)) {
+            // // console.log(ent.isPhoton);
+            //     // console.log(ent.freezeLvl)
+            //     // console.log(ent.freezeLvl > 0 && enemy.boundingbox.collide(ent.boundingbox));
+            // }
             if (ent.freezeLvl > 0 && enemy.boundingbox.collide(ent.boundingbox)) {
+                //   console.log(enemy.freezeResistance  + " - " +  ent.freezeProbAdder);
                 if (Math.random() > enemy.freezeResistance - ent.freezeProbAdder) {
+                    // console.log("aaaaa");
                     enemy.isFrozen = true;
                     if (enemy.freezeLvl < ent.freezeLvl) {
                         enemy.freezeLvl = ent.freezeLvl;
@@ -192,7 +199,7 @@ var collideUpdate = function(enemy) {
                 }
             } 
             if (ent.burnLvl > 0  && enemy.boundingbox.collide(ent.boundingbox)) {
-                console.log(enemy.burnResistance + " " + ent.burnProbAdder);
+                // console.log(enemy.burnResistance + " " + ent.burnProbAdder);
                 if (Math.random() > enemy.burnResistance - ent.burnProbAdder) {
                     // console.log("EXPLOSION");
                     enemy.isBurned = true;
