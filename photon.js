@@ -11,7 +11,7 @@ function photon(game, startX, startY, name, target, damage, speed, ricochetLevel
     this.burnTimeAdder = 0;
     this.poisonLvl = poisonLevel;
     this.freezeLvl = freezeLevel;
-    this.paralyzeLvl = paralyzeLevel;
+    this.paralysisLvl = paralyzeLevel;
     this.burnLvl = explosiveLevel;
     this.laserLvl = laserLevel;
     this.homingLvl = homingLevel;
@@ -114,7 +114,7 @@ function photon(game, startX, startY, name, target, damage, speed, ricochetLevel
         this.game.addEntity(new photon(this.game, this.centerX + this.velocity.x * this.game.clockTick * 10
             , this.centerY + this.velocity.y * this.game.clockTick * 10, this.name, this.target
             , this.bobaDamage, this.speed, this.ricochetLvl, this.pierceLvl, this.homingLvl
-            , this.poisonLvl, this.laserLvl, this.freezeLvl, this.paralyzeLvl, this.burnLvl, count - 1));
+            , this.poisonLvl, this.laserLvl, this.freezeLvl, this.paralysisLvl, this.burnLvl, count - 1));
     } 
     // console.log(this.x + " " + this.y);
     // if () {
@@ -172,7 +172,7 @@ photon.prototype.update = function () {
         } 
         if (this.paralysisLvl > 0) {
             this.color = "Purple";
-        } 
+        }  
         if (this.burnLvl > 0) {
             this.color = "Red";
         } 
