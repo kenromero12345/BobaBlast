@@ -141,9 +141,27 @@ var collideUpdate = function(enemy) {
     for (var i = 0; i < enemy.game.entities.length; i++) {
         var ent = enemy.game.entities[i];
         if (ent !== enemy && enemy.isEnemy && enemy.hp > 0) {
-            if (ent.pierceCount == -1 && ent.ricochetCount == -1) {
+            // if (ent.pierceCount == -1 && ent.ricochetCount == -1) {
+            //     ent.removeFromWorld = true;
+            // }
+            // if (ent.isPhoton && enemy.boundingbox.collide(ent.boundingbox)) {
+            // // console.log(ent.isPhoton);
+            //     // console.log(ent.freezeLvl)
+            //     // console.log(ent.freezeLvl > 0 && enemy.boundingbox.collide(ent.boundingbox));
+            // }
+
+                        // if (ent.pierceCount == -1 && ent.ricochetCount == -1 && ent.pierceLvl != 0 && ent.ricochetLvl != 0
+            //     || (ent.pierceCount == -1 && ent.pierceLvl != 0 && ent.ricochetLvl == 0)
+            //     || ()) {
+            //     ent.removeFromWorld = true;
+            // }
+
+            if ((ent.pierceCount == -1 && ent.pierceLvl != 0 && ent.ricochetLvl != 0 && ent.ricochetCount == -1)
+                || (ent.pierceCount == -1 && ent.pierceLvl!= 0 && ent.ricochetLvl == 0)
+                || (ent.ricochetCount == -1 && ent.ricochetLvl!= 0 && ent.pierceLvl == 0) ) {
                 ent.removeFromWorld = true;
-            }
+            } 
+
             // if (ent.isPhoton && enemy.boundingbox.collide(ent.boundingbox)) {
             // // console.log(ent.isPhoton);
             //     // console.log(ent.freezeLvl)
@@ -235,7 +253,7 @@ var collideUpdate = function(enemy) {
             }
 
             if (ent.isBoba && enemy.boundingbox.collide(ent.boundingbox)) {
-                if (ent.ricochetLvl > 0 && !ent.collidedBefore(enemy)) {
+                if (ent.ricochetLvl > 0 && ent.ricochetCount > -1 && !ent.collidedBefore(enemy)) {
                     ent.collidedBeforeList.push(enemy);
                     ent.ricochetCount--;
                     enemy.hp -= ent.bobaDamage;
@@ -243,7 +261,7 @@ var collideUpdate = function(enemy) {
                     var newTarget;
                     for (var k = 0; k < enemy.game.entities.length; k++) {
                         var temp = enemy.game.entities[k];
-                        if (temp !== enemy && temp.isEnemy) {
+                        if (temp !== enemy && temp.isEnemy && !ent.collidedBefore(temp)) {
                             if(temp.hp > 0) {
                                 var tempDist = distance(enemy, temp);
                                 if (tempDist < dist) {
@@ -260,7 +278,7 @@ var collideUpdate = function(enemy) {
                         ent.removeFromWorld = true;
                     }
                     
-                } else if (ent.pierceLvl != 0 && !ent.collidedBefore(enemy)) {
+                } else if (ent.pierceLvl != 0 && ent.pierceCount > -1 && !ent.collidedBefore(enemy)) {
                     ent.collidedBeforeList.push(enemy);
                     ent.pierceCount--;
                     ent.isHoming = false;

@@ -156,7 +156,9 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
         this.paralysisTimeAdder = 1000/1000;
     } 
 
-    if (this.ricochetLvl == 2) {
+    if (this.ricochetLvl == 1) {
+        this.ricochetCount = 1;
+    }else if (this.ricochetLvl == 2) {
         // this.isRicochet = true;
         this.ricochetCount = 3;
     } else if (this.ricochetLvl == 3) {
@@ -166,6 +168,8 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
 
     if (this.pierceLvl == -1) {
         this.pierceCount = Number.MAX_VALUE;
+    } else if (this.pierceLvl == 1) {
+        this.pierceCount = 1;
     } else if (this.pierceLvl == 2) {
         this.pierceCount = 3;
     } else if (this.pierceLvl == 3) {
@@ -300,6 +304,14 @@ boba.prototype.draw = function () {
 
 boba.prototype.update = function () {
     if(this.game.running) {
+        // if ((this.pierceCount == -1 && this.pierceLvl != 0 && this.ricochetLvl != 0 && this.ricochetCount == -1)
+        // || (this.pierceCount == -1 && this.pierceLvl!= 0 && this.ricochetLvl == 0)
+        // || (this.ricochetCount == -1 && this.ricochetLvl!= 0 && this.pierceLvl == 0) ) {
+        //     this.removeFromWorld = true;
+        // } 
+        // if (this.pierceCount == -1 && this.pierceLvl > 0) {
+        //     this.removeFromWorld = true;
+        // }
         if (this.freezeLvl > 0) {
             this.animation = new Animation(AM.getAsset("./img/bobaB.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
             this.animation.offsetX = - 8;
