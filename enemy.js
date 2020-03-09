@@ -301,8 +301,8 @@ var collideUpdate = function(enemy) {
 var enemyStatusEffectUpdate = function(enemy) {
     enemyPoisonUpdate(enemy);
     enemyBurnUpdate(enemy);
-    enemyParalyzeUpdate(enemy);
     enemyFreezeUpdate(enemy);
+    enemyParalyzeUpdate(enemy);
 }
 
 var enemyPoisonUpdate = function(enemy) {
