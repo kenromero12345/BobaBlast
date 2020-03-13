@@ -13,7 +13,7 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinGoodFlip.png")
     , 720, 260, -84, 76, 7, .2, 7, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 3);
         //                                           this.moveDirection = 3;
         // this.lookDirectionRight = false;
     this.burnResistance = .75;

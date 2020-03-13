@@ -13,7 +13,7 @@ function pumpkinEvil(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/pumpkinEvilFlip.png")
     , 1320, 286, -110, 172, 10, .2, 10, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 2);
+        , this.animationWalkLeft.frameHeight, game, this.speed, this.animationWalkLeft.frameDuration, 3);
     this.animationDisappearLeft.offsetY -= 50;
     this.animationDisappearRight.offsetY -= 50;
         //                                   this.moveDirection = 3;
