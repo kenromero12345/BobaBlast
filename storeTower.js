@@ -49,7 +49,7 @@ function storeTower(game, name, cost, frequency, radius, description, spriteshee
     this.initRicochetUpgrade = initRicochetUpgrade;
     this.initPierceUpgrade = initPierceUpgrade;
     this.initHomingUpgrade = initHomingUpgrade;
-    this.roundUnlock = null;
+    this.roundUnlock = roundUnlock;
 }
 
 storeTower.prototype.draw = function () {
