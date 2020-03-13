@@ -13,7 +13,7 @@ function watermelon(game, spawnX, spawnY, scale) {
     this.animationDisappearRight = new Animation(AM.getAsset("./img/watermelonFlip.png")
     , 1394, 245, -62, 74, 14, .25, 14, false, scale, false);
     enemyConstructor(this, scale, spawnX, spawnY, this.animationWalkLeft.frameWidth
-        , this.animationWalkLeft.frameHeight, game, this.speed,  this.animationWalkLeft.frameDuration, 2);
+        , this.animationWalkLeft.frameHeight, game, this.speed,  this.animationWalkLeft.frameDuration, 3);
         //                                           this.moveDirection = 3;
         // this.lookDirectionRight = false;
 }

@@ -325,7 +325,7 @@ function generateStoreTowers(game) {
     // laser tower
     var eighthTower = new storeTower(game, "Laser Boba", 300, 0.01, 250,"Fires laser boba \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Laser boba \nperforms more damage ",AM.getAsset("./img/lasertower.png"), 1015, 260,70,70,1,2, "laser", 3, 3, 0, 3, 1, 3, 3, 3, 3, 0, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 5, 0, 0);
      // mix tower
-     var ninthTower = new storeTower(game, "Multi-Directional Boba", 300, 1000/1000, 250,"Fires boba in all directions \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Boba is fired \nin all directions ",AM.getAsset("./img/mixtower.png"), 1085, 260,70,70,2,2, "all", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0);
+     var ninthTower = new storeTower(game, "Multi-Directional Boba", 300, 600/1000, 300,"Fires boba in all directions \nShooting Speed: Moderate \nRange: Medium \nSpecial Ability: Boba is fired \nin all directions ",AM.getAsset("./img/mixtower.png"), 1085, 260,70,70,2,2, "all", 3, 3, 3, 3, 0, 3, 3, 3, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, -1, 0, 0);
     var temp = [[firstTower, secondTower, thirdTower],[fourthTower,fifthTower,sixthTower],[seventhTower, eighthTower, ninthTower]];//eightTower,ninthTower
     game.towers = temp;
     return temp;

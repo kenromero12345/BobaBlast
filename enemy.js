@@ -327,9 +327,9 @@ var enemyPoisonUpdate = function(enemy) {
 
 var enemyBurnUpdate = function(enemy) {
     if (enemy.isBurned) {
-        enemy.hp -= 0.0075 * enemy.game.speed;
+        enemy.hp -= 0.06 * enemy.game.speed;
         if (enemy.burnLvl == 2) {
-            enemy.hp -= 0.005 * enemy.game.speed;
+            enemy.hp -= 0.08 * enemy.game.speed;
         } else if (enemy.burnLvl == 3) {
             enemy.hp -= 0.010 * enemy.game.speed;
         }
