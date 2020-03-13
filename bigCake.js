@@ -1,8 +1,8 @@
 function bigCake(game, spawnX, spawnY, scale) {
     this.lifeDeduction = 10;
     this.name = "bigCake";
-    this.speed = 50;
-    this.hp = 200;//
+    this.speed = 50 * (1 + round * 0.07);
+    this.hp = 200* (1 + round * 0.05);//
     this.money = 100;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/bigCake.png")
     , 0, 400, 298, 400, 8, .135, 8, true, scale, false);

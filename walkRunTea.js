@@ -12,14 +12,14 @@ var walkRunTeaConstructor = function (tea, game, spawnX, spawnY, isRun) {
         tea.centerX = tea.x + tea.walkWidth / 2;
         tea.centerY = tea.y + tea.walkHeight / 2;
     }
-    tea.walkSpeed = 100;
-    tea.runSpeed = 200;
+    tea.walkSpeed = 100 * (1 + round * 0.05);
+    tea.runSpeed = 200 * (1 + round * 0.02);
     tea.game = game;
     tea.ctx = game.ctx;
     tea.moveDirection = 1; 
     tea.lookDirectionRight = true;
     tea.paceWalk = !isRun;
-    tea.hp = 20;
+    tea.hp = 20 * (1 + round * 0.05);
     tea.maxHp = tea.hp;
     tea.tempWalkSpeed = tea.walkSpeed;
     tea.tempRunSpeed = tea.runSpeed;

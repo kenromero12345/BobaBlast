@@ -2,11 +2,11 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     this.lifeDeduction = 2;
     this.isWhite = isWhite;
     this.name = "cola";
-    this.speed = 100;
-    this.hp = 30;//50
+    this.speed = 100 * (1 + round * 0.05);
+    this.hp = 30 * (1 + round * 0.05);//50
     this.money = 20;
     if (isWhite) {
-        this.hp = 60;
+        this.hp *= 2;
         this.animationWalkLeft = new Animation(AM.getAsset("./img/sprite.png")
         , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
         this.animationDisappearLeft = new Animation(AM.getAsset("./img/sprite.png")
