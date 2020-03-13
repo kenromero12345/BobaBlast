@@ -155,12 +155,17 @@ GameEngine.prototype.draw = function () {
             }
         }
     }
+    if (this.roundPlan) {
+        this.roundPlan.draw(this.ctx);
+    }
     this.ctx.restore();
 }
 
 GameEngine.prototype.update = function () {
     var entitiesCount = this.entities.length;
-
+    if (this.roundPlan) {
+        this.roundPlan.update();
+    }
     for (var i = 0; i < entitiesCount; i++) {
         var entity = this.entities[i];
 

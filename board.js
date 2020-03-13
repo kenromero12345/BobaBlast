@@ -53,6 +53,28 @@ board.prototype.buildGameboard = function () {
   GAMEBOARD[11][4].occupied = true;
   GAMEBOARD[11][5].occupied = true;
 
+  GAMEBOARD[1][0].occupied = true;
+  GAMEBOARD[2][0].occupied = true;
+  GAMEBOARD[3][0].occupied = true;
+  GAMEBOARD[4][0].occupied = true;
+  GAMEBOARD[5][0].occupied = true;
+  GAMEBOARD[6][0].occupied = true;
+  GAMEBOARD[7][0].occupied = true;
+  GAMEBOARD[8][0].occupied = true;
+  GAMEBOARD[9][0].occupied = true;
+  GAMEBOARD[10][0].occupied = true;
+
+  GAMEBOARD[1][5].occupied = true;
+  GAMEBOARD[2][5].occupied = true;
+  GAMEBOARD[3][5].occupied = true;
+  GAMEBOARD[4][5].occupied = true;
+  GAMEBOARD[5][5].occupied = true;
+  GAMEBOARD[6][5].occupied = true;
+  GAMEBOARD[7][5].occupied = true;
+  GAMEBOARD[8][5].occupied = true;
+  GAMEBOARD[9][5].occupied = true;
+  GAMEBOARD[10][5].occupied = true;
+
   // GAMEBOARD[1][1].occupied = true;
 
   // GAMEBOARD[2][2].occupied = true;

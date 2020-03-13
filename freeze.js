@@ -15,7 +15,7 @@ function Freeze(game, x, y, lvl) {
     this.freezeTimeAdder = 0;
     if (this.freezeLvl == 2) {
         this.freezeProbAdder = .5;
-        this.freezeTimeAdder = 3000;
+        this.freezeTimeAdder = 3000/1000;
     } else if (this.freezeLvl == 3) {
         this.freezeProbAdder = .8;
         this.freezeTimeAdder = 5000/1000;
