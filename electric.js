@@ -15,7 +15,7 @@ function Electric(game, x, y, lvl) {
     this.paralysisTimeAdder = 0;
     if (this.paralysisLvl == 2) {
         this.paralysisProbAdder = .5;
-        this.paralysisTimeAdder = 500;
+        this.paralysisTimeAdder = 500/1000;
     } else if (this.paralysisLvl == 3) {
         this.paralysisProbAdder = .8;
         this.paralysisTimeAdder = 1000/1000;

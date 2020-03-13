@@ -91,6 +91,10 @@ function boardTower(game, gridX, gridY, type) {
         this.pointDirection = 'N';
         this.intendedDirection = 'N';
         this.intendedDirectionIndex = 4;
+    } else if (this.name == 'pot') {
+        this.pointDirection = 'S';
+        this.intendedDirection = 'S';
+        this.intendedDirectionIndex = 0;
     }
     this.game = game;
     this.ctx = game.ctx;
@@ -292,22 +296,42 @@ boardTower.prototype.update = function () {
         }
     }
     
+    this.tempRangeLevel = 0;
+    this.tempDamageLevel = 0;
+    this.tempSpeedLevel = 0;
+    this.tempLaserLevel = 0;
+    this.tempFrequencyLevel = 0;
+    this.tempRicochetLevel = 0;
+    this.tempPierceLevel = 0;
+    this.tempHomingLevel = 0;
+    this.tempPoisonLevel = 0;
+    this.tempFreezeLevel = 0;
+    this.tempParalyzeLevel = 0;
+    this.tempExplosiveLevel = 0;
 
     if (this.name != "pot") {
         this.tempRangeLevel = this.rangeLevel + bestRangeUpgrade;
         this.tempDamageLevel = this.damageLevel + bestDamageUpgrade;
         this.tempSpeedLevel = this.speedLevel + bestSpeedUpgrade;
         this.tempLaserLevel = this.laserLevel + bestLaserUpgrade;
-        this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
-        this.tempFreezeLevel = this.freezeLevel + bestFreezeUpgrade;
-        this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
-        this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
         this.tempFrequencyLevel = this.frequencyLevel + bestFrequencyUpgrade;
         this.tempRicochetLevel = this.ricochetLevel + bestRicochetUpgrade;
         this.tempPierceLevel = this.pierceLevel + bestPierceUpgrade;
         this.tempHomingLevel = this.homingLevel + bestHomingUpgrade;
-    }
 
+        if (this.poisonLevel > 0) {
+            this.tempPoisonLevel = this.poisonLevel + bestPoisonUpgrade;
+        }
+        if (this.freezeLevel > 0) {
+            this.tempFreezeLevel = this.freezeLevel + bestFreezeUpgrade;
+        }
+        if (this.paralyzeLevel > 0) {
+            this.tempParalyzeLevel = this.paralyzeLevel + bestParalyzeUpgrade;
+        }
+        if (this.explosiveLevel > 0) {
+            this.tempExplosiveLevel = this.explosiveLevel + bestExplosiveUpgrade;
+        }
+    }
     this.tempBobaSpeed = this.bobaSpeed;
     this.tempBobaDamage = this.bobaDamage;
     this.tempPhotonDamage = this.photonDamage;
@@ -387,7 +411,7 @@ boardTower.prototype.update = function () {
         this.shootBoba = true;
     }
 */
-    if(this.spin && this.pointDirection === this.intendedDirection && this.name != 'all') {
+    if(this.spin && this.pointDirection === this.intendedDirection && this.name != 'all' && this.name != 'pot') {
         this.pointDirectionIndex = this.intendedDirectionIndex;
         this.spin = false;
     }
@@ -396,7 +420,7 @@ boardTower.prototype.update = function () {
     //     this.timeToMove = this.time + 5;
     // }
 
-    if(this.spin && this.name != 'all') {
+    if(this.spin && this.name != 'all' && this.name != 'pot') {
         if(this.counterclockwise) {
             if(this.pointDirection === 'S') {
                 this.pointDirection = 'SE';
@@ -601,7 +625,9 @@ boardTower.prototype.update = function () {
             this.target = selectedEnemy.enemy;
         }
         this.calculateDirection(selectedEnemy.enemy);
-        this.shootBoba = true;
+        if(this.name != "pot") {
+            this.shootBoba = true;
+        }
     }
 
     }

@@ -122,7 +122,7 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
     if (this.freezeLvl == 2) {
         // this.isFreeze = true;
         this.freezeProbAdder = .5;
-        this.freezeTimeAdder = 3000;
+        this.freezeTimeAdder = 3000/1000;
     } else if (this.freezeLvl == 3) {
         // this.isFreeze = true;
         this.freezeProbAdder = .8;
@@ -137,26 +137,28 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
         this.poisonProbAdder = .8;
         this.poisonTimeAdder = 5000/1000;
     } 
-    // if (this.burnLvl == 2) {
+    if (this.burnLvl == 2) {
 
-    //     this.burnProbAdder = 5;
-    //     this.burnTimeAdder - 500;
-    // } else if (this.burnLvl == 3) {
-    //     this.burnProbAdder = 8;
-    //     this.burnTimeAdder = 1000;
-    // } 
+        this.burnProbAdder = 5;
+        this.burnTimeAdder = 500/1000;
+    } else if (this.burnLvl == 3) {
+        this.burnProbAdder = 8;
+        this.burnTimeAdder = 1000/1000;
+    } 
 
     if (this.paralysisLvl == 2) {
         // this.isParalyze = true;
         this.paralysisProbAdder = .5;
-        this.paralysisTimeAdder = 500;
+        this.paralysisTimeAdder = 500/1000;
     } else if (this.paralysisLvl == 3) {
         // this.isParalyze = true;
         this.paralysisProbAdder = .8;
         this.paralysisTimeAdder = 1000/1000;
     } 
 
-    if (this.ricochetLvl == 2) {
+    if (this.ricochetLvl == 1) {
+        this.ricochetCount = 1;
+    }else if (this.ricochetLvl == 2) {
         // this.isRicochet = true;
         this.ricochetCount = 3;
     } else if (this.ricochetLvl == 3) {
@@ -166,6 +168,8 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
 
     if (this.pierceLvl == -1) {
         this.pierceCount = Number.MAX_VALUE;
+    } else if (this.pierceLvl == 1) {
+        this.pierceCount = 1;
     } else if (this.pierceLvl == 2) {
         this.pierceCount = 3;
     } else if (this.pierceLvl == 3) {
@@ -178,6 +182,26 @@ function boba(game, startX, startY, name, target, damage, speed, ricochetLevel
         this.isFire = true;
     }*/
     this.animation = new Animation(AM.getAsset("./img/boba.png"), 0, 0, 20, 20, 1, 0.1, 1, true, 1);
+    if (this.freezeLvl > 0) {
+        this.animation = new Animation(AM.getAsset("./img/bobaB.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
+        this.animation.offsetX = - 8;
+        this.animation.offsetY = - 8;
+    } 
+    if (this.paralysisLvl > 0) {
+        this.animation = new Animation(AM.getAsset("./img/bobaP.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
+        this.animation.offsetX = - 8;
+        this.animation.offsetY = - 8;
+    } 
+    if (this.burnLvl > 0) {
+        this.animation = new Animation(AM.getAsset("./img/bobaR.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
+        this.animation.offsetX = - 8;
+        this.animation.offsetY = - 8;
+    } 
+    if (this.poisonLvl > 0) {
+        this.animation = new Animation(AM.getAsset("./img/bobaG.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
+        this.animation.offsetX = - 8;
+        this.animation.offsetY = - 8;
+    } 
     this.x = startX;
     this.y = startY;
     this.isBoba = true;
@@ -280,6 +304,34 @@ boba.prototype.draw = function () {
 
 boba.prototype.update = function () {
     if(this.game.running) {
+        // if ((this.pierceCount == -1 && this.pierceLvl != 0 && this.ricochetLvl != 0 && this.ricochetCount == -1)
+        // || (this.pierceCount == -1 && this.pierceLvl!= 0 && this.ricochetLvl == 0)
+        // || (this.ricochetCount == -1 && this.ricochetLvl!= 0 && this.pierceLvl == 0) ) {
+        //     this.removeFromWorld = true;
+        // } 
+        // if (this.pierceCount == -1 && this.pierceLvl > 0) {
+        //     this.removeFromWorld = true;
+        // }
+        if (this.freezeLvl > 0) {
+            this.animation = new Animation(AM.getAsset("./img/bobaB.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
+            this.animation.offsetX = - 8;
+            this.animation.offsetY = - 8;
+        } 
+        if (this.paralysisLvl > 0) {
+            this.animation = new Animation(AM.getAsset("./img/bobaP.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
+            this.animation.offsetX = - 8;
+            this.animation.offsetY = - 8;
+        } 
+        if (this.burnLvl > 0) {
+            this.animation = new Animation(AM.getAsset("./img/bobaR.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
+            this.animation.offsetX = - 8;
+            this.animation.offsetY = - 8;
+        } 
+        if (this.poisonLvl > 0) {
+            this.animation = new Animation(AM.getAsset("./img/bobaG.png"), 0, 0, 34, 34, 1, 0.1, 1, true, 1);
+            this.animation.offsetX = - 8;
+            this.animation.offsetY = - 8;
+        } 
         if (this.isHoming) {
             if (this.target.hp <= 0) {
                 this.removeFromWorld = true;
