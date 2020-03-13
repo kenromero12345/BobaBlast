@@ -4,9 +4,10 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     this.name = "cola";
     this.speed = 100 * (1 + round * 0.05);
     this.hp = 30 * (1 + round * 0.05);//50
-    this.money = 20;
+    this.money = 5;
     if (isWhite) {
         this.hp *= 2;
+        this.money *= 2;
         this.animationWalkLeft = new Animation(AM.getAsset("./img/sprite.png")
         , 0, 137, 65, 65, 4, 0.1, 4, true, scale, false);
         this.animationDisappearLeft = new Animation(AM.getAsset("./img/sprite.png")
