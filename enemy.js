@@ -230,6 +230,11 @@ var collideUpdate = function(enemy) {
                     } else {
                         enemy.speed = 2 * enemy.tempSpeed;
                     }
+                    if(enemy.speed > 420 || enemy.tempWalkSpeed > 420 || enemy.tempRunSpeed> 420){
+                        enemy.speed = 420;
+                        enemy.tempWalkSpeed = 420;
+                        enemy.tempRunSpeed = 420;
+                    }
                     if (enemy.burnDate < enemy.game.timer.time + 2000/1000 + ent.burnTimeAdder) {
                         enemy.burnDate = enemy.game.timer.time + 2000/1000 + ent.burnTimeAdder;
                     }
@@ -322,7 +327,7 @@ var enemyPoisonUpdate = function(enemy) {
 
 var enemyBurnUpdate = function(enemy) {
     if (enemy.isBurned) {
-        enemy.hp -= 0.075 * enemy.game.speed;
+        enemy.hp -= 0.0075 * enemy.game.speed;
         if (enemy.burnLvl == 2) {
             enemy.hp -= 0.005 * enemy.game.speed;
         } else if (enemy.burnLvl == 3) {
