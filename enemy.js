@@ -316,7 +316,7 @@ var enemyPoisonUpdate = function(enemy) {
         if (enemy.poisonLvl == 2) {
             enemy.hp -= 0.01 * enemy.game.speed;
         } else if (enemy.poisonLvl == 3) {
-            enemy.hp -= 0.02 * enemy.game.speed;
+            enemy.hp -= 0.5 * enemy.game.speed;
         }
         if (enemy.game.timer.time >= enemy.poisonDate) {
             enemy.isPoisoned = false;
@@ -372,11 +372,11 @@ var enemyParalyzeUpdate = function(enemy) {
 
 var enemyFreezeUpdate = function(enemy) {
     if (enemy.isFrozen) {
-        enemy.hp -= 0.025 * enemy.game.speed;
+        enemy.hp -= 0.0025 * enemy.game.speed;
         if (enemy.freezeLvl == 2) {
-            enemy.hp -= 0.005 * enemy.game.speed;
+            enemy.hp -= 0.0075 * enemy.game.speed;
         } else if (enemy.freezeLvl == 3) {
-            enemy.hp -= 0.010 * enemy.game.speed;
+            enemy.hp -= 0.005 * enemy.game.speed;
         }
         if (enemy.game.timer.time >= enemy.freezeDate) {
             enemy.isFrozen = false;
