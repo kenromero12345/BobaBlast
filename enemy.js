@@ -314,9 +314,9 @@ var enemyPoisonUpdate = function(enemy) {
     if (enemy.isPoisoned) {
         enemy.hp -= 0.05 * enemy.game.speed;
         if (enemy.poisonLvl == 2) {
-            enemy.hp -= 0.01 * enemy.game.speed;
+            enemy.hp -= 0.2 * enemy.game.speed;
         } else if (enemy.poisonLvl == 3) {
-            enemy.hp -= 0.5 * enemy.game.speed;
+            enemy.hp -= 0.3 * enemy.game.speed;
         }
         if (enemy.game.timer.time >= enemy.poisonDate) {
             enemy.isPoisoned = false;
@@ -327,11 +327,11 @@ var enemyPoisonUpdate = function(enemy) {
 
 var enemyBurnUpdate = function(enemy) {
     if (enemy.isBurned) {
-        enemy.hp -= 0.06 * enemy.game.speed;
+        enemy.hp -= 0.05 * enemy.game.speed;
         if (enemy.burnLvl == 2) {
-            enemy.hp -= 0.08 * enemy.game.speed;
+            enemy.hp -= 0.10 * enemy.game.speed;
         } else if (enemy.burnLvl == 3) {
-            enemy.hp -= 0.010 * enemy.game.speed;
+            enemy.hp -= 0.15 * enemy.game.speed;
         }
         if (enemy.game.timer.time >= enemy.burnDate) {
             enemy.isBurned = false;
