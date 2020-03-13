@@ -28,8 +28,8 @@ function slime(game, spawnX, spawnY, scale, num) {
         this.slimeOffsetY = 3236;
     } 
     this.name = "slime";
-    this.speed = 100;
-    this.hp = 10;//
+    this.speed = 100 * (1 + round * 0.03);
+    this.hp = 10 * (1 + round * 0.05);//
     // this.animationWalkLeft = new Animation(AM.getAsset("./img/slime.png")
     // , 5, 70 + this.slimeOffsetY, 79, 80, 7, .135, 7, true, scale, false);
     // this.animationDisappearLeft = new Animation(AM.getAsset("./img/slime.png")
