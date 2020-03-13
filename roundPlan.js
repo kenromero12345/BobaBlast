@@ -21,7 +21,7 @@ function roundPlan(game) {
     this.index = 1;
     this.game = game;
     this.ctx = game.ctx;
-    this.timeGap = 1000/1000; 
+    this.timeGap = 1500/1000; 
     this.isRoundStart = true;
     this.isEnding = false;
     this.game.running = false;
@@ -427,6 +427,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new greenTea(this.game, -50, 350, false, .75), true);
         } else if (round == 6) {
+            this.timeGap = 1000/1000;
             // 35 TOTAL ENTITIES: 20 RED TEAS, 5 BISCUITS, 5 WATERMELON, 5 PUMPKIN GOOD
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new redTea(this.game, -50, 350, false, .75));
