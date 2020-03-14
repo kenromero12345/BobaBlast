@@ -531,7 +531,27 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new greenTea(this.game, -50, 350, false, .75));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 1));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 2));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 3));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 4));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 5));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 6));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -539,35 +559,15 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 9));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 10));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 8));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -607,11 +607,27 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new yellowTea(this.game, -50, 350, true, .75));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 1));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 2));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, true));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 3));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, true));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 4));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, true));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 5));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, true));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 6));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -619,71 +635,55 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 8));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 9));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 10));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 0));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 1));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 2));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 3));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 4));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 5));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 6));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 0));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 9));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, true));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, true));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, true));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, true));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                    , this.game, new slime(this.game, -50, 350, .75, 7));
+                    , this.game, new slime(this.game, -50, 350, .75, 10));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, true));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -782,7 +782,31 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new pumpkinEvil(this.game, -50, 350, .75));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 0));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 1));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 2));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 3));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 4));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 5));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new cola(this.game, -50, 350, .85, false));
+            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
+                , this.game, new slime(this.game, -50, 350, .75, 6));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
@@ -790,35 +814,11 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 10));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new cola(this.game, -50, 350, .85, false));
-            this.roundEntity(this.index * this.timeGap + this.initialRoundTime
-                , this.game, new slime(this.game, -50, 350, .75, 7));
+                , this.game, new slime(this.game, -50, 350, .75, 9));
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false), true);
         }
