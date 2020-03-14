@@ -3,7 +3,7 @@ function miniCake(game, spawnX, spawnY, scale) {
     this.name = "minicake";
     this.speed = 50;
     this.hp = 20 * (1 + round * 0.05);//
-    this.money = 5;
+    this.money = 1;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/miniCake.png")
     , 0, 66, 67, 48, 6, .135, 6, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/miniCake.png")

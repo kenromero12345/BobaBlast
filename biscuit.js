@@ -3,7 +3,7 @@ function biscuit(game, spawnX, spawnY, scale) {
     this.name = "biscuit";
     this.speed = 100 * (1 + round * 0.04);
     this.hp = 30 * (1 + round * 0.05);//
-    this.money = 5;
+    this.money = 3;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/biscuitWarrior.png")
     , 7, 111, 98, 94, 6, .135, 6, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/biscuitWarrior.png")

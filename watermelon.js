@@ -3,7 +3,7 @@ function watermelon(game, spawnX, spawnY, scale) {
     this.name = "watermelon";
     this.speed = 100 * (1 + round * 0.03);
     this.hp = 50 * (1 + round * 0.05);//
-    this.money = 5;
+    this.money = 3;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/watermelon.png")
     , 0, 82, 62, 68, 4, .135, 4, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/watermelon.png")

@@ -4,7 +4,7 @@ function cola(game, spawnX, spawnY, scale, isWhite) {
     this.name = "cola";
     this.speed = 100 * (1 + round * 0.05);
     this.hp = 30 * (1 + round * 0.05);//50
-    this.money = 5;
+    this.money = 3;
     if (isWhite) {
         this.hp *= 2;
         this.money *= 2;

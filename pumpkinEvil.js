@@ -3,7 +3,7 @@ function pumpkinEvil(game, spawnX, spawnY, scale) {
     this.name = "evil pumpkin";
     this.speed = 100;
     this.hp = 40* (1 + round * 0.05);
-    this.money = 8;
+    this.money = 5;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/pumpkinEvil.png")
     , 0, 115, 125, 112, 6, .135, 6, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/pumpkinEvil.png")

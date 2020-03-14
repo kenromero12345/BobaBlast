@@ -3,7 +3,7 @@ function cake(game, spawnX, spawnY, scale) {
     this.name = "cake";
     this.speed = 100 * (1 + round * 0.05);
     this.hp = 100 * (1 + round * 0.05);//
-    this.money = 50;
+    this.money = 20;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/cake.png")
     , 0, 85, 96, 90, 5, .135, 5, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/cake.png")
