@@ -195,10 +195,10 @@ var collideUpdate = function(enemy) {
                     enemy.animationWalkLeft.stop = true;
                     enemy.animationWalkRight.stop = true;
                     if (enemy.type && enemy.type == "tea") {
-                        enemy.walkSpeed = 0;
-                        enemy.runSpeed = 0;
+                        enemy.walkSpeed = 1;
+                        enemy.runSpeed = 1;
                     } else {
-                        enemy.speed = 0;
+                        enemy.speed = 1;
                     }
                     if (enemy.paralyzeDate < enemy.game.timer.time + 1500/1000 + ent.paralysisTimeAdder) {
                         enemy.paralyzeDate = enemy.game.timer.time + 1500/1000 + ent.paralysisTimeAdder;
@@ -225,15 +225,15 @@ var collideUpdate = function(enemy) {
                         enemy.burnLvl = ent.burnLvl;
                     }
                     if (enemy.type && enemy.type == "tea") {
-                        enemy.walkSpeed = 2 * enemy.tempWalkSpeed;
-                        enemy.runSpeed = 2 * enemy.tempRunSpeed;
+                        enemy.walkSpeed = 1.25 * enemy.tempWalkSpeed;
+                        enemy.runSpeed = 1.25 * enemy.tempRunSpeed;
                     } else {
-                        enemy.speed = 2 * enemy.tempSpeed;
+                        enemy.speed = 1.25 * enemy.tempSpeed;
                     }
-                    if(enemy.speed > 400 || enemy.tempWalkSpeed > 400 || enemy.tempRunSpeed> 400){
-                        enemy.speed = 400;
-                        enemy.tempWalkSpeed = 400;
-                        enemy.tempRunSpeed = 400;
+                    if(enemy.speed > 300 || enemy.tempWalkSpeed > 300 || enemy.tempRunSpeed> 300){
+                        enemy.speed = 300;
+                        enemy.tempWalkSpeed = 300;
+                        enemy.tempRunSpeed = 300;
                     }
                     if (enemy.burnDate < enemy.game.timer.time + 2000/1000 + ent.burnTimeAdder) {
                         enemy.burnDate = enemy.game.timer.time + 2000/1000 + ent.burnTimeAdder;

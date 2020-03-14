@@ -140,7 +140,9 @@ roundPlan.prototype.update = function () {
         this.index = 1;
         displayRoundDone = true;
         roundComplete = true;
-        currentMoney += 100;
+        if (currentMoney < 3000){
+            currentMoney += 100;
+        } 
         for (var i = 0; i < this.game.entities.length; i++) {
             var ent = this.game.entities[i];
             if (ent.isBoba) {
@@ -1118,6 +1120,7 @@ roundPlan.prototype.update = function () {
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                     , this.game, new redTea(this.game, -50, 350, false, .75), true);
         }else if (round == 12) {
+            this.timeGap = 500/1000;
             // 80 ENTITIES: 15 CAKE CHOCO, 15 RED TEAS, 15 YELLOW TEAS, 5 GREEN TEAS, 16 SLIMES, 10 COLA, 5 whITE COLA
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new cola(this.game, -50, 350, .85, false));
@@ -1849,6 +1852,7 @@ roundPlan.prototype.update = function () {
 
                                 
         }else if (round == 16) {
+            this.timeGap = 100/1000;
             // 155 ENTITIES: 29 GREEN TEAS, 66 SLIMES, 30 ICE GOLEMS, 10 RED TEAS, 10 YELLOW TEAS, 10 GEREN TEAS
             this.roundEntity(this.index * this.timeGap + this.initialRoundTime
                 , this.game, new iceGolem(this.game, -50, 350, .70));
