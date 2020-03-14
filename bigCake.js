@@ -108,6 +108,12 @@ bigCake.prototype.update = function () {
 var bigCakeUpdate = function (enemy) {
     // console.log(enemy.centerX + " " + enemy.centerY)
     if (enemy.hp > 0) {
+        if (enemy.centerY >= 475){
+            enemy.centerY = 475;
+        }
+        if (enemy.centerY <= 125){
+            enemy.centerY = 125;
+        }
         if (enemy.moveDirection == 1) {
             if (true ){//enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
                 enemy.x += enemy.game.clockTick * enemy.speed;
