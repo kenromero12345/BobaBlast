@@ -47,6 +47,12 @@ var enemyUpdateLookHelper = function(enemy) {
 var enemyUpdateHelper = function (enemy) {
     // console.log(enemy.centerX + " " + enemy.centerY)
     if (enemy.hp > 0) {
+        if (enemy.centerY >= 475){
+            enemy.centerY = 475;
+        }
+        if (enemy.centerY <= 125){
+            enemy.centerY = 125;
+        }
         if (enemy.moveDirection == 1) {
      
                 enemy.x += enemy.game.clockTick * enemy.speed;
