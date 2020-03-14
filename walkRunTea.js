@@ -167,8 +167,10 @@ var walkRunTeaUpdate = function (tea) {
     if (tea.hp > 0) {
         if (tea.centerY >= 475){
             tea.centerY = 475;
+            tea.centerY = 475;
         }
         if (tea.centerY <= 125){
+            tea.centerY = 125;
             tea.centerY = 125;
         }
         if (tea.paceWalk) {

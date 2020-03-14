@@ -49,9 +49,11 @@ var enemyUpdateHelper = function (enemy) {
     if (enemy.hp > 0) {
         if (enemy.centerY >= 475){
             enemy.centerY = 475;
+            enemy.y = 475;
         }
         if (enemy.centerY <= 125){
             enemy.centerY = 125;
+            enemy.y = 125;
         }
         if (enemy.moveDirection == 1) {
      
@@ -118,7 +120,11 @@ var enemyEscape = function(enemy) {
     if (xy.x == GAMEBOARD.length - 1 && GAMEBOARD[xy.x][xy.y].end && enemy.hp > 0) {
         enemy.hp = 0; //dead
         currentLifes -= enemy.lifeDeduction;
-    } 
+    }
+    if( xy.y > 600 || xy.y < 0){
+        enemy.hp = 0; //dead
+        currentLifes -= enemy.lifeDeduction;
+    }
 }
 
 var enemyCenterUpdate = function(enemy) {

@@ -108,9 +108,11 @@ var pumpkinEvilUpdate = function (enemy) {
     if (enemy.hp > 0) {
         if (enemy.centerY >= 475){
             enemy.centerY = 475;
+            enemy.y = 475;
         }
         if (enemy.centerY <= 125){
             enemy.centerY = 125;
+            enemy.y = 125;
         }
         if (enemy.moveDirection == 1) {
             if (enemy.animationWalkRight.currentFrame() >= 1 && enemy.animationWalkRight.currentFrame() <= 5) {
