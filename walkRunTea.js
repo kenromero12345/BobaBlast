@@ -165,11 +165,11 @@ var walkRunTeaUpdate = function (tea) {
     }
 
     if (tea.hp > 0) {
-        if (enemy.centerY >= 475){
-            enemy.centerY = 475;
+        if (tea.centerY >= 475){
+            tea.centerY = 475;
         }
-        if (enemy.centerY <= 125){
-            enemy.centerY = 125;
+        if (tea.centerY <= 125){
+            tea.centerY = 125;
         }
         if (tea.paceWalk) {
             if (tea.moveDirection == 1) {
