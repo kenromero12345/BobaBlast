@@ -18,7 +18,7 @@ function yellowTea(game, spawnX, spawnY, isRun, scale) {
     this.runHeight= 83 * scale;
     this.scale = scale;
     this.name = "yellow bubble tea";
-    this.money = 5;
+    this.money = 3;
     walkRunTeaConstructor(this, game, spawnX, spawnY, isRun);
 }
 

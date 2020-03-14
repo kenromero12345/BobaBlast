@@ -3,7 +3,7 @@ function pumpkinGood(game, spawnX, spawnY, scale) {
     this.name = "good pumpkin";
     this.speed = 120 * (1 + round * 0.05);
     this.hp = 40 * (1 + round * 0.05);//
-    this.money = 20;
+    this.money = 15;
     this.animationWalkLeft = new Animation(AM.getAsset("./img/pumpkinGood.png")
     , 5, 87, 81, 84, 4, .135, 4, true, scale, false);
     this.animationDisappearLeft = new Animation(AM.getAsset("./img/pumpkinGood.png")
