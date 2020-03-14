@@ -50,11 +50,15 @@ var enemyUpdateHelper = function (enemy) {
         if (enemy.centerY >= 475){
             enemy.centerY = 475;
             enemy.y = 475;
+            enemy.x += enemy.game.clockTick * enemy.speed;
+            enemy.centerX += enemy.game.clockTick * enemy.speed;
             enemy.moveDirection = 4;
         }
         if (enemy.centerY <= 125){
             enemy.centerY = 125;
             enemy.y = 125;
+            enemy.x += enemy.game.clockTick * enemy.speed;
+            enemy.centerX += enemy.game.clockTick * enemy.speed;
             enemy.moveDirection = 2;
         }
         if (enemy.moveDirection == 1) {
