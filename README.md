@@ -2,6 +2,9 @@
 
 A bubble tea-themed tower defense game with JavaScript as the game engine.
 
+Play here!
+https://github.com/kenromero12345/BobaBlast
+
 What I learned:
 
 Incorporated enemy sprite animation and collision detection for better visuals on JavaScript.
